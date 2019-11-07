@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifoneServices", "VerifoneServices\VerifoneServices.csproj", "{05720CDD-4508-4A0D-896E-884894DCE757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifoneLibrary", "VerifoneLibrary\VerifoneLibrary.csproj", "{F331B1DB-403E-4F72-93AB-7EDADFD196FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomAction", "CustomAction\CustomAction.csproj", "{756F678D-5C91-4621-9F31-47B850E23578}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "VerifoneCustomInte", "VerifoneCustomInte\VerifoneCustomInte.vdproj", "{CF04A59B-17F0-4D46-8221-3F588B208047}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05720CDD-4508-4A0D-896E-884894DCE757}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{05720CDD-4508-4A0D-896E-884894DCE757}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{05720CDD-4508-4A0D-896E-884894DCE757}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{05720CDD-4508-4A0D-896E-884894DCE757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05720CDD-4508-4A0D-896E-884894DCE757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05720CDD-4508-4A0D-896E-884894DCE757}.Release|x86.ActiveCfg = Release|Any CPU
+		{F331B1DB-403E-4F72-93AB-7EDADFD196FF}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{F331B1DB-403E-4F72-93AB-7EDADFD196FF}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{F331B1DB-403E-4F72-93AB-7EDADFD196FF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F331B1DB-403E-4F72-93AB-7EDADFD196FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F331B1DB-403E-4F72-93AB-7EDADFD196FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F331B1DB-403E-4F72-93AB-7EDADFD196FF}.Release|x86.ActiveCfg = Release|Any CPU
+		{756F678D-5C91-4621-9F31-47B850E23578}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{756F678D-5C91-4621-9F31-47B850E23578}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{756F678D-5C91-4621-9F31-47B850E23578}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{756F678D-5C91-4621-9F31-47B850E23578}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756F678D-5C91-4621-9F31-47B850E23578}.Release|Any CPU.Build.0 = Release|Any CPU
+		{756F678D-5C91-4621-9F31-47B850E23578}.Release|x86.ActiveCfg = Release|Any CPU
+		{CF04A59B-17F0-4D46-8221-3F588B208047}.Debug|Any CPU.ActiveCfg = Release
+		{CF04A59B-17F0-4D46-8221-3F588B208047}.Debug|x86.ActiveCfg = Debug
+		{CF04A59B-17F0-4D46-8221-3F588B208047}.Release|Any CPU.ActiveCfg = Release
+		{CF04A59B-17F0-4D46-8221-3F588B208047}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
