@@ -23,7 +23,7 @@ using System.Xml.Linq;
 using vsmsNAXML;
 using System.Text.RegularExpressions;
 using RapidVerifoneFuelconfig;
-
+// test git
 namespace VerifoneServices
 {
     public class VerifoneInsert
