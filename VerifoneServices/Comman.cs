@@ -22,6 +22,7 @@ using System.Threading;
 
 namespace VerifoneServices
 {
+
     public class Comman
     {
         public sealed class Utf8StringWriter : StringWriter
