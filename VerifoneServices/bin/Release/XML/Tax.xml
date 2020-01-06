@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<domain:taxRateConfig xmlns:domain="urn:vfi-sapphire:np.domain.2001-07-01">
+  <site>0413</site>
+  <taxRates>
+    <taxRate sysid="1" name="STATE HI TAX" indicator="T" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="6.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="2" name="CO/PA TAX" indicator="!" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="0.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="3" name="911 FEE" indicator="F" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="2.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="4" name="CITY TAX" indicator="!" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="1.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="5" name="CITY SPL TAX" indicator="!" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="0.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="6" name="STATE LO TAX" indicator="%" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="0.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="7" name="NO TAX" indicator="!" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="0.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="8" name="SALES TAX" indicator="!" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="6.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+  </taxRates>
+</domain:taxRateConfig>

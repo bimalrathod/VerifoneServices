@@ -1,0 +1,6 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<domain:PLUSelect xmlns:domain='urn:vfi-sapphire:np.domain.2001-07-01'>
+  <orderby kind='PLUNumber'/>
+  <pageSize>5000000</pageSize>
+  <page>1</page>
+</domain:PLUSelect>

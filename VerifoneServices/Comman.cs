@@ -1,11 +1,11 @@
-﻿using VerifoneLibrary;
+﻿//using VerifoneLibrary;
 using VerifoneLibrary.DataAccess;
 
 using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 
 using System.IO;
 using System.Configuration;
@@ -15,7 +15,7 @@ using System.Xml;
 using System.Net;
 using System.Xml.Linq;
 
-using System.Diagnostics;
+//using System.Diagnostics;
 
 using System.Net.Mail;
 using System.Threading;
@@ -36,6 +36,7 @@ namespace VerifoneServices
         public bool RequestUrl = true;
         public string InvoiceFileName = "";
         public string RubyPeriodFileName = "";
+        public string ReportPeriodFileName = "";
         //VerifoneInsert objInsert = new VerifoneInsert();
         //VerifoneUpdate objUpdate = new VerifoneUpdate();
 
@@ -335,14 +336,15 @@ namespace VerifoneServices
             string responseBody = null;
             _CVerifone objCVerifone = new _CVerifone();
             string datetime = DateTime.Now.ToString("ddMMyyyyHHmmss");
+            string File_Name = "";
             try
             {
                 //objCVerifone.InsertActiveLog("Verifone", "check", "GetRequestUrl()", url + " - " + Method + " - " + body + " - " +methodname + " - " +RequestCommand , methodname, RequestCommand);
                 #region ********** Insert Action Log **********
-                if (RequestCommand != "validate" && RequestCommand != "releaseCredential")
-                {
-                    objCVerifone.InsertActiveLog("Verifone", "Start", "GetRequestUrl()", "Initializing Url Request", methodname, RequestCommand);
-                }
+                //if (RequestCommand != "validate" && RequestCommand != "releaseCredential")
+                //{
+                //    objCVerifone.InsertActiveLog("Verifone", "Start", "GetRequestUrl()", "Initializing Url Request", methodname, RequestCommand);
+                //}
                 #endregion
 
                 HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);
@@ -376,25 +378,29 @@ namespace VerifoneServices
                         XmlDocument xdoc = new XmlDocument();
                         xdoc.LoadXml(responseBody);
                         xdoc.Save(AppDomain.CurrentDomain.BaseDirectory + "xml\\" + methodname + ".xml");
-                        if (RequestCommand != "validate" && RequestCommand != "releaseCredential")
-                        {
-                            #region ********** Insert Action Log **********
-                            objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
-                            #endregion
-                        }
+                        File_Name = methodname + ".xml";
+
+                        //if (RequestCommand != "validate" && RequestCommand != "releaseCredential")
+                        //{
+                        //    #region ********** Insert Action Log **********
+                        //    objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
+                        //    #endregion
+                        //}
                     }
                     else if (methodname == "LogPeriod")
                     {
                         #region Archive old period file
                         CommanArchiveFiles(methodname);
                         #endregion
+
                         XmlDocument xdoc = new XmlDocument();
                         xdoc.LoadXml(responseBody);
                         xdoc.Save(AppDomain.CurrentDomain.BaseDirectory + "xml\\Period\\" + methodname + "_" + datetime + ".xml");
                         PeriodFileName = methodname + "_" + datetime + ".xml";
+                        File_Name = PeriodFileName;
 
                         #region ********** Insert Action Log **********
-                        objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
+                        // objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
                         #endregion
                     }
                     else if (methodname == "Invoice")
@@ -402,9 +408,10 @@ namespace VerifoneServices
                         XmlDocument xdoc = new XmlDocument();
                         xdoc.LoadXml(responseBody);
                         xdoc.Save(AppDomain.CurrentDomain.BaseDirectory + "xml\\Invoice\\" + InvoiceFileName + ".xml");
+                        File_Name = InvoiceFileName + ".xml";
 
                         #region ********** Insert Action Log **********
-                        objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
+                        // objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
                         #endregion
                     }
                     else if (methodname == "Report")
@@ -416,9 +423,11 @@ namespace VerifoneServices
                         XmlDocument xdoc = new XmlDocument();
                         xdoc.LoadXml(responseBody);
                         xdoc.Save(AppDomain.CurrentDomain.BaseDirectory + "xml\\Report\\" + methodname + "_" + datetime + ".xml");
+                        ReportPeriodFileName = methodname + "_" + datetime + ".xml";
+                        File_Name = ReportPeriodFileName;
 
                         #region ********** Insert Action Log **********
-                        objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
+                        // objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
                         #endregion
                     }
                     else if (methodname == "RubyReport_Daily")
@@ -430,9 +439,10 @@ namespace VerifoneServices
                         XmlDocument xdoc = new XmlDocument();
                         xdoc.LoadXml(responseBody);
                         xdoc.Save(AppDomain.CurrentDomain.BaseDirectory + "xml\\RubyReport\\Daily\\" + RubyPeriodFileName + ".xml");
+                        File_Name = RubyPeriodFileName + ".xml";
 
                         #region ********** Insert Action Log **********
-                        objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
+                        //objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
                         #endregion
                     }
                     else if (methodname == "RubyReport_Shift")
@@ -444,9 +454,10 @@ namespace VerifoneServices
                         XmlDocument xdoc = new XmlDocument();
                         xdoc.LoadXml(responseBody);
                         xdoc.Save(AppDomain.CurrentDomain.BaseDirectory + "xml\\RubyReport\\Shift\\" + RubyPeriodFileName + ".xml");
+                        File_Name = RubyPeriodFileName + ".xml";
 
                         #region ********** Insert Action Log **********
-                        objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
+                        //objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
                         #endregion
                     }
                     else if (methodname == "RubyReport_Month")
@@ -458,16 +469,17 @@ namespace VerifoneServices
                         XmlDocument xdoc = new XmlDocument();
                         xdoc.LoadXml(responseBody);
                         xdoc.Save(AppDomain.CurrentDomain.BaseDirectory + "xml\\RubyReport\\Month\\" + RubyPeriodFileName + ".xml");
+                        File_Name = RubyPeriodFileName + ".xml";
 
                         #region ********** Insert Action Log **********
-                        objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
+                        //  objCVerifone.InsertActiveLog("Verifone", "End", "GetRequestUrl()", "Verifone Command Response Saved", methodname, RequestCommand);
                         #endregion
                     }
                 }
                 catch (WebException e)
                 {
                     resp = (HttpWebResponse)e.Response;
-                    objCVerifone.InsertActiveLog("Verifone", "Error", "GetRequestUrl()", "GetRequestUrl Response Exception : " + e.ToString(), methodname, RequestCommand);
+                    objCVerifone.InsertActiveLog("Verifone", "Error", "GetRequestUrl()", "GetRequestUrl Response Exception in " + Convert.ToString(File_Name) + " : " + e.ToString(), methodname, RequestCommand);
                 }
                 return responseBody;
             }
@@ -498,6 +510,8 @@ namespace VerifoneServices
         {
             //PeriodFileName = "LogPeriod.xml";
             _CVerifone objCVerifone = new _CVerifone();
+            bool isXMLError = false;
+            EmailMessages objEmail = new EmailMessages();
             try
             {
                 var Period = "";
@@ -511,91 +525,113 @@ namespace VerifoneServices
                     ds.ReadXml(PeriodFilename_Path, XmlReadMode.InferSchema);
                 }
 
-                #region get period to get invoice file
-                var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Period\\" + PeriodFileName;
+                //#region get period to get invoice file
+                var FilePathPeriod = AppDomain.CurrentDomain.BaseDirectory + "xml\\Period\\" + PeriodFileName;
 
-                XmlSerializer serializer = new XmlSerializer(typeof(Credential.periodList));
+                DataSet ds_xml = new DataSet();
+                ds_xml.ReadXml(FilePathPeriod, XmlReadMode.InferSchema);
 
-                Credential.periodList resultingMessage = (Credential.periodList)serializer.Deserialize(new XmlTextReader(path));
-
-                int periodInfoCount = resultingMessage.periodInfo.Count();
-                Credential.periodInfo[] objPeriodInfo = new Credential.periodInfo[periodInfoCount];
-                objPeriodInfo = resultingMessage.periodInfo;
-
-                CommanArchiveFiles("Invoice");   //Archived all invoice files
-                #endregion
-
-                for (int i = 0; i < objPeriodInfo.Length; i++)
+                for (int i = 0; i < ds_xml.Tables.Count; i++)
                 {
-                    //if (((Credential.periodCType)(objPeriodInfo[i].Items[0])).sysid == "2" && objPeriodInfo[i].name != "current")
-                    if (((Credential.periodCType)(objPeriodInfo[i].Items[0])).sysid == "2")
+                    if (ds_xml.Tables[i].TableName == "Fault")
                     {
-                        reportParameterCount = objPeriodInfo[i].reportParameters.reportParameter.Count();
-                        Credential.periodInfoReportParametersReportParameter[] objReportParameter = new Credential.periodInfoReportParametersReportParameter[reportParameterCount];
-                        objReportParameter = objPeriodInfo[i].reportParameters.reportParameter;
+                        isXMLError = true;
+                        break;
+                    }
+                }
 
-                        for (int j = 0; j < objReportParameter.Length; j++)
+                if (isXMLError == false)
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(Credential.periodList));
+
+                    Credential.periodList resultingMessage = (Credential.periodList)serializer.Deserialize(new XmlTextReader(FilePathPeriod));
+
+                    int periodInfoCount = resultingMessage.periodInfo.Count();
+                    Credential.periodInfo[] objPeriodInfo = new Credential.periodInfo[periodInfoCount];
+                    objPeriodInfo = resultingMessage.periodInfo;
+
+                    CommanArchiveFiles("Invoice");   //Archived all invoice files
+                    //#endregion
+
+                    for (int i = 0; i < objPeriodInfo.Length; i++)
+                    {
+                        //if (((Credential.periodCType)(objPeriodInfo[i].Items[0])).sysid == "2" && objPeriodInfo[i].name != "current")
+                        if (((Credential.periodCType)(objPeriodInfo[i].Items[0])).sysid == "2")
                         {
-                            if (objReportParameter[j].name == "period")
-                            {
-                                Period = objReportParameter[j].Value;
-                            }
-                            else if (objReportParameter[j].name == "filename")
-                            {
-                                FileName = objReportParameter[j].Value;
-                            }
-                        }
+                            reportParameterCount = objPeriodInfo[i].reportParameters.reportParameter.Count();
+                            Credential.periodInfoReportParametersReportParameter[] objReportParameter = new Credential.periodInfoReportParametersReportParameter[reportParameterCount];
+                            objReportParameter = objPeriodInfo[i].reportParameters.reportParameter;
 
-                        #region Archived File
-                        if (ds.Tables.Count > 0)
-                        {
-                            DataView dv = ds.Tables[0].DefaultView;
-                            dv.RowFilter = ("[" + ds.Tables[0].Columns[0].ColumnName + "] ='" + Period + "'AND [" + ds.Tables[0].Columns[1].ColumnName + "] ='" + FileName + "'");
+                            for (int j = 0; j < objReportParameter.Length; j++)
+                            {
+                                if (objReportParameter[j].name == "period")
+                                {
+                                    Period = objReportParameter[j].Value;
+                                }
+                                else if (objReportParameter[j].name == "filename")
+                                {
+                                    FileName = objReportParameter[j].Value;
+                                }
+                            }
 
-                            if (dv.Count == 0)
+                            #region Archived File
+                            if (ds.Tables.Count > 0)
+                            {
+                                DataView dv = ds.Tables[0].DefaultView;
+                                dv.RowFilter = ("[" + ds.Tables[0].Columns[0].ColumnName + "] ='" + Period + "'AND [" + ds.Tables[0].Columns[1].ColumnName + "] ='" + FileName + "'");
+
+                                if (dv.Count == 0)
+                                {
+                                    #region generate invoice file
+                                    try
+                                    {
+                                        string url = VerifoneServices.VerifoneLink + "cgi-bin/CGILink?cmd=vtransset&period=" + Period + "&filename=" + FileName + "&cookie=" + lblCookieValue + "";
+                                        //http://192.168.31.11/cgi-bin/CGILink?cmd=vtransset&period=1&filename=2019-06-30.622&cookie=;
+                                        InvoiceFileName = Command + "_" + Period + "_" + FileName;
+                                        GetRequestUrl(url, Method, body, Command, RequestCommand);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        objCVerifone.InsertActiveLog("BoF", "Error", "GetPeriod()", "GetPeriod ex " + InvoiceFileName + ":" + ex, "", "");
+                                    }
+                                    #endregion
+
+                                    //objCVerifone.InsertActiveLog("BoF", "End", "GetPeriod()", "generate new period file", "", "");
+                                }
+                                else
+                                {
+                                    //objCVerifone.InsertActiveLog("BoF", "End", "GetPeriod()", "period filename already exists", "", "");
+                                }
+                                dv.RowFilter = string.Empty;
+                            }
+                            else
                             {
                                 #region generate invoice file
                                 try
                                 {
                                     string url = VerifoneServices.VerifoneLink + "cgi-bin/CGILink?cmd=vtransset&period=" + Period + "&filename=" + FileName + "&cookie=" + lblCookieValue + "";
-                                    //http://192.168.31.11/cgi-bin/CGILink?cmd=vtransset&period=1&filename=2019-06-30.622&cookie=;
                                     InvoiceFileName = Command + "_" + Period + "_" + FileName;
                                     GetRequestUrl(url, Method, body, Command, RequestCommand);
                                 }
                                 catch (Exception ex)
                                 {
-                                    objCVerifone.InsertActiveLog("BoF", "Error", "GetPeriod()", "GetPeriod ex:" + ex, "", "");
                                 }
                                 #endregion
-
-                                //objCVerifone.InsertActiveLog("BoF", "End", "GetPeriod()", "generate new period file", "", "");
-                            }
-                            else
-                            {
-                                //objCVerifone.InsertActiveLog("BoF", "End", "GetPeriod()", "period filename already exists", "", "");
-                            }
-                        }
-                        else
-                        {
-                            #region generate invoice file
-                            try
-                            {
-                                string url = VerifoneServices.VerifoneLink + "cgi-bin/CGILink?cmd=vtransset&period=" + Period + "&filename=" + FileName + "&cookie=" + lblCookieValue + "";
-                                InvoiceFileName = Command + "_" + Period + "_" + FileName;
-                                GetRequestUrl(url, Method, body, Command, RequestCommand);
-                            }
-                            catch (Exception ex)
-                            {
                             }
                             #endregion
                         }
-                        #endregion
                     }
+                }
+                else
+                {
+                    String xmlText = File.ReadAllText(FilePathPeriod);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "GetPeriod()", "Error in " + PeriodFileName, "Period", "");
+                    SendEmail(objEmail.PeriodSubject + ": " + PeriodFileName, xmlText);
                 }
             }
             catch (Exception ex)
             {
-                objCVerifone.InsertActiveLog("BoF", "Error", "GetPeriod()", "GetPeriod Exception :  " + Convert.ToString(PeriodFileName) + "->" + ex, "", "");
+                objCVerifone.InsertActiveLog("BoF", "Error", "GetPeriod()", "GetPeriod Exception " + InvoiceFileName + " :  " + Convert.ToString(PeriodFileName) + "->" + ex, "", "");
             }
         }
 
@@ -1147,29 +1183,11 @@ namespace VerifoneServices
         #region Update Database Server file
         public bool UpdateDatabaseServerFile(string New_VP, string New_VU = "")
         {
-            //string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DataSource\\DatabaseServers.xml");
             var path = AppDomain.CurrentDomain.BaseDirectory + "DataSource\\DatabaseServers.xml";
             _CVerifone objCVerifone = new _CVerifone();
             try
             {
-                #region old code
-                //XmlDocument doc = new XmlDocument();
-                //doc.Load(path);
-
-                //XmlNodeList aDateNodes = doc.SelectNodes("/VerifoneServers/VerifoneServer");
-
-                //objCVerifone.InsertActiveLog("BoF", "Begin", "3()", aDateNodes.ToString(), "", "");
-
-                //foreach (XmlNode aDateNode in aDateNodes)
-                //{
-                //    objCVerifone.InsertActiveLog("BoF", "Begin", "4()", aDateNode.ToString(), "", "");
-                //    XmlAttribute DateAttribute = aDateNode.Attributes["VP"];
-                //    aDateNode.InnerText = New_VP;
-                //    objCVerifone.InsertActiveLog("BoF", "Begin", "5()", aDateNode.InnerText.ToString(), "", "");
-                //}
-
-                //doc.Save(path);
-                #endregion
+                objCVerifone.InsertActiveLog("BoF", "Start", "UpdateDatabaseServerFile()", "Initialize UpdateDatabaseServerFile", "", "");
 
                 XDocument xmlFile = XDocument.Load(path);
                 var query = from c in xmlFile.Elements("VerifoneServers").Elements("VerifoneServer")
@@ -1195,38 +1213,27 @@ namespace VerifoneServices
                                                 VU = dbServer.Attribute("VU").Value,
                                             }).ToList()[0];
 
-                //string NewChanged_VP = dbServerDetailResult.VP.Decript();
-                //string NewChanged_VU = dbServerDetailResult.VU.Decript(); 
-
                 string NewChanged_VP = dbServerDetailResult.VP;
                 string NewChanged_VU = dbServerDetailResult.VU;
 
-                objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", NewChanged_VP, "", "");
-                objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", New_VP, "", "");
                 if (NewChanged_VP == New_VP)
                 {
-                    objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", "1", "", "");
-
-                    if (New_VU != "")
+                    if (New_VU != "")  // used while replacing any user with RAPID user in DS File
                     {
-                        objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", "2", "", "");
                         if (NewChanged_VU == New_VU)
                         {
-                            objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", "3", "", "");
                             VerifoneServices.VerifoneUserName = New_VU;
                             objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", "DatabaseServers.xml file updated", "", "");
                             return true;
                         }
                         else
                         {
-                            objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", "4", "", "");
                             objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", "DatabaseServers.xml file not updated", "", "");
                             return false;
                         }
                     }
-                    else
+                    else // already RAPID user exists in DS File
                     {
-                        objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", "5", "", "");
                         VerifoneServices.VerifonePassword = New_VP;
                         objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", "DatabaseServers.xml file updated", "", "");
                         return true;
@@ -1234,7 +1241,6 @@ namespace VerifoneServices
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", "6", "", "");
                     objCVerifone.InsertActiveLog("BoF", "End", "UpdateDatabaseServerFile()", "DatabaseServers.xml file not updated", "", "");
                     return false;
                 }
@@ -1257,32 +1263,38 @@ namespace VerifoneServices
         }
 
         #region Email
-        public void SendEmail(string Subject, string Message)
+        public void SendEmail(string Subject, string Message, string Error = "")
         {
+            _CVerifone objCVerifone = new _CVerifone();
             try
             {
                 MailMessage message = new MailMessage();
                 string SMTPFROM = ConfigurationManager.AppSettings["SMTPFROM"];
                 string MailTo = ConfigurationManager.AppSettings["MailTo"];
-                string Body = "";
                 message.From = new MailAddress(SMTPFROM);
                 message.To.Add(MailTo);
                 message.Subject = Subject;
                 message.IsBodyHtml = true;
-                Body = "<b>DatabaseName</b> : " + VerifoneLibrary.DataAccess._CVerifone.DTN;
-                Body += "<br/><b>ErrorMessage</b> : " + Message;
+                //message.BodyEncoding = System.Text.Encoding.BigEndianUnicode;    //
+                string Body = "";
+                Body = "<b>Database Name</b> : " + VerifoneLibrary.DataAccess._CVerifone.DTN;
+                if (Error != "")
+                {
+                    Body += "<br/><b>Error</b> : " + Error;
+                }
+                Body += "<br/><b>Error Message</b> : " + Message;
                 message.Body = Body;
-
 
                 SendMailAnync(message);
             }
             catch (Exception ex)
             {
-                throw ex;
+                objCVerifone.InsertActiveLog("BoF", "Error", "SendEmail()", "SendEmail Exception : " + ex, "SendEmail", "");
             }
         }
         private void SendMailAnync(MailMessage message)
         {
+            _CVerifone objCVerifone = new _CVerifone();
             try
             {
                 string SMTPFROM = ConfigurationManager.AppSettings["SMTPFROM"];
@@ -1312,16 +1324,38 @@ namespace VerifoneServices
                     }
                     catch (Exception ex)
                     {
-                        //throw ex;
+                        objCVerifone.InsertActiveLog("BoF", "Error", "SendMailAnync()", "SendMailAnync Exception : " + ex, "SendMailAnync", "");
                     }
                 }).Start();
+
             }
             catch (Exception ex)
             {
-                throw;
+                objCVerifone.InsertActiveLog("BoF", "Error", "SendMailAnync()", "SendMailAnync Exception 2 : " + ex, "SendMailAnync", "");
             }
         }
         #endregion
+
+        public bool GetErrorStatus(DataSet ds)
+        {
+            bool isXMLError = false;
+            try
+            {
+                for (int i = 0; i < ds.Tables.Count; i++)
+                {
+                    if (ds.Tables[i].TableName == "Fault")
+                    {
+                        isXMLError = true;
+                        break;
+                    }
+                }
+                return isXMLError;
+            }
+            catch (Exception ex)
+            {
+                return isXMLError;
+            }
+        }
     }
 
     public enum WeekDays
@@ -1341,6 +1375,72 @@ namespace VerifoneServices
         #region user
         public string UserSubject = "Verifone - User Password Blank";
         public string UserBody = "Rapid User Password found blank";
+        #endregion
+
+        #region tax
+        public string TaxSubject = "Verifone - Error in Tax.xml";
+        //public string TaxBody = "Please find below attached error file of Tax";
+        #endregion
+
+        #region department
+        public string DepartmentSubject = "Verifone - Error in Department.xml";
+        #endregion
+
+        #region payment
+        public string PaymentSubject = "Verifone - Error in Payment.xml";
+        #endregion
+
+        #region category
+        public string CategorySubject = "Verifone - Error in Category.xml";
+        #endregion
+
+        #region prodcodes
+        public string ProdCodesSubject = "Verifone - Error in prodCodes.xml";
+        #endregion
+
+        #region fee
+        public string FeeSubject = "Verifone - Error in Fee.xml";
+        #endregion
+
+        #region item
+        public string ItemSubject = "Verifone - Error in Item.xml";
+        #endregion
+
+        #region fuel
+        public string FuelSubject = "Verifone - Error in Fuel.xml";
+        #endregion
+
+        #region employee
+        public string EmployeeSubject = "Verifone - Error in Employee.xml";
+        #endregion
+
+        #region user with role
+        public string UserRoleSubject = "Verifone - Error in UserRole.xml";
+        #endregion
+
+        #region cashier user
+        public string CashierUserSubject = "Verifone - Error in CashierUser.xml";
+        #endregion
+
+        #region promotion
+        public string MixMatchSubject = "Verifone - Error in MixMatch.xml";
+        public string ItemListSubject = "Verifone - Error in MixMatch_ItemList.xml";
+        #endregion
+
+        #region register
+        public string RegisterSubject = "Verifone - Error in Register.xml";
+        #endregion
+
+        #region Invoice
+        public string InvoiceSubject = "Verifone - Error in Invoice xml";
+        public string PeriodSubject = "Verifone - Error in Period xml";
+        #endregion
+
+        #region Ruby Report
+        public string ReportSubject = "Verifone - Error in Report xml";
+        public string ZSubject = "Verifone - Error in Daily xml";
+        public string ShiftSubject = "Verifone - Error in Shift xml";
+        public string ZZSubject = "Verifone - Error in Monthly xml";
         #endregion
     }
     #endregion

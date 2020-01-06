@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-16' ?> 
+<posConfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns='urn:vfi-sapphire:np.domain.2001-07-01'>
+<site  /> 
+<departments >
+<department minAmt='0' maxAmt='0' isAllowFS='false' isNegative='false' isFuel='false' isAllowFQ='false' isAllowSD='false' isMoneyOrder='false' /> 
+</departments>
+</posConfig>

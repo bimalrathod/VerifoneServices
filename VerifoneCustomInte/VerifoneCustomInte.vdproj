@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1244FA81B7DC4ECDB49C9EBE4AD50092"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_13A8A3ABAC18492B953B11F8D9E08426"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -45,12 +39,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_31F567C01C744B34B007B254EDCC1C1D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_36C917264A114041AFC418A68B37BF96"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -63,7 +51,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3DFBCC3BA4DB4345927768EE542D10AB"
+        "MsmKey" = "8:_4595AC7E75E34534BB9A5A69F96EA758"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -75,19 +63,37 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_86C100386603424E9FA4DACB4B86742A"
+        "MsmKey" = "8:_7C8EE52A01E64B3F9D32D422392BA0BB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8C4892A6047B4EE6B90B3DA7CB729BC9"
+        "MsmKey" = "8:_7CE618F7C78B4D7CA660A93925C54CA6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_890341489B9C43208F82A7ED2B02F126"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_93BAD3165CAE44089B7719C2A9548195"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_969173F76B4B4FE580CB9B94559CF233"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9DCA234DFC84426D91E01789A9AD98E1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -123,12 +129,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D80384EE74F249C99504FFF8A5B9A1E1"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D81C673E231A4BB6BE3BB24C54069AF9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -148,13 +148,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D294AB3A2F7E4B9022CE7DDC80950487"
+        "OwnerKey" = "8:_D81C673E231A4BB6BE3BB24C54069AF9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D81C673E231A4BB6BE3BB24C54069AF9"
+        "OwnerKey" = "8:_D294AB3A2F7E4B9022CE7DDC80950487"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -364,26 +364,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1244FA81B7DC4ECDB49C9EBE4AD50092"
-            {
-            "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\ReportArchived_Files.txt"
-            "TargetName" = "8:ReportArchived_Files.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_CFC8CB5EF35C4BE791B809F725B90CBD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_13A8A3ABAC18492B953B11F8D9E08426"
             {
             "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\Invoice.txt"
@@ -444,26 +424,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_31F567C01C744B34B007B254EDCC1C1D"
-            {
-            "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\shiftArchived_Files.txt"
-            "TargetName" = "8:shiftArchived_Files.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_3B1291AF28F4455EA87DC4E79EC6998D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_36C917264A114041AFC418A68B37BF96"
             {
             "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\Period.txt"
@@ -504,7 +464,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3DFBCC3BA4DB4345927768EE542D10AB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4595AC7E75E34534BB9A5A69F96EA758"
             {
             "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\DailyArchived_Files.txt"
             "TargetName" = "8:DailyArchived_Files.txt"
@@ -544,12 +504,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_86C100386603424E9FA4DACB4B86742A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7C8EE52A01E64B3F9D32D422392BA0BB"
             {
-            "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\PeriodArchived_Files.txt"
-            "TargetName" = "8:PeriodArchived_Files.txt"
+            "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\InvoiceArchived_Files.txt"
+            "TargetName" = "8:InvoiceArchived_Files.txt"
             "Tag" = "8:"
-            "Folder" = "8:_8B39D7187B34473E905EF00F1ED27A9D"
+            "Folder" = "8:_6215F1AAD1864EA7B580F2B29C66B482"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -564,7 +524,27 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8C4892A6047B4EE6B90B3DA7CB729BC9"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7CE618F7C78B4D7CA660A93925C54CA6"
+            {
+            "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\ReportArchived_Files.txt"
+            "TargetName" = "8:ReportArchived_Files.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_CFC8CB5EF35C4BE791B809F725B90CBD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_890341489B9C43208F82A7ED2B02F126"
             {
             "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\MonthArchived_Files.txt"
             "TargetName" = "8:MonthArchived_Files.txt"
@@ -590,6 +570,46 @@
             "TargetName" = "8:Fee.xml"
             "Tag" = "8:"
             "Folder" = "8:_D1178510BC774C428DCA2DDA7878C3F6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_969173F76B4B4FE580CB9B94559CF233"
+            {
+            "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\PeriodArchived_Files.txt"
+            "TargetName" = "8:PeriodArchived_Files.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_8B39D7187B34473E905EF00F1ED27A9D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9DCA234DFC84426D91E01789A9AD98E1"
+            {
+            "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\shiftArchived_Files.txt"
+            "TargetName" = "8:shiftArchived_Files.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_3B1291AF28F4455EA87DC4E79EC6998D"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -691,6 +711,11 @@
             "AssemblyAsmDisplayName" = "8:VerifoneLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_D294AB3A2F7E4B9022CE7DDC80950487"
+                    {
+                    "Name" = "8:VerifoneLibrary.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:VerifoneLibrary.dll"
             "TargetName" = "8:"
@@ -708,26 +733,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D80384EE74F249C99504FFF8A5B9A1E1"
-            {
-            "SourcePath" = "8:D:\\VerifoneServicesSetupFile\\InvoiceArchived_Files.txt"
-            "TargetName" = "8:InvoiceArchived_Files.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_6215F1AAD1864EA7B580F2B29C66B482"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F821CE10B3B84D7BB0A46D6023601BF9"

@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="VerifoneServices.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="VerifoneServices" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
+    <commandLine file="VerifoneServices.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="VerifoneLibrary.dll" size="34816">
+      <assemblyIdentity name="VerifoneLibrary" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>wf3i3mLSOKtLxlSOosEVsYJOflSxkSx8ei06QwHf+KU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="VerifoneServices.exe" size="1268736">
+      <assemblyIdentity name="VerifoneServices" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>SyeydTUBWpJnEizRMDAsMjFl5pEK112abBYr8Qudju4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="bin\Debug\Payload\Department.xml" size="405" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>qfd12iI/Gg0Alb8gn1xmpm5Wl+1wS9lLVGC1ewLw92I=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Debug\Payload\Fee.xml" size="880" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jnFbJsZNQ8EryYQNmDCr5KVmKP+JxpsUZLxRHPbxBSM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Debug\Payload\Fuel.xml" size="43" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>XSCtbGEAeMoTKajnTWsVSbObpH01Q+xj4PgLLZnrO7g=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Debug\Payload\Item.xml" size="216" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>zYdfs71QVZ6aMmihWoNRbs4OuSD4uXef6O2tydRXwd8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Debug\Payload\Payment.xml" size="2792" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>gKx1LQBKmM10RjSMKrjayeGXhcc3braIkE1zeFOC5yY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Debug\Payload\Tax.xml" size="1282" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Mb9Z8O9M6tRTzR1Q59bjfyCrI3VZJFFHqH5Zwa455gY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Debug\Period_FileName.xml" size="502" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>L/M/gXiSWT2vmhyJPpuyQdthUK5pNgj8OKSkUoJ/wzQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Debug\RubyReport_Period_FileName.xml" size="602" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>EhYtf+WMp990zkc0CWgNbXMIvteQwWzNB/is6cYg7nc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Debug\VerifoneLibrary.dll" size="59392">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>8HF/Ueko9T5jaIvkFpZCa3k3jsu/humdhp2iJY1BQC4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Debug\VerifoneLibrary.pdb" size="71168">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>oftBKTqsq8yD7ApfHisvayDR4+b+kHGZTlRtyQwQmik=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Release\DataSource\DatabaseServers.xml" size="1063" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Yffj2lleQoh62pgwcotmgCnuKa6xcaaeDA5w3NXLHCI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Release\DataSource\DatabaseServers-ez.xml" size="506" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>32MvidK6FGUaC4pXykgLs9w9nC7+oy3aVmx5kwpW6uo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Release\Payload\Department.xml" size="405" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>qfd12iI/Gg0Alb8gn1xmpm5Wl+1wS9lLVGC1ewLw92I=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Release\Payload\Fee.xml" size="880" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jnFbJsZNQ8EryYQNmDCr5KVmKP+JxpsUZLxRHPbxBSM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Release\Payload\Fuel.xml" size="43" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>XSCtbGEAeMoTKajnTWsVSbObpH01Q+xj4PgLLZnrO7g=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Release\Payload\Item.xml" size="216" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>zYdfs71QVZ6aMmihWoNRbs4OuSD4uXef6O2tydRXwd8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Release\Payload\Payment.xml" size="2792" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>gKx1LQBKmM10RjSMKrjayeGXhcc3braIkE1zeFOC5yY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Release\Payload\Tax.xml" size="1282" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Mb9Z8O9M6tRTzR1Q59bjfyCrI3VZJFFHqH5Zwa455gY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="bin\Release\XML\Invoice\Invoice_2_2019-10-04.583.xml" size="9406463" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>r3nPk3O5dd8A6kaUxPSQVjBVoE9ZOxr8E9cuZFyFaNo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="VerifoneServices.exe.config" size="2087">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>DyrN8uV7HtnsZ+b7OUUEYqde9o58n+7mzx0RehfoKGY=</dsig:DigestValue>
+    </hash>
+  </file>
+</asmv1:assembly>

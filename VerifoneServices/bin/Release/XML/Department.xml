@@ -1,0 +1,1907 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<domain:posConfig xmlns:domain="urn:vfi-sapphire:np.domain.2001-07-01">
+  <site>0413</site>
+  <categories>
+    <category sysid="1" name="INSIDE SALES" />
+    <category sysid="2" name="METERED SALES" />
+    <category sysid="3" name="New Category" />
+    <category sysid="4" name="testing 111" />
+    <category sysid="6" name="DISPENSED BEVERAGE" />
+    <category sysid="900" name="FUEL SALES" />
+    <category sysid="9995" name="TEST MDSE" />
+    <category sysid="9999" name="FUEL DEPOSIT" />
+  </categories>
+  <prodCodes>
+    <prodCode sysid="1" name="UNLEADED REGULAR" isNotSold="0" isFuel="1" />
+    <prodCode sysid="2" name="UNLEADED PLUS" isNotSold="0" isFuel="1" />
+    <prodCode sysid="3" name="UNLEADED SUPER" isNotSold="0" isFuel="1" />
+    <prodCode sysid="4" name="UNLEADED 4" isNotSold="0" isFuel="1" />
+    <prodCode sysid="5" name="UNLEADED 5" isNotSold="0" isFuel="1" />
+    <prodCode sysid="6" name="UNLEADED METH 5.7%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="7" name="UNLEADED PLUS METH%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="8" name="SUPER UNLEADED METH" isNotSold="0" isFuel="1" />
+    <prodCode sysid="9" name="UNLEADED METH 7.7%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="10" name="UNLEADED PLUS METH" isNotSold="0" isFuel="1" />
+    <prodCode sysid="11" name="UNLEADED ETHA 5.7%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="12" name="UNLEADED PLUS ETHA" isNotSold="0" isFuel="1" />
+    <prodCode sysid="13" name="UNLEADED SUPER ETHA" isNotSold="0" isFuel="1" />
+    <prodCode sysid="14" name="UNLEADED ETHA 7.7%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="15" name="UNLEADED PLUS ETHA" isNotSold="0" isFuel="1" />
+    <prodCode sysid="16" name="METHANOL / LEADED" isNotSold="0" isFuel="1" />
+    <prodCode sysid="17" name="ETHANOL / LEADED" isNotSold="0" isFuel="1" />
+    <prodCode sysid="18" name="LEADED" isNotSold="0" isFuel="1" />
+    <prodCode sysid="19" name="REGULAR DIESEL 2" isNotSold="0" isFuel="1" />
+    <prodCode sysid="20" name="PREMIUM DIESEL 2" isNotSold="0" isFuel="1" />
+    <prodCode sysid="21" name="REGULAR DIESEL 1" isNotSold="0" isFuel="1" />
+    <prodCode sysid="22" name="COMPRESSED NATURAL" isNotSold="0" isFuel="1" />
+    <prodCode sysid="23" name="LIQUID PROPANE GAS" isNotSold="0" isFuel="1" />
+    <prodCode sysid="24" name="LIQUID NATURAL GAS" isNotSold="0" isFuel="1" />
+    <prodCode sysid="25" name="M-85" isNotSold="0" isFuel="1" />
+    <prodCode sysid="26" name="E-85" isNotSold="0" isFuel="1" />
+    <prodCode sysid="27" name="UNLEADED -REFORMU 1" isNotSold="0" isFuel="1" />
+    <prodCode sysid="28" name="UNLEADED -REFORMU 2" isNotSold="0" isFuel="1" />
+    <prodCode sysid="29" name="UNLEADED -REFORMU 3" isNotSold="0" isFuel="1" />
+    <prodCode sysid="30" name="UNLEADED -REFORMU 4" isNotSold="0" isFuel="1" />
+    <prodCode sysid="31" name="UNLEADED -REFORMU 5" isNotSold="0" isFuel="1" />
+    <prodCode sysid="32" name="DIE OFF 1 2 NO TAX" isNotSold="0" isFuel="1" />
+    <prodCode sysid="33" name="DIES OFF RD NON-TAX" isNotSold="0" isFuel="1" />
+    <prodCode sysid="34" name="BIODIES BL NON-TAXA" isNotSold="0" isFuel="1" />
+    <prodCode sysid="35" name="BIODIES BL NON-TAXA" isNotSold="0" isFuel="1" />
+    <prodCode sysid="36" name="RACING FUEL" isNotSold="0" isFuel="1" />
+    <prodCode sysid="37" name="SUP UNLEA METH 7.7%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="38" name="UNLEADED METH 10%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="39" name="UNLEA PLUS METH 10%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="40" name="SUP UNLEA METH 10%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="41" name="UNLEA SUP ETHA 7.7%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="42" name="UNLEADED ETHA 10%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="43" name="UNLEA PLUS ETHA 10%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="44" name="UNLEA SUP ETHA 10%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="45" name="B2 DIES BLEN 2% BIO" isNotSold="0" isFuel="1" />
+    <prodCode sysid="46" name="B5 DIES BLEN 5% BIO" isNotSold="0" isFuel="1" />
+    <prodCode sysid="47" name="B10 DIES BL 10% BIO" isNotSold="0" isFuel="1" />
+    <prodCode sysid="48" name="B11 DIES BL 11% BIO" isNotSold="0" isFuel="1" />
+    <prodCode sysid="49" name="B15 DIES BL 15% BIO" isNotSold="0" isFuel="1" />
+    <prodCode sysid="50" name="B20 DIES BL 20% BIO" isNotSold="0" isFuel="1" />
+    <prodCode sysid="51" name="B100 DI BL 100% BIO" isNotSold="0" isFuel="1" />
+    <prodCode sysid="52" name="ULTRA LOW SULFUR 1" isNotSold="0" isFuel="1" />
+    <prodCode sysid="53" name="ULTRA LOW SULFUR 2" isNotSold="0" isFuel="1" />
+    <prodCode sysid="54" name="UL LW SUL PRE DI 2" isNotSold="0" isFuel="1" />
+    <prodCode sysid="55" name="UL LW SUL BID BL 2%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="56" name="UL LW SUL BID BL 5%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="57" name="UL LW SUL BI BL 10%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="58" name="UL LW SUL BI BL 11%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="59" name="UL LW SUL BI BL 15%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="60" name="UL LW SUL BI BL 20%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="61" name="UL LW SU BI BL 100%" isNotSold="0" isFuel="1" />
+    <prodCode sysid="62" name="DEF DIES EXHAU FLUI" isNotSold="0" isFuel="1" />
+    <prodCode sysid="63" name="PREMIUM DIESEL 1" isNotSold="0" isFuel="1" />
+    <prodCode sysid="64" name="UNLEA ETH 15% BLEND" isNotSold="0" isFuel="1" />
+    <prodCode sysid="65" name="UNL PLU ETH 15% BLE" isNotSold="0" isFuel="1" />
+    <prodCode sysid="66" name="UNL SUP ETH 15% BLE" isNotSold="0" isFuel="1" />
+    <prodCode sysid="67" name="PRE DI BL &lt;20% BIOD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="68" name="PRE DI BL =&gt;20% BIO" isNotSold="0" isFuel="1" />
+    <prodCode sysid="69" name="B75 DI BL 75% BIOD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="70" name="B99 DI BL 99% BIOD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="71" name="RESERVED FUEL 071" isNotSold="0" isFuel="1" />
+    <prodCode sysid="72" name="RESERVED FUEL 072" isNotSold="0" isFuel="1" />
+    <prodCode sysid="73" name="RESERVED FUEL 073" isNotSold="0" isFuel="1" />
+    <prodCode sysid="74" name="RESERVED FUEL 074" isNotSold="0" isFuel="1" />
+    <prodCode sysid="75" name="RESERVED FUEL 075" isNotSold="0" isFuel="1" />
+    <prodCode sysid="76" name="RESERVED FUEL 076" isNotSold="0" isFuel="1" />
+    <prodCode sysid="77" name="RESERVED FUEL 077" isNotSold="0" isFuel="1" />
+    <prodCode sysid="78" name="RESERVED FUEL 078" isNotSold="0" isFuel="1" />
+    <prodCode sysid="79" name="RESERVED FUEL 079" isNotSold="0" isFuel="1" />
+    <prodCode sysid="80" name="RESERVED FUEL 080" isNotSold="0" isFuel="1" />
+    <prodCode sysid="81" name="RESERVED FUEL 081" isNotSold="0" isFuel="1" />
+    <prodCode sysid="82" name="RESERVED FUEL 082" isNotSold="0" isFuel="1" />
+    <prodCode sysid="83" name="RESERVED FUEL 083" isNotSold="0" isFuel="1" />
+    <prodCode sysid="84" name="RESERVED FUEL 084" isNotSold="0" isFuel="1" />
+    <prodCode sysid="85" name="RESERVED FUEL 085" isNotSold="0" isFuel="1" />
+    <prodCode sysid="86" name="RESERVED FUEL 086" isNotSold="0" isFuel="1" />
+    <prodCode sysid="87" name="RESERVED FUEL 087" isNotSold="0" isFuel="1" />
+    <prodCode sysid="88" name="RESERVED FUEL 088" isNotSold="0" isFuel="1" />
+    <prodCode sysid="89" name="RESERVED FUEL 089" isNotSold="0" isFuel="1" />
+    <prodCode sysid="90" name="RESERVED FUEL 090" isNotSold="0" isFuel="1" />
+    <prodCode sysid="91" name="RESERVED FUEL 091" isNotSold="0" isFuel="1" />
+    <prodCode sysid="92" name="RESERVED FUEL 092" isNotSold="0" isFuel="1" />
+    <prodCode sysid="93" name="RESERVED FUEL 093" isNotSold="0" isFuel="1" />
+    <prodCode sysid="94" name="RESERVED FUEL 094" isNotSold="0" isFuel="1" />
+    <prodCode sysid="95" name="RESERVED FUEL 095" isNotSold="0" isFuel="1" />
+    <prodCode sysid="96" name="RESERVED FUEL 096" isNotSold="0" isFuel="1" />
+    <prodCode sysid="97" name="RESERVED FUEL 097" isNotSold="0" isFuel="1" />
+    <prodCode sysid="98" name="RESERVED FUEL 098" isNotSold="0" isFuel="1" />
+    <prodCode sysid="99" name="MISCELLANEOUS FUEL" isNotSold="0" isFuel="1" />
+    <prodCode sysid="100" name="GENERAL AUTOMOTIVE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="101" name="MOTOR OIL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="102" name="CAR WASH" isNotSold="0" isFuel="0" />
+    <prodCode sysid="103" name="OIL CHANGE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="104" name="OIL FILTER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="105" name="WORK ORDER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="106" name="ANTI-FREEZE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="107" name="WASHER FLUID" isNotSold="0" isFuel="0" />
+    <prodCode sysid="108" name="BRAKE FLUID" isNotSold="0" isFuel="0" />
+    <prodCode sysid="109" name="TIRES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="110" name="FEDERAL EXCISE TAX" isNotSold="0" isFuel="0" />
+    <prodCode sysid="111" name="TIRE ROTATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="112" name="BATTERIES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="113" name="LUBE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="114" name="INSPECTION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="115" name="LABOR" isNotSold="0" isFuel="0" />
+    <prodCode sysid="116" name="TOWING" isNotSold="0" isFuel="0" />
+    <prodCode sysid="117" name="ROAD SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="118" name="VEHICLE ACCESSORIE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="119" name="VEHICLE PARTS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="120" name="PREVENTATIVE MAINTE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="121" name="AIR CONDITIONING SE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="122" name="ENGINE SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="123" name="TRANSMISSION SERVIC" isNotSold="0" isFuel="0" />
+    <prodCode sysid="124" name="BRAKE SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="125" name="EXHAUST SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="126" name="BODY WORK" isNotSold="0" isFuel="0" />
+    <prodCode sysid="127" name="VEHICLE GLASS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="128" name="SYNTHETIC OIL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="129" name="LAMPS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="130" name="WIPERS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="131" name="HOSES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="132" name="TIRE-RELATED" isNotSold="0" isFuel="0" />
+    <prodCode sysid="133" name="REPAIRS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="134" name="SERVICE PACKAGE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="135" name="VEHICLE PARKING" isNotSold="0" isFuel="0" />
+    <prodCode sysid="136" name="TRUCK TANK CLEANING" isNotSold="0" isFuel="0" />
+    <prodCode sysid="137" name="OTHER LUBRICANTS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="138" name="VEHICLE FUEL ADDI" isNotSold="0" isFuel="0" />
+    <prodCode sysid="139" name="VEHICLE RENTALS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="140" name="AIR FILTER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="141" name="VEHICLE PREP" isNotSold="0" isFuel="0" />
+    <prodCode sysid="142" name="FUEL SYSTEM" isNotSold="0" isFuel="0" />
+    <prodCode sysid="143" name="PARTS/SERVICE 143" isNotSold="0" isFuel="0" />
+    <prodCode sysid="144" name="PARTS/SERVICE 144" isNotSold="0" isFuel="0" />
+    <prodCode sysid="145" name="PARTS/SERVICE 145" isNotSold="0" isFuel="0" />
+    <prodCode sysid="146" name="PARTS/SERVICE 146" isNotSold="0" isFuel="0" />
+    <prodCode sysid="147" name="PARTS/SERVICE 147" isNotSold="0" isFuel="0" />
+    <prodCode sysid="148" name="PARTS/SERVICE 148" isNotSold="0" isFuel="0" />
+    <prodCode sysid="149" name="MISC PARTS/SERVI" isNotSold="0" isFuel="0" />
+    <prodCode sysid="150" name="JET FUEL" isNotSold="0" isFuel="1" />
+    <prodCode sysid="151" name="AVIATION FUEL REGUL" isNotSold="0" isFuel="1" />
+    <prodCode sysid="152" name="AVIATION FUEL PREMI" isNotSold="0" isFuel="1" />
+    <prodCode sysid="153" name="AVIATION FUEL JP8" isNotSold="0" isFuel="1" />
+    <prodCode sysid="154" name="AVIATION FUEL 4" isNotSold="0" isFuel="1" />
+    <prodCode sysid="155" name="AVIATION FUEL 5" isNotSold="0" isFuel="1" />
+    <prodCode sysid="156" name="AVIATION FUEL 156" isNotSold="0" isFuel="1" />
+    <prodCode sysid="157" name="AVIATION FUEL 157" isNotSold="0" isFuel="1" />
+    <prodCode sysid="158" name="AVIATION FUEL 158" isNotSold="0" isFuel="1" />
+    <prodCode sysid="159" name="AVIATION FUEL 159" isNotSold="0" isFuel="1" />
+    <prodCode sysid="160" name="AVIATION FUEL 160" isNotSold="0" isFuel="1" />
+    <prodCode sysid="161" name="AVIATION FUEL 161" isNotSold="0" isFuel="1" />
+    <prodCode sysid="162" name="AVIATION FUEL 162" isNotSold="0" isFuel="1" />
+    <prodCode sysid="163" name="AVIATION FUEL 163" isNotSold="0" isFuel="1" />
+    <prodCode sysid="164" name="AVIATION FUEL 164" isNotSold="0" isFuel="1" />
+    <prodCode sysid="165" name="AVIATION FUEL 165" isNotSold="0" isFuel="1" />
+    <prodCode sysid="166" name="AVIATION FUEL 166" isNotSold="0" isFuel="1" />
+    <prodCode sysid="167" name="AVIATION FUEL 167" isNotSold="0" isFuel="1" />
+    <prodCode sysid="168" name="AVIATION FUEL 168" isNotSold="0" isFuel="1" />
+    <prodCode sysid="169" name="AVIATION FUEL 169" isNotSold="0" isFuel="1" />
+    <prodCode sysid="170" name="AVIATION FUEL 170" isNotSold="0" isFuel="1" />
+    <prodCode sysid="171" name="AVIATION FUEL 171" isNotSold="0" isFuel="1" />
+    <prodCode sysid="172" name="AVIATION FUEL 172" isNotSold="0" isFuel="1" />
+    <prodCode sysid="173" name="AVIATION FUEL 173" isNotSold="0" isFuel="1" />
+    <prodCode sysid="174" name="MISC AVIATION FUEL" isNotSold="0" isFuel="1" />
+    <prodCode sysid="175" name="STORAGE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="176" name="AIRCRAFT GROUND HAN" isNotSold="0" isFuel="0" />
+    <prodCode sysid="177" name="AIRCRAFT GROUND POW" isNotSold="0" isFuel="0" />
+    <prodCode sysid="178" name="AIRCRAFT LABOR" isNotSold="0" isFuel="0" />
+    <prodCode sysid="179" name="AIRCRAFT WORK ORDER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="180" name="AIRCRAFT MAINTENANC" isNotSold="0" isFuel="0" />
+    <prodCode sysid="181" name="AIRCRAFT SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="182" name="TRANSPORTATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="183" name="DE-ICING" isNotSold="0" isFuel="0" />
+    <prodCode sysid="184" name="RAMP FEES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="185" name="CATERING" isNotSold="0" isFuel="0" />
+    <prodCode sysid="186" name="HANGAR FEE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="187" name="LANDING FEE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="188" name="CALL OUT FEE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="189" name="AIRCRAFFT RENTAL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="190" name="INSTRUCTION FEE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="191" name="FLIGHT PLANS / WEAT" isNotSold="0" isFuel="0" />
+    <prodCode sysid="192" name="CHARTER FEE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="193" name="COMMUNICATION FEE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="194" name="AIRCRAFT CLEANING" isNotSold="0" isFuel="0" />
+    <prodCode sysid="195" name="CARGO HANDLING" isNotSold="0" isFuel="0" />
+    <prodCode sysid="196" name="AIRCRAFT ACCESSORIE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="197" name="PILOT SUPPLIES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="198" name="AIRCRAFT PARKING FE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="199" name="AIRCRAFT TIEDOWN FE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="200" name="AIRCRAFT SANITAT FE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="201" name="AIRCRAFT FUEL ADDIT" isNotSold="0" isFuel="0" />
+    <prodCode sysid="202" name="AC PARTS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="203" name="OXYGEN" isNotSold="0" isFuel="0" />
+    <prodCode sysid="204" name="DE-FUEL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="205" name="RE-SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="206" name="STATIC DISSIPAT ADD" isNotSold="0" isFuel="0" />
+    <prodCode sysid="207" name="CORROSION INHIBITOR" isNotSold="0" isFuel="0" />
+    <prodCode sysid="208" name="AIRPORT FEES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="209" name="OVERTIME FEES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="210" name="IT/BLADDER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="211" name="GROUND EQUI SER FEE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="212" name="SECURE FEES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="213" name="FLOW FEES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="214" name="AVIATION PROD/SERV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="215" name="AVIATION PROD/SERV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="216" name="AVIATION PROD/SERV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="217" name="AVIATION PROD/SERV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="218" name="AVIATION PROD/SERV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="219" name="AVIATION PROD/SERV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="220" name="AVIATION PROD/SERV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="221" name="AVIATION PROD/SERV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="222" name="AVIATION PROD/SERV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="223" name="AVIATION PROD/SERV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="224" name="MISCELLANEOUS AVIAT" isNotSold="0" isFuel="0" />
+    <prodCode sysid="225" name="MARINE FUEL 1" isNotSold="0" isFuel="1" />
+    <prodCode sysid="226" name="MARINE FUEL 2" isNotSold="0" isFuel="1" />
+    <prodCode sysid="227" name="MARINE FUEL 3" isNotSold="0" isFuel="1" />
+    <prodCode sysid="228" name="MARINE FUEL 4" isNotSold="0" isFuel="1" />
+    <prodCode sysid="229" name="MARINE FUEL 5" isNotSold="0" isFuel="1" />
+    <prodCode sysid="230" name="MARINE OTHER" isNotSold="0" isFuel="1" />
+    <prodCode sysid="231" name="MARINE FUEL 231" isNotSold="0" isFuel="1" />
+    <prodCode sysid="232" name="MARINE FUEL 232" isNotSold="0" isFuel="1" />
+    <prodCode sysid="233" name="MARINE FUEL 233" isNotSold="0" isFuel="1" />
+    <prodCode sysid="234" name="MARINE FUEL 234" isNotSold="0" isFuel="1" />
+    <prodCode sysid="235" name="MARINE FUEL 235" isNotSold="0" isFuel="1" />
+    <prodCode sysid="236" name="MARINE FUEL 236" isNotSold="0" isFuel="1" />
+    <prodCode sysid="237" name="MARINE FUEL 237" isNotSold="0" isFuel="1" />
+    <prodCode sysid="238" name="MARINE FUEL 238" isNotSold="0" isFuel="1" />
+    <prodCode sysid="239" name="MARINE FUEL 239" isNotSold="0" isFuel="1" />
+    <prodCode sysid="240" name="MARINE FUEL 240" isNotSold="0" isFuel="1" />
+    <prodCode sysid="241" name="MARINE FUEL 241" isNotSold="0" isFuel="1" />
+    <prodCode sysid="242" name="MARINE FUEL 242" isNotSold="0" isFuel="1" />
+    <prodCode sysid="243" name="MARINE FUEL 243" isNotSold="0" isFuel="1" />
+    <prodCode sysid="244" name="MARINE FUEL 244" isNotSold="0" isFuel="1" />
+    <prodCode sysid="245" name="MARINE FUEL 245" isNotSold="0" isFuel="1" />
+    <prodCode sysid="246" name="MARINE FUEL 246" isNotSold="0" isFuel="1" />
+    <prodCode sysid="247" name="MARINE FUEL 247" isNotSold="0" isFuel="1" />
+    <prodCode sysid="248" name="MARINE FUEL 248" isNotSold="0" isFuel="1" />
+    <prodCode sysid="249" name="MISCELLANEOUS MARIN" isNotSold="0" isFuel="1" />
+    <prodCode sysid="250" name="MARINE SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="251" name="MARINE LABOR" isNotSold="0" isFuel="0" />
+    <prodCode sysid="252" name="MARINE WORK ORDER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="253" name="LAUNCH FEE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="254" name="SLIP RENTAL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="255" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="256" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="257" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="258" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="259" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="260" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="261" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="262" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="263" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="264" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="265" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="266" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="267" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="268" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="269" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="270" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="271" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="272" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="273" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="274" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="275" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="276" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="277" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="278" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="279" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="280" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="281" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="282" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="283" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="284" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="285" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="286" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="287" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="288" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="289" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="290" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="291" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="292" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="293" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="294" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="295" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="296" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="297" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="298" name="MARINE PROD/SERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="299" name="MISCELLANEOUS MARIN" isNotSold="0" isFuel="0" />
+    <prodCode sysid="300" name="KEROSENE-LOW SULFUR" isNotSold="0" isFuel="1" />
+    <prodCode sysid="301" name="WHITE GAS" isNotSold="0" isFuel="1" />
+    <prodCode sysid="302" name="HEATING OIL" isNotSold="0" isFuel="1" />
+    <prodCode sysid="303" name="BOTTLED PROPANE" isNotSold="0" isFuel="1" />
+    <prodCode sysid="304" name="OTHER FUEL (NON TAX" isNotSold="0" isFuel="1" />
+    <prodCode sysid="305" name="KEROSE-ULTR LW SULF" isNotSold="0" isFuel="1" />
+    <prodCode sysid="306" name="KER-LOW SULF NON TA" isNotSold="0" isFuel="1" />
+    <prodCode sysid="307" name="KER-UL LW SUL NO TA" isNotSold="0" isFuel="1" />
+    <prodCode sysid="308" name="EVC1-LV1 110V 15A" isNotSold="0" isFuel="1" />
+    <prodCode sysid="309" name="EVC2-L2 240V 15-40A" isNotSold="0" isFuel="1" />
+    <prodCode sysid="310" name="EVC3-LV3 480V 3PHAS" isNotSold="0" isFuel="1" />
+    <prodCode sysid="311" name="BIOD BL 2% OFF-ROAD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="312" name="BIOD BL 5% OFF-ROAD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="313" name="BIOD BL 10% OFFROAD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="314" name="BIOD BL 11% OFFROAD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="315" name="BIOD BL 15% OFFROAD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="316" name="BIOD BL 20% OFFROAD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="317" name="DIESEL 1 OFF-ROAD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="318" name="DIESEL 2 OFF-ROAD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="319" name="DIE 1 PREM OFFROAD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="320" name="DIE 2 PREM OFFROAD" isNotSold="0" isFuel="1" />
+    <prodCode sysid="321" name="ADDITIVE DOSAGE" isNotSold="0" isFuel="1" />
+    <prodCode sysid="322" name="UNL ETH BL E16-E84" isNotSold="0" isFuel="1" />
+    <prodCode sysid="323" name="LOW OCTANE UNLEADED" isNotSold="0" isFuel="1" />
+    <prodCode sysid="324" name="BLEND DIESEL 1 2" isNotSold="0" isFuel="1" />
+    <prodCode sysid="325" name="OFFR UNL REG NO TAX" isNotSold="0" isFuel="1" />
+    <prodCode sysid="326" name="OFFR UNL PLU NO TAX" isNotSold="0" isFuel="1" />
+    <prodCode sysid="327" name="OFFR UNL SUP NO TAX" isNotSold="0" isFuel="1" />
+    <prodCode sysid="328" name="OFFRO UNL 4 NON TAX" isNotSold="0" isFuel="1" />
+    <prodCode sysid="329" name="OFFRO UNL 5 NON TAX" isNotSold="0" isFuel="1" />
+    <prodCode sysid="330" name="RECREATI FUEL 90OCT" isNotSold="0" isFuel="1" />
+    <prodCode sysid="331" name="HYDROGEN H35" isNotSold="0" isFuel="1" />
+    <prodCode sysid="332" name="HYDROGEN H70" isNotSold="0" isFuel="1" />
+    <prodCode sysid="333" name="OTHER FUEL 333" isNotSold="0" isFuel="1" />
+    <prodCode sysid="334" name="OTHER FUEL 334" isNotSold="0" isFuel="1" />
+    <prodCode sysid="335" name="OTHER FUEL 335" isNotSold="0" isFuel="1" />
+    <prodCode sysid="336" name="OTHER FUEL 336" isNotSold="0" isFuel="1" />
+    <prodCode sysid="337" name="OTHER FUEL 337" isNotSold="0" isFuel="1" />
+    <prodCode sysid="338" name="OTHER FUEL 338" isNotSold="0" isFuel="1" />
+    <prodCode sysid="339" name="OTHER FUEL 339" isNotSold="0" isFuel="1" />
+    <prodCode sysid="340" name="OTHER FUEL 340" isNotSold="0" isFuel="1" />
+    <prodCode sysid="341" name="OTHER FUEL 341" isNotSold="0" isFuel="1" />
+    <prodCode sysid="342" name="OTHER FUEL 342" isNotSold="0" isFuel="1" />
+    <prodCode sysid="343" name="OTHER FUEL 343" isNotSold="0" isFuel="1" />
+    <prodCode sysid="344" name="OTHER FUEL 344" isNotSold="0" isFuel="1" />
+    <prodCode sysid="345" name="OTHER FUEL 345" isNotSold="0" isFuel="1" />
+    <prodCode sysid="346" name="OTHER FUEL 346" isNotSold="0" isFuel="1" />
+    <prodCode sysid="347" name="OTHER FUEL 347" isNotSold="0" isFuel="1" />
+    <prodCode sysid="348" name="OTHER FUEL 348" isNotSold="0" isFuel="1" />
+    <prodCode sysid="349" name="OTHER FUEL 349" isNotSold="0" isFuel="1" />
+    <prodCode sysid="350" name="OTHER FUEL 350" isNotSold="0" isFuel="1" />
+    <prodCode sysid="351" name="OTHER FUEL 351" isNotSold="0" isFuel="1" />
+    <prodCode sysid="352" name="OTHER FUEL 352" isNotSold="0" isFuel="1" />
+    <prodCode sysid="353" name="OTHER FUEL 353" isNotSold="0" isFuel="1" />
+    <prodCode sysid="354" name="OTHER FUEL 354" isNotSold="0" isFuel="1" />
+    <prodCode sysid="355" name="OTHER FUEL 355" isNotSold="0" isFuel="1" />
+    <prodCode sysid="356" name="OTHER FUEL 356" isNotSold="0" isFuel="1" />
+    <prodCode sysid="357" name="OTHER FUEL 357" isNotSold="0" isFuel="1" />
+    <prodCode sysid="358" name="OTHER FUEL 358" isNotSold="0" isFuel="1" />
+    <prodCode sysid="359" name="OTHER FUEL 359" isNotSold="0" isFuel="1" />
+    <prodCode sysid="360" name="OTHER FUEL 360" isNotSold="0" isFuel="1" />
+    <prodCode sysid="361" name="OTHER FUEL 361" isNotSold="0" isFuel="1" />
+    <prodCode sysid="362" name="OTHER FUEL 362" isNotSold="0" isFuel="1" />
+    <prodCode sysid="363" name="OTHER FUEL 363" isNotSold="0" isFuel="1" />
+    <prodCode sysid="364" name="OTHER FUEL 364" isNotSold="0" isFuel="1" />
+    <prodCode sysid="365" name="OTHER FUEL 365" isNotSold="0" isFuel="1" />
+    <prodCode sysid="366" name="OTHER FUEL 366" isNotSold="0" isFuel="1" />
+    <prodCode sysid="367" name="OTHER FUEL 367" isNotSold="0" isFuel="1" />
+    <prodCode sysid="368" name="OTHER FUEL 368" isNotSold="0" isFuel="1" />
+    <prodCode sysid="369" name="OTHER FUEL 369" isNotSold="0" isFuel="1" />
+    <prodCode sysid="370" name="OTHER FUEL 370" isNotSold="0" isFuel="1" />
+    <prodCode sysid="371" name="OTHER FUEL 371" isNotSold="0" isFuel="1" />
+    <prodCode sysid="372" name="OTHER FUEL 372" isNotSold="0" isFuel="1" />
+    <prodCode sysid="373" name="OTHER FUEL 373" isNotSold="0" isFuel="1" />
+    <prodCode sysid="374" name="OTHER FUEL 374" isNotSold="0" isFuel="1" />
+    <prodCode sysid="375" name="OTHER FUEL 375" isNotSold="0" isFuel="1" />
+    <prodCode sysid="376" name="OTHER FUEL 376" isNotSold="0" isFuel="1" />
+    <prodCode sysid="377" name="OTHER FUEL 377" isNotSold="0" isFuel="1" />
+    <prodCode sysid="378" name="OTHER FUEL 378" isNotSold="0" isFuel="1" />
+    <prodCode sysid="379" name="OTHER FUEL 379" isNotSold="0" isFuel="1" />
+    <prodCode sysid="380" name="OTHER FUEL 380" isNotSold="0" isFuel="1" />
+    <prodCode sysid="381" name="OTHER FUEL 381" isNotSold="0" isFuel="1" />
+    <prodCode sysid="382" name="OTHER FUEL 382" isNotSold="0" isFuel="1" />
+    <prodCode sysid="383" name="OTHER FUEL 383" isNotSold="0" isFuel="1" />
+    <prodCode sysid="384" name="OTHER FUEL 384" isNotSold="0" isFuel="1" />
+    <prodCode sysid="385" name="OTHER FUEL 385" isNotSold="0" isFuel="1" />
+    <prodCode sysid="386" name="OTHER FUEL 386" isNotSold="0" isFuel="1" />
+    <prodCode sysid="387" name="OTHER FUEL 387" isNotSold="0" isFuel="1" />
+    <prodCode sysid="388" name="OTHER FUEL 388" isNotSold="0" isFuel="1" />
+    <prodCode sysid="389" name="OTHER FUEL 389" isNotSold="0" isFuel="1" />
+    <prodCode sysid="390" name="OTHER FUEL 390" isNotSold="0" isFuel="1" />
+    <prodCode sysid="391" name="OTHER FUEL 391" isNotSold="0" isFuel="1" />
+    <prodCode sysid="392" name="OTHER FUEL 392" isNotSold="0" isFuel="1" />
+    <prodCode sysid="393" name="OTHER FUEL 393" isNotSold="0" isFuel="1" />
+    <prodCode sysid="394" name="OTHER FUEL 394" isNotSold="0" isFuel="1" />
+    <prodCode sysid="395" name="OTHER FUEL 395" isNotSold="0" isFuel="1" />
+    <prodCode sysid="396" name="OTHER FUEL 396" isNotSold="0" isFuel="1" />
+    <prodCode sysid="397" name="OTHER FUEL 397" isNotSold="0" isFuel="1" />
+    <prodCode sysid="398" name="OTHER FUEL 398" isNotSold="0" isFuel="1" />
+    <prodCode sysid="399" name="MISCELLA OTHER FUEL" isNotSold="0" isFuel="1" />
+    <prodCode sysid="400" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="401" name="GENERAL ICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="402" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="403" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="404" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="405" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="406" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="407" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="408" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="409" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="410" name="GENERAL TOBACCO" isNotSold="0" isFuel="0" />
+    <prodCode sysid="411" name="CIGARETTES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="412" name="TOBACCO OTHER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="413" name="GENERAL TOBACCO 413" isNotSold="0" isFuel="0" />
+    <prodCode sysid="414" name="GENERAL TOBACCO 414" isNotSold="0" isFuel="0" />
+    <prodCode sysid="415" name="GENERAL TOBACCO 415" isNotSold="0" isFuel="0" />
+    <prodCode sysid="416" name="GENERAL TOBACCO 416" isNotSold="0" isFuel="0" />
+    <prodCode sysid="417" name="GENERAL TOBACCO 417" isNotSold="0" isFuel="0" />
+    <prodCode sysid="418" name="GENERAL TOBACCO 418" isNotSold="0" isFuel="0" />
+    <prodCode sysid="419" name="GENERAL TOBACCO 419" isNotSold="0" isFuel="0" />
+    <prodCode sysid="420" name="GENERAL PACKED BEVE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="421" name="PACKED BEV NON-ALCO" isNotSold="0" isFuel="0" />
+    <prodCode sysid="422" name="PACKAGED JUICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="423" name="OTHER PACKED BEVERA" isNotSold="0" isFuel="0" />
+    <prodCode sysid="424" name="GENERAL PACKED BEVE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="425" name="GENERAL PACKED BEVE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="426" name="GENERAL PACKED BEVE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="427" name="GENERAL PACKED BEVE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="428" name="GENERAL PACKED BEVE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="429" name="GENERAL PACKED BEVE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="430" name="GENERAL DISPENSED B" isNotSold="0" isFuel="0" />
+    <prodCode sysid="431" name="HOT DISPENSED BEVER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="432" name="COLD DISPENSED BEVE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="433" name="FROZEN DISPENSED BE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="434" name="OTHER DISPENSED BEV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="435" name="GENERAL DISPENSED B" isNotSold="0" isFuel="0" />
+    <prodCode sysid="436" name="GENERAL DISPENSED B" isNotSold="0" isFuel="0" />
+    <prodCode sysid="437" name="GENERAL DISPENSED B" isNotSold="0" isFuel="0" />
+    <prodCode sysid="438" name="GENERAL DISPENSED B" isNotSold="0" isFuel="0" />
+    <prodCode sysid="439" name="GENERAL DISPENSED B" isNotSold="0" isFuel="0" />
+    <prodCode sysid="440" name="GENERAL SNACKS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="441" name="SALTY SNACKS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="442" name="ALTERNATIVE SNACKS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="443" name="SWEET SNACKS PACKAG" isNotSold="0" isFuel="0" />
+    <prodCode sysid="444" name="GENERAL SNACKS 444" isNotSold="0" isFuel="0" />
+    <prodCode sysid="445" name="GENERAL SNACKS 445" isNotSold="0" isFuel="0" />
+    <prodCode sysid="446" name="GENERAL SNACKS 446" isNotSold="0" isFuel="0" />
+    <prodCode sysid="447" name="GENERAL SNACKS 447" isNotSold="0" isFuel="0" />
+    <prodCode sysid="448" name="GENERAL SNACKS 448" isNotSold="0" isFuel="0" />
+    <prodCode sysid="449" name="GENERAL SNACKS 449" isNotSold="0" isFuel="0" />
+    <prodCode sysid="450" name="GENERAL CANDY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="451" name="GENERAL CANDY 451" isNotSold="0" isFuel="0" />
+    <prodCode sysid="452" name="GENERAL CANDY 452" isNotSold="0" isFuel="0" />
+    <prodCode sysid="453" name="GENERAL CANDY 453" isNotSold="0" isFuel="0" />
+    <prodCode sysid="454" name="GENERAL CANDY 454" isNotSold="0" isFuel="0" />
+    <prodCode sysid="455" name="GENERAL CANDY 455" isNotSold="0" isFuel="0" />
+    <prodCode sysid="456" name="GENERAL CANDY 456" isNotSold="0" isFuel="0" />
+    <prodCode sysid="457" name="GENERAL CANDY 457" isNotSold="0" isFuel="0" />
+    <prodCode sysid="458" name="GENERAL CANDY 458" isNotSold="0" isFuel="0" />
+    <prodCode sysid="459" name="GENERAL CANDY 459" isNotSold="0" isFuel="0" />
+    <prodCode sysid="460" name="GENERAL DAIRY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="461" name="FLUID MILK PRODUCTS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="462" name="PACK ICE CREAM / NO" isNotSold="0" isFuel="0" />
+    <prodCode sysid="463" name="OTHER DAIRY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="464" name="GENERAL DAIRY 464" isNotSold="0" isFuel="0" />
+    <prodCode sysid="465" name="GENERAL DAIRY 465" isNotSold="0" isFuel="0" />
+    <prodCode sysid="466" name="GENERAL DAIRY 466" isNotSold="0" isFuel="0" />
+    <prodCode sysid="467" name="GENERAL DAIRY 467" isNotSold="0" isFuel="0" />
+    <prodCode sysid="468" name="GENERAL DAIRY 468" isNotSold="0" isFuel="0" />
+    <prodCode sysid="469" name="GENERAL DAIRY 469" isNotSold="0" isFuel="0" />
+    <prodCode sysid="470" name="GENERAL GROCERY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="471" name="GROCERIES - EDIBLE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="472" name="GROCERIES - NON EDI" isNotSold="0" isFuel="0" />
+    <prodCode sysid="473" name="GROCERIES - PERISHA" isNotSold="0" isFuel="0" />
+    <prodCode sysid="474" name="BREAD - PACKAGED" isNotSold="0" isFuel="0" />
+    <prodCode sysid="475" name="FROZEN FOODS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="476" name="GENERAL GROCERY 476" isNotSold="0" isFuel="0" />
+    <prodCode sysid="477" name="GENERAL GROCERY 477" isNotSold="0" isFuel="0" />
+    <prodCode sysid="478" name="GENERAL GROCERY 478" isNotSold="0" isFuel="0" />
+    <prodCode sysid="479" name="GENERAL GROCERY 479" isNotSold="0" isFuel="0" />
+    <prodCode sysid="480" name="GENERAL ALCOHOL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="481" name="BEER - ALCHOLIC" isNotSold="0" isFuel="0" />
+    <prodCode sysid="482" name="BEER - NON-ALCHOLIC" isNotSold="0" isFuel="0" />
+    <prodCode sysid="483" name="WINE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="484" name="LIQUER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="485" name="GENERAL ALCOHOL 485" isNotSold="0" isFuel="0" />
+    <prodCode sysid="486" name="GENERAL ALCOHOL 486" isNotSold="0" isFuel="0" />
+    <prodCode sysid="487" name="GENERAL ALCOHOL 487" isNotSold="0" isFuel="0" />
+    <prodCode sysid="488" name="GENERAL ALCOHOL 488" isNotSold="0" isFuel="0" />
+    <prodCode sysid="489" name="GENERAL ALCOHOL 489" isNotSold="0" isFuel="0" />
+    <prodCode sysid="490" name="GENERAL DELI" isNotSold="0" isFuel="0" />
+    <prodCode sysid="491" name="PACKAGED SANDWICHES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="492" name="PREPARED FOODS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="493" name="DELI ITEMS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="494" name="GENERAL DELI 494" isNotSold="0" isFuel="0" />
+    <prodCode sysid="495" name="GENERAL DELI 495" isNotSold="0" isFuel="0" />
+    <prodCode sysid="496" name="GENERAL DELI 496" isNotSold="0" isFuel="0" />
+    <prodCode sysid="497" name="GENERAL DELI 497" isNotSold="0" isFuel="0" />
+    <prodCode sysid="498" name="GENERAL DELI 498" isNotSold="0" isFuel="0" />
+    <prodCode sysid="499" name="GENERAL DELI 499" isNotSold="0" isFuel="0" />
+    <prodCode sysid="500" name="GENERAL FOODSERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="501" name="GENERAL FOODSERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="502" name="GENERAL FOODSERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="503" name="GENERAL FOODSERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="504" name="GENERAL FOODSERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="505" name="GENERAL FOODSERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="506" name="GENERAL FOODSERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="507" name="GENERAL FOODSERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="508" name="GENERAL FOODSERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="509" name="GENERAL FOODSERVICE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="510" name="GENERAL LOTTERY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="511" name="LOTTERY - INSTANT" isNotSold="0" isFuel="0" />
+    <prodCode sysid="512" name="LOTTERY - ONLINE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="513" name="LOTTERY - OTHER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="514" name="GENERAL LOTTERY 514" isNotSold="0" isFuel="0" />
+    <prodCode sysid="515" name="GENERAL LOTTERY 515" isNotSold="0" isFuel="0" />
+    <prodCode sysid="516" name="GENERAL LOTTERY 516" isNotSold="0" isFuel="0" />
+    <prodCode sysid="517" name="GENERAL LOTTERY 517" isNotSold="0" isFuel="0" />
+    <prodCode sysid="518" name="GENERAL LOTTERY 518" isNotSold="0" isFuel="0" />
+    <prodCode sysid="519" name="GENERAL LOTTERY 519" isNotSold="0" isFuel="0" />
+    <prodCode sysid="520" name="GENERAL MONEY ORDER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="521" name="MON ORD - VEND PAYM" isNotSold="0" isFuel="0" />
+    <prodCode sysid="522" name="MON ORD - PAYROLL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="523" name="MON ORD - GIFT CERT" isNotSold="0" isFuel="0" />
+    <prodCode sysid="524" name="MON ORD - REFUND" isNotSold="0" isFuel="0" />
+    <prodCode sysid="525" name="MON ORD - OFFICIAL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="526" name="MON ORD - REBATE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="527" name="MON ORD - DIVIDEND" isNotSold="0" isFuel="0" />
+    <prodCode sysid="528" name="MON ORD - UTILITY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="529" name="MONEY ORDER 529" isNotSold="0" isFuel="0" />
+    <prodCode sysid="530" name="GENERAL STORE SERVI" isNotSold="0" isFuel="0" />
+    <prodCode sysid="531" name="HOME DELIVERY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="532" name="PREPAID CARDS - PUR" isNotSold="0" isFuel="0" />
+    <prodCode sysid="533" name="PREPAID CARDS - ACT" isNotSold="0" isFuel="0" />
+    <prodCode sysid="534" name="MEMBERSHIP/LOYALTY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="535" name="GENERAL STORE SERVI" isNotSold="0" isFuel="0" />
+    <prodCode sysid="536" name="GENERAL STORE SERVI" isNotSold="0" isFuel="0" />
+    <prodCode sysid="537" name="GENERAL STORE SERVI" isNotSold="0" isFuel="0" />
+    <prodCode sysid="538" name="GENERAL STORE SERVI" isNotSold="0" isFuel="0" />
+    <prodCode sysid="539" name="GENERAL STORE SERVI" isNotSold="0" isFuel="0" />
+    <prodCode sysid="540" name="GENERAL HEALTH/BEAU" isNotSold="0" isFuel="0" />
+    <prodCode sysid="541" name="GENERAL HEALTH/BEAU" isNotSold="0" isFuel="0" />
+    <prodCode sysid="542" name="GENERAL HEALTH/BEAU" isNotSold="0" isFuel="0" />
+    <prodCode sysid="543" name="GENERAL HEALTH/BEAU" isNotSold="0" isFuel="0" />
+    <prodCode sysid="544" name="GENERAL HEALTH/BEAU" isNotSold="0" isFuel="0" />
+    <prodCode sysid="545" name="GENERAL HEALTH/BEAU" isNotSold="0" isFuel="0" />
+    <prodCode sysid="546" name="GENERAL HEALTH/BEAU" isNotSold="0" isFuel="0" />
+    <prodCode sysid="547" name="GENERAL HEALTH/BEAU" isNotSold="0" isFuel="0" />
+    <prodCode sysid="548" name="GENERAL HEALTH/BEAU" isNotSold="0" isFuel="0" />
+    <prodCode sysid="549" name="GENERAL HEALTH/BEAU" isNotSold="0" isFuel="0" />
+    <prodCode sysid="550" name="GENERAL PUBLICATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="551" name="GENERAL PUBLICATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="552" name="GENERAL PUBLICATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="553" name="GENERAL PUBLICATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="554" name="GENERAL PUBLICATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="555" name="GENERAL PUBLICATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="556" name="GENERAL PUBLICATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="557" name="GENERAL PUBLICATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="558" name="GENERAL PUBLICATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="559" name="GENERAL PUBLICATION" isNotSold="0" isFuel="0" />
+    <prodCode sysid="560" name="PIN ACTIVATE PREPAID" isNotSold="0" isFuel="0" />
+    <prodCode sysid="561" name="PIN RETURN PREPAID" isNotSold="0" isFuel="0" />
+    <prodCode sysid="562" name="ENABLE DEV/HANDSET" isNotSold="0" isFuel="0" />
+    <prodCode sysid="563" name="DISABLE DEV/HANDSET" isNotSold="0" isFuel="0" />
+    <prodCode sysid="564" name="3RD PAR PP CARD ACT" isNotSold="0" isFuel="0" />
+    <prodCode sysid="565" name="3RD PAR PP CARD REL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="566" name="FINANCI PP CARD ACT" isNotSold="0" isFuel="0" />
+    <prodCode sysid="567" name="FINANCI PP CARD REL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="568" name="PROPRIET PPCARD ACT" isNotSold="0" isFuel="0" />
+    <prodCode sysid="569" name="PROPRIET PPCARD REL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="570" name="GEN PURPOSE ACTIV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="571" name="GEN PURPOSE RELOAD" isNotSold="0" isFuel="0" />
+    <prodCode sysid="572" name="REAL TIME RECHARGE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="573" name="WIRELESS REAL TIME" isNotSold="0" isFuel="0" />
+    <prodCode sysid="574" name="SINGLE PAYEE BILL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="575" name="MULTIPLE PAYEE BILL" isNotSold="0" isFuel="0" />
+    <prodCode sysid="576" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="577" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="578" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="579" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="580" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="581" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="582" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="583" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="584" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="585" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="586" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="587" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="588" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="589" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="590" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="591" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="592" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="593" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="594" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="595" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="596" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="597" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="598" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="599" name="GENERAL MERCHANDISE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="600" name="PACKAGED DEF" isNotSold="0" isFuel="0" />
+    <prodCode sysid="601" name="PACKAGED B99" isNotSold="0" isFuel="0" />
+    <prodCode sysid="602" name="PACKAGED B100" isNotSold="0" isFuel="0" />
+    <prodCode sysid="603" name="PACKAGED ADDITIVE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="604" name="PACKAGED KEROSENE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="605" name="PACKAGED PROPANE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="606" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="607" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="608" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="609" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="610" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="611" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="612" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="613" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="614" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="615" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="616" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="617" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="618" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="619" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="620" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="621" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="622" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="623" name="PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="624" name="MISC PACKAGED FUELS" isNotSold="0" isFuel="0" />
+    <prodCode sysid="625" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="626" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="627" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="628" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="629" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="630" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="631" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="632" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="633" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="634" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="635" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="636" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="637" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="638" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="639" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="640" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="641" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="642" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="643" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="644" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="645" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="646" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="647" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="648" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="649" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="650" name="SCALES" isNotSold="0" isFuel="0" />
+    <prodCode sysid="651" name="SHOWER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="652" name="TIRE REPAIR" isNotSold="0" isFuel="0" />
+    <prodCode sysid="653" name="LODGING" isNotSold="0" isFuel="0" />
+    <prodCode sysid="654" name="WASH OUT" isNotSold="0" isFuel="0" />
+    <prodCode sysid="655" name="TRAILER WASH" isNotSold="0" isFuel="0" />
+    <prodCode sysid="656" name="RV DUMP FEE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="657" name="EV CHARGING FEE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="658" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="659" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="660" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="661" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="662" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="663" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="664" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="665" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="666" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="667" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="668" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="669" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="670" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="671" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="672" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="673" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="674" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="675" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="676" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="677" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="678" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="679" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="680" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="681" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="682" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="683" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="684" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="685" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="686" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="687" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="688" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="689" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="690" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="691" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="692" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="693" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="694" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="695" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="696" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="697" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="698" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="699" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="700" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="701" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="702" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="703" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="704" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="705" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="706" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="707" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="708" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="709" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="710" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="711" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="712" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="713" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="714" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="715" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="716" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="717" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="718" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="719" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="720" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="721" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="722" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="723" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="724" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="725" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="726" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="727" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="728" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="729" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="730" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="731" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="732" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="733" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="734" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="735" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="736" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="737" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="738" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="739" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="740" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="741" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="742" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="743" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="744" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="745" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="746" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="747" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="748" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="749" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="750" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="751" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="752" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="753" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="754" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="755" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="756" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="757" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="758" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="759" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="760" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="761" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="762" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="763" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="764" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="765" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="766" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="767" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="768" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="769" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="770" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="771" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="772" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="773" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="774" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="775" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="776" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="777" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="778" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="779" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="780" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="781" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="782" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="783" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="784" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="785" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="786" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="787" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="788" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="789" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="790" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="791" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="792" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="793" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="794" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="795" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="796" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="797" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="798" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="799" name="RES FOR NACS FUTURE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="800" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="801" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="802" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="803" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="804" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="805" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="806" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="807" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="808" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="809" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="810" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="811" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="812" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="813" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="814" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="815" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="816" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="817" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="818" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="819" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="820" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="821" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="822" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="823" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="824" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="825" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="826" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="827" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="828" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="829" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="830" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="831" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="832" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="833" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="834" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="835" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="836" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="837" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="838" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="839" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="840" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="841" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="842" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="843" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="844" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="845" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="846" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="847" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="848" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="849" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="850" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="851" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="852" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="853" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="854" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="855" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="856" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="857" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="858" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="859" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="860" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="861" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="862" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="863" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="864" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="865" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="866" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="867" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="868" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="869" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="870" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="871" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="872" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="873" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="874" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="875" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="876" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="877" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="878" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="879" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="880" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="881" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="882" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="883" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="884" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="885" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="886" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="887" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="888" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="889" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="890" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="891" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="892" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="893" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="894" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="895" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="896" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="897" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="898" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="899" name="RES FOR PROPRIETARY" isNotSold="0" isFuel="0" />
+    <prodCode sysid="900" name="DISCOUNT 1" isNotSold="1" isFuel="0" />
+    <prodCode sysid="901" name="DISCOUNT 2" isNotSold="1" isFuel="0" />
+    <prodCode sysid="902" name="DISCOUNT 3" isNotSold="1" isFuel="0" />
+    <prodCode sysid="903" name="DISCOUNT 4" isNotSold="1" isFuel="0" />
+    <prodCode sysid="904" name="DISCOUNT 5" isNotSold="1" isFuel="0" />
+    <prodCode sysid="905" name="COUPON 1" isNotSold="0" isFuel="0" />
+    <prodCode sysid="906" name="COUPON 2" isNotSold="0" isFuel="0" />
+    <prodCode sysid="907" name="COUPON 3" isNotSold="0" isFuel="0" />
+    <prodCode sysid="908" name="COUPON 4" isNotSold="0" isFuel="0" />
+    <prodCode sysid="909" name="COUPON 5" isNotSold="0" isFuel="0" />
+    <prodCode sysid="910" name="LOTT PAY OUT - INST" isNotSold="0" isFuel="0" />
+    <prodCode sysid="911" name="LOTT PAY OUT - ONLI" isNotSold="0" isFuel="0" />
+    <prodCode sysid="912" name="LOTT PAY OUT - OTHE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="913" name="SPLIT TENDER" isNotSold="0" isFuel="0" />
+    <prodCode sysid="914" name="TAX DISCOUNT/FORGIV" isNotSold="0" isFuel="0" />
+    <prodCode sysid="915" name="NEGATIVE 915" isNotSold="0" isFuel="0" />
+    <prodCode sysid="916" name="NEGATIVE 916" isNotSold="0" isFuel="0" />
+    <prodCode sysid="917" name="NEGATIVE 917" isNotSold="0" isFuel="0" />
+    <prodCode sysid="918" name="NEGATIVE 918" isNotSold="0" isFuel="0" />
+    <prodCode sysid="919" name="NEGATIVE 919" isNotSold="0" isFuel="0" />
+    <prodCode sysid="920" name="NEGATIVE 920" isNotSold="0" isFuel="0" />
+    <prodCode sysid="921" name="NEGATIVE 921" isNotSold="0" isFuel="0" />
+    <prodCode sysid="922" name="NEGATIVE 922" isNotSold="0" isFuel="0" />
+    <prodCode sysid="923" name="NEGATIVE 923" isNotSold="0" isFuel="0" />
+    <prodCode sysid="924" name="NEGATIVE 924" isNotSold="0" isFuel="0" />
+    <prodCode sysid="925" name="NEGATIVE 925" isNotSold="0" isFuel="0" />
+    <prodCode sysid="926" name="NEGATIVE 926" isNotSold="0" isFuel="0" />
+    <prodCode sysid="927" name="NEGATIVE 927" isNotSold="0" isFuel="0" />
+    <prodCode sysid="928" name="NEGATIVE 928" isNotSold="0" isFuel="0" />
+    <prodCode sysid="929" name="NEGATIVE 929" isNotSold="0" isFuel="0" />
+    <prodCode sysid="930" name="NEGATIVE 930" isNotSold="0" isFuel="0" />
+    <prodCode sysid="931" name="NEGATIVE 931" isNotSold="0" isFuel="0" />
+    <prodCode sysid="932" name="NEGATIVE 932" isNotSold="0" isFuel="0" />
+    <prodCode sysid="933" name="NEGATIVE 933" isNotSold="0" isFuel="0" />
+    <prodCode sysid="934" name="NEGATIVE 934" isNotSold="0" isFuel="0" />
+    <prodCode sysid="935" name="NEGATIVE 935" isNotSold="0" isFuel="0" />
+    <prodCode sysid="936" name="NEGATIVE 936" isNotSold="0" isFuel="0" />
+    <prodCode sysid="937" name="NEGATIVE 937" isNotSold="0" isFuel="0" />
+    <prodCode sysid="938" name="NEGATIVE 938" isNotSold="0" isFuel="0" />
+    <prodCode sysid="939" name="NEGATIVE 939" isNotSold="0" isFuel="0" />
+    <prodCode sysid="940" name="NEGATIVE 940" isNotSold="0" isFuel="0" />
+    <prodCode sysid="941" name="NEGATIVE 941" isNotSold="0" isFuel="0" />
+    <prodCode sysid="942" name="NEGATIVE 942" isNotSold="0" isFuel="0" />
+    <prodCode sysid="943" name="NEGATIVE 943" isNotSold="0" isFuel="0" />
+    <prodCode sysid="944" name="NEGATIVE 944" isNotSold="0" isFuel="0" />
+    <prodCode sysid="945" name="NEGATIVE 945" isNotSold="0" isFuel="0" />
+    <prodCode sysid="946" name="NEGATIVE 946" isNotSold="0" isFuel="0" />
+    <prodCode sysid="947" name="NEGATIVE 947" isNotSold="0" isFuel="0" />
+    <prodCode sysid="948" name="NEGATIVE 948" isNotSold="0" isFuel="0" />
+    <prodCode sysid="949" name="MISC NEGATIVE ADMIN" isNotSold="0" isFuel="0" />
+    <prodCode sysid="950" name="TAX 1" isNotSold="0" isFuel="0" />
+    <prodCode sysid="951" name="TAX 2" isNotSold="0" isFuel="0" />
+    <prodCode sysid="952" name="TAX 3" isNotSold="0" isFuel="0" />
+    <prodCode sysid="953" name="TAX 4" isNotSold="0" isFuel="0" />
+    <prodCode sysid="954" name="TAX 5" isNotSold="0" isFuel="0" />
+    <prodCode sysid="955" name="CASH BACK" isNotSold="0" isFuel="0" />
+    <prodCode sysid="956" name="CASH BACK FEE" isNotSold="0" isFuel="0" />
+    <prodCode sysid="957" name="FEE 1" isNotSold="0" isFuel="0" />
+    <prodCode sysid="958" name="FEE 2" isNotSold="0" isFuel="0" />
+    <prodCode sysid="959" name="FEE 3" isNotSold="0" isFuel="0" />
+    <prodCode sysid="960" name="FEE 4" isNotSold="0" isFuel="0" />
+    <prodCode sysid="961" name="FEE 5" isNotSold="0" isFuel="0" />
+    <prodCode sysid="962" name="MISCELLANEOUS AVIAT" isNotSold="0" isFuel="0" />
+    <prodCode sysid="963" name="GST / HST / VAT1" isNotSold="0" isFuel="0" />
+    <prodCode sysid="964" name="PST / QST / VAT2" isNotSold="0" isFuel="0" />
+    <prodCode sysid="965" name="SWT / VAT3" isNotSold="0" isFuel="0" />
+    <prodCode sysid="966" name="TAX 6" isNotSold="0" isFuel="0" />
+    <prodCode sysid="967" name="TAX 7" isNotSold="0" isFuel="0" />
+    <prodCode sysid="968" name="TAX 8" isNotSold="0" isFuel="0" />
+    <prodCode sysid="969" name="JET FEDER EXCIS TAX" isNotSold="0" isFuel="0" />
+    <prodCode sysid="970" name="AVGAS FEDER EXC TAX" isNotSold="0" isFuel="0" />
+    <prodCode sysid="971" name="ADMINISTRATIVE 971" isNotSold="0" isFuel="0" />
+    <prodCode sysid="972" name="ADMINISTRATIVE 972" isNotSold="0" isFuel="0" />
+    <prodCode sysid="973" name="ADMINISTRATIVE 973" isNotSold="0" isFuel="0" />
+    <prodCode sysid="974" name="ADMINISTRATIVE 974" isNotSold="0" isFuel="0" />
+    <prodCode sysid="975" name="ADMINISTRATIVE 975" isNotSold="0" isFuel="0" />
+    <prodCode sysid="976" name="ADMINISTRATIVE 976" isNotSold="0" isFuel="0" />
+    <prodCode sysid="977" name="ADMINISTRATIVE 977" isNotSold="0" isFuel="0" />
+    <prodCode sysid="978" name="ADMINISTRATIVE 978" isNotSold="0" isFuel="0" />
+    <prodCode sysid="979" name="ADMINISTRATIVE 979" isNotSold="0" isFuel="0" />
+    <prodCode sysid="980" name="ADMINISTRATIVE 980" isNotSold="0" isFuel="0" />
+    <prodCode sysid="981" name="ADMINISTRATIVE 981" isNotSold="0" isFuel="0" />
+    <prodCode sysid="982" name="ADMINISTRATIVE 982" isNotSold="0" isFuel="0" />
+    <prodCode sysid="983" name="ADMINISTRATIVE 983" isNotSold="0" isFuel="0" />
+    <prodCode sysid="984" name="ADMINISTRATIVE 984" isNotSold="0" isFuel="0" />
+    <prodCode sysid="985" name="ADMINISTRATIVE 985" isNotSold="0" isFuel="0" />
+    <prodCode sysid="986" name="ADMINISTRATIVE 986" isNotSold="0" isFuel="0" />
+    <prodCode sysid="987" name="ADMINISTRATIVE 987" isNotSold="0" isFuel="0" />
+    <prodCode sysid="988" name="ADMINISTRATIVE 988" isNotSold="0" isFuel="0" />
+    <prodCode sysid="989" name="ADMINISTRATIVE 989" isNotSold="0" isFuel="0" />
+    <prodCode sysid="990" name="ADMINISTRATIVE 990" isNotSold="0" isFuel="0" />
+    <prodCode sysid="991" name="ADMINISTRATIVE 991" isNotSold="0" isFuel="0" />
+    <prodCode sysid="992" name="ADMINISTRATIVE 992" isNotSold="0" isFuel="0" />
+    <prodCode sysid="993" name="ADMINISTRATIVE 993" isNotSold="0" isFuel="0" />
+    <prodCode sysid="994" name="ADMINISTRATIVE 994" isNotSold="0" isFuel="0" />
+    <prodCode sysid="995" name="ADMINISTRATIVE 995" isNotSold="0" isFuel="0" />
+    <prodCode sysid="996" name="ADMINISTRATIVE 996" isNotSold="0" isFuel="0" />
+    <prodCode sysid="997" name="ADMINISTRATIVE 997" isNotSold="0" isFuel="0" />
+    <prodCode sysid="998" name="ADMINISTRATIVE 998" isNotSold="0" isFuel="0" />
+    <prodCode sysid="999" name="MISCELLANEOUS ADMIN" isNotSold="0" isFuel="0" />
+  </prodCodes>
+  <departments>
+    <department sysid="1" name="OTP" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="0" />
+      <prodCode sysid="3" />
+      <fees />
+      <taxes />
+      <ageValidns>
+        <ageValidn sysid="2" />
+      </ageValidns>
+      <blueLaws />
+    </department>
+    <department sysid="2" name="RETAIL FOOD" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="0" />
+      <prodCode sysid="0" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="3" name="LOTTO" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="514" />
+      <fees />
+      <taxes />
+      <ageValidns>
+        <ageValidn sysid="2" />
+      </ageValidns>
+      <blueLaws />
+    </department>
+    <department sysid="4" name="BEER" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="1" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="480" />
+      <fees />
+      <taxes />
+      <ageValidns>
+        <ageValidn sysid="1" />
+      </ageValidns>
+      <blueLaws>
+        <blueLaw sysid="1" />
+      </blueLaws>
+    </department>
+    <department sysid="5" name="CIGARETTES" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="411" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="6" name="CHARITY" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="0" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="7" name="COLD DISP BEV" minAmt="0.01" maxAmt="50.00" isAllowFS="1" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="1" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="432" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="8" name="MONEY ORDER" minAmt="0.01" maxAmt="1000.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="1" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="520" />
+      <fees>
+        <fee sysid="4" />
+      </fees>
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="9" name="PHONE CARD" minAmt="0.01" maxAmt="500.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="532" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="10" name="LAUNDRY" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="400" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="11" name="WIRE TRANSFER" minAmt="0.01" maxAmt="500.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="520" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="12" name="BR GIFT CARD ACT" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="533" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="13" name="VIDEO" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="0" />
+      <prodCode sysid="400" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="14" name="ROLLER GRILL" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="1" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="493" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="15" name="STORE SERVICES" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="400" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="16" name="GROCERY TAXABLE" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="470" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="17" name="GROCERY N-TAX" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="470" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="18" name="SNACKS TAXABLE" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="440" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="19" name="SNACKS N-TAX" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="440" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="20" name="GEN MERCH TAXABL" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="400" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="21" name="GEN MERCH N-TAX" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="400" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="22" name="PACK BEV TAXABLE" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="420" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="23" name="PACK BEV N-TAX" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="421" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="24" name="BAIT" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="400" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="25" name="MANUAL WASH" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="102" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="26" name="PROPANE" minAmt="0.01" maxAmt="75.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="303" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="27" name="LICENSES" minAmt="0.01" maxAmt="30.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="0" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="28" name="PRE-PAID CARDS" minAmt="0.01" maxAmt="150.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="532" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="29" name="CAR WASH TIPS" minAmt="0.01" maxAmt="25.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="0" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="30" name="UNKNOWN UPC" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="400" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="31" name="ICED TEA" minAmt="0.01" maxAmt="50.00" isAllowFS="1" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="1" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="434" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="32" name="HOT DISP BEV" minAmt="0.01" maxAmt="50.00" isAllowFS="1" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="1" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="431" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="33" name="FCB" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="433" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="34" name="LOTTERY" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="511" />
+      <fees />
+      <taxes />
+      <ageValidns>
+        <ageValidn sysid="2" />
+      </ageValidns>
+      <blueLaws />
+    </department>
+    <department sysid="35" name="F'REAL" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="433" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="36" name="SALADS" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="37" name="KRISPY KREME" minAmt="0.01" maxAmt="50.00" isAllowFS="1" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="38" name="COLD SANDWICH" minAmt="0.01" maxAmt="50.00" isAllowFS="1" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="39" name="BAKERY" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="40" name="911 FEE" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="532" />
+      <fees>
+        <fee sysid="10" />
+      </fees>
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="41" name="FUDGE" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="42" name="PIZZA" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="43" name="BREAKFAST" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="44" name="CAR WASH" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="102" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="45" name="MONEY ORDER FEE" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="520" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="46" name="BR GIFT CARD REC" minAmt="0.00" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="533" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="47" name="BARBEQUE" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="48" name="PUBLICATIONS" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="550" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="49" name="CHICKEN" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="50" name="HOT SANDWICH" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="51" name="OTHER FOOD" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="52" name="QSR SUBWAY" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="500" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="53" name="E-CIGARETTES" minAmt="0.01" maxAmt="50.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="413" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns>
+        <ageValidn sysid="2" />
+      </ageValidns>
+      <blueLaws />
+    </department>
+    <department sysid="54" name="SHIPLEY DONUTS" minAmt="0.00" maxAmt="5.00" isAllowFS="0" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="490" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="55" name="FRESH YO" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="433" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="56" name="BILL PAY" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="574" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="57" name="CANDY" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="450" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="58" name="AUTOMOTIVE" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="100" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="59" name="HBA" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="540" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="60" name="STORAGE" minAmt="0.01" maxAmt="100.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="2" />
+      <prodCode sysid="400" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="61" name="ICE CREAM" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="462" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="62" name="WINE" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="483" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns>
+        <ageValidn sysid="1" />
+      </ageValidns>
+      <blueLaws />
+    </department>
+    <department sysid="63" name="ICE" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="401" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="72" name="payout 1234" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="0" />
+      <prodCode sysid="0" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="90" name="COLD DISP BEV COUPON" minAmt="0.01" maxAmt="5.00" isAllowFS="1" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="91" name="SNACKS TAX COUPO" minAmt="0.01" maxAmt="5.00" isAllowFS="1" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="92" name="SNACKS NTAX COUP" minAmt="0.01" maxAmt="5.00" isAllowFS="1" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="93" name="GROC TAX COUPONS" minAmt="0.01" maxAmt="5.00" isAllowFS="1" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="94" name="GROC NTAX  COUPO" minAmt="0.01" maxAmt="5.00" isAllowFS="1" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="95" name="CIGS  COUPONS" minAmt="0.01" maxAmt="5.00" isAllowFS="0" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes />
+      <ageValidns>
+        <ageValidn sysid="2" />
+      </ageValidns>
+      <blueLaws />
+    </department>
+    <department sysid="96" name="RETAIL TAX COUPO" minAmt="0.01" maxAmt="5.00" isAllowFS="1" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="97" name="HOT DISP BEV COUPON" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="98" name="AUTOMOTIVE" minAmt="0.01" maxAmt="0.00" isAllowFS="0" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="99" name="HBA COUPON" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="100" name="CANDY COUPON" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="101" name="ICE CREAM COUPON" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="102" name="ICE COUPON" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="905" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="199" name="Deletedep" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="0" />
+      <prodCode sysid="1" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="889" name="FEE DEPOSIT" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="0" />
+      <prodCode sysid="957" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="890" name="FUEL DISCOUNT" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="1" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="0" />
+      <prodCode sysid="947" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="891" name="NONFUEL DISCOUNT" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="0" />
+      <prodCode sysid="948" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="901" name="UNLEADED" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="1" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="900" />
+      <prodCode sysid="1" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="902" name="MIDGRADE UNLEAD" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="1" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="900" />
+      <prodCode sysid="2" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="903" name="PREMIUM" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="1" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="900" />
+      <prodCode sysid="3" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="904" name="DIESEL" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="1" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="900" />
+      <prodCode sysid="21" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="905" name="OFF LINE  DIESEL" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="1" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="900" />
+      <prodCode sysid="32" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="906" name="E-85" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="1" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="900" />
+      <prodCode sysid="25" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="907" name="E-80" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="1" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="900" />
+      <prodCode sysid="15" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="908" name="B-20" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="1" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="900" />
+      <prodCode sysid="21" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="909" name="DEF" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="1" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="900" />
+      <prodCode sysid="45" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="6541" name="Lottery  Sales Winner" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="1" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="0" />
+      <prodCode sysid="399" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="9876" name="Test 1 Department" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="1" />
+      <prodCode sysid="134" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="9965" name="GIFT CARD ACT$" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="0" />
+      <prodCode sysid="533" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="9966" name="GIFT CARD RCHG$" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="0" />
+      <prodCode sysid="533" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="9995" name="TEST A DEPT" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="9995" />
+      <prodCode sysid="7" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="9996" name="TEST B DEPT" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="9995" />
+      <prodCode sysid="7" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="9997" name="TEST C DEPT" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="0" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="9995" />
+      <prodCode sysid="7" />
+      <fees />
+      <taxes>
+        <tax sysid="1" />
+      </taxes>
+      <ageValidns />
+      <blueLaws />
+    </department>
+    <department sysid="9998" name="MANUAL FUEL DEPT" minAmt="0.00" maxAmt="0.00" isAllowFS="0" isNegative="0" isFuel="1" isAllowFQ="0" isAllowSD="0" prohibitDisc="0" isBL1="0" isBL2="0" isMoneyOrder="0" isSNPromptReqd="0">
+      <category sysid="9999" />
+      <prodCode sysid="4" />
+      <fees />
+      <taxes />
+      <ageValidns />
+      <blueLaws />
+    </department>
+  </departments>
+</domain:posConfig>
