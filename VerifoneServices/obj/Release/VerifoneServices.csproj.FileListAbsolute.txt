@@ -13,3 +13,6 @@ D:\VerifoneServices\VerifoneServices\obj\Release\VerifoneServices.exe.manifest
 D:\VerifoneServices\VerifoneServices\obj\Release\VerifoneServices.application
 D:\VerifoneServices\VerifoneServices\obj\Release\VerifoneServices.exe
 D:\VerifoneServices\VerifoneServices\obj\Release\VerifoneServices.pdb
+D:\GitHub\VerifoneServices\VerifoneServices\bin\Release\VerifoneServices.exe.config
+D:\GitHub\VerifoneServices\VerifoneServices\obj\Release\VerifoneServices.exe
+D:\GitHub\VerifoneServices\VerifoneServices\obj\Release\VerifoneServices.pdb
