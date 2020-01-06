@@ -1,0 +1,4 @@
+D:\VerifoneServices\CustomAction\bin\Debug\CustomAction.dll
+D:\VerifoneServices\CustomAction\bin\Debug\CustomAction.pdb
+D:\VerifoneServices\CustomAction\obj\Debug\CustomAction.dll
+D:\VerifoneServices\CustomAction\obj\Debug\CustomAction.pdb

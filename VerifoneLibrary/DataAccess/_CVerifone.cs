@@ -166,14 +166,13 @@ namespace VerifoneLibrary.DataAccess
             }
         }
 
-        public long InsertFuel(DataTable dtFuelServices , DataTable dt, DataTable dt1)
+        public long InsertFuel(DataTable dtFuelServices, DataTable dt, DataTable dt1)
         {
             try
             {
                 string conn = connectionstring();
-
-                object returnVal = SqlHelper.ExecuteNonQuery(conn, CommandType.StoredProcedure, "VP_InsertFuel",
-                    new SqlParameter("@VP_FuelServices", dtFuelServices),                    
+                object returnVal = SqlHelper.ExecuteScalar(conn, CommandType.StoredProcedure, "VP_InsertFuel",
+                    new SqlParameter("@VP_FuelServices", dtFuelServices),
                     new SqlParameter("@VP_Fuel", dt),
                     new SqlParameter("@VP_FuelPrice", dt1));
 
@@ -210,7 +209,7 @@ namespace VerifoneLibrary.DataAccess
             try
             {
                 string conn = connectionstring();
-                object returnVal = SqlHelper.ExecuteNonQuery(conn, CommandType.StoredProcedure, "VP_InsertItems",
+                object returnVal = SqlHelper.ExecuteScalar(conn, CommandType.StoredProcedure, "VP_InsertItems",
                     new SqlParameter("@VP_Items", dt),
                     new SqlParameter("@VP_ItemsTax", dtitemtax),
                     new SqlParameter("@VP_ItemsFee", dtitemFee)
@@ -394,7 +393,7 @@ namespace VerifoneLibrary.DataAccess
             }
             catch (Exception ex)
             {
-                throw;
+                InsertActiveLog("BoF", "Error", "InsertActiveLog()", "InsertActiveLog_Class Exception : " + ex, "InsertActiveLog", "");
             }
         }
 
@@ -526,6 +525,23 @@ namespace VerifoneLibrary.DataAccess
             }
             catch (Exception ex)
             {
+                InsertActiveLog("BoF", "Error", "GetVerifoneUpdatePendingData()", "GetVerifoneUpdatePendingData_Class Exception : " + ex, "GetVerifoneUpdatePendingData", "");
+                throw;
+            }
+        }
+
+        public DataSet GetVerifoneDeletePendingData()
+        {
+            DataSet ds = new DataSet();
+            string conn = connectionstring();
+            try
+            {
+                ds = SqlHelper.ExecuteDataset(conn, CommandType.StoredProcedure, "VP_GetDeletePendingData");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                InsertActiveLog("BoF", "Error", "GetVerifoneDeletePendingData()", "GetVerifoneDeletePendingData Exception : " + ex, "GetVerifoneDeletePendingData", "");
                 throw;
             }
         }
@@ -978,10 +994,10 @@ namespace VerifoneLibrary.DataAccess
             try
             {
                 string conn = connectionstring();
-                long Result = SqlHelper.ExecuteNonQuery(conn, CommandType.StoredProcedure, "VP_Insertdropamount",
+                object returnVal = SqlHelper.ExecuteScalar(conn, CommandType.StoredProcedure, "VP_Insertdropamount",
                                     new SqlParameter("@VP_Dropamount", dtDropamount));
 
-                return Result;
+                return Convert.ToInt64(returnVal);
             }
             catch (Exception ex)
             {
@@ -1053,7 +1069,8 @@ namespace VerifoneLibrary.DataAccess
             }
             catch (Exception ex)
             {
-                throw;
+                InsertActiveLog("BoF", "Error", "GetDatabaseNameFromApplicationKey()", "GetDatabaseNameFromApplicationKey_Class Exception : " + ex, "GetDatabaseNameFromApplicationKey", "");
+                return "";
             }
         }
         #endregion

@@ -1,29 +1,29 @@
-﻿using VerifoneLibrary;
+﻿//using VerifoneLibrary;
 using VerifoneLibrary.DataAccess;
 using RapidVerifone;
 using myCompany1111;
 using RapidVerifoneNAXML;
 
-using VerifoneLibrary.DataObject;
+//using VerifoneLibrary.DataObject;
 
 using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Text;
+//using System.Threading.Tasks;
 
 using System.IO;
 using System.Configuration;
 using System.Xml.Serialization;
 using System.Data;
 using System.Xml;
-using System.Collections;
-using RapidVerifoneNAXML;
-using System.Xml.Linq;
+//using System.Collections;
+//using RapidVerifoneNAXML;
+//using System.Xml.Linq;
 using vsmsNAXML;
-using System.Text.RegularExpressions;
+//using System.Text.RegularExpressions;
 using RapidVerifoneFuelconfig;
-// test git
+
 namespace VerifoneServices
 {
     public class VerifoneInsert
@@ -38,513 +38,675 @@ namespace VerifoneServices
         string PeriodForXML = "";
         string FileNameForXML = "";
         long OrderNo = 0;
+        EmailMessages objEmail = new EmailMessages();
 
         Comman objComman = new Comman();
 
         #region Masters
-
         public void Tax()
         {
             VerifoneLibrary.DataAccess._CVerifone objCVerifone = new VerifoneLibrary.DataAccess._CVerifone();
+            bool isXMLError = false;
             try
             {
+
                 #region Read Payload, Save Tax data from Verifone
                 objComman.GetPayloadXML("Tax", "POST", "vtaxratecfg");
                 #endregion
 
-                #region insert log
-                objCVerifone.InsertActiveLog("BoF", "Start", "Tax()", "Initialize to Insert Verifone Data into BoF", "Tax", "");
-                #endregion
-
                 var FilePathTax = AppDomain.CurrentDomain.BaseDirectory + "xml\\Tax.xml";
 
-                var FileExistsTax = System.IO.File.Exists(FilePathTax);
-                //this.WriteToFile("FileExistsTax : " + FileExistsTax);
-                if (FileExistsTax == true)
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePathTax, XmlReadMode.InferSchema);
+
+                if (ds.Tables != null && ds.Tables.Count > 0)
                 {
-                    #region Insert Verifone Tax Data
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Tax.xml";
+                    isXMLError = objComman.GetErrorStatus(ds);
+                }
 
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.taxRateConfig));
-
-                    RapidVerifone.taxRateConfig resultingMessage = (RapidVerifone.taxRateConfig)serializer.Deserialize(new XmlTextReader(path));
-                    String strItemTaxXMLData = string.Empty;
-                    int taxcount = resultingMessage.taxRates.Count();
-                    RapidVerifone.taxRate[] objtaxRate = new RapidVerifone.taxRate[taxcount];
-
-                    DataTable dt = new DataTable();
-                    dt.Columns.AddRange(new DataColumn[6] {
-                    new DataColumn("sysid", typeof(int)), new DataColumn("name", typeof(string)),new DataColumn("indicator", typeof(string)),
-                    new DataColumn("isPriceIncsTax", typeof(bool)),new DataColumn("isPromptExemption", typeof(bool)),
-                    new DataColumn("rate", typeof(decimal))
-                    });
-
-                    for (int i = 0; i < objtaxRate.Length; i++)
+                if (isXMLError == false)
+                {
+                    var FileExistsTax = System.IO.File.Exists(FilePathTax);
+                    if (FileExistsTax == true)
                     {
-                        dt.Rows.Add
-                        (
-                                resultingMessage.taxRates[i].sysid,
-                                resultingMessage.taxRates[i].name,
-                                resultingMessage.taxRates[i].indicator,
-                                resultingMessage.taxRates[i].isPriceIncsTax,
-                                resultingMessage.taxRates[i].isPromptExemption,
-                                resultingMessage.taxRates[i].taxProperties.rate
-                         );
-                    }
+                        #region Insert Verifone Tax Data
+                        objCVerifone.InsertActiveLog("BoF", "Start", "Tax()", "Initialize to Insert Verifone Data into BoF", "Tax", "");
+                        var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Tax.xml";
 
-                    long result = objCVerifone.InsertTax(dt);
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.taxRateConfig));
 
-                    if (result == 0)
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "Fail", "Tax()", "Verifone Data not inserted in BoF", "Tax", "");
-                        //this.WriteToFile("Fail");
+                        RapidVerifone.taxRateConfig resultingMessage = (RapidVerifone.taxRateConfig)serializer.Deserialize(new XmlTextReader(path));
+                        String strItemTaxXMLData = string.Empty;
+                        int taxcount = resultingMessage.taxRates.Count();
+                        RapidVerifone.taxRate[] objtaxRate = new RapidVerifone.taxRate[taxcount];
+
+                        DataTable dt = new DataTable();
+                        dt.Columns.AddRange(new DataColumn[6] {
+                        new DataColumn("sysid", typeof(int)), new DataColumn("name", typeof(string)),new DataColumn("indicator", typeof(string)),
+                        new DataColumn("isPriceIncsTax", typeof(bool)),new DataColumn("isPromptExemption", typeof(bool)),
+                        new DataColumn("rate", typeof(decimal))});
+
+                        if (objtaxRate != null && objtaxRate.Length > 0)
+                        {
+                            for (int i = 0; i < objtaxRate.Length; i++)
+                            {
+                                dt.Rows.Add
+                                (
+                                        resultingMessage.taxRates[i].sysid,
+                                        resultingMessage.taxRates[i].name,
+                                        resultingMessage.taxRates[i].indicator,
+                                        resultingMessage.taxRates[i].isPriceIncsTax,
+                                        resultingMessage.taxRates[i].isPromptExemption,
+                                        resultingMessage.taxRates[i].taxProperties.rate
+                                 );
+                            }
+                        }
+
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            long result = objCVerifone.InsertTax(dt);
+
+                            if (result == 0)
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "Fail", "Tax()", "Verifone Data not inserted in BoF", "Tax", "");
+                            }
+                            else
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "End", "Tax()", "Verifone Data inserted Successfully in BoF", "Tax", "");
+                            }
+                        }
+                        else
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "End", "Tax()", "No Data Found", "Tax", "");
+                        }
+                        #endregion
                     }
                     else
                     {
-                        objCVerifone.InsertActiveLog("BoF", "End", "Tax()", "Verifone Data inserted Successfully in BoF", "Tax", "");
-                        //this.WriteToFile("Success");
+                        objCVerifone.InsertActiveLog("BoF", "Fail", "Tax()", "Tax.xml not found", "Tax", "");
                     }
-                    #endregion
                 }
                 else
                 {
-                    //this.WriteToFile("TAX FILE PATH : " + FilePathTax);
-                    objCVerifone.InsertActiveLog("BoF", "Fail", "Tax()", "Tax.xml not found", "Tax", "");
+                    String xmlText = File.ReadAllText(FilePathTax);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "Tax()", "Error in " + Path.GetFileName(FilePathTax), "Tax", "");
+                    //objComman.SendEmail(objEmail.TaxSubject, objEmail.TaxBody, FilePathTax, true);
+                    objComman.SendEmail(objEmail.TaxSubject, xmlText, Path.GetFileName(FilePathTax));
                 }
             }
             catch (Exception ex)
             {
                 objCVerifone.InsertActiveLog("BoF", "Error", "Tax()", "Tax Exception : " + ex, "Tax", "");
-                //this.WriteToFile("Tax : " + ex);
             }
         }
 
         public void Payment()
         {
             _CVerifone objCVerifone = new _CVerifone();
+            bool isXMLError = false;
             try
             {
+                
+
                 #region Read Payload, Save Payment data from Verifone
                 objComman.GetPayloadXML("Payment", "POST", "vpaymentcfg");
                 #endregion
 
                 var FilePathPayment = AppDomain.CurrentDomain.BaseDirectory + "xml\\Payment.xml";
-                var FileExistsPayment = File.Exists(FilePathPayment);
-                if (FileExistsPayment == true)
+
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePathPayment, XmlReadMode.InferSchema);
+
+                if (ds.Tables != null && ds.Tables.Count > 0)
                 {
-                    #region Insert Verifone Payment Data
-                    objCVerifone.InsertActiveLog("BoF", "Start", "Payment()", "Initialize to Insert Verifone Data into BoF", "Payment", "");
+                    isXMLError = objComman.GetErrorStatus(ds);
+                }
 
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Payment.xml";
-
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.paymentConfig));
-
-                    RapidVerifone.paymentConfig resultingMessage = (RapidVerifone.paymentConfig)serializer.Deserialize(new XmlTextReader(path));
-                    String strItemPaymentXMLData = string.Empty;
-
-                    int paymentmopCodes = resultingMessage.mopCodes.Count();
-                    RapidVerifone.paymentConfigMopCode[] objPaymentmopCodes = new RapidVerifone.paymentConfigMopCode[paymentmopCodes];
-                    objPaymentmopCodes = resultingMessage.mopCodes;
-
-                    int paymentmops = resultingMessage.mops.Count();
-                    RapidVerifone.paymentConfigMop[] objPaymentmops = new RapidVerifone.paymentConfigMop[paymentmops];
-                    objPaymentmops = resultingMessage.mops;
-
-                    DataTable dt = new DataTable();
-                    dt.Columns.AddRange(new DataColumn[3] {
-                    new DataColumn("sysid", typeof(int)), new DataColumn("PaymentName", typeof(string)),new DataColumn("Paycode", typeof(string))
-                    });
-
-
-                    DataTable dtCardTypeName = new DataTable();
-                    dtCardTypeName.Columns.AddRange(new DataColumn[2]
-                    {     new DataColumn("CardTypeId", typeof(int)),
-                          new DataColumn("CardTypeName", typeof(string))
-                    });
-
-                    for (int j = 0; j < objPaymentmopCodes.Length; j++)
+                if (isXMLError == false)
+                {
+                    var FileExistsPayment = File.Exists(FilePathPayment);
+                    if (FileExistsPayment == true)
                     {
-                        dtCardTypeName.Rows.Add
-                       (
-                               objPaymentmopCodes[j].sysid,
-                               objPaymentmopCodes[j].name
+                        #region Insert Verifone Payment Data
+                        objCVerifone.InsertActiveLog("BoF", "Start", "Payment()", "Initialize to Insert Verifone Data into BoF", "Payment", "");
+                        var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Payment.xml";
 
-                       );
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.paymentConfig));
 
-                    }
+                        RapidVerifone.paymentConfig resultingMessage = (RapidVerifone.paymentConfig)serializer.Deserialize(new XmlTextReader(path));
+                        String strItemPaymentXMLData = string.Empty;
 
+                        int paymentmopCodes = resultingMessage.mopCodes.Count();
+                        RapidVerifone.paymentConfigMopCode[] objPaymentmopCodes = new RapidVerifone.paymentConfigMopCode[paymentmopCodes];
+                        objPaymentmopCodes = resultingMessage.mopCodes;
 
-                    var paycode = "";
-                    for (int i = 0; i < objPaymentmops.Length; i++)
-                    {
-                        for (int j = 0; j < objPaymentmopCodes.Length; j++)
+                        int paymentmops = resultingMessage.mops.Count();
+                        RapidVerifone.paymentConfigMop[] objPaymentmops = new RapidVerifone.paymentConfigMop[paymentmops];
+                        objPaymentmops = resultingMessage.mops;
+
+                        DataTable dt = new DataTable();
+                        dt.Columns.AddRange(new DataColumn[3] {
+                        new DataColumn("sysid", typeof(int)), new DataColumn("PaymentName", typeof(string)),new DataColumn("Paycode", typeof(string))});
+
+                        DataTable dtCardTypeName = new DataTable();
+                        dtCardTypeName.Columns.AddRange(new DataColumn[2]{
+                        new DataColumn("CardTypeId", typeof(int)), new DataColumn("CardTypeName", typeof(string))});
+
+                        if (objPaymentmopCodes != null && objPaymentmopCodes.Length > 0)
                         {
-                            if (objPaymentmopCodes[j].sysid == objPaymentmops[i].code)
+                            for (int j = 0; j < objPaymentmopCodes.Length; j++)
                             {
-                                paycode = objPaymentmopCodes[j].name;
-                                break;
+                                dtCardTypeName.Rows.Add
+                                (
+                                    objPaymentmopCodes[j].sysid,
+                                    objPaymentmopCodes[j].name
+                                );
                             }
                         }
-                        dt.Rows.Add
-                        (
-                                resultingMessage.mops[i].sysid,
-                                resultingMessage.mops[i].name,
-                                paycode
-                        );
-                    }
 
+                        var paycode = "";
+                        if (objPaymentmops != null && objPaymentmops.Length > 0)
+                        {
+                            for (int i = 0; i < objPaymentmops.Length; i++)
+                            {
+                                if (objPaymentmopCodes != null && objPaymentmopCodes.Length > 0)
+                                {
+                                    for (int j = 0; j < objPaymentmopCodes.Length; j++)
+                                    {
+                                        if (objPaymentmopCodes[j].sysid == objPaymentmops[i].code)
+                                        {
+                                            paycode = objPaymentmopCodes[j].name;
+                                            break;
+                                        }
+                                    }
+                                }
+                                dt.Rows.Add
+                                (
+                                        resultingMessage.mops[i].sysid,
+                                        resultingMessage.mops[i].name,
+                                        paycode
+                                );
+                            }
+                        }
 
-                    long result = objCVerifone.InsertPayment(dt, dtCardTypeName);
-                    //long result = objCVerifone.InsertPayment(dt);
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            long result = objCVerifone.InsertPayment(dt, dtCardTypeName);
+                            //long result = objCVerifone.InsertPayment(dt);
 
-                    if (result == 0)
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "Fail", "Payment()", "Verifone Data not inserted in BoF", "Payment", "");
-                        //this.WriteToFile("Fail");
+                            if (result == 0)
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "Fail", "Payment()", "Verifone Data not inserted in BoF", "Payment", "");
+                            }
+                            else
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "End", "Payment()", "Verifone Data inserted Successfully in BoF", "Payment", "");
+                            }
+                        }
+                        else
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "End", "Payment()", "No Data Found", "Payment", "");
+                        }
+                        #endregion
                     }
                     else
                     {
-                        objCVerifone.InsertActiveLog("BoF", "End", "Payment()", "Verifone Data inserted Successfully in BoF", "Payment", "");
-                        //this.WriteToFile("Success");
+                        objCVerifone.InsertActiveLog("BoF", "Fail", "Payment()", "Payment.xml not found", "Payment", "");
                     }
-                    #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("BoF", "Fail", "Payment()", "Payment.xml not found", "Payment", "");
+                    String xmlText = File.ReadAllText(FilePathPayment);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "Payment()", "Error in " + Path.GetFileName(FilePathPayment), "Payment", "");
+                    objComman.SendEmail(objEmail.PaymentSubject, xmlText, Path.GetFileName(FilePathPayment));
                 }
             }
             catch (Exception ex)
             {
                 objCVerifone.InsertActiveLog("BoF", "Error", "Payment()", "Payment Exception : " + ex, "Payment", "");
-                //this.WriteToFile("Payment : " + ex);
             }
         }
 
         public void Category()
         {
             VerifoneLibrary.DataAccess._CVerifone objCVerifone = new VerifoneLibrary.DataAccess._CVerifone();
+            bool isXMLError = false;
             try
             {
+
                 #region Read Payload, Save Tax data from Verifone
                 objComman.GetPayloadXML("Category", "POST", "vposcfg");
                 #endregion
 
                 var FilePathCategory = AppDomain.CurrentDomain.BaseDirectory + "xml\\Category.xml";
-                var FileExistsCategory = File.Exists(FilePathCategory);
-                if (FileExistsCategory == true)
+
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePathCategory, XmlReadMode.InferSchema);
+
+                if (ds.Tables != null && ds.Tables.Count > 0)
                 {
-                    #region Insert Verifone Category Data
-                    objCVerifone.InsertActiveLog("BoF", "Start", "Category()", "Initialize to Insert Verifone Data into BoF", "Category", "");
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Category.xml";
+                    isXMLError = objComman.GetErrorStatus(ds);
+                }
 
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.posConfig));
-                    RapidVerifone.posConfig resultingMessage = (RapidVerifone.posConfig)serializer.Deserialize(new XmlTextReader(path));
-
-                    int CategortCount = resultingMessage.categories.Count();
-                    RapidVerifone.posConfig[] objCategory = new RapidVerifone.posConfig[CategortCount];
-
-                    DataTable dt = new DataTable();
-                    dt.Columns.AddRange(new DataColumn[2]{
-                    new DataColumn("sysid", typeof(int)), new DataColumn("name", typeof(string))
-                    });
-
-                    for (int i = 0; i < objCategory.Length; i++)
+                if (isXMLError == false)
+                {
+                    var FileExistsCategory = File.Exists(FilePathCategory);
+                    if (FileExistsCategory == true)
                     {
-                        dt.Rows.Add(
-                            resultingMessage.categories[i].sysid,
-                            resultingMessage.categories[i].name
-                       );
-                    }
+                        #region Insert Verifone Category Data
+                        objCVerifone.InsertActiveLog("BoF", "Start", "Category()", "Initialize to Insert Verifone Data into BoF", "Category", "");
 
-                    long result = objCVerifone.InsertCategory(dt);
+                        var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Category.xml";
 
-                    if (result == 0)
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "Fail", "Category()", "Verifone Data not inserted in BoF", "Category", "");
-                        //this.WriteToFile("Fail");
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.posConfig));
+                        RapidVerifone.posConfig resultingMessage = (RapidVerifone.posConfig)serializer.Deserialize(new XmlTextReader(path));
+
+                        int CategortCount = resultingMessage.categories.Count();
+                        RapidVerifone.posConfig[] objCategory = new RapidVerifone.posConfig[CategortCount];
+
+                        DataTable dt = new DataTable();
+                        dt.Columns.AddRange(new DataColumn[2]{
+                        new DataColumn("sysid", typeof(int)), new DataColumn("name", typeof(string))});
+
+                        if (objCategory != null && objCategory.Length > 0)
+                        {
+                            for (int i = 0; i < objCategory.Length; i++)
+                            {
+                                dt.Rows.Add(
+                                    resultingMessage.categories[i].sysid,
+                                    resultingMessage.categories[i].name
+                               );
+                            }
+                        }
+
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            long result = objCVerifone.InsertCategory(dt);
+
+                            if (result == 0)
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "Fail", "Category()", "Verifone Data not inserted in BoF", "Category", "");
+                            }
+                            else
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "End", "Category()", "Verifone Data inserted Successfully in BoF", "Category", "");
+                            }
+                        }
+                        else
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "End", "Category()", "No Data Found", "Category", "");
+                        }
+                        #endregion
                     }
                     else
                     {
-                        objCVerifone.InsertActiveLog("BoF", "End", "Category()", "Verifone Data inserted Successfully in BoF", "Category", "");
-                        //this.WriteToFile("Success");
+                        objCVerifone.InsertActiveLog("BoF", "Fail", "Category()", "Category.xml not found", "Category", "");
                     }
-                    #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("BoF", "Fail", "Category()", "Category.xml not found", "Category", "");
+                    String xmlText = File.ReadAllText(FilePathCategory);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "Category()", "Error in " + Path.GetFileName(FilePathCategory), "Category", "");
+                    objComman.SendEmail(objEmail.CategorySubject, xmlText, Path.GetFileName(FilePathCategory));
                 }
             }
             catch (Exception ex)
             {
                 objCVerifone.InsertActiveLog("BoF", "Error", "Category()", "Category Exception : " + ex, "Category", "");
-                //this.WriteToFile("Category : " + ex);
             }
         }
 
         public void ProductCode()
         {
             VerifoneLibrary.DataAccess._CVerifone objCVerifone = new VerifoneLibrary.DataAccess._CVerifone();
+            bool isXMLError = false;
             try
             {
+
                 #region Read Payload, Save Tax data from Verifone
                 objComman.GetPayloadXML("prodCodes", "POST", "vposcfg");
                 #endregion
 
-                var FilePathCategory = AppDomain.CurrentDomain.BaseDirectory + "xml\\prodCodes.xml";
-                var FileExistsCategory = File.Exists(FilePathCategory);
-                if (FileExistsCategory == true)
+                var FilePathProCodes = AppDomain.CurrentDomain.BaseDirectory + "xml\\prodCodes.xml";
+
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePathProCodes, XmlReadMode.InferSchema);
+
+                if (ds.Tables != null && ds.Tables.Count > 0)
                 {
-                    #region Insert Verifone Category Data
-                    objCVerifone.InsertActiveLog("BoF", "Start", "prodCodes()", "Initialize to Insert Verifone Data into BoF", "prodCodes", "");
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\prodCodes.xml";
+                    isXMLError = objComman.GetErrorStatus(ds);
+                }
 
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.posConfig));
-                    RapidVerifone.posConfig resultingMessage = (RapidVerifone.posConfig)serializer.Deserialize(new XmlTextReader(path));
-
-                    int prodCodesCount = resultingMessage.prodCodes.Count();
-                    RapidVerifone.posConfig[] objProdcode = new RapidVerifone.posConfig[prodCodesCount];
-
-                    DataTable dt = new DataTable();
-                    dt.Columns.AddRange(new DataColumn[2]{
-                    new DataColumn("sysid", typeof(int)), new DataColumn("name", typeof(string))
-                    });
-
-                    for (int i = 0; i < objProdcode.Length; i++)
+                if (isXMLError == false)
+                {
+                    var FileExistsProCodes = File.Exists(FilePathProCodes);
+                    if (FileExistsProCodes == true)
                     {
-                        dt.Rows.Add(
-                            resultingMessage.prodCodes[i].sysid,
-                            resultingMessage.prodCodes[i].name
-                       );
-                    }
+                        #region Insert Verifone Category Data
+                        objCVerifone.InsertActiveLog("BoF", "Start", "prodCodes()", "Initialize to Insert Verifone Data into BoF", "prodCodes", "");
 
-                    long result = objCVerifone.InsertprodCodes(dt);
+                        var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\prodCodes.xml";
 
-                    if (result == 0)
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "Fail", "prodCodes()", "Verifone Data not inserted in BoF", "prodCodes", "");
-                        //this.WriteToFile("Fail");
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.posConfig));
+                        RapidVerifone.posConfig resultingMessage = (RapidVerifone.posConfig)serializer.Deserialize(new XmlTextReader(path));
+
+                        int prodCodesCount = resultingMessage.prodCodes.Count();
+                        RapidVerifone.posConfig[] objProdcode = new RapidVerifone.posConfig[prodCodesCount];
+
+                        DataTable dt = new DataTable();
+                        dt.Columns.AddRange(new DataColumn[2]{
+                        new DataColumn("sysid", typeof(int)), new DataColumn("name", typeof(string))});
+
+                        if (objProdcode != null && objProdcode.Length > 0)
+                        {
+                            for (int i = 0; i < objProdcode.Length; i++)
+                            {
+                                dt.Rows.Add(
+                                    resultingMessage.prodCodes[i].sysid,
+                                    resultingMessage.prodCodes[i].name
+                               );
+                            }
+                        }
+
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            long result = objCVerifone.InsertprodCodes(dt);
+
+                            if (result == 0)
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "Fail", "prodCodes()", "Verifone Data not inserted in BoF", "prodCodes", "");
+                            }
+                            else
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "End", "prodCodes()", "Verifone Data inserted Successfully in BoF", "prodCodes", "");
+                            }
+                        }
+                        else
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "End", "prodCodes()", "No Data Found", "prodCodes", "");
+                        }
+
+                        #endregion
                     }
                     else
                     {
-                        objCVerifone.InsertActiveLog("BoF", "End", "prodCodes()", "Verifone Data inserted Successfully in BoF", "prodCodes", "");
-                        //this.WriteToFile("Success");
+                        objCVerifone.InsertActiveLog("BoF", "Fail", "prodCodes()", "Category.xml not found", "prodCodes", "");
                     }
-                    #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("BoF", "Fail", "prodCodes()", "Category.xml not found", "prodCodes", "");
+                    String xmlText = File.ReadAllText(FilePathProCodes);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "prodCodes()", "Error in " + Path.GetFileName(FilePathProCodes), "prodCodes", "");
+                    objComman.SendEmail(objEmail.ProdCodesSubject, xmlText, Path.GetFileName(FilePathProCodes));
                 }
             }
             catch (Exception ex)
             {
-                objCVerifone.InsertActiveLog("BoF", "Error", "prodCodes()", "Category Exception : " + ex, "prodCodes", "");
-                //this.WriteToFile("Category : " + ex);
+                objCVerifone.InsertActiveLog("BoF", "Error", "prodCodes()", "prodCodes Exception : " + ex, "prodCodes", "");
             }
         }
 
         public void Department()
         {
             VerifoneLibrary.DataAccess._CVerifone objPOSdetail = new VerifoneLibrary.DataAccess._CVerifone();
+            bool isXMLError = false;
             try
             {
+
                 #region Read Payload, Save Department data from Verifone
                 objComman.GetPayloadXML("Department", "POST", "vposcfg");
                 #endregion
 
                 var FilePathDepartment = AppDomain.CurrentDomain.BaseDirectory + "xml\\Department.xml";
-                var FileExistsDepartment = File.Exists(FilePathDepartment);
-                if (FileExistsDepartment == true)
+
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePathDepartment, XmlReadMode.InferSchema);
+
+                if (ds.Tables != null && ds.Tables.Count > 0)
                 {
-                    #region Insert Verifone Department Data
-                    objPOSdetail.InsertActiveLog("BoF", "Start", "Department()", "Initialize to Insert Verifone Data into BoF", "Department", "");
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Department.xml";
+                    isXMLError = objComman.GetErrorStatus(ds);
+                }
 
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.posConfig));
-
-                    RapidVerifone.posConfig resultingMessage = (RapidVerifone.posConfig)serializer.Deserialize(new XmlTextReader(path));
-                    String strItemTaxXMLData = string.Empty;
-
-                    DataTable dt = new DataTable();
-                    dt.Columns.AddRange(new DataColumn[10] {
-                    new DataColumn("DeptId", typeof(int)), new DataColumn("DeptCode", typeof(string)), new DataColumn("DeptName", typeof(string)),
-                    new DataColumn("TaxFlg", typeof(int)), new DataColumn("IsGASPump", typeof(bool)), new DataColumn("isMoneyOrder", typeof(bool)),
-                    new DataColumn("TaxId", typeof(int)), new DataColumn("ItemCode", typeof(int)), new DataColumn("ProdCode", typeof(string)),
-                    new DataColumn("CatId", typeof(int))
-                    });
-
-                    DataTable dt1 = new DataTable();
-                    dt1.Columns.AddRange(new DataColumn[2] {
-                    new DataColumn("DeptId", typeof(int)), new DataColumn("TaxId", typeof(string))});
-
-                    int DepartmentCount = resultingMessage.departments.Count();
-                    RapidVerifone.department[] objDepartment = new RapidVerifone.department[DepartmentCount];
-                    objDepartment = resultingMessage.departments;
-
-                    int ProbCodeCount = resultingMessage.prodCodes.Count();
-                    RapidVerifone.prodCode[] objProdCode = new RapidVerifone.prodCode[ProbCodeCount];
-                    objProdCode = resultingMessage.prodCodes;
-
-                    var deptCode = "";
-                    int TaxFlag = 0;
-                    int TaxId = 0;
-                    int itemCode = 0;
-                    var ProdCode = "";
-
-                    DataSet dsreg = objComman.GetRegsiterinv();
-                    if (dsreg.Tables[0] != null && dsreg.Tables[0].Rows.Count > 0)
+                if (isXMLError == false)
+                {
+                    var FileExistsDepartment = File.Exists(FilePathDepartment);
+                    if (FileExistsDepartment == true)
                     {
-                        itemCode = Convert.ToInt32(dsreg.Tables[0].Rows[0]["ItemCode"]);
-                    }
+                        #region Insert Verifone Department Data
+                        objPOSdetail.InsertActiveLog("BoF", "Start", "Department()", "Initialize to Insert Verifone Data into BoF", "Department", "");
 
-                    for (int i = 0; i < objDepartment.Length; i++)
-                    {
-                        for (int j = 0; j < objProdCode.Length; j++)
+                        var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Department.xml";
+
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.posConfig));
+
+                        RapidVerifone.posConfig resultingMessage = (RapidVerifone.posConfig)serializer.Deserialize(new XmlTextReader(path));
+                        String strItemTaxXMLData = string.Empty;
+
+                        DataTable dt = new DataTable();
+                        dt.Columns.AddRange(new DataColumn[10] {
+                        new DataColumn("DeptId", typeof(int)), new DataColumn("DeptCode", typeof(string)), new DataColumn("DeptName", typeof(string)),
+                        new DataColumn("TaxFlg", typeof(int)), new DataColumn("IsGASPump", typeof(bool)), new DataColumn("isMoneyOrder", typeof(bool)),
+                        new DataColumn("TaxId", typeof(int)), new DataColumn("ItemCode", typeof(int)), new DataColumn("ProdCode", typeof(string)),
+                        new DataColumn("CatId", typeof(int))});
+
+                        DataTable dt1 = new DataTable();
+                        dt1.Columns.AddRange(new DataColumn[2] {
+                        new DataColumn("DeptId", typeof(int)), new DataColumn("TaxId", typeof(string))});
+
+                        int DepartmentCount = resultingMessage.departments.Count();
+                        RapidVerifone.department[] objDepartment = new RapidVerifone.department[DepartmentCount];
+                        objDepartment = resultingMessage.departments;
+
+                        int ProbCodeCount = resultingMessage.prodCodes.Count();
+                        RapidVerifone.prodCode[] objProdCode = new RapidVerifone.prodCode[ProbCodeCount];
+                        objProdCode = resultingMessage.prodCodes;
+
+                        var deptCode = "";
+                        int TaxFlag = 0;
+                        int TaxId = 0;
+                        int itemCode = 0;
+                        var ProdCode = "";
+
+                        DataSet dsreg = objComman.GetRegsiterinv();
+                        if (dsreg.Tables[0] != null && dsreg.Tables[0].Rows.Count > 0)
                         {
-                            if (objProdCode[j].sysid == objDepartment[i].prodCode.sysid)
-                            {
-                                deptCode = objProdCode[j].name;
-                                ProdCode = objProdCode[j].sysid;
-                                break;
-                            }
+                            itemCode = Convert.ToInt32(dsreg.Tables[0].Rows[0]["ItemCode"]);
                         }
 
-                        int DepartmentTaxCount = objDepartment[i].taxes.Count();
-                        RapidVerifone.departmentTax[] objDepartmentTax = new RapidVerifone.departmentTax[DepartmentTaxCount];
-                        if (DepartmentTaxCount != 0)
+                        if (objDepartment != null && objDepartment.Length > 0)
                         {
-                            objDepartmentTax = objDepartment[i].taxes;
-                            for (int k = 0; k < objDepartmentTax.Length; k++)
+                            for (int i = 0; i < objDepartment.Length; i++)
                             {
-                                if (objDepartmentTax[k].sysid != "")
+                                if (objProdCode != null && objProdCode.Length > 0)
                                 {
-                                    TaxFlag = 1;
-                                    TaxId = Convert.ToInt16(objDepartmentTax[k].sysid);
+                                    for (int j = 0; j < objProdCode.Length; j++)
+                                    {
+                                        if (objProdCode[j].sysid == objDepartment[i].prodCode.sysid)
+                                        {
+                                            deptCode = objProdCode[j].name;
+                                            ProdCode = objProdCode[j].sysid;
+                                            break;
+                                        }
+                                    }
+                                }
 
-                                    dt1.Rows.Add(
-                                        resultingMessage.departments[i].sysid,
-                                        Convert.ToInt16(objDepartmentTax[k].sysid)
-                                        );
+                                int DepartmentTaxCount = objDepartment[i].taxes.Count();
+                                RapidVerifone.departmentTax[] objDepartmentTax = new RapidVerifone.departmentTax[DepartmentTaxCount];
+                                if (DepartmentTaxCount != 0)
+                                {
+                                    objDepartmentTax = objDepartment[i].taxes;
+
+                                    if (objDepartmentTax != null && objDepartmentTax.Length > 0)
+                                    {
+                                        for (int k = 0; k < objDepartmentTax.Length; k++)
+                                        {
+                                            if (objDepartmentTax[k].sysid != "")
+                                            {
+                                                TaxFlag = 1;
+                                                TaxId = Convert.ToInt16(objDepartmentTax[k].sysid);
+
+                                                dt1.Rows.Add(
+                                                    resultingMessage.departments[i].sysid,
+                                                    Convert.ToInt16(objDepartmentTax[k].sysid)
+                                                    );
+                                            }
+                                            else
+                                            {
+                                                TaxFlag = 0;
+                                                TaxId = 0;
+                                            }
+                                        }
+                                    }
                                 }
                                 else
                                 {
                                     TaxFlag = 0;
                                     TaxId = 0;
                                 }
+
+                                dt.Rows.Add
+                                (
+                                    resultingMessage.departments[i].sysid,
+                                    deptCode,
+                                    resultingMessage.departments[i].name,
+                                    TaxFlag,
+                                    resultingMessage.departments[i].isFuel,
+                                    resultingMessage.departments[i].isMoneyOrder,
+                                    TaxId,
+                                    itemCode = itemCode + 1,
+                                    ProdCode,
+                                    resultingMessage.departments[i].category.sysid
+                                );
+                            }
+                        }
+
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            long result = objPOSdetail.InsertDepartment(dt, dt1);
+
+                            if (result == 0)
+                            {
+                                objPOSdetail.InsertActiveLog("BoF", "Fail", "Department()", "Verifone Data not inserted in BoF", "Department", "");
+                            }
+                            else
+                            {
+                                objPOSdetail.InsertActiveLog("BoF", "End", "Department()", "Verifone Data inserted Successfully in BoF", "Department", "");
                             }
                         }
                         else
                         {
-                            TaxFlag = 0;
-                            TaxId = 0;
+                            objPOSdetail.InsertActiveLog("BoF", "End", "Department()", "No Data Found", "Department", "");
                         }
-
-                        dt.Rows.Add
-                        (
-                            resultingMessage.departments[i].sysid,
-                            deptCode,
-                            resultingMessage.departments[i].name,
-                            TaxFlag,
-                            resultingMessage.departments[i].isFuel,
-                            resultingMessage.departments[i].isMoneyOrder,
-                            TaxId,
-                            itemCode = itemCode + 1,
-                            ProdCode,
-                            resultingMessage.departments[i].category.sysid
-                        );
-                    }
-
-                    long result = objPOSdetail.InsertDepartment(dt, dt1);
-
-                    if (result == 0)
-                    {
-                        objPOSdetail.InsertActiveLog("BoF", "Fail", "Department()", "Verifone Data not inserted in BoF", "Department", "");
-                        //this.WriteToFile("Fail");
+                        #endregion
                     }
                     else
                     {
-                        objPOSdetail.InsertActiveLog("BoF", "End", "Department()", "Verifone Data inserted Successfully in BoF", "Department", "");
-                        // this.WriteToFile("Success");
+                        objPOSdetail.InsertActiveLog("BoF", "Fail", "Department()", "Department.xml not found", "Department", "");
                     }
-                    #endregion
                 }
                 else
                 {
-                    objPOSdetail.InsertActiveLog("BoF", "Fail", "Department()", "Department.xml not found", "Department", "");
+                    String xmlDepartment = File.ReadAllText(FilePathDepartment);
+                    objPOSdetail.InsertActiveLog("BoF", "Fail", "Department()", "Error in " + Path.GetFileName(FilePathDepartment), "Department", "");
+                    objComman.SendEmail(objEmail.DepartmentSubject, xmlDepartment, Path.GetFileName(FilePathDepartment));
                 }
             }
             catch (Exception ex)
             {
                 objPOSdetail.InsertActiveLog("BoF", "Error", "Department()", "Department Exception : " + ex, "Department", "");
-                //this.WriteToFile("Department : " + ex);
             }
         }
 
         public void Fee()
         {
             VerifoneLibrary.DataAccess._CVerifone objCVerifone = new VerifoneLibrary.DataAccess._CVerifone();
+            bool isXMLError = false;
             try
             {
+
                 #region Read Payload, Save Tax data from Verifone
                 objComman.GetPayloadXML("Fee", "POST", "vfeecfg");
                 #endregion
 
                 var FilePathFee = AppDomain.CurrentDomain.BaseDirectory + "xml\\Fee.xml";
-                var FileExistsFee = File.Exists(FilePathFee);
-                if (FileExistsFee == true)
+
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePathFee, XmlReadMode.InferSchema);
+
+                if (ds.Tables != null && ds.Tables.Count > 0)
                 {
-                    #region Insert Verifone Fee Data
-                    objCVerifone.InsertActiveLog("BoF", "Start", "Fee()", "Initialize to Insert Verifone Data into BoF", "Fee", "");
+                    isXMLError = objComman.GetErrorStatus(ds);
+                }
 
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.feeConfig));
-
-                    RapidVerifone.feeConfig resultingMessage = (RapidVerifone.feeConfig)serializer.Deserialize(new XmlTextReader(FilePathFee));
-
-                    int FeeCount = resultingMessage.fees.Count();
-                    RapidVerifone.fee[] objFee = new RapidVerifone.fee[FeeCount];
-                    objFee = resultingMessage.fees;
-
-                    decimal rangeFee = 0;
-                    decimal rangeEnd = 0;
-                    int ChargeId = 0;
-
-                    DataTable dt = new DataTable();
-                    dt.Columns.AddRange(new DataColumn[3]{
-                    new DataColumn("sysid", typeof(int)), new DataColumn("name", typeof(string)), new DataColumn("dept", typeof(int))
-                    });
-
-                    DataTable dt1 = new DataTable();
-                    dt1.Columns.AddRange(new DataColumn[4]{
-                    new DataColumn("ChargeId", typeof(int)), new DataColumn("sysid", typeof(int)), new DataColumn("rangeFee", typeof(decimal)),
-                    new DataColumn("rangeEnd", typeof(decimal))
-                    });
-
-                    for (int i = 0; i < objFee.Length; i++)
+                if (isXMLError == false)
+                {
+                    var FileExistsFee = File.Exists(FilePathFee);
+                    if (FileExistsFee == true)
                     {
-                        if (objFee[i].Items != null)
+                        #region Insert Verifone Fee Data
+                        objCVerifone.InsertActiveLog("BoF", "Start", "Fee()", "Initialize to Insert Verifone Data into BoF", "Fee", "");
+
+
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.feeConfig));
+
+                        RapidVerifone.feeConfig resultingMessage = (RapidVerifone.feeConfig)serializer.Deserialize(new XmlTextReader(FilePathFee));
+
+                        int FeeCount = resultingMessage.fees.Count();
+                        RapidVerifone.fee[] objFee = new RapidVerifone.fee[FeeCount];
+                        objFee = resultingMessage.fees;
+
+                        decimal rangeFee = 0;
+                        decimal rangeEnd = 0;
+                        int ChargeId = 0;
+
+                        DataTable dt = new DataTable();
+                        dt.Columns.AddRange(new DataColumn[3]{
+                        new DataColumn("sysid", typeof(int)), new DataColumn("name", typeof(string)), new DataColumn("dept", typeof(int))});
+
+                        DataTable dt1 = new DataTable();
+                        dt1.Columns.AddRange(new DataColumn[4]{
+                        new DataColumn("ChargeId", typeof(int)), new DataColumn("sysid", typeof(int)), new DataColumn("rangeFee", typeof(decimal)),
+                        new DataColumn("rangeEnd", typeof(decimal))});
+
+                        if (objFee != null && objFee.Length > 0)
                         {
-                            int RangeCount = objFee[i].Items.Count();
-
-                            //RapidVerifone.rangeAmountFeeType[] objRange = new RapidVerifone.rangeAmountFeeType[RangeCount];
-
-                            for (int j = 0; j < RangeCount; j++)
+                            for (int i = 0; i < objFee.Length; i++)
                             {
-                                try
+                                if (objFee[i].Items != null)
                                 {
-                                    rangeFee = ((rangeAmountFeeType)(objFee[i].Items[j])).rangeFee;
-                                    rangeEnd = ((rangeAmountFeeType)(objFee[i].Items[j])).rangeEnd;
+                                    int RangeCount = objFee[i].Items.Count();
 
-                                    dt1.Rows.Add(
-                                         ChargeId = ChargeId + 1,
-                                         objFee[i].sysid,
-                                         rangeFee,
-                                         rangeEnd
-                                    );
+                                    //RapidVerifone.rangeAmountFeeType[] objRange = new RapidVerifone.rangeAmountFeeType[RangeCount];
 
+                                    for (int j = 0; j < RangeCount; j++)
+                                    {
+                                        try
+                                        {
+                                            rangeFee = ((rangeAmountFeeType)(objFee[i].Items[j])).rangeFee;
+                                            rangeEnd = ((rangeAmountFeeType)(objFee[i].Items[j])).rangeEnd;
+
+                                            dt1.Rows.Add(
+                                                 ChargeId = ChargeId + 1,
+                                                 objFee[i].sysid,
+                                                 rangeFee,
+                                                 rangeEnd
+                                            );
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            rangeFee = 0;
+                                            rangeEnd = 0;
+
+                                            dt1.Rows.Add(
+                                                 ChargeId = ChargeId + 1,
+                                                 objFee[i].sysid,
+                                                 rangeFee,
+                                                 rangeEnd
+                                            );
+                                        }
+                                    }
                                 }
-                                catch (Exception ex)
+                                else
                                 {
                                     rangeFee = 0;
                                     rangeEnd = 0;
@@ -556,229 +718,265 @@ namespace VerifoneServices
                                          rangeEnd
                                     );
                                 }
+
+                                dt.Rows.Add(
+                                    objFee[i].sysid,
+                                    objFee[i].name,
+                                    objFee[i].dept
+                                    );
+                            }
+                        }
+
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            long result = objCVerifone.InsertFeeDeposit(dt, dt1);
+
+                            if (result == 0)
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "Fail", "Fee()", "Verifone Data not inserted in BoF", "Fee", "");
+                            }
+                            else
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "End", "Fee()", "Verifone Data inserted Successfully in BoF", "Fee", "");
                             }
                         }
                         else
                         {
-                            rangeFee = 0;
-                            rangeEnd = 0;
-
-                            dt1.Rows.Add(
-                                 ChargeId = ChargeId + 1,
-                                 objFee[i].sysid,
-                                 rangeFee,
-                                 rangeEnd
-                            );
+                            objCVerifone.InsertActiveLog("BoF", "End", "Fee()", "No Data Found", "Fee", "");
                         }
 
-                        dt.Rows.Add(
-                            objFee[i].sysid,
-                            objFee[i].name,
-                            objFee[i].dept
-                            );
-                    }
-
-                    long result = objCVerifone.InsertFeeDeposit(dt, dt1);
-
-                    if (result == 0)
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "Fail", "Fee()", "Verifone Data not inserted in BoF", "Fee", "");
-                        //this.WriteToFile("Fail");
+                        #endregion
                     }
                     else
                     {
-                        objCVerifone.InsertActiveLog("BoF", "End", "Fee()", "Verifone Data inserted Successfully in BoF", "Fee", "");
-                        // this.WriteToFile("Success");
+                        objCVerifone.InsertActiveLog("BoF", "Fail", "Fee()", "Fee.xml not found", "Fee", "");
                     }
-                    #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("BoF", "Fail", "Fee()", "Fee.xml not found", "Fee", "");
+                    String xmlText = File.ReadAllText(FilePathFee);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "Fee()", "Error in " + Path.GetFileName(FilePathFee), "Fee", "");
+                    objComman.SendEmail(objEmail.FeeSubject, xmlText, Path.GetFileName(FilePathFee));
                 }
             }
             catch (Exception ex)
             {
                 objCVerifone.InsertActiveLog("BoF", "Error", "Fee()", "Fee Exception :" + ex, "Fee", "");
-                //this.WriteToFile("Fee :" + ex);
             }
         }
 
-        public void Item_New()
+        public void Item()
         {
             _CVerifone objVerifone = new _CVerifone();
             int TaxRate = 0;
             int ItemCode = 0;
             bool isExists = false;
+            bool isXMLError = false;
             try
             {
+
                 #region Read Payload, Save Item data from Verifone
                 objComman.GetPayloadXML("Item", "POST", "vPLUs");
                 #endregion
 
                 var FilePathItem = AppDomain.CurrentDomain.BaseDirectory + "xml\\Item.xml";
-                var FileExistsItem = File.Exists(FilePathItem);
-                if (FileExistsItem == true)
+
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePathItem, XmlReadMode.InferSchema);
+
+                if (ds.Tables != null && ds.Tables.Count > 0)
                 {
-                    #region Insert Verifone Item Data
-                    objVerifone.InsertActiveLog("BoF", "Start", "Item()", "Initialize to Insert Verifone Data into BoF", "Item", "");
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Item.xml";
+                    isXMLError = objComman.GetErrorStatus(ds);
+                }
 
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVarifone.PLUs));
 
-                    RapidVarifone.PLUs resultingMessage = (RapidVarifone.PLUs)serializer.Deserialize(new XmlTextReader(path));
-
-                    int ItemCount = resultingMessage.PLU.Count();
-                    RapidVarifone.PLUCType[] objItems = new RapidVarifone.PLUCType[ItemCount];
-                    objItems = resultingMessage.PLU;
-
-                    DataTable dtItem = new DataTable();
-                    dtItem.Columns.AddRange(new DataColumn[13]{
-                    new DataColumn("upc", typeof(string)), new DataColumn("description", typeof(string)), new DataColumn("department", typeof(int)),
-                    new DataColumn("fees", typeof(string)), new DataColumn("pcode", typeof(string)), new DataColumn("price", typeof(decimal)),
-                    new DataColumn("taxRates", typeof(int)), new DataColumn("SellUnit", typeof(decimal)), new DataColumn("taxableRebate_amount", typeof(decimal)),
-                    new DataColumn("ItemCode", typeof(int)), new DataColumn("ItemType", typeof(int)), new DataColumn("upcModifier", typeof(string)),
-                    new DataColumn("isExists", typeof(bool))});
-
-                    DataTable dtItemTax = new DataTable();
-                    dtItemTax.Columns.AddRange(new DataColumn[4]{
-                    new DataColumn("ItemCode", typeof(int)), new DataColumn("UPC", typeof(string)), new DataColumn("upcModifier", typeof(string)),
-                    new DataColumn("TaxId", typeof(int))});
-
-                    DataTable dtItemFee = new DataTable();
-                    dtItemFee.Columns.AddRange(new DataColumn[4]{
-                    new DataColumn("ItemCode", typeof(int)), new DataColumn("UPC", typeof(string)), new DataColumn("upcModifier", typeof(string)),
-                    new DataColumn("FeeId", typeof(int))});
-
-                    //DataSet dsreg = objComman.GetRegsiterinv();
-                    //if (dsreg.Tables[0] != null && dsreg.Tables[0].Rows.Count > 0)
-                    //{
-                    //    ItemCode = Convert.ToInt32(dsreg.Tables[0].Rows[0]["ItemCode"]);
-                    //}
-
-                    DataSet dsItem = objVerifone.GetItemData();
-                    if (dsItem.Tables[1] != null && dsItem.Tables[1].Rows.Count > 0)
+                if (isXMLError == false)
+                {
+                    var FileExistsItem = File.Exists(FilePathItem);
+                    if (FileExistsItem == true)
                     {
-                        ItemCode = Convert.ToInt32(dsItem.Tables[1].Rows[0]["ItemCode"]);
-                    }
+                        #region Insert Verifone Item Data
+                        objVerifone.InsertActiveLog("BoF", "Start", "Item()", "Initialize to Insert Verifone Data into BoF", "Item", "");
 
-                    for (int i = 0; i < objItems.Length; i++)
-                    {
-                        DataView dvItem = dsItem.Tables[0].DefaultView;
-                        dvItem.RowFilter = ("[" + dsItem.Tables[0].Columns["UPC"].ColumnName + "] ='" + objItems[i].upc.Value + "'AND [" + dsItem.Tables[0].Columns["upcModifier"].ColumnName + "] ='" + objItems[i].upcModifier + "'");
-                        if (dvItem.Count > 0)
+                        var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Item.xml";
+
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVarifone.PLUs));
+
+                        RapidVarifone.PLUs resultingMessage = (RapidVarifone.PLUs)serializer.Deserialize(new XmlTextReader(path));
+
+                        int ItemCount = resultingMessage.PLU.Count();
+                        RapidVarifone.PLUCType[] objItems = new RapidVarifone.PLUCType[ItemCount];
+                        objItems = resultingMessage.PLU;
+
+                        DataTable dtItem = new DataTable();
+                        dtItem.Columns.AddRange(new DataColumn[13]{
+                        new DataColumn("upc", typeof(string)), new DataColumn("description", typeof(string)), new DataColumn("department", typeof(int)),
+                        new DataColumn("fees", typeof(string)), new DataColumn("pcode", typeof(string)), new DataColumn("price", typeof(decimal)),
+                        new DataColumn("taxRates", typeof(int)), new DataColumn("SellUnit", typeof(decimal)), new DataColumn("taxableRebate_amount", typeof(decimal)),
+                        new DataColumn("ItemCode", typeof(int)), new DataColumn("ItemType", typeof(int)), new DataColumn("upcModifier", typeof(string)),
+                        new DataColumn("isExists", typeof(bool))});
+
+                        DataTable dtItemTax = new DataTable();
+                        dtItemTax.Columns.AddRange(new DataColumn[4]{
+                        new DataColumn("ItemCode", typeof(int)), new DataColumn("UPC", typeof(string)), new DataColumn("upcModifier", typeof(string)),
+                        new DataColumn("TaxId", typeof(int))});
+
+                        DataTable dtItemFee = new DataTable();
+                        dtItemFee.Columns.AddRange(new DataColumn[4]{
+                        new DataColumn("ItemCode", typeof(int)), new DataColumn("UPC", typeof(string)), new DataColumn("upcModifier", typeof(string)),
+                        new DataColumn("FeeId", typeof(int))});
+
+                        //DataSet dsreg = objComman.GetRegsiterinv();
+                        //if (dsreg.Tables[0] != null && dsreg.Tables[0].Rows.Count > 0)
+                        //{
+                        //    ItemCode = Convert.ToInt32(dsreg.Tables[0].Rows[0]["ItemCode"]);
+                        //}
+
+                        DataSet dsItem = objVerifone.GetItemData();
+                        if (dsItem.Tables[1] != null && dsItem.Tables[1].Rows.Count > 0)
                         {
-                            isExists = true;
+                            ItemCode = Convert.ToInt32(dsItem.Tables[1].Rows[0]["ItemCode"]);
+                        }
+
+                        if (objItems != null && objItems.Length > 0)
+                        {
+                            for (int i = 0; i < objItems.Length; i++)
+                            {
+                                DataView dvItem = dsItem.Tables[0].DefaultView;
+                                dvItem.RowFilter = ("[" + dsItem.Tables[0].Columns["UPC"].ColumnName + "] ='" + objItems[i].upc.Value + "'AND [" + dsItem.Tables[0].Columns["upcModifier"].ColumnName + "] ='" + objItems[i].upcModifier + "'");
+                                if (dvItem.Count > 0)
+                                {
+                                    isExists = true;
+                                }
+                                else
+                                {
+                                    ItemCode += 1;
+                                    isExists = false;
+                                }
+
+                                TaxRate = 0;
+
+                                if (objItems[i].taxRates != null)
+                                {
+                                    int TaxRatesCount = objItems[i].taxRates.Count();
+                                    RapidVarifone.taxRate[] objTaxRates = new RapidVarifone.taxRate[TaxRatesCount];
+                                    objTaxRates = objItems[i].taxRates;
+
+                                    if (objTaxRates != null && objTaxRates.Length > 0)
+                                    {
+                                        for (int j = 0; j < objTaxRates.Length; j++)
+                                        {
+                                            dtItemTax.Rows.Add(
+                                                isExists == true ? dvItem[0]["ItemCode"] : ItemCode,
+                                                objItems[i].upc.Value,
+                                                objItems[i].upcModifier,
+                                                Convert.ToInt32(objTaxRates[j].sysid)
+                                            );
+                                        }
+                                    }
+                                    TaxRate = 1;
+                                }
+                                else
+                                {
+                                    TaxRate = 0;
+                                }
+
+                                if (((RapidVarifone.PLUCTypeFees)(objItems[i].Item)).fee != null)
+                                {
+                                    for (int k = 0; k < ((RapidVarifone.PLUCTypeFees)(objItems[i].Item)).fee.Length; k++)
+                                    {
+                                        dtItemFee.Rows.Add(
+                                            isExists == true ? dvItem[0]["ItemCode"] : ItemCode,
+                                            objItems[i].upc.Value,
+                                            objItems[i].upcModifier,
+                                            ((RapidVarifone.PLUCTypeFees)(objItems[i].Item)).fee[k]
+                                        );
+                                    }
+                                }
+
+                                dtItem.Rows.Add(
+                                    objItems[i].upc.Value,
+                                    objItems[i].description,
+                                    objItems[i].department,
+                                    ((RapidVarifone.PLUCTypeFees)(objItems[i].Item)).fee[0],
+                                    objItems[i].pcode,
+                                    objItems[i].price.Value,
+                                    TaxRate,
+                                    objItems[i].SellUnit,
+                                    objItems[i].taxableRebate.amount.Value,
+                                    isExists == true ? dvItem[0]["ItemCode"] : ItemCode,
+                                    0,
+                                    objItems[i].upcModifier,
+                                    isExists
+                                );
+
+                                // ******* new case
+                                dtItem.Rows.Add(
+                                    objItems[i].upc.Value,//"",
+                                    "",
+                                    0,
+                                    "",
+                                    0,
+                                    0,
+                                    0,
+                                    0,
+                                    0,
+                                    isExists == true ? dvItem[0]["ItemCode"] : ItemCode,
+                                    1,
+                                    objItems[i].upcModifier,
+                                    isExists
+                                );
+
+                                // ******* new pack
+                                dtItem.Rows.Add(
+                                    objItems[i].upc.Value,// "",
+                                    "",
+                                    0,
+                                    "",
+                                    0,
+                                    0,
+                                    0,
+                                    0,
+                                    0,
+                                    isExists == true ? dvItem[0]["ItemCode"] : ItemCode,
+                                    2,
+                                    objItems[i].upcModifier,
+                                    isExists
+                                );
+
+                                dvItem.RowFilter = string.Empty;
+                            }
+                        }
+
+                        if (dtItem != null && dtItem.Rows.Count > 0)
+                        {
+                            long result = objVerifone.InsertItems(dtItem, dtItemTax, dtItemFee);
+
+                            if (result == 0)
+                            {
+                                objVerifone.InsertActiveLog("BoF", "Fail", "Item()", "Verifone Data not inserted in BoF", "Item", "");
+                            }
+                            else
+                            {
+                                objVerifone.InsertActiveLog("BoF", "End", "Item()", "Verifone Data inserted Successfully in BoF", "Item", "");
+                            }
                         }
                         else
                         {
-                            ItemCode += 1;
-                            isExists = false;
+                            objVerifone.InsertActiveLog("BoF", "End", "Item()", "No Data Found", "Item", "");
                         }
-
-                        TaxRate = 0;
-
-                        if (objItems[i].taxRates != null)
-                        {
-                            int TaxRatesCount = objItems[i].taxRates.Count();
-                            RapidVarifone.taxRate[] objTaxRates = new RapidVarifone.taxRate[TaxRatesCount];
-                            objTaxRates = objItems[i].taxRates;
-
-                            for (int j = 0; j < objTaxRates.Length; j++)
-                            {
-                                dtItemTax.Rows.Add(
-                                    isExists == true ? dvItem[0]["ItemCode"] : ItemCode,
-                                    objItems[i].upc.Value,
-                                    objItems[i].upcModifier,
-                                    Convert.ToInt32(objTaxRates[j].sysid)
-                                );
-                            }
-                            TaxRate = 1;
-                        }
-                        else
-                        {
-                            TaxRate = 0;
-                        }
-
-                        if (((RapidVarifone.PLUCTypeFees)(objItems[i].Item)).fee != null)
-                        {
-                            for (int k = 0; k < ((RapidVarifone.PLUCTypeFees)(objItems[i].Item)).fee.Length; k++)
-                            {
-                                dtItemFee.Rows.Add(
-                                    isExists == true ? dvItem[0]["ItemCode"] : ItemCode,
-                                    objItems[i].upc.Value,
-                                    objItems[i].upcModifier,
-                                    ((RapidVarifone.PLUCTypeFees)(objItems[i].Item)).fee[k]
-                                );
-                            }
-                        }
-
-                        dtItem.Rows.Add(
-                            objItems[i].upc.Value,
-                            objItems[i].description,
-                            objItems[i].department,
-                            ((RapidVarifone.PLUCTypeFees)(objItems[i].Item)).fee[0],
-                            objItems[i].pcode,
-                            objItems[i].price.Value,
-                            TaxRate,
-                            objItems[i].SellUnit,
-                            objItems[i].taxableRebate.amount.Value,
-                            isExists == true ? dvItem[0]["ItemCode"] : ItemCode,
-                            0,
-                            objItems[i].upcModifier,
-                            isExists
-                        );
-
-                        // ******* new case
-                        dtItem.Rows.Add(
-                            objItems[i].upc.Value,//"",
-                            "",
-                            0,
-                            "",
-                            0,
-                            0,
-                            0,
-                            0,
-                            0,
-                            isExists == true ? dvItem[0]["ItemCode"] : ItemCode,
-                            1,
-                            objItems[i].upcModifier,
-                            isExists
-                        );
-
-                        // ******* new pack
-                        dtItem.Rows.Add(
-                            objItems[i].upc.Value,// "",
-                            "",
-                            0,
-                            "",
-                            0,
-                            0,
-                            0,
-                            0,
-                            0,
-                            isExists == true ? dvItem[0]["ItemCode"] : ItemCode,
-                            2,
-                            objItems[i].upcModifier,
-                            isExists
-                        );
-                    }
-
-                    long result = objVerifone.InsertItems(dtItem, dtItemTax, dtItemFee);
-
-                    if (result == 0)
-                    {
-                        objVerifone.InsertActiveLog("BoF", "Fail", "Item()", "Verifone Data not inserted in BoF", "Item", "");
+                        #endregion
                     }
                     else
                     {
-                        objVerifone.InsertActiveLog("BoF", "End", "Item()", "Verifone Data inserted Successfully in BoF", "Item", "");
+                        objVerifone.InsertActiveLog("BoF", "Fail", "Item()", "Item.xml not found", "Item", "");
                     }
-                    #endregion
                 }
                 else
                 {
-                    objVerifone.InsertActiveLog("BoF", "Fail", "Item()", "Item.xml not found", "Item", "");
+                    String xmlText = File.ReadAllText(FilePathItem);
+                    objVerifone.InsertActiveLog("BoF", "Fail", "Item()", "Error in " + Path.GetFileName(FilePathItem), "Item", "");
+                    objComman.SendEmail(objEmail.ItemSubject, xmlText, Path.GetFileName(FilePathItem));
                 }
             }
             catch (Exception ex)
@@ -790,351 +988,458 @@ namespace VerifoneServices
         public void Fuel()
         {
             VerifoneLibrary.DataAccess._CVerifone objCVerifone = new VerifoneLibrary.DataAccess._CVerifone();
+            bool isXMLError = false;
             try
             {
+
                 #region Read Payload, Save Fuel data from Verifone
                 objComman.GetPayloadXML("Fuel", "POST", "vfuelrtcfg");
                 #endregion
 
                 var FilePathFuel = AppDomain.CurrentDomain.BaseDirectory + "xml\\Fuel.xml";
-                var FileExistsFuel = File.Exists(FilePathFuel);
-                if (FileExistsFuel == true)
+
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePathFuel, XmlReadMode.InferSchema);
+
+                if (ds.Tables != null && ds.Tables.Count > 0)
                 {
-                    #region Insert Verifone Fuel Data
-                    objCVerifone.InsertActiveLog("BoF", "Start", "Fuel()", "Initialize to Insert Verifone Data into BoF", "Fuel", "");
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Fuel.xml";
+                    isXMLError = objComman.GetErrorStatus(ds);
+                }
 
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifoneFuelconfig.fuelConfigType));
-
-                    RapidVerifoneFuelconfig.fuelConfigType resultingMessage = (RapidVerifoneFuelconfig.fuelConfigType)serializer.Deserialize(new XmlTextReader(path));
-
-
-                    RapidVerifoneFuelconfig.fuelConfigTypeFuelSvcModes objFuelSvcModes = new RapidVerifoneFuelconfig.fuelConfigTypeFuelSvcModes();
-                    objFuelSvcModes = resultingMessage.fuelSvcModes;
-
-
-                    DataTable dtFuelServices = new DataTable();
-                    dtFuelServices.Columns.AddRange(new DataColumn[2]{
-                    new DataColumn("FuelServicesId", typeof(int)), new DataColumn("FuelServices", typeof(string))});
-
-
-                    for (int j = 0; j < objFuelSvcModes.fuelSvcMode.Length; j++)
+                if (isXMLError == false)
+                {
+                    var FileExistsFuel = File.Exists(FilePathFuel);
+                    if (FileExistsFuel == true)
                     {
-                        dtFuelServices.Rows.Add(
-                              objFuelSvcModes.fuelSvcMode[j].sysid,
-                              objFuelSvcModes.fuelSvcMode[j].name
-                          );
+                        #region Insert Verifone Fuel Data
+                        objCVerifone.InsertActiveLog("BoF", "Start", "Fuel()", "Initialize to Insert Verifone Data into BoF", "Fuel", "");
 
-                    }
+                        var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Fuel.xml";
 
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifoneFuelconfig.fuelConfigType));
 
+                        RapidVerifoneFuelconfig.fuelConfigType resultingMessage = (RapidVerifoneFuelconfig.fuelConfigType)serializer.Deserialize(new XmlTextReader(path));
 
+                        RapidVerifoneFuelconfig.fuelConfigTypeFuelSvcModes objFuelSvcModes = new RapidVerifoneFuelconfig.fuelConfigTypeFuelSvcModes();
+                        objFuelSvcModes = resultingMessage.fuelSvcModes;
 
-                    int FuelCount = resultingMessage.fuelProducts.fuelProduct.Count();
-                    RapidVerifoneFuelconfig.fuelConfigTypeFuelProductsFuelProduct[] objFuel = new RapidVerifoneFuelconfig.fuelConfigTypeFuelProductsFuelProduct[FuelCount];
-                    objFuel = resultingMessage.fuelProducts.fuelProduct;
+                        DataTable dtFuelServices = new DataTable();
+                        dtFuelServices.Columns.AddRange(new DataColumn[2]{
+                        new DataColumn("FuelServicesId", typeof(int)), new DataColumn("FuelServices", typeof(string))});
 
-
-
-
-
-
-                    DataTable dt = new DataTable();
-                    dt.Columns.AddRange(new DataColumn[4]{
-                    new DataColumn("FuelId", typeof(int)), new DataColumn("FuelName", typeof(string))
-                    , new DataColumn("NAXMLFuelGradeID", typeof(string))
-                    , new DataColumn("deptid", typeof(string))
-                    });
-
-                    DataTable dt1 = new DataTable();
-                    dt1.Columns.AddRange(new DataColumn[5]{
-                    new DataColumn("FuelId", typeof(int)), new DataColumn("PayId", typeof(int)), 
-                    new DataColumn("ServiceType", typeof(int)), 
-                    new DataColumn("Price", typeof(decimal)),
-                    new DataColumn("tier", typeof(string))
-                    
-                    });
-
-                    for (int i = 0; i < objFuel.Length; i++)
-                    {
-                        int FuelPriceCount = objFuel[i].prices.Count();
-                        RapidVerifoneFuelconfig.fuelConfigTypeFuelProductsFuelProductPrice[] objFuelPrice = new RapidVerifoneFuelconfig.fuelConfigTypeFuelProductsFuelProductPrice[FuelPriceCount];
-                        objFuelPrice = objFuel[i].prices;
-
-                        fuelConfigTypeFuelProductsFuelProductDepartment objdepartment = new fuelConfigTypeFuelProductsFuelProductDepartment();
-                        objdepartment = objFuel[i].department;
-
-                        for (int j = 0; j < objFuelPrice.Length; j++)
+                        if (objFuelSvcModes.fuelSvcMode != null && objFuelSvcModes.fuelSvcMode.Length > 0)
                         {
-                            //if (objFuelPrice[j].tier == "1")
-                            //{
-                            dt1.Rows.Add(
-                                objFuel[i].sysid,
-                                objFuelPrice[j].mop,
-                                objFuelPrice[j].servLevel,
-                                objFuelPrice[j].Value,
-                                objFuelPrice[j].tier
-                                );
-                            //}
+                            for (int j = 0; j < objFuelSvcModes.fuelSvcMode.Length; j++)
+                            {
+                                dtFuelServices.Rows.Add(
+                                      objFuelSvcModes.fuelSvcMode[j].sysid,
+                                      objFuelSvcModes.fuelSvcMode[j].name
+                                  );
+                            }
                         }
 
-                        dt.Rows.Add(
-                                objFuel[i].sysid,
-                                objFuel[i].name,
-                                objFuel[i].NAXMLFuelGradeID,
-                                objdepartment.sysid
+                        int FuelCount = resultingMessage.fuelProducts.fuelProduct.Count();
+                        RapidVerifoneFuelconfig.fuelConfigTypeFuelProductsFuelProduct[] objFuel = new RapidVerifoneFuelconfig.fuelConfigTypeFuelProductsFuelProduct[FuelCount];
+                        objFuel = resultingMessage.fuelProducts.fuelProduct;
 
-                            );
-                    }
+                        DataTable dt = new DataTable();
+                        dt.Columns.AddRange(new DataColumn[4]{
+                        new DataColumn("FuelId", typeof(int)), new DataColumn("FuelName", typeof(string)), new DataColumn("NAXMLFuelGradeID", typeof(string)), 
+                        new DataColumn("deptid", typeof(string))});
 
-                    long result = objCVerifone.InsertFuel(dtFuelServices, dt, dt1);
+                        DataTable dt1 = new DataTable();
+                        dt1.Columns.AddRange(new DataColumn[5]{
+                        new DataColumn("FuelId", typeof(int)), new DataColumn("PayId", typeof(int)), new DataColumn("ServiceType", typeof(int)), 
+                        new DataColumn("Price", typeof(decimal)), new DataColumn("tier", typeof(string))});
 
-                    if (result == 0)
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "Fail", "Fuel()", "Verifone Data not inserted in BoF", "Fuel", "");
-                        // this.WriteToFile("Fuel");
+                        if (objFuel != null && objFuel.Length > 0)
+                        {
+                            for (int i = 0; i < objFuel.Length; i++)
+                            {
+                                try
+                                {
+                                    int FuelPriceCount = objFuel[i].prices.Count();
+                                    RapidVerifoneFuelconfig.fuelConfigTypeFuelProductsFuelProductPrice[] objFuelPrice = new RapidVerifoneFuelconfig.fuelConfigTypeFuelProductsFuelProductPrice[FuelPriceCount];
+                                    objFuelPrice = objFuel[i].prices;
+
+                                    fuelConfigTypeFuelProductsFuelProductDepartment objdepartment = new fuelConfigTypeFuelProductsFuelProductDepartment();
+                                    objdepartment = objFuel[i].department;
+
+                                    if (objFuelPrice != null && objFuelPrice.Length > 0)
+                                    {
+                                        for (int j = 0; j < objFuelPrice.Length; j++)
+                                        {
+                                            //if (objFuelPrice[j].tier == "1")
+                                            //{
+                                            dt1.Rows.Add(
+                                                objFuel[i].sysid,
+                                                objFuelPrice[j].mop,
+                                                objFuelPrice[j].servLevel,
+                                                objFuelPrice[j].Value,
+                                                objFuelPrice[j].tier
+                                                );
+                                            //}
+                                        }
+                                    }
+
+                                    dt.Rows.Add(
+                                            objFuel[i].sysid,
+                                            objFuel[i].name,
+                                            objFuel[i].NAXMLFuelGradeID,
+                                            objdepartment.sysid
+
+                                        );
+                                }
+                                catch (Exception ex)
+                                {
+                                    objCVerifone.InsertActiveLog("BoF", "Error", "Fuel()", "Fuel Exception :" + ex, "Fuel", "");
+                                }
+                            }
+                        }
+
+                        if ((dt != null && dt.Rows.Count > 0) || (dtFuelServices != null && dtFuelServices.Rows.Count > 0))
+                        {
+                            long result = objCVerifone.InsertFuel(dtFuelServices, dt, dt1);
+
+                            if (result == 0)
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "Fail", "Fuel()", "Verifone Data not inserted in BoF", "Fuel", "");
+                            }
+                            else
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "End", "Fuel()", "Verifone Data inserted Successfully in BoF", "Fuel", "");
+                            }
+                        }
+                        else
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "End", "Fuel()", "No Data Found", "Fuel", "");
+                        }
+
+                        #endregion
                     }
                     else
                     {
-                        objCVerifone.InsertActiveLog("BoF", "End", "Fuel()", "Verifone Data inserted Successfully in BoF", "Fuel", "");
-                        // this.WriteToFile("Success");
+                        objCVerifone.InsertActiveLog("BoF", "Fail", "Fuel()", "Fuel.xml not found", "Fuel", "");
                     }
-                    #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("BoF", "Fail", "Fuel()", "Fuel.xml not found", "Fuel", "");
+                    String xmlText = File.ReadAllText(FilePathFuel);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "Fuel()", "Error in " + Path.GetFileName(FilePathFuel), "Fuel", "");
+                    objComman.SendEmail(objEmail.FuelSubject, xmlText, Path.GetFileName(FilePathFuel));
                 }
             }
             catch (Exception ex)
             {
                 objCVerifone.InsertActiveLog("BoF", "Error", "Fuel()", "Fuel Exception :" + ex, "Fuel", "");
-                // this.WriteToFile("Fuel : " + ex);
             }
         }
 
         public void Employee()
         {
             _CVerifone objCVerifone = new _CVerifone();
+            bool isXMLError = false;
             try
             {
-                #region Save CashierUser data from Verifone
+           
+
+                #region Save Employee data from Verifone
                 objComman.GetXMLResult("", "Employee", "POST", "vpossecurity");
                 #endregion
 
-                var FilePathCashierUser = AppDomain.CurrentDomain.BaseDirectory + "xml\\Employee.xml";
+                var FilePathEmployee = AppDomain.CurrentDomain.BaseDirectory + "xml\\Employee.xml";
 
-                var FileExistsCashierUser = System.IO.File.Exists(FilePathCashierUser);
-                if (FileExistsCashierUser == true)
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePathEmployee, XmlReadMode.InferSchema);
+
+                if (ds.Tables != null && ds.Tables.Count > 0)
                 {
-                    #region insert log
-                    objCVerifone.InsertActiveLog("BoF", "Start", "Employee()", "Initialize to Insert Verifone Data into BoF", "Employee", "");
-                    #endregion
+                    isXMLError = objComman.GetErrorStatus(ds);
+                }
 
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Employee.xml";
-
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.posSecurity));
-
-                    RapidVerifone.posSecurity resultingMessage = (RapidVerifone.posSecurity)serializer.Deserialize(new XmlTextReader(path));
-
-                    int EmployeeCount = resultingMessage.employees.Count();
-                    RapidVerifone.employeeType[] objEmployee = new RapidVerifone.employeeType[EmployeeCount];
-                    objEmployee = resultingMessage.employees;
-
-                    DataTable dt = new DataTable();
-                    dt.Columns.AddRange(new DataColumn[6]
+                if (isXMLError == false)
+                {
+                    var FileExistsEmployee = System.IO.File.Exists(FilePathEmployee);
+                    if (FileExistsEmployee == true)
                     {
-                        new DataColumn("sysid", typeof(Int64)), new DataColumn("EmployeeName", typeof(string)), new DataColumn("Number", typeof(string))
-                            , new DataColumn("securityLevel", typeof(string)) , new DataColumn("isCashier", typeof(bool)), new DataColumn("gemcomPasswd", typeof(string))
-                    });
+                        objCVerifone.InsertActiveLog("BoF", "Start", "Employee()", "Initialize to Insert Verifone Data into BoF", "Employee", "");
 
-                    for (int i = 0; i < objEmployee.Length; i++)
-                    {
-                        dt.Rows.Add(
-                            Convert.ToInt64(objEmployee[i].sysid),
-                            objEmployee[i].name,
-                            objEmployee[i].number,
-                            objEmployee[i].securityLevel,
-                            objEmployee[i].isCashier,
-                            objEmployee[i].gemcomPasswd
-                            );
+                        var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Employee.xml";
+
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.posSecurity));
+
+                        RapidVerifone.posSecurity resultingMessage = (RapidVerifone.posSecurity)serializer.Deserialize(new XmlTextReader(path));
+
+                        int EmployeeCount = resultingMessage.employees.Count();
+                        RapidVerifone.employeeType[] objEmployee = new RapidVerifone.employeeType[EmployeeCount];
+                        objEmployee = resultingMessage.employees;
+
+                        DataTable dt = new DataTable();
+                        dt.Columns.AddRange(new DataColumn[6]
+                        {
+                            new DataColumn("sysid", typeof(Int64)), new DataColumn("EmployeeName", typeof(string)), new DataColumn("Number", typeof(string))
+                                , new DataColumn("securityLevel", typeof(string)) , new DataColumn("isCashier", typeof(bool)), new DataColumn("gemcomPasswd", typeof(string))
+                        });
+
+                        if (objEmployee != null && objEmployee.Length > 0)
+                        {
+                            for (int i = 0; i < objEmployee.Length; i++)
+                            {
+                                dt.Rows.Add(
+                                    Convert.ToInt64(objEmployee[i].sysid),
+                                    objEmployee[i].name,
+                                    objEmployee[i].number,
+                                    objEmployee[i].securityLevel,
+                                    objEmployee[i].isCashier,
+                                    objEmployee[i].gemcomPasswd
+                                    );
+                            }
+                        }
+
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            long result = objCVerifone.InsertEmployee(dt);
+
+                            if (result == 0)
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "Fail", "Employee()", "Verifone Data not inserted in BoF", "Employee", "");
+                            }
+                            else
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "End", "Employee()", "Verifone Data inserted Successfully in BoF", "Employee", "");
+                            }
+                        }
+                        else
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "End", "Employee()", "No Data Found", "Employee", "");
+                        }
                     }
-                    long result = objCVerifone.InsertEmployee(dt);
-
-                    if (result == 0)
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "Fail", "Employee()", "Verifone Data not inserted in BoF", "Employee", "");
-                    }
-                    else
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "End", "Employee()", "Verifone Data inserted Successfully in BoF", "Employee", "");
-                    }
+                }
+                else
+                {
+                    String xmlText = File.ReadAllText(FilePathEmployee);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "Employee()", "Error in " + Path.GetFileName(FilePathEmployee), "Employee", "");
+                    objComman.SendEmail(objEmail.EmployeeSubject, xmlText, Path.GetFileName(FilePathEmployee));
                 }
             }
             catch (Exception ex)
             {
-                objCVerifone.InsertActiveLog("BoF", "Error", "Employee()", "CashierUser Exception : " + ex, "Employee", "");
+                objCVerifone.InsertActiveLog("BoF", "Error", "Employee()", "Employee Exception : " + ex, "Employee", "");
             }
         }
 
         public void UserWithRole()
         {
             _CVerifone objCVerifone = new _CVerifone();
-            bool isSecureUserAdmin = false;
-            string secureUserID = "";
+            bool isXMLError = false;
             try
             {
+               
+
                 #region Save data from Verifone
                 objComman.GetXMLResult("", "UserRole", "POST", "vuseradmin");
                 #endregion
 
-                var FilePathCashierUser = AppDomain.CurrentDomain.BaseDirectory + "xml\\UserRole.xml";
+                var FilePathUserRole = AppDomain.CurrentDomain.BaseDirectory + "xml\\UserRole.xml";
 
-                var FileExistsCashierUser = System.IO.File.Exists(FilePathCashierUser);
-                if (FileExistsCashierUser == true)
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePathUserRole, XmlReadMode.InferSchema);
+
+                if (ds.Tables != null && ds.Tables.Count > 0)
                 {
-                    #region insert log
-                    objCVerifone.InsertActiveLog("BoF", "Start", "UserWithRole()", "Initialize to Insert Verifone Data into BoF", "UserWithRole", "");
-                    #endregion
+                    isXMLError = objComman.GetErrorStatus(ds);
+                }
 
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\UserRole.xml";
-
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.userConfig));
-                    RapidVerifone.userConfig resultingMessage = (RapidVerifone.userConfig)serializer.Deserialize(new XmlTextReader(path));
-
-                    #region Function
-                    RapidVerifone.functionsType objfunctionsType = new RapidVerifone.functionsType();
-                    objfunctionsType = resultingMessage.Items[0] as functionsType;
-
-                    DataTable dtFunction = new DataTable();
-                    dtFunction.Columns.AddRange(new DataColumn[2]
+                if (isXMLError == false)
+                {
+                    var FileExistsUserRole = System.IO.File.Exists(FilePathUserRole);
+                    if (FileExistsUserRole == true)
                     {
-                        new DataColumn("FunctionName", typeof(string)), new DataColumn("FunctionCmd", typeof(string))
-                    });
-
-                    for (int i = 0; i < objfunctionsType.function.Length; i++)
-                    {
-                        dtFunction.Rows.Add
-                        (
-                            Convert.ToString(objfunctionsType.function[i].name),
-                            objfunctionsType.function[i].cmd
-                        );
-                    }
-                    #endregion
-
-                    #region Role and Role Function
-                    RapidVerifone.rolesType objrolesType = new RapidVerifone.rolesType();
-                    objrolesType = resultingMessage.Items[1] as rolesType;
-
-                    DataTable dtRole = new DataTable();
-                    dtRole.Columns.AddRange(new DataColumn[2]
-                    {
-                        new DataColumn("RoleName", typeof(string)),new DataColumn("isSecureRole", typeof(bool))
-                    });
-
-                    DataTable dtRoleFunction = new DataTable();
-                    dtRoleFunction.Columns.AddRange(new DataColumn[3]
-                    {
-                        new DataColumn("RoleName", typeof(string)),new DataColumn("FunctionName", typeof(string)), new DataColumn("FunctionCmd", typeof(string))
-                    });
-
-                    for (int i = 0; i < objrolesType.role.Length; i++)
-                    {
-                        #region Role
-                        dtRole.Rows.Add
-                        (
-                            objrolesType.role[i].name,
-                            objrolesType.role[i].isSecureRole
-                        );
-                        #endregion
-
-                        RapidVerifone.functionType[] objfunctionType_validFns = new RapidVerifone.functionType[objrolesType.role[i].validFns.Count()];
-                        objfunctionType_validFns = objrolesType.role[i].validFns;
-
-                        #region Role Function
-                        for (int j = 0; j < objfunctionType_validFns.Length; j++)
+                        #region declare variables and dt
+                        bool isSecureUserAdmin = false;
+                        string secureUserID = "";
+                        DataTable dtFunction = new DataTable();
+                        dtFunction.Columns.AddRange(new DataColumn[2]
                         {
-                            dtRoleFunction.Rows.Add
-                            (
-                                objrolesType.role[i].name,
-                                objfunctionType_validFns[j].name,
-                                objfunctionType_validFns[j].cmd
-                            );
-                        }
-                        #endregion
-                    }
-                    #endregion
+                            new DataColumn("FunctionName", typeof(string)), new DataColumn("FunctionCmd", typeof(string))
+                        });
 
-                    #region User and User Role
-                    RapidVerifone.usersType objusersType = new RapidVerifone.usersType();
-                    objusersType = resultingMessage.Items[2] as usersType;
-
-                    DataTable dtUser = new DataTable();
-                    dtUser.Columns.AddRange(new DataColumn[9]
-                    {
-                        new DataColumn("Name", typeof(string)), new DataColumn("isDisallowLogin", typeof(bool)), new DataColumn("Expire", typeof(bool)),
-                        new DataColumn("Freq", typeof(string)) , new DataColumn("MinLen", typeof(string)), new DataColumn("MaxLen", typeof(string)),
-                        new DataColumn("Employee", typeof(string)), new DataColumn("isSecureUserAdmin", typeof(bool)), new DataColumn("secureUserID", typeof(string))
-                    });
-
-                    DataTable dtUserRole = new DataTable();
-                    dtUserRole.Columns.AddRange(new DataColumn[2]
-                    {
-                        new DataColumn("Name", typeof(string)), new DataColumn("RoleName", typeof(string))
-                    });
-
-                    for (int i = 0; i < objusersType.user.Length; i++)
-                    {
-                        userPasswd objuserPasswd = new userPasswd();
-                        objuserPasswd = objusersType.user[i].passwd;
-                        //userSecureUserID objuserSecureUserID = new userSecureUserID();
-                        //objuserSecureUserID.isSecureUserAdmin = objusersType.user[i].secureUserID.isSecureUserAdmin;
-
-                        isSecureUserAdmin = objusersType.user[i].secureUserID != null ? objusersType.user[i].secureUserID.isSecureUserAdmin : false;
-                        secureUserID = objusersType.user[i].secureUserID != null ? objusersType.user[i].secureUserID.Value : "";
-
-                        #region User
-                        dtUser.Rows.Add
-                        (
-                            objusersType.user[i].name,
-                            objusersType.user[i].isDisallowLogin,
-                            Convert.ToInt32(objuserPasswd.expire), // bool
-                            Convert.ToInt32(objuserPasswd.freq), //string
-                            Convert.ToInt32(objuserPasswd.minLen), //string
-                            Convert.ToInt32(objuserPasswd.maxLen), //string
-                            objusersType.user[i].employee,
-                            isSecureUserAdmin,
-                            secureUserID
-                        );
-                        #endregion
-
-                        int usersroleCount = objusersType.user[i].validRoles.Count();
-                        RapidVerifone.roleType[] objroleTypeUser = new RapidVerifone.roleType[usersroleCount];
-                        objroleTypeUser = objusersType.user[i].validRoles;
-
-                        for (int j = 0; j < objroleTypeUser.Length; j++)
+                        DataTable dtRole = new DataTable();
+                        dtRole.Columns.AddRange(new DataColumn[2]
                         {
-                            #region User Role
-                            dtUserRole.Rows.Add
-                            (
-                                Convert.ToString(objusersType.user[i].name),
-                                objroleTypeUser[j].name
-                            );
-                            #endregion
+                            new DataColumn("RoleName", typeof(string)),new DataColumn("isSecureRole", typeof(bool))
+                        });
+
+                        DataTable dtRoleFunction = new DataTable();
+                        dtRoleFunction.Columns.AddRange(new DataColumn[3]
+                        {
+                            new DataColumn("RoleName", typeof(string)),new DataColumn("FunctionName", typeof(string)), new DataColumn("FunctionCmd", typeof(string))
+                        });
+
+                        DataTable dtUser = new DataTable();
+                        dtUser.Columns.AddRange(new DataColumn[9]
+                        {
+                            new DataColumn("Name", typeof(string)), new DataColumn("isDisallowLogin", typeof(bool)), new DataColumn("Expire", typeof(bool)),
+                            new DataColumn("Freq", typeof(string)) , new DataColumn("MinLen", typeof(string)), new DataColumn("MaxLen", typeof(string)),
+                            new DataColumn("Employee", typeof(string)), new DataColumn("isSecureUserAdmin", typeof(bool)), new DataColumn("secureUserID", typeof(string))
+                        });
+
+                        DataTable dtUserRole = new DataTable();
+                        dtUserRole.Columns.AddRange(new DataColumn[2]
+                        {
+                            new DataColumn("Name", typeof(string)), new DataColumn("RoleName", typeof(string))
+                        });
+                        #endregion
+                        objCVerifone.InsertActiveLog("BoF", "Start", "UserWithRole()", "Initialize to Insert Verifone Data into BoF", "UserWithRole", "");
+
+                        var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\UserRole.xml";
+
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.userConfig));
+                        RapidVerifone.userConfig resultingMessage = (RapidVerifone.userConfig)serializer.Deserialize(new XmlTextReader(path));
+
+                        if (resultingMessage.Items != null && resultingMessage.Items.Length > 0)
+                        {
+                            for (int i = 0; i < resultingMessage.Items.Length; i++)
+                            {
+                                if (resultingMessage.Items[i].GetType().Name == "functionsType")
+                                {
+                                    #region Function
+                                    RapidVerifone.functionsType objfunctionsType = new RapidVerifone.functionsType();
+                                    objfunctionsType = resultingMessage.Items[i] as functionsType;
+
+                                    if (objfunctionsType != null && objfunctionsType.function.Length > 0)
+                                    {
+                                        for (int j = 0; j < objfunctionsType.function.Length; j++)
+                                        {
+                                            dtFunction.Rows.Add
+                                            (
+                                                Convert.ToString(objfunctionsType.function[j].name),
+                                                objfunctionsType.function[j].cmd
+                                            );
+                                        }
+                                    }
+                                    #endregion
+                                }
+                                else if (resultingMessage.Items[i].GetType().Name == "rolesType")
+                                {
+                                    #region Role and Role Function
+                                    RapidVerifone.rolesType objrolesType = new RapidVerifone.rolesType();
+                                    objrolesType = resultingMessage.Items[i] as rolesType;
+
+                                    if (objrolesType != null && objrolesType.role.Length > 0)
+                                    {
+                                        for (int j = 0; j < objrolesType.role.Length; j++)
+                                        {
+                                            #region Role
+                                            dtRole.Rows.Add
+                                            (
+                                                objrolesType.role[j].name,
+                                                objrolesType.role[j].isSecureRole
+                                            );
+                                            #endregion
+
+                                            RapidVerifone.functionType[] objfunctionType_validFns = new RapidVerifone.functionType[objrolesType.role[i].validFns.Count()];
+                                            objfunctionType_validFns = objrolesType.role[j].validFns;
+
+                                            #region Role Function
+                                            if (objfunctionType_validFns != null && objfunctionType_validFns.Length > 0)
+                                            {
+                                                for (int k = 0; k < objfunctionType_validFns.Length; k++)
+                                                {
+                                                    dtRoleFunction.Rows.Add
+                                                    (
+                                                        objrolesType.role[j].name,
+                                                        objfunctionType_validFns[k].name,
+                                                        objfunctionType_validFns[k].cmd
+                                                    );
+                                                }
+                                            }
+                                            #endregion
+                                        }
+                                    }
+                                    #endregion
+                                }
+                                else if (resultingMessage.Items[i].GetType().Name == "usersType")
+                                {
+                                    #region User and User Role
+                                    RapidVerifone.usersType objusersType = new RapidVerifone.usersType();
+                                    objusersType = resultingMessage.Items[i] as usersType;
+
+                                    if (objusersType != null && objusersType.user.Length > 0)
+                                    {
+                                        for (int j = 0; j < objusersType.user.Length; j++)
+                                        {
+                                            userPasswd objuserPasswd = new userPasswd();
+                                            objuserPasswd = objusersType.user[j].passwd;
+                                            //userSecureUserID objuserSecureUserID = new userSecureUserID();
+                                            //objuserSecureUserID.isSecureUserAdmin = objusersType.user[i].secureUserID.isSecureUserAdmin;
+
+                                            isSecureUserAdmin = objusersType.user[j].secureUserID != null ? objusersType.user[j].secureUserID.isSecureUserAdmin : false;
+                                            secureUserID = objusersType.user[j].secureUserID != null ? objusersType.user[j].secureUserID.Value : "";
+
+                                            #region User
+                                            dtUser.Rows.Add
+                                            (
+                                                objusersType.user[j].name,
+                                                objusersType.user[j].isDisallowLogin,
+                                                Convert.ToInt32(objuserPasswd.expire), // bool
+                                                Convert.ToInt32(objuserPasswd.freq), //string
+                                                Convert.ToInt32(objuserPasswd.minLen), //string
+                                                Convert.ToInt32(objuserPasswd.maxLen), //string
+                                                objusersType.user[j].employee,
+                                                isSecureUserAdmin,
+                                                secureUserID
+                                            );
+                                            #endregion
+
+                                            int usersroleCount = objusersType.user[j].validRoles.Count();
+                                            RapidVerifone.roleType[] objroleTypeUser = new RapidVerifone.roleType[usersroleCount];
+                                            objroleTypeUser = objusersType.user[j].validRoles;
+
+                                            if (objroleTypeUser != null && objroleTypeUser.Length > 0)
+                                            {
+                                                for (int k = 0; k < objroleTypeUser.Length; k++)
+                                                {
+                                                    #region User Role
+                                                    dtUserRole.Rows.Add
+                                                    (
+                                                        Convert.ToString(objusersType.user[j].name),
+                                                        objroleTypeUser[k].name
+                                                    );
+                                                    #endregion
+                                                }
+                                            }
+                                        }
+                                    }
+                                    #endregion
+                                }
+                            }
+                        }
+
+                        if ((dtFunction != null && dtFunction.Rows.Count > 0) || (dtRole != null && dtRole.Rows.Count > 0) || (dtUser != null && dtUser.Rows.Count > 0))
+                        {
+                            long result = objCVerifone.InsertUserFunctionRole(dtFunction, dtRole, dtRoleFunction, dtUser, dtUserRole);
+
+                            if (result == 0)
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "Fail", "UserWithRole()", "Verifone Data not inserted in BoF", "UserWithRole", "");
+                            }
+                            else
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "End", "UserWithRole()", "Verifone Data inserted Successfully in BoF", "UserWithRole", "");
+                            }
+                        }
+                        else
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "End", "UserWithRole()", "No Data Found", "UserWithRole", "");
                         }
                     }
-                    #endregion
-
-                    long result = objCVerifone.InsertUserFunctionRole(dtFunction, dtRole, dtRoleFunction, dtUser, dtUserRole);
-
-                    if (result == 0)
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "Fail", "UserWithRole()", "Verifone Data not inserted in BoF", "UserWithRole", "");
-                    }
-                    else
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "End", "UserWithRole()", "Verifone Data inserted Successfully in BoF", "UserWithRole", "");
-                    }
+                }
+                else
+                {
+                    String xmlText = File.ReadAllText(FilePathUserRole);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "UserWithRole()", "Error in " + Path.GetFileName(FilePathUserRole), "UserWithRole", "");
+                    objComman.SendEmail(objEmail.UserRoleSubject, xmlText, Path.GetFileName(FilePathUserRole));
                 }
             }
             catch (Exception ex)
@@ -1146,6 +1451,7 @@ namespace VerifoneServices
         public void CashierUser()
         {
             _CVerifone objCVerifone = new _CVerifone();
+            bool isXMLError = false;
             try
             {
                 #region Save CashierUser data from Verifone
@@ -1154,46 +1460,77 @@ namespace VerifoneServices
 
                 var FilePathCashierUser = AppDomain.CurrentDomain.BaseDirectory + "xml\\CashierUser.xml";
 
-                var FileExistsCashierUser = System.IO.File.Exists(FilePathCashierUser);
-                if (FileExistsCashierUser == true)
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePathCashierUser, XmlReadMode.InferSchema);
+
+                for (int i = 0; i < ds.Tables.Count; i++)
                 {
-                    #region insert log
-                    objCVerifone.InsertActiveLog("BoF", "Start", "CashierUser()", "Initialize to Insert Verifone Data into BoF", "CashierUser", "");
-                    #endregion
-
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\CashierUser.xml";
-
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.posSecurity));
-
-                    RapidVerifone.posSecurity resultingMessage = (RapidVerifone.posSecurity)serializer.Deserialize(new XmlTextReader(path));
-
-                    int EmployeeCount = resultingMessage.employees.Count();
-                    RapidVerifone.employeeType[] objEmployee = new RapidVerifone.employeeType[EmployeeCount];
-                    objEmployee = resultingMessage.employees;
-
-                    DataTable dt = new DataTable();
-                    dt.Columns.AddRange(new DataColumn[3]{
-                        new DataColumn("sysid", typeof(Int64)), new DataColumn("name", typeof(string)), new DataColumn("number", typeof(string))
-                    });
-
-                    for (int i = 0; i < objEmployee.Length; i++)
+                    if (ds.Tables[i].TableName == "Fault")
                     {
-                        dt.Rows.Add(
-                            Convert.ToInt64(objEmployee[i].sysid),
-                            objEmployee[i].name,
-                            objEmployee[i].number
-                            );
+                        isXMLError = true;
+                        break;
                     }
-                    long result = objCVerifone.InsertCashierUser(dt);
+                }
 
-                    if (result == 0)
+                if (isXMLError == false)
+                {
+                    var FileExistsCashierUser = System.IO.File.Exists(FilePathCashierUser);
+                    if (FileExistsCashierUser == true)
                     {
-                        objCVerifone.InsertActiveLog("BoF", "Fail", "CashierUser()", "Verifone Data not inserted in BoF", "CashierUser", "");
+                        #region insert log
+                        objCVerifone.InsertActiveLog("BoF", "Start", "CashierUser()", "Initialize to Insert Verifone Data into BoF", "CashierUser", "");
+                        #endregion
+
+                        var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\CashierUser.xml";
+
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifone.posSecurity));
+
+                        RapidVerifone.posSecurity resultingMessage = (RapidVerifone.posSecurity)serializer.Deserialize(new XmlTextReader(path));
+
+                        int EmployeeCount = resultingMessage.employees.Count();
+                        RapidVerifone.employeeType[] objEmployee = new RapidVerifone.employeeType[EmployeeCount];
+                        objEmployee = resultingMessage.employees;
+
+                        DataTable dt = new DataTable();
+                        dt.Columns.AddRange(new DataColumn[3]{
+                        new DataColumn("sysid", typeof(Int64)), new DataColumn("name", typeof(string)), new DataColumn("number", typeof(string))});
+
+                        if (objEmployee != null && objEmployee.Length > 0)
+                        {
+                            for (int i = 0; i < objEmployee.Length; i++)
+                            {
+                                dt.Rows.Add(
+                                    Convert.ToInt64(objEmployee[i].sysid),
+                                    objEmployee[i].name,
+                                    objEmployee[i].number
+                                    );
+                            }
+                        }
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            long result = objCVerifone.InsertCashierUser(dt);
+
+                            if (result == 0)
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "Fail", "CashierUser()", "Verifone Data not inserted in BoF", "CashierUser", "");
+                            }
+                            else
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "End", "CashierUser()", "Verifone Data inserted Successfully in BoF", "CashierUser", "");
+                            }
+                        }
+                        else
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "End", "CashierUser()", "No Data Found", "CashierUser", "");
+                        }
                     }
-                    else
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "End", "CashierUser()", "Verifone Data inserted Successfully in BoF", "CashierUser", "");
-                    }
+                }
+                else
+                {
+                    String xmlText = File.ReadAllText(FilePathCashierUser);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "CashierUser()", "Error in " + Path.GetFileName(FilePathCashierUser), "CashierUser", "");
+                    objComman.SendEmail(objEmail.CashierUserSubject, xmlText, Path.GetFileName(FilePathCashierUser));
                 }
             }
             catch (Exception ex)
@@ -1202,7 +1539,7 @@ namespace VerifoneServices
             }
         }
 
-        public void PromotionNew()
+        public void Promotion()
         {
             #region declare variables
             _CVerifone objCVerifone = new _CVerifone();
@@ -1219,7 +1556,7 @@ namespace VerifoneServices
             int FreeType = 0;
             string ItemChoiceType = "";
             decimal Price = 0, TaxAmount = 0;
-            bool isSun = false, isMon = false, isTue = false, isWed = false, isThurs = false, isFri = false, isSat = false;
+            bool isSun = false, isMon = false, isTue = false, isWed = false, isThurs = false, isFri = false, isSat = false, isXMLError_MM = false, isXMLError_IT = false;
             DateTime Sun_StartTime = DateTime.Now, Sun_EndTime = DateTime.Now, Mon_StartTime = DateTime.Now, Mon_EndTime = DateTime.Now,
                      Tue_StartTime = DateTime.Now, Tue_EndTime = DateTime.Now, Wed_StartTime = DateTime.Now, Wed_EndTime = DateTime.Now, Thurs_StartTime = DateTime.Now,
                      Thurs_EndTime = DateTime.Now, Fri_StartTime = DateTime.Now, Fri_EndTime = DateTime.Now, Sat_StartTime = DateTime.Now, Sat_EndTime = DateTime.Now;
@@ -1254,6 +1591,8 @@ namespace VerifoneServices
 
             try
             {
+               
+
                 #region Save MixMatch data from Verifone
                 objComman.GetXMLResult("", "MixMatch", "POST", "vMaintenance");
                 #endregion
@@ -1263,321 +1602,361 @@ namespace VerifoneServices
                 #endregion
 
                 #region xml to dataset : MixMatch and ItemList
-                FilePath_MixMatch = AppDomain.CurrentDomain.BaseDirectory + "xml/MixMatch.xml";
-                FilePath_ItemList = AppDomain.CurrentDomain.BaseDirectory + "xml/MixMatch_ItemList.xml";
+                FilePath_MixMatch = AppDomain.CurrentDomain.BaseDirectory + "xml\\MixMatch.xml";
+                FilePath_ItemList = AppDomain.CurrentDomain.BaseDirectory + "xml\\MixMatch_ItemList.xml";
 
-                if (File.Exists(FilePath_MixMatch) == true && File.Exists(FilePath_ItemList) == true)
+                DataSet ds_MM = new DataSet();
+                ds_MM.ReadXml(FilePath_MixMatch, XmlReadMode.InferSchema);
+
+                DataSet ds_IL = new DataSet();
+                ds_IL.ReadXml(FilePath_ItemList, XmlReadMode.InferSchema);
+
+                if (ds_MM.Tables != null && ds_MM.Tables.Count > 0)
                 {
-                    #region insert log
-                    objCVerifone.InsertActiveLog("BoF", "Start", "Promotion()", "Initialize to Insert Verifone Data into BoF", "Promotion", "");
-                    #endregion
+                    isXMLError_MM = objComman.GetErrorStatus(ds_MM);
+                }
 
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\MixMatch.xml";
-                    //var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\MixMatch - Copy.xml";
-                    XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifoneNAXML.NAXMLMaintenanceRequest));
-                    RapidVerifoneNAXML.NAXMLMaintenanceRequest resultingMessage = (RapidVerifoneNAXML.NAXMLMaintenanceRequest)serializer.Deserialize(new XmlTextReader(path));
+                if (ds_IL.Tables != null && ds_IL.Tables.Count > 0)
+                {
+                    isXMLError_IT = objComman.GetErrorStatus(ds_IL);
+                }
 
-                    var pathItem = AppDomain.CurrentDomain.BaseDirectory + "xml\\MixMatch_ItemList.xml";
-                    //var pathItem = AppDomain.CurrentDomain.BaseDirectory + "xml\\MixMatch_ItemList - Copy.xml";
-                    XmlSerializer serializerItem = new XmlSerializer(typeof(RapidVerifoneNAXML.NAXMLMaintenanceRequest));
-                    RapidVerifoneNAXML.NAXMLMaintenanceRequest resultingMessageItem = (RapidVerifoneNAXML.NAXMLMaintenanceRequest)serializer.Deserialize(new XmlTextReader(pathItem));
-
-                    RapidVerifoneNAXML.ItemListMaintenance[] objItemListMaintenance = new RapidVerifoneNAXML.ItemListMaintenance[resultingMessageItem.ItemListMaintenance.Count()];
-                    objItemListMaintenance = resultingMessageItem.ItemListMaintenance;
-
-                    #region MixMatchMaintenance
-                    int countman = resultingMessage.MixMatchMaintenance.Count();
-                    RapidVerifoneNAXML.MixMatchMaintenance[] objMixMatchMaintenance = new RapidVerifoneNAXML.MixMatchMaintenance[countman];
-
-                    objMixMatchMaintenance = resultingMessage.MixMatchMaintenance;
-
-                    if (objMixMatchMaintenance != null)
+                if (isXMLError_MM == false && isXMLError_IT == false)
+                {
+                    if (File.Exists(FilePath_MixMatch) == true && File.Exists(FilePath_ItemList) == true)
                     {
-                        for (int i = 0; i < objMixMatchMaintenance.Length; i++)
+                        objCVerifone.InsertActiveLog("BoF", "Start", "Promotion()", "Initialize to Insert Verifone Data into BoF", "Promotion", "");
+
+                        var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\MixMatch.xml";
+                        //var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\MixMatch - Copy.xml";
+                        XmlSerializer serializer = new XmlSerializer(typeof(RapidVerifoneNAXML.NAXMLMaintenanceRequest));
+                        RapidVerifoneNAXML.NAXMLMaintenanceRequest resultingMessage = (RapidVerifoneNAXML.NAXMLMaintenanceRequest)serializer.Deserialize(new XmlTextReader(path));
+
+                        var pathItem = AppDomain.CurrentDomain.BaseDirectory + "xml\\MixMatch_ItemList.xml";
+                        //var pathItem = AppDomain.CurrentDomain.BaseDirectory + "xml\\MixMatch_ItemList - Copy.xml";
+                        XmlSerializer serializerItem = new XmlSerializer(typeof(RapidVerifoneNAXML.NAXMLMaintenanceRequest));
+                        RapidVerifoneNAXML.NAXMLMaintenanceRequest resultingMessageItem = (RapidVerifoneNAXML.NAXMLMaintenanceRequest)serializer.Deserialize(new XmlTextReader(pathItem));
+
+                        RapidVerifoneNAXML.ItemListMaintenance[] objItemListMaintenance = new RapidVerifoneNAXML.ItemListMaintenance[resultingMessageItem.ItemListMaintenance.Count()];
+                        objItemListMaintenance = resultingMessageItem.ItemListMaintenance;
+
+                        #region MixMatchMaintenance
+                        int countman = resultingMessage.MixMatchMaintenance.Count();
+                        RapidVerifoneNAXML.MixMatchMaintenance[] objMixMatchMaintenance = new RapidVerifoneNAXML.MixMatchMaintenance[countman];
+
+                        objMixMatchMaintenance = resultingMessage.MixMatchMaintenance;
+
+                        if (objMixMatchMaintenance != null && objMixMatchMaintenance.Length > 0)
                         {
-                            if (objMixMatchMaintenance[i].MMTDetail != null && objMixMatchMaintenance[i].MMTDetail.Length > 0)
+                            for (int i = 0; i < objMixMatchMaintenance.Length; i++)
                             {
-                                #region MMTDetail
-                                countMixMatchMaintenance = objMixMatchMaintenance[i].MMTDetail.Count();
-                                RapidVerifoneNAXML.MMTDetailType[] objMMTDetailType = new RapidVerifoneNAXML.MMTDetailType[countMixMatchMaintenance];
-                                objMMTDetailType = objMixMatchMaintenance[i].MMTDetail;
-
-                                if (objMMTDetailType != null)
+                                if (objMixMatchMaintenance[i].MMTDetail != null && objMixMatchMaintenance[i].MMTDetail.Length > 0)
                                 {
-                                    for (int j = 0; j < objMMTDetailType.Length; j++)
+                                    #region MMTDetail
+                                    countMixMatchMaintenance = objMixMatchMaintenance[i].MMTDetail.Count();
+                                    RapidVerifoneNAXML.MMTDetailType[] objMMTDetailType = new RapidVerifoneNAXML.MMTDetailType[countMixMatchMaintenance];
+                                    objMMTDetailType = objMixMatchMaintenance[i].MMTDetail;
+
+                                    if (objMMTDetailType != null && objMMTDetailType.Length > 0)
                                     {
-                                        WeekdayAvailability = 0;
-                                        #region Promotion
-                                        PromotionID = "";
-                                        countPromotion = objMMTDetailType[j].Promotion.Count();
-                                        RapidVerifoneNAXML.Promotion[] objPromotion = new RapidVerifoneNAXML.Promotion[countPromotion];
-                                        objPromotion = objMMTDetailType[j].Promotion;
-
-                                        if (objPromotion != null)
+                                        for (int j = 0; j < objMMTDetailType.Length; j++)
                                         {
-                                            for (int k = 0; k < objPromotion.Length; k++)
+                                            WeekdayAvailability = 0;
+                                            #region Promotion
+                                            PromotionID = "";
+                                            countPromotion = objMMTDetailType[j].Promotion.Count();
+                                            RapidVerifoneNAXML.Promotion[] objPromotion = new RapidVerifoneNAXML.Promotion[countPromotion];
+                                            objPromotion = objMMTDetailType[j].Promotion;
+
+                                            if (objPromotion != null && objPromotion.Length > 0)
                                             {
-                                                if (PromotionID == "")
+                                                for (int k = 0; k < objPromotion.Length; k++)
                                                 {
-                                                    PromotionID = objPromotion[k].PromotionID.Value;
-                                                }
-                                                else
-                                                {
-                                                    PromotionID = PromotionID + "," + objPromotion[k].PromotionID.Value;
-                                                }
-                                            }
-                                        }
-                                        #endregion
-
-                                        #region ItemListID
-                                        string[] itemlist = objMMTDetailType[j].ItemListID;
-                                        #endregion
-
-                                        #region weekdays
-                                        //WeekdayAvailability = Weeklycount(objMMTDetailType[j]);
-                                        RapidVerifoneNAXML.yesNo objyesNo = new RapidVerifoneNAXML.yesNo();
-                                        for (int n = 0; n < objMMTDetailType[j].WeekdayAvailability.Length; n++)
-                                        {
-                                            if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Sunday)
-                                            {
-                                                objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
-
-                                                isSun = objyesNo.ToString().ToLower() == "yes" ? true : false;
-                                                Sun_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
-                                                Sun_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
-
-                                                if (isSun == true)
-                                                {
-                                                    WeekdayAvailability += Convert.ToInt16(WeekDays.Sunday);    // valid days
-                                                }
-                                            }
-                                            else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Monday)
-                                            {
-                                                objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
-
-                                                isMon = objyesNo.ToString().ToLower() == "yes" ? true : false;
-                                                Mon_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
-                                                Mon_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
-                                            }
-                                            else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Tuesday)
-                                            {
-                                                objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
-
-                                                isTue = objyesNo.ToString().ToLower() == "yes" ? true : false;
-                                                Tue_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
-                                                Tue_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
-
-                                                if (isTue == true)
-                                                {
-                                                    WeekdayAvailability += Convert.ToInt16(WeekDays.Tuesday);    // valid days
-                                                }
-                                            }
-                                            else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Wednesday)
-                                            {
-                                                objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
-
-                                                isWed = objyesNo.ToString().ToLower() == "yes" ? true : false;
-                                                Wed_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
-                                                Wed_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
-
-                                                if (isWed == true)
-                                                {
-                                                    WeekdayAvailability += Convert.ToInt16(WeekDays.Wednesday);    // valid days
-                                                }
-                                            }
-                                            else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Thursday)
-                                            {
-                                                objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
-
-                                                isThurs = objyesNo.ToString().ToLower() == "yes" ? true : false;
-                                                Thurs_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
-                                                Thurs_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
-
-                                                if (isThurs == true)
-                                                {
-                                                    WeekdayAvailability += Convert.ToInt16(WeekDays.Thursday);    // valid days
-                                                }
-                                            }
-                                            else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Friday)
-                                            {
-                                                objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
-
-                                                isFri = objyesNo.ToString().ToLower() == "yes" ? true : false;
-                                                Fri_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
-                                                Fri_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
-
-                                                if (isFri == true)
-                                                {
-                                                    WeekdayAvailability += Convert.ToInt16(WeekDays.Friday);    // valid days
-                                                }
-                                            }
-                                            else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Saturday)
-                                            {
-                                                objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
-
-                                                isSat = objyesNo.ToString().ToLower() == "yes" ? true : false;
-                                                Sat_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
-                                                Sat_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
-
-                                                if (isSat == true)
-                                                {
-                                                    WeekdayAvailability += Convert.ToInt16(WeekDays.Saturday);    // valid days
-                                                }
-                                            }
-                                        }
-                                        #endregion
-
-                                        #region MixMatchEntry
-                                        RapidVerifoneNAXML.MixMatchEntry[] objMixMatchEntry = new RapidVerifoneNAXML.MixMatchEntry[objMMTDetailType[j].MixMatchEntry.Count()];
-                                        objMixMatchEntry = objMMTDetailType[j].MixMatchEntry;
-                                        if (objMixMatchEntry != null)
-                                        {
-                                            for (int m = 0; m < objMixMatchEntry.Length; m++)
-                                            {
-                                                #region FreeType
-                                                string itemvalue = "";
-                                                if (objMixMatchEntry[m].ItemElementName == RapidVerifoneNAXML.ItemChoiceType.MixMatchDiscountAmount)
-                                                {
-                                                    itemvalue = Convert.ToString(objMixMatchEntry[m].MixMatchUnits.Value);
-                                                    RapidVerifoneNAXML.amount12 obja = (RapidVerifoneNAXML.amount12)objMixMatchEntry[m].Item;
-                                                    Price = obja.Value;
-                                                    FreeType = 1;
-                                                    ItemChoiceType = "Amount Off Package Price";
-                                                }
-                                                if (objMixMatchEntry[m].ItemElementName == RapidVerifoneNAXML.ItemChoiceType.MixMatchDiscountPercent)
-                                                {
-                                                    itemvalue = Convert.ToString(objMixMatchEntry[m].MixMatchUnits.Value);
-                                                    Price = Convert.ToDecimal(objMixMatchEntry[m].Item);
-                                                    FreeType = 2;
-                                                    ItemChoiceType = "Percent Off Package Price";
-                                                }
-                                                if (objMixMatchEntry[m].ItemElementName == RapidVerifoneNAXML.ItemChoiceType.MixMatchPrice)
-                                                {
-                                                    itemvalue = Convert.ToString(objMixMatchEntry[m].MixMatchUnits.Value);
-                                                    RapidVerifoneNAXML.amount12 obja = (RapidVerifoneNAXML.amount12)objMixMatchEntry[m].Item;
-                                                    Price = obja.Value;
-                                                    FreeType = 4;
-                                                    ItemChoiceType = "Total Package Price";
-                                                }
-                                                #endregion
-
-                                                if (PromotionID != "")
-                                                {
-                                                    string[] PromotionIDCount = PromotionID.Split(',');
-                                                    if (PromotionIDCount != null)
+                                                    if (PromotionID == "")
                                                     {
-                                                        for (int L = 0; L < PromotionIDCount.Length; L++)
+                                                        PromotionID = objPromotion[k].PromotionID.Value;
+                                                    }
+                                                    else
+                                                    {
+                                                        PromotionID = PromotionID + "," + objPromotion[k].PromotionID.Value;
+                                                    }
+                                                }
+                                            }
+                                            #endregion
+
+                                            #region ItemListID
+                                            string[] itemlist = objMMTDetailType[j].ItemListID;
+                                            #endregion
+
+                                            #region weekdays
+                                            //WeekdayAvailability = Weeklycount(objMMTDetailType[j]);
+                                            if (objMMTDetailType[j].WeekdayAvailability != null && objMMTDetailType[j].WeekdayAvailability.Length > 0)
+                                            {
+                                                RapidVerifoneNAXML.yesNo objyesNo = new RapidVerifoneNAXML.yesNo();
+                                                for (int n = 0; n < objMMTDetailType[j].WeekdayAvailability.Length; n++)
+                                                {
+                                                    if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Sunday)
+                                                    {
+                                                        objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
+
+                                                        isSun = objyesNo.ToString().ToLower() == "yes" ? true : false;
+                                                        Sun_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
+                                                        Sun_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
+
+                                                        if (isSun == true)
                                                         {
-                                                            //DiscountId = DiscountId + 1;
-                                                            objComman = new Comman();
+                                                            WeekdayAvailability += Convert.ToInt16(WeekDays.Sunday);    // valid days
+                                                        }
+                                                    }
+                                                    else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Monday)
+                                                    {
+                                                        objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
 
-                                                            #region code (auto generated)
-                                                            for (int a = 0; a < stringChars.Length; a++)
-                                                            {
-                                                                stringChars[a] = chars[random.Next(chars.Length)];
-                                                            }
-                                                            finalString = new String(stringChars);
-                                                            #endregion
+                                                        isMon = objyesNo.ToString().ToLower() == "yes" ? true : false;
+                                                        Mon_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
+                                                        Mon_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
+                                                    }
+                                                    else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Tuesday)
+                                                    {
+                                                        objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
 
-                                                            #region Tax
-                                                            transmissionHeaderExtension obj = new transmissionHeaderExtension();
-                                                            obj = objMMTDetailType[j].Items[0] as transmissionHeaderExtension;
+                                                        isTue = objyesNo.ToString().ToLower() == "yes" ? true : false;
+                                                        Tue_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
+                                                        Tue_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
 
-                                                            XmlRootAttribute xRoot = new XmlRootAttribute();
-                                                            xRoot.ElementName = "TaxableRebate";
-                                                            xRoot.Namespace = "urn:vfi-sapphire:np.naxmlext.2005-06-24";
-                                                            xRoot.IsNullable = true;
-                                                            var dataElement = DeserializeXMLClass<TaxableRebate>(obj.Any[0].OuterXml, xRoot);
+                                                        if (isTue == true)
+                                                        {
+                                                            WeekdayAvailability += Convert.ToInt16(WeekDays.Tuesday);    // valid days
+                                                        }
+                                                    }
+                                                    else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Wednesday)
+                                                    {
+                                                        objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
 
-                                                            TaxableRebate taxableRebate = dataElement;
-                                                            TaxAmount = taxableRebate.Amount.Value;
+                                                        isWed = objyesNo.ToString().ToLower() == "yes" ? true : false;
+                                                        Wed_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
+                                                        Wed_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
 
-                                                            if (taxableRebate.Tax != null)
-                                                            {
-                                                                for (int t = 0; t < taxableRebate.Tax.Length; t++)
-                                                                {
-                                                                    dt_Tax.Rows.Add(
-                                                                    PromotionID,
-                                                                    taxableRebate.Tax[t].sysid,
-                                                                    FreeType,
-                                                                    Price
-                                                                    );
-                                                                }
-                                                            }
-                                                            #endregion
+                                                        if (isWed == true)
+                                                        {
+                                                            WeekdayAvailability += Convert.ToInt16(WeekDays.Wednesday);    // valid days
+                                                        }
+                                                    }
+                                                    else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Thursday)
+                                                    {
+                                                        objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
 
-                                                            #region dt_MixMatch
-                                                            dt_MixMatch.Rows.Add(
-                                                            PromotionIDCount[L],
-                                                            objMMTDetailType[j].MixMatchDescription,
-                                                            objComman.SplitDate(Convert.ToString(objMMTDetailType[j].StartDate)),
-                                                            objComman.SplitDate(Convert.ToString(objMMTDetailType[j].StopDate)),
-                                                            Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].StartTime).ToString("HH:mm:ss")),
-                                                            Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].StopTime).ToString("HH:mm:ss")),
-                                                            WeekdayAvailability,
-                                                            itemvalue,
-                                                            Price,
-                                                            finalString,
-                                                            FreeType,
-                                                            ItemChoiceType,
-                                                            itemlist[0],
-                                                            TaxAmount,
-                                                            Sun_StartTime,
-                                                            Sun_EndTime,
-                                                            Mon_StartTime,
-                                                            Mon_EndTime,
-                                                            Tue_StartTime,
-                                                            Tue_EndTime,
-                                                            Wed_StartTime,
-                                                            Wed_EndTime,
-                                                            Thurs_StartTime,
-                                                            Thurs_EndTime,
-                                                            Fri_StartTime,
-                                                            Fri_EndTime,
-                                                            Sat_StartTime,
-                                                            Sat_EndTime,
-                                                            isSun,
-                                                            isMon,
-                                                            isTue,
-                                                            isWed,
-                                                            isThurs,
-                                                            isFri,
-                                                            isSat
-                                                            );
-                                                            #endregion
+                                                        isThurs = objyesNo.ToString().ToLower() == "yes" ? true : false;
+                                                        Thurs_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
+                                                        Thurs_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
 
-                                                            #region ItemList
-                                                            if (itemlist != null)
-                                                            {
-                                                                //CallPromotionItem(objItemListMaintenance, itemlist[0], DiscountId, dt_ItemList, PromotionIDCount[L], FreeType);
-                                                                CallPromotionItem(objItemListMaintenance, itemlist[0], dt_ItemList, PromotionIDCount[L], FreeType, Price);
-                                                            }
-                                                            #endregion
+                                                        if (isThurs == true)
+                                                        {
+                                                            WeekdayAvailability += Convert.ToInt16(WeekDays.Thursday);    // valid days
+                                                        }
+                                                    }
+                                                    else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Friday)
+                                                    {
+                                                        objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
+
+                                                        isFri = objyesNo.ToString().ToLower() == "yes" ? true : false;
+                                                        Fri_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
+                                                        Fri_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
+
+                                                        if (isFri == true)
+                                                        {
+                                                            WeekdayAvailability += Convert.ToInt16(WeekDays.Friday);    // valid days
+                                                        }
+                                                    }
+                                                    else if (objMMTDetailType[j].WeekdayAvailability[n].weekday == RapidVerifoneNAXML.dayOfWeek.Saturday)
+                                                    {
+                                                        objyesNo = objMMTDetailType[j].WeekdayAvailability[n].available;
+
+                                                        isSat = objyesNo.ToString().ToLower() == "yes" ? true : false;
+                                                        Sat_StartTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].startTime).ToString("HH:mm:ss"));
+                                                        Sat_EndTime = Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].WeekdayAvailability[n].stopTime).ToString("HH:mm:ss"));
+
+                                                        if (isSat == true)
+                                                        {
+                                                            WeekdayAvailability += Convert.ToInt16(WeekDays.Saturday);    // valid days
                                                         }
                                                     }
                                                 }
                                             }
+                                            #endregion
+
+                                            #region MixMatchEntry
+                                            RapidVerifoneNAXML.MixMatchEntry[] objMixMatchEntry = new RapidVerifoneNAXML.MixMatchEntry[objMMTDetailType[j].MixMatchEntry.Count()];
+                                            objMixMatchEntry = objMMTDetailType[j].MixMatchEntry;
+                                            if (objMixMatchEntry != null && objMixMatchEntry.Length > 0)
+                                            {
+                                                for (int m = 0; m < objMixMatchEntry.Length; m++)
+                                                {
+                                                    #region FreeType
+                                                    string itemvalue = "";
+                                                    if (objMixMatchEntry[m].ItemElementName == RapidVerifoneNAXML.ItemChoiceType.MixMatchDiscountAmount)
+                                                    {
+                                                        itemvalue = Convert.ToString(objMixMatchEntry[m].MixMatchUnits.Value);
+                                                        RapidVerifoneNAXML.amount12 obja = (RapidVerifoneNAXML.amount12)objMixMatchEntry[m].Item;
+                                                        Price = obja.Value;
+                                                        FreeType = 1;
+                                                        ItemChoiceType = "Amount Off Package Price";
+                                                    }
+                                                    if (objMixMatchEntry[m].ItemElementName == RapidVerifoneNAXML.ItemChoiceType.MixMatchDiscountPercent)
+                                                    {
+                                                        itemvalue = Convert.ToString(objMixMatchEntry[m].MixMatchUnits.Value);
+                                                        Price = Convert.ToDecimal(objMixMatchEntry[m].Item);
+                                                        FreeType = 2;
+                                                        ItemChoiceType = "Percent Off Package Price";
+                                                    }
+                                                    if (objMixMatchEntry[m].ItemElementName == RapidVerifoneNAXML.ItemChoiceType.MixMatchPrice)
+                                                    {
+                                                        itemvalue = Convert.ToString(objMixMatchEntry[m].MixMatchUnits.Value);
+                                                        RapidVerifoneNAXML.amount12 obja = (RapidVerifoneNAXML.amount12)objMixMatchEntry[m].Item;
+                                                        Price = obja.Value;
+                                                        FreeType = 4;
+                                                        ItemChoiceType = "Total Package Price";
+                                                    }
+                                                    #endregion
+
+                                                    if (PromotionID != "")
+                                                    {
+                                                        string[] PromotionIDCount = PromotionID.Split(',');
+                                                        if (PromotionIDCount != null)
+                                                        {
+                                                            for (int L = 0; L < PromotionIDCount.Length; L++)
+                                                            {
+                                                                //DiscountId = DiscountId + 1;
+                                                                objComman = new Comman();
+
+                                                                #region code (auto generated)
+                                                                for (int a = 0; a < stringChars.Length; a++)
+                                                                {
+                                                                    stringChars[a] = chars[random.Next(chars.Length)];
+                                                                }
+                                                                finalString = new String(stringChars);
+                                                                #endregion
+
+                                                                #region Tax
+                                                                transmissionHeaderExtension obj = new transmissionHeaderExtension();
+                                                                obj = objMMTDetailType[j].Items[0] as transmissionHeaderExtension;
+
+                                                                XmlRootAttribute xRoot = new XmlRootAttribute();
+                                                                xRoot.ElementName = "TaxableRebate";
+                                                                xRoot.Namespace = "urn:vfi-sapphire:np.naxmlext.2005-06-24";
+                                                                xRoot.IsNullable = true;
+                                                                var dataElement = DeserializeXMLClass<TaxableRebate>(obj.Any[0].OuterXml, xRoot);
+
+                                                                TaxableRebate taxableRebate = dataElement;
+                                                                TaxAmount = taxableRebate.Amount.Value;
+
+                                                                if (taxableRebate.Tax != null && taxableRebate.Tax.Length > 0)
+                                                                {
+                                                                    for (int t = 0; t < taxableRebate.Tax.Length; t++)
+                                                                    {
+                                                                        dt_Tax.Rows.Add(
+                                                                        PromotionID,
+                                                                        taxableRebate.Tax[t].sysid,
+                                                                        FreeType,
+                                                                        Price
+                                                                        );
+                                                                    }
+                                                                }
+                                                                #endregion
+
+                                                                #region dt_MixMatch
+                                                                dt_MixMatch.Rows.Add(
+                                                                PromotionIDCount[L],
+                                                                objMMTDetailType[j].MixMatchDescription,
+                                                                objComman.SplitDate(Convert.ToString(objMMTDetailType[j].StartDate)),
+                                                                objComman.SplitDate(Convert.ToString(objMMTDetailType[j].StopDate)),
+                                                                Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].StartTime).ToString("HH:mm:ss")),
+                                                                Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + (objMMTDetailType[j].StopTime).ToString("HH:mm:ss")),
+                                                                WeekdayAvailability,
+                                                                itemvalue,
+                                                                Price,
+                                                                finalString,
+                                                                FreeType,
+                                                                ItemChoiceType,
+                                                                itemlist[0],
+                                                                TaxAmount,
+                                                                Sun_StartTime,
+                                                                Sun_EndTime,
+                                                                Mon_StartTime,
+                                                                Mon_EndTime,
+                                                                Tue_StartTime,
+                                                                Tue_EndTime,
+                                                                Wed_StartTime,
+                                                                Wed_EndTime,
+                                                                Thurs_StartTime,
+                                                                Thurs_EndTime,
+                                                                Fri_StartTime,
+                                                                Fri_EndTime,
+                                                                Sat_StartTime,
+                                                                Sat_EndTime,
+                                                                isSun,
+                                                                isMon,
+                                                                isTue,
+                                                                isWed,
+                                                                isThurs,
+                                                                isFri,
+                                                                isSat
+                                                                );
+                                                                #endregion
+
+                                                                #region ItemList
+                                                                if (itemlist != null)
+                                                                {
+                                                                    //CallPromotionItem(objItemListMaintenance, itemlist[0], DiscountId, dt_ItemList, PromotionIDCount[L], FreeType);
+                                                                    CallPromotionItem(objItemListMaintenance, itemlist[0], dt_ItemList, PromotionIDCount[L], FreeType, Price);
+                                                                }
+                                                                #endregion
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            #endregion
                                         }
-                                        #endregion
-
-
                                     }
+                                    #endregion
                                 }
-                                #endregion
                             }
                         }
+                        #endregion
                     }
-                    #endregion
-                }
 
-                long result = objCVerifone.InsertPromotion(dt_MixMatch, dt_ItemList, dt_Tax);
-                if (result == 0)
-                {
-                    objCVerifone.InsertActiveLog("BoF", "Fail", "Promotion()", "Verifone Data not inserted in BoF", "Promotion", "");
+                    if ((dt_MixMatch != null && dt_MixMatch.Rows.Count > 0) || (dt_ItemList != null && dt_ItemList.Rows.Count > 0))
+                    {
+                        long result = objCVerifone.InsertPromotion(dt_MixMatch, dt_ItemList, dt_Tax);
+                        if (result == 0)
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "Fail", "Promotion()", "Verifone Data not inserted in BoF", "Promotion", "");
+                        }
+                        else
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "End", "Promotion()", "Verifone Data inserted Successfully in BoF", "Promotion", "");
+                        }
+                    }
+                    else
+                    {
+                        objCVerifone.InsertActiveLog("BoF", "End", "Promotion()", "No Data Found", "Promotion", "");
+                    }
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("BoF", "End", "Promotion()", "Verifone Data inserted Successfully in BoF", "Promotion", "");
+                    if (isXMLError_MM == true)
+                    {
+                        String xmlText = File.ReadAllText(FilePath_MixMatch);
+                        objCVerifone.InsertActiveLog("BoF", "Fail", "Promotion()", "Error in " + Path.GetFileName(FilePath_MixMatch), "Promotion", "");
+                        objComman.SendEmail(objEmail.MixMatchSubject, xmlText, Path.GetFileName(FilePath_MixMatch));
+                    }
+                    else if (isXMLError_IT == true)
+                    {
+                        String xmlText = File.ReadAllText(FilePath_ItemList);
+                        objCVerifone.InsertActiveLog("BoF", "Fail", "Promotion()", "Error in " + Path.GetFileName(FilePath_ItemList), "Promotion", "");
+                        objComman.SendEmail(objEmail.ItemListSubject, xmlText, Path.GetFileName(FilePath_ItemList));
+                    }
                 }
                 #endregion
             }
@@ -1650,13 +2029,13 @@ namespace VerifoneServices
         {
             try
             {
-                if (objItemListMaintenance != null)
+                if (objItemListMaintenance != null && objItemListMaintenance.Length > 0)
                 {
                     for (int E = 0; E < objItemListMaintenance.Length; E++)
                     {
                         RapidVerifoneNAXML.ILTDetailType[] objILTDetailType = new RapidVerifoneNAXML.ILTDetailType[objItemListMaintenance[E].ILTDetail.Count()];
                         objILTDetailType = objItemListMaintenance[E].ILTDetail;
-                        if (objILTDetailType != null)
+                        if (objILTDetailType != null && objILTDetailType.Length > 0)
                         {
                             for (int F = 0; F < objILTDetailType.Length; F++)
                             {
@@ -1669,18 +2048,20 @@ namespace VerifoneServices
 
                                     RapidVerifoneNAXML.ItemCode objItemCode = new RapidVerifoneNAXML.ItemCode();
 
-                                    for (int G = 0; G < objItemListEntry.Length; G++)
+                                    if (objItemListEntry != null && objItemListEntry.Length > 0)
                                     {
-                                        objItemCode = new RapidVerifoneNAXML.ItemCode();
-                                        objItemCode = objItemListEntry[G].ItemCode;
-                                        dt_ItemList.Rows.Add(
-                                            PromotionID,
-                                            objItemCode.POSCode,
-                                            FreeType,
-                                            Price,
-                                            objItemCode.POSCodeModifier.Value
-                                           );
-
+                                        for (int G = 0; G < objItemListEntry.Length; G++)
+                                        {
+                                            objItemCode = new RapidVerifoneNAXML.ItemCode();
+                                            objItemCode = objItemListEntry[G].ItemCode;
+                                            dt_ItemList.Rows.Add(
+                                                PromotionID,
+                                                objItemCode.POSCode,
+                                                FreeType,
+                                                Price,
+                                                objItemCode.POSCodeModifier.Value
+                                               );
+                                        }
                                     }
                                     break;
                                 }
@@ -1695,165 +2076,11 @@ namespace VerifoneServices
             }
         }
 
-        public void Promotion()
-        {
-            #region declare variables
-            _CVerifone objCVerifone = new _CVerifone();
-            DataSet ds_MixMatch = new DataSet();
-            DataSet ds_ItemList = new DataSet();
-            string FilePath_MixMatch = "";
-            string FilePath_ItemList = "";
-            int WeekdayAvailability = 0;
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var stringChars = new char[8];
-            var random = new Random();
-            var finalString = "";
-
-            DataTable dt_MixMatch = new DataTable();
-            dt_MixMatch.Columns.AddRange(new DataColumn[10]{
-                    new DataColumn("PromotionID", typeof(Int64)), new DataColumn("MixMatchDescription", typeof(string)), new DataColumn("StartDate", typeof(string)),
-                    new DataColumn("StopDate", typeof(string)), new DataColumn("StartTime", typeof(string)), new DataColumn("StopTime", typeof(string)),
-                    new DataColumn("WeekdayAvailability", typeof(int)), new DataColumn("MixMatchUnits", typeof(float)), new DataColumn("MixMatchPrice", typeof(decimal)),
-                    new DataColumn("Code", typeof(string))
-                    });
-
-            DataTable dt_ItemList = new DataTable();
-            dt_ItemList.Columns.AddRange(new DataColumn[2]{
-                    new DataColumn("PromotionID", typeof(Int64)), new DataColumn("POSCode", typeof(string))
-                    });
-            #endregion
-
-            try
-            {
-                #region Save MixMatch data from Verifone
-                objComman.GetXMLResult("", "MixMatch", "POST", "vMaintenance");
-                #endregion
-
-                #region Save MixMatch_ItemList data from Verifone
-                objComman.GetXMLResult("", "MixMatch_ItemList", "POST", "vMaintenance");
-                #endregion
-
-                #region xml to dataset : MixMatch and ItemList
-                FilePath_MixMatch = AppDomain.CurrentDomain.BaseDirectory + "xml/MixMatch.xml";
-                FilePath_ItemList = AppDomain.CurrentDomain.BaseDirectory + "xml/MixMatch_ItemList.xml";
-
-                if (File.Exists(FilePath_MixMatch) == true && File.Exists(FilePath_ItemList) == true)
-                {
-                    #region insert log
-                    objCVerifone.InsertActiveLog("BoF", "Start", "Promotion()", "Initialize to Insert Verifone Data into BoF", "Promotion", "");
-                    #endregion
-
-                    ds_MixMatch.ReadXml(FilePath_MixMatch, XmlReadMode.InferSchema);
-                    ds_ItemList.ReadXml(FilePath_ItemList, XmlReadMode.InferSchema);
-
-                    for (int i = 0; i < ds_MixMatch.Tables[5].Rows.Count; i++)
-                    {
-                        WeekdayAvailability = 0;
-                        finalString = "";
-                        DataView dv_PromotionId = ds_MixMatch.Tables[6].DefaultView;
-                        dv_PromotionId.RowFilter = ("[" + ds_MixMatch.Tables[6].Columns[1].ColumnName + "] ='" + ds_MixMatch.Tables[5].Rows[i][0] + "'");
-
-                        DataView dv_WeekDays = ds_MixMatch.Tables[9].DefaultView;
-                        dv_WeekDays.RowFilter = ("[" + ds_MixMatch.Tables[9].Columns[4].ColumnName + "] ='" + ds_MixMatch.Tables[5].Rows[i][0] + "'");
-
-                        DataView dv_MixMatchEntry = ds_MixMatch.Tables[10].DefaultView;
-                        dv_MixMatchEntry.RowFilter = ("[" + ds_MixMatch.Tables[10].Columns[4].ColumnName + "] ='" + ds_MixMatch.Tables[5].Rows[i][0] + "'");
-
-                        #region Total WeekDays
-                        for (int j = 0; j < dv_WeekDays.Count; j++)
-                        {
-                            if ((string)dv_WeekDays[j][1] == "Sunday")
-                            {
-                                WeekdayAvailability += Convert.ToInt16(WeekDays.Sunday);
-                            }
-                            if ((string)dv_WeekDays[j][1] == "Monday")
-                            {
-                                WeekdayAvailability += Convert.ToInt16(WeekDays.Monday);
-                            }
-                            if ((string)dv_WeekDays[j][1] == "Tuesday")
-                            {
-                                WeekdayAvailability += Convert.ToInt16(WeekDays.Tuesday);
-                            }
-                            if ((string)dv_WeekDays[j][1] == "Wednesday")
-                            {
-                                WeekdayAvailability += Convert.ToInt16(WeekDays.Wednesday);
-                            }
-                            if ((string)dv_WeekDays[j][1] == "Thursday")
-                            {
-                                WeekdayAvailability += Convert.ToInt16(WeekDays.Thursday);
-                            }
-                            if ((string)dv_WeekDays[j][1] == "Friday")
-                            {
-                                WeekdayAvailability += Convert.ToInt16(WeekDays.Friday);
-                            }
-                            if ((string)dv_WeekDays[j][1] == "Saturday")
-                            {
-                                WeekdayAvailability += Convert.ToInt16(WeekDays.Saturday);
-                            }
-                        }
-                        #endregion
-
-                        #region auto generated code
-                        for (int a = 0; a < stringChars.Length; a++)
-                        {
-                            stringChars[a] = chars[random.Next(chars.Length)];
-                        }
-                        finalString = new String(stringChars);
-                        #endregion
-
-                        dt_MixMatch.Rows.Add(
-                            Convert.ToInt64(dv_PromotionId[0]["PromotionID"]),
-                            ds_MixMatch.Tables[5].Rows[i][1],
-                            ds_MixMatch.Tables[5].Rows[i][3],
-                            ds_MixMatch.Tables[5].Rows[i][5],
-                            ds_MixMatch.Tables[5].Rows[i][4],
-                            ds_MixMatch.Tables[5].Rows[i][6],
-                            WeekdayAvailability,
-                            dv_MixMatchEntry[0]["MixMatchUnits"],
-                            dv_MixMatchEntry[0]["MixMatchPrice"],
-                            finalString
-                            );
-
-                        DataView dv_ILTDetailId = ds_ItemList.Tables[5].DefaultView;
-                        dv_ILTDetailId.RowFilter = ("[" + ds_ItemList.Tables[5].Columns[0].ColumnName + "] ='" + ds_MixMatch.Tables[5].Rows[i][2] + "'");
-
-                        DataView dv_ItemListEntryId = ds_ItemList.Tables[6].DefaultView;
-                        dv_ItemListEntryId.RowFilter = ("[" + ds_ItemList.Tables[6].Columns[1].ColumnName + "] ='" + dv_ILTDetailId[0]["ILTDetail_Id"] + "'");
-
-                        for (int k = 0; k < dv_ItemListEntryId.Count; k++)
-                        {
-                            DataView dv_POSCode = ds_ItemList.Tables[7].DefaultView;
-                            dv_POSCode.RowFilter = ("[" + ds_ItemList.Tables[7].Columns[3].ColumnName + "] ='" + dv_ItemListEntryId[k]["ItemListEntry_Id"] + "'");
-
-                            dt_ItemList.Rows.Add(
-                            Convert.ToInt64(dv_PromotionId[0]["PromotionID"]),
-                            dv_POSCode[0]["POSCode"]
-                            );
-                        }
-                    }
-                }
-
-                long result = 0;//objCVerifone.InsertPromotion(dt_MixMatch, dt_ItemList);
-                if (result == 0)
-                {
-                    objCVerifone.InsertActiveLog("BoF", "Fail", "Promotion()", "Verifone Data not inserted in BoF", "Promotion", "");
-                }
-                else
-                {
-                    objCVerifone.InsertActiveLog("BoF", "End", "Promotion()", "Verifone Data inserted Successfully in BoF", "Promotion", "");
-                }
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                objCVerifone.InsertActiveLog("BoF", "Error", "Promotion()", "Promotion Exception : " + ex, "Promotion", "");
-            }
-        }
-
         public void Register()
         {
             _CVerifone objCVerifone = new _CVerifone();
             string FilePath = "";
+            bool isXMLError = false;
             DataSet ds_Register = new DataSet();
             DataTable dt_Register = new DataTable();
             dt_Register.Columns.AddRange(new DataColumn[2]{
@@ -1861,46 +2088,73 @@ namespace VerifoneServices
                     });
             try
             {
+               
                 #region Read Payload, Save Register data from Verifone
                 objComman.GetXMLResult("", "Register", "POST", "vappinfo");
                 #endregion
 
-                #region Insert Log
                 objCVerifone.InsertActiveLog("BoF", "Start", "Register()", "Initialize to Insert Verifone Data into BoF", "Register", "");
-                #endregion
+
 
                 #region xml to Dataset
                 FilePath = AppDomain.CurrentDomain.BaseDirectory + "xml/Register.xml";
 
-                if (File.Exists(FilePath) == true)
-                {
-                    ds_Register.ReadXml(FilePath, XmlReadMode.InferSchema);
-                    if (ds_Register.Tables.Count >= 4)
-                    {
-                        for (int i = 0; i < ds_Register.Tables[4].Rows.Count; i++)
-                        {
-                            DataView dv_Register = ds_Register.Tables[2].DefaultView;
-                            dv_Register.RowFilter = ("[" + ds_Register.Tables[2].Columns[9].ColumnName + "] ='" + ds_Register.Tables[4].Rows[i][0] + "'");
+                DataSet ds = new DataSet();
+                ds.ReadXml(FilePath, XmlReadMode.InferSchema);
 
-                            dt_Register.Rows.Add(
-                                ds_Register.Tables[4].Rows[i][1],
-                                dv_Register[0]["dataSubsetName"]
-                                );
-                        }
-                        long result = objCVerifone.InsertRegister(dt_Register);
-                        if (result == 0)
+                if (ds.Tables != null && ds.Tables.Count > 0)
+                {
+                    isXMLError = objComman.GetErrorStatus(ds);
+                }
+
+                if (isXMLError == false)
+                {
+                    if (File.Exists(FilePath) == true)
+                    {
+                        ds_Register.ReadXml(FilePath, XmlReadMode.InferSchema);
+                        if (ds_Register.Tables.Count >= 4)
                         {
-                            objCVerifone.InsertActiveLog("BoF", "Fail", "Register()", "Verifone Data not inserted in BoF", "Register", "");
+                            for (int i = 0; i < ds_Register.Tables[4].Rows.Count; i++)
+                            {
+                                DataView dv_Register = ds_Register.Tables[2].DefaultView;
+                                dv_Register.RowFilter = ("[" + ds_Register.Tables[2].Columns[9].ColumnName + "] ='" + ds_Register.Tables[4].Rows[i][0] + "'");
+
+                                dt_Register.Rows.Add(
+                                    ds_Register.Tables[4].Rows[i][1],
+                                    dv_Register[0]["dataSubsetName"]
+                                    );
+
+                                dv_Register.RowFilter = string.Empty;
+                            }
+
+                            if (dt_Register.Rows.Count > 0)
+                            {
+                                long result = objCVerifone.InsertRegister(dt_Register);
+                                if (result == 0)
+                                {
+                                    objCVerifone.InsertActiveLog("BoF", "Fail", "Register()", "Verifone Data not inserted in BoF", "Register", "");
+                                }
+                                else
+                                {
+                                    objCVerifone.InsertActiveLog("BoF", "End", "Register()", "Verifone Data inserted Successfully in BoF", "Register", "");
+                                }
+                            }
+                            else
+                            {
+                                objCVerifone.InsertActiveLog("BoF", "End", "Register()", "No Data Found", "Register", "");
+                            }
                         }
                         else
                         {
-                            objCVerifone.InsertActiveLog("BoF", "End", "Register()", "Verifone Data inserted Successfully in BoF", "Register", "");
+                            objCVerifone.InsertActiveLog("BoF", "End", "Register()", "Verifone Register data not found", "Register", "");
                         }
                     }
-                    else
-                    {
-                        objCVerifone.InsertActiveLog("BoF", "End", "Register()", "Verifone Register data not found", "Register", "");
-                    }
+                }
+                else
+                {
+                    String xmlText = File.ReadAllText(FilePath);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "Register()", "Error in " + Path.GetFileName(FilePath), "Register", "");
+                    objComman.SendEmail(objEmail.RegisterSubject, xmlText, Path.GetFileName(FilePath));
                 }
                 #endregion
             }
@@ -1909,33 +2163,14 @@ namespace VerifoneServices
                 objCVerifone.InsertActiveLog("BoF", "Error", "Register()", "Register Exception : " + ex, "Register", "");
             }
         }
-
-        public void UpdateUserPassword()
-        {
-            _CVerifone objVerifone = new _CVerifone();
-            try
-            {
-                long Result = objVerifone.UpdateUserPassword(VerifoneServices.VerifoneLink, VerifoneServices.VerifoneUserName, VerifoneServices.VerifonePassword.Encript());
-                if (Result == 0)
-                {
-                    objVerifone.InsertActiveLog("BoF", "Fail", "UpdateUserPassword()", "Verifone Data not updated in BoF", "UpdateUserPassword", "");
-                }
-                else
-                {
-                    objVerifone.InsertActiveLog("BoF", "End", "UpdateUserPassword()", "Verifone Data updated Successfully in BoF", "UpdateUserPassword", "");
-                }
-            }
-            catch (Exception ex)
-            {
-                objVerifone.InsertActiveLog("Verifone", "Error", "UpdateUserPassword()", "UpdateUserPassword  : " + ex.Message, "UpdateUserPassword", "");
-            }
-        }
         #endregion
 
         #region Invoice
         public void Invoice_New_WithChanges()
         {
             _CVerifone objVerifone = new _CVerifone();
+            bool isXMLError = false;
+            string FileName = "";
             try
             {
                 #region Get Verifone Period data for invoice
@@ -1955,32 +2190,57 @@ namespace VerifoneServices
                 {
                     for (int a = 0; a < filePaths.Length; a++)
                     {
-                        if (InvoiceFileWise_DifferentType(filePaths[a]))
+                        FileName = "";
+                        FileName = Path.GetFileName(filePaths[a]);
+                        isXMLError = false;
+                        DataSet ds = new DataSet();
+                        ds.ReadXml(filePaths[a], XmlReadMode.InferSchema);
+
+                        for (int i = 0; i < ds.Tables.Count; i++)
                         {
-                            #region Create new xml
-                            if (PeriodForXML != "" && FileNameForXML != "")
+                            if (ds.Tables[i].TableName == "Fault")
                             {
-                                if (File.Exists(PeriodFilePath) == false)
-                                {
-                                    objComman.CreateXML(PeriodForXML, FileNameForXML, PeriodFilePath, "New", "Invoice");
-                                }
-                                else
-                                {
-                                    DataSet Xds = new DataSet();
-                                    Xds.ReadXml(PeriodFilePath, XmlReadMode.InferSchema);
-
-                                    DataView dvxml = Xds.Tables[0].DefaultView;
-                                    dvxml.RowFilter = ("[" + Xds.Tables[0].Columns[0].ColumnName + "] ='" + PeriodForXML + "'AND [" + Xds.Tables[0].Columns[1].ColumnName + "] ='" + FileNameForXML + "'");
-
-                                    if (dvxml.Count == 0 && FileNameForXML != "CURRENT")
-                                    {
-                                        objComman.CreateXML(PeriodForXML, FileNameForXML, PeriodFilePath, "Exists", "Invoice");
-                                    }
-                                }
-                                PeriodForXML = "";
-                                FileNameForXML = "";
+                                isXMLError = true;
+                                break;
                             }
-                            #endregion
+                        }
+                        if (isXMLError == false)
+                        {
+                            if (InvoiceFileWise_DifferentType(filePaths[a]))
+                            {
+                                #region Create new xml
+                                if (PeriodForXML != "" && FileNameForXML != "")
+                                {
+                                    if (File.Exists(PeriodFilePath) == false)
+                                    {
+                                        objComman.CreateXML(PeriodForXML, FileNameForXML, PeriodFilePath, "New", "Invoice");
+                                    }
+                                    else
+                                    {
+                                        DataSet Xds = new DataSet();
+                                        Xds.ReadXml(PeriodFilePath, XmlReadMode.InferSchema);
+
+                                        DataView dvxml = Xds.Tables[0].DefaultView;
+                                        dvxml.RowFilter = ("[" + Xds.Tables[0].Columns[0].ColumnName + "] ='" + PeriodForXML + "'AND [" + Xds.Tables[0].Columns[1].ColumnName + "] ='" + FileNameForXML + "'");
+
+                                        if (dvxml.Count == 0 && FileNameForXML != "CURRENT")
+                                        {
+                                            objComman.CreateXML(PeriodForXML, FileNameForXML, PeriodFilePath, "Exists", "Invoice");
+                                        }
+
+                                        dvxml.RowFilter = string.Empty;
+                                    }
+                                    PeriodForXML = "";
+                                    FileNameForXML = "";
+                                }
+                                #endregion
+                            }
+                        }
+                        else
+                        {
+                            String xmlText = File.ReadAllText(filePaths[a]);
+                            objVerifone.InsertActiveLog("BoF", "Fail", "Invoice_New_WithChanges()", "Error in " + Path.GetFileName(filePaths[a]), "Invoice", "");
+                            objComman.SendEmail(objEmail.InvoiceSubject + ": " + Path.GetFileName(filePaths[a]), xmlText, Path.GetFileName(filePaths[a]));
                         }
                     }
                 }
@@ -1988,10 +2248,9 @@ namespace VerifoneServices
             }
             catch (Exception ex)
             {
-                objVerifone.InsertActiveLog("BoF", "Error", "Invoice_New_WithChanges()", "Invoice_New_WithChanges Exception : " + ex, "Invoice", "");
+                objVerifone.InsertActiveLog("BoF", "Error", "Invoice_New_WithChanges()", "Invoice_New_WithChanges Exception in " + FileName + " : " + ex, "Invoice", "");
             }
         }
-
         public bool InvoiceFileWise_DifferentType(string FilePath)
         {
             _CVerifone objVerifone = new _CVerifone();
@@ -2312,7 +2571,7 @@ namespace VerifoneServices
                 }
                 catch (Exception ex)
                 {
-                    objVerifone.InsertActiveLog("BoF", "Error", "InvoiceFileWise_DifferentType()", "CURRENT Exception : " + ex.Message, "Invoice", "");
+                    objVerifone.InsertActiveLog("BoF", "Error", "InvoiceFileWise_DifferentType()", "CURRENT Exception " + FileNameForXML + ": " + ex.Message, "Invoice", "");
                 }
 
                 #region File Wise Item Loop
@@ -2326,6 +2585,9 @@ namespace VerifoneServices
                         objTransactionType = ((trans)(resultingMessage.Items[i])).type;
                         if (Convert.ToInt16(objTransactionType) != 1)
                         {
+
+
+
                             var transType = ((trans)(resultingMessage.Items[i])).trHeader.trTickNum;
 
                             if (Convert.ToInt32(((trans)(resultingMessage.Items[i])).type) == 2)
@@ -2347,6 +2609,17 @@ namespace VerifoneServices
                             if (objtrLine != null)
                             {
 
+
+                                var objtra = (trans)(resultingMessage.Items[i]);
+                                if (Convert.ToString(objtra.trHeader.trTickNum.trSeq) == "1023037")
+                                {
+
+
+                                    string a = "a";
+                                    a = a;
+                                }
+
+
                                 IsLottery = false;
                                 IsLotteryItem = false;
 
@@ -2358,12 +2631,15 @@ namespace VerifoneServices
                                     myCompany1111.trLine[] objtrLineCheckType = new trLine[trLinesCount];
                                     objtrLineCheckType = ((trans)(resultingMessage.Items[i])).trLines;
 
-                                    for (int Prefuel = 0; Prefuel < objtrLineCheckType.Length; Prefuel++)
+                                    if (objtrLineCheckType != null && objtrLineCheckType.Length > 0)
                                     {
-                                        if (Convert.ToInt16(objtrLineCheckType[Prefuel].type) == 4)
+                                        for (int Prefuel = 0; Prefuel < objtrLineCheckType.Length; Prefuel++)
                                         {
-                                            PrefuelInvoice = true;
-                                            break;
+                                            if (Convert.ToInt16(objtrLineCheckType[Prefuel].type) == 4)
+                                            {
+                                                PrefuelInvoice = true;
+                                                break;
+                                            }
                                         }
                                     }
 
@@ -2372,7 +2648,7 @@ namespace VerifoneServices
                                         Comman_InvoiceNo += 1;
                                         //OrderNo += 1;
                                         Sale((trans)(resultingMessage.Items[i]), dtInvoice, dtInvoiceItem, dtInvoiceDiscount, dtLotteryInvoice, dtLotteryInvoiceItem, dtTaxExempt,
-                                              Comman_InvoiceNo, dtInvoicePump, dtPumpCart, dtInvoicePayment);
+                                              Comman_InvoiceNo, dtInvoicePump, dtPumpCart, dtInvoicePayment, FilePath);
                                     }
                                 }
                                 #endregion
@@ -2380,7 +2656,7 @@ namespace VerifoneServices
                                 #region Type = void
                                 else if (transType != null && Convert.ToInt16(objTransactionType) == 12)
                                 {
-                                    Void((trans)(resultingMessage.Items[i]), dtVoid);
+                                    Void((trans)(resultingMessage.Items[i]), dtVoid, FilePath);
                                 }
                                 #endregion
 
@@ -2388,7 +2664,7 @@ namespace VerifoneServices
                                 else if (transType != null && objTransactionType == 0 && ((trans)(resultingMessage.Items[i])).suspended == true && (((trans)(resultingMessage.Items[i])).recalled == false || ((trans)(resultingMessage.Items[i])).recalled == true))
                                 {
                                     SaleSuspended_OrderNo += 1;
-                                    Suspended((trans)(resultingMessage.Items[i]), dtSaleSuspened, dtSalesSuspenedItem, SaleSuspended_OrderNo, dtTaxExempt);
+                                    Suspended((trans)(resultingMessage.Items[i]), dtSaleSuspened, dtSalesSuspenedItem, SaleSuspended_OrderNo, dtTaxExempt, FilePath);
                                 }
                                 #endregion
 
@@ -2398,7 +2674,7 @@ namespace VerifoneServices
                                     Comman_InvoiceNo += 1;
                                     //Recall((trans)(resultingMessage.Items[i]), dtSaleRecall, dtSaleRecallItem, dtSaleRecall_InvoiceDiscount, Comman_InvoiceNo, dtSaleRecallPayment);
                                     Recall((trans)(resultingMessage.Items[i]), dtSaleRecall, dtSaleRecallItem, dtSaleRecall_InvoiceDiscount, dtLotteryInvoice,
-                                    dtLotteryInvoiceItem, dtTaxExempt, Comman_InvoiceNo, dtInvoicePump, dtPumpCart, dtSaleRecallPayment);
+                                    dtLotteryInvoiceItem, dtTaxExempt, Comman_InvoiceNo, dtInvoicePump, dtPumpCart, dtSaleRecallPayment, FilePath);
                                 }
                                 #endregion
 
@@ -2408,7 +2684,7 @@ namespace VerifoneServices
                             #region Type = nosale
                             else if (transType != null && Convert.ToInt16(objTransactionType) == 11)
                             {
-                                NoSale((trans)(resultingMessage.Items[i]), dtNoSale);
+                                NoSale((trans)(resultingMessage.Items[i]), dtNoSale, FilePath);
                             }
                             #endregion
 
@@ -2416,14 +2692,14 @@ namespace VerifoneServices
                             else if (transType != null && Convert.ToInt16(objTransactionType) == 9)
                             {
                                 Comman_InvoiceNo += 1;
-                                Payout((trans)(resultingMessage.Items[i]), dtPayout, Comman_InvoiceNo);
+                                Payout((trans)(resultingMessage.Items[i]), dtPayout, Comman_InvoiceNo, FilePath);
                             }
                             #endregion
 
                             #region Lottery without item
                             else if (transType != null && Convert.ToInt16(objTransactionType) == 0 && PrefuelInvoice == false)
                             {
-                                if (objtrPayline != null)
+                                if (objtrPayline != null && objtrPayline.Length > 0)
                                 {
                                     for (int k = 0; k < objtrPayline.Length; k++)
                                     {
@@ -2431,7 +2707,7 @@ namespace VerifoneServices
                                         {
                                             IsLotteryItem = false;
                                             Comman_InvoiceNo += 1;
-                                            LotteryWithoutItem((trans)(resultingMessage.Items[i]), dtLotteryInvoice, Comman_InvoiceNo, IsLotteryItem, OrderNo, dtInvoicePayment);
+                                            LotteryWithoutItem((trans)(resultingMessage.Items[i]), dtLotteryInvoice, Comman_InvoiceNo, IsLotteryItem, OrderNo, dtInvoicePayment, FilePath);
                                         }
                                     }
                                 }
@@ -2443,7 +2719,7 @@ namespace VerifoneServices
                             else if (transType != null && Convert.ToInt16(objTransactionType) == 10)
                             {
                                 DropId = DropId + 1;
-                                drpoAmountData((trans)(resultingMessage.Items[i]), dtDropamount, DropId);
+                                drpoAmountData((trans)(resultingMessage.Items[i]), dtDropamount, DropId, FilePath);
                             }
                             #endregion
                         }
@@ -2451,7 +2727,7 @@ namespace VerifoneServices
                         #region Type = journal - trline - plu
                         else if (Convert.ToInt16(objTransactionType) == 1)
                         {
-                            Journal((trans)(resultingMessage.Items[i]), dtJournal);
+                            Journal((trans)(resultingMessage.Items[i]), dtJournal, FilePath);
                         }
                         else
                         {
@@ -2585,14 +2861,14 @@ namespace VerifoneServices
             }
             catch (Exception ex)
             {
-                objVerifone.InsertActiveLog("BoF", "Error", "InvoiceFileWise_DifferentType()", "InvoiceFileWise_DifferentType Exception : " + ex.Message, "Invoice", "");
+                objVerifone.InsertActiveLog("BoF", "Error", "InvoiceFileWise_DifferentType()", "InvoiceFileWise_DifferentType Exception  : " + Path.GetFileName(FilePath) + "--" + ex.Message, "Invoice", "");
                 return false;
             }
         }
         #endregion
 
         #region Different Types of Invoices
-        public void NoSale(myCompany1111.trans objtrans, DataTable dtNoSale)
+        public void NoSale(myCompany1111.trans objtrans, DataTable dtNoSale, string FilePath)
         {
             _CVerifone objVerifone = new _CVerifone();
             try
@@ -2614,11 +2890,11 @@ namespace VerifoneServices
             }
             catch (Exception ex)
             {
-                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "NoSale Exception : " + ex.Message, "NoSale", "");
+                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "NoSale Exception " + Path.GetFileName(FilePath) + " : " + ex.Message, "NoSale", "");
             }
         }
 
-        public void drpoAmountData(myCompany1111.trans objtrans, DataTable dtDropamount, int DropId)
+        public void drpoAmountData(myCompany1111.trans objtrans, DataTable dtDropamount, int DropId, string FilePath)
         {
             _CVerifone objVerifone = new _CVerifone();
             decimal drop_amount;
@@ -2643,12 +2919,11 @@ namespace VerifoneServices
                 trPayline[] objtrPayline = new trPayline[PayLineCount];
                 objtrPayline = objtrans.trPaylines;
 
-                if (objtrPayline != null)
+                if (objtrPayline != null && objtrPayline.Length > 0)
                 {
                     for (int k = 0; k < objtrPayline.Length; k++)
                     {
                         PayId = Convert.ToInt32(objtrPayline[k].trpPaycode.mop);
-
                     }
                 }
 
@@ -2665,12 +2940,13 @@ namespace VerifoneServices
             }
             catch (Exception ex)
             {
-                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "NoSale Exception : " + ex.Message, "NoSale", "");
+                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "NoSale Exception " + Path.GetFileName(FilePath) + " : " + ex.Message, "NoSale", "");
             }
         }
 
         public void Sale(myCompany1111.trans objtrans, DataTable dtInvoice, DataTable dtInvoiceItem, DataTable dtInvoiceDiscount, DataTable dtLotteryInvoice,
-                         DataTable dtLotteryInvoiceItem, DataTable dtTaxExempt, int Comman_InvoiceNo, DataTable dtInvoicePump, DataTable dtPumpCart, DataTable dtInvoicePayment)
+                         DataTable dtLotteryInvoiceItem, DataTable dtTaxExempt, int Comman_InvoiceNo, DataTable dtInvoicePump, DataTable dtPumpCart, DataTable dtInvoicePayment,
+                         string FilePath)
         {
             _CVerifone objVerifone = new _CVerifone();
 
@@ -2726,7 +3002,7 @@ namespace VerifoneServices
 
                 try
                 {
-                    if (objtrPayline != null)
+                    if (objtrPayline != null && objtrPayline.Length > 0)
                     {
                         for (int k = 0; k < objtrPayline.Length; k++)
                         {
@@ -3011,180 +3287,236 @@ namespace VerifoneServices
                 );
                 }
                 #endregion
-
-                for (int j = 0; j < objtrLine.Length; j++)
+                if (objtrLine != null && objtrLine.Length > 0)
                 {
-                    ExtraCharge = 0;
-                    RowPosition = RowPosition + 1;
-                    IsReverse = false;
-                    PromotionAmount = 0;
-                    ItemType = Convert.ToString(objtrLine[j].type);
-                    DepartmentId = Convert.ToInt64(objtrLine[j].trlDept.number);
-                    DepartmentType = Convert.ToString(objtrLine[j].trlDept.type);
-
-                    if (objtrLine[j].trlDept.Value == "MONEY ORDER")
+                    #region
+                    for (int j = 0; j < objtrLine.Length; j++)
                     {
-                        if (objtrLine[j].trlFee != null)
-                        {
-                            trlFee[] objtrlFee = new trlFee[objtrLine[j].trlFee.Count()];
-                            objtrlFee = objtrLine[j].trlFee;
-                            for (int jj = 0; jj < objtrlFee.Length; jj++)
-                            {
-                                ExtraCharge += objtrlFee[jj].trlFeeAmount;
+                        ExtraCharge = 0;
+                        RowPosition = RowPosition + 1;
+                        IsReverse = false;
+                        PromotionAmount = 0;
+                        ItemType = Convert.ToString(objtrLine[j].type);
+                        DepartmentId = Convert.ToInt64(objtrLine[j].trlDept.number);
+                        DepartmentType = Convert.ToString(objtrLine[j].trlDept.type);
 
+                        if (objtrLine[j].trlDept.Value == "MONEY ORDER")
+                        {
+                            if (objtrLine[j].trlFee != null)
+                            {
+                                trlFee[] objtrlFee = new trlFee[objtrLine[j].trlFee.Count()];
+                                objtrlFee = objtrLine[j].trlFee;
+                                if (objtrlFee != null && objtrlFee.Length > 0)
+                                {
+                                    for (int jj = 0; jj < objtrlFee.Length; jj++)
+                                    {
+                                        ExtraCharge += objtrlFee[jj].trlFeeAmount;
+
+                                    }
+                                }
+                                IsMoneyOrder = true;
                             }
-                            IsMoneyOrder = true;
+                            else
+                            {
+                                ExtraCharge = 0;
+                                IsMoneyOrder = false;
+                            }
                         }
                         else
                         {
                             ExtraCharge = 0;
                             IsMoneyOrder = false;
                         }
-                    }
-                    else
-                    {
-                        ExtraCharge = 0;
-                        IsMoneyOrder = false;
-                    }
 
-                    if (ItemType == "postFuel")
-                    {
-
-
-                        DataSet dsdep = objComman.GetDataDepthorwItem(DepartmentId);
-                        if (dsdep.Tables[0] != null && dsdep.Tables[0].Rows.Count > 0)
+                        if (ItemType == "postFuel")
                         {
-                            ItemNo = Convert.ToString(dsdep.Tables[0].Rows[0]["ITEM_No"]);
-                            ItemDesc = Convert.ToString(dsdep.Tables[0].Rows[0]["ITEM_Desc"]);
-                            UPC = Convert.ToString(dsdep.Tables[0].Rows[0]["Barcode"]);
+
+
+                            DataSet dsdep = objComman.GetDataDepthorwItem(DepartmentId);
+                            if (dsdep.Tables[0] != null && dsdep.Tables[0].Rows.Count > 0)
+                            {
+                                ItemNo = Convert.ToString(dsdep.Tables[0].Rows[0]["ITEM_No"]);
+                                ItemDesc = Convert.ToString(dsdep.Tables[0].Rows[0]["ITEM_Desc"]);
+                                UPC = Convert.ToString(dsdep.Tables[0].Rows[0]["Barcode"]);
+
+                            }
+                            else
+                            {
+                                ItemNo = "0";
+                                ItemDesc = "";
+                                UPC = "";
+                            }
+                            ItemQty = 1;
+                        }
+                        else
+                        {
+                            ItemNo = objtrLine[j].trlNetwCode;
+                            ItemDesc = objtrLine[j].trlDesc;
+                            UPC = objtrLine[j].trlUPC;
+                            ItemQty = objtrLine[j].trlQty != null ? objtrLine[j].trlQty : 0;
+                        }
+
+                        Modifier = objtrLine[j].trlModifier;
+
+                        if (objtrLine[j].trlTaxes != null && objtrLine[j].trlTaxes.Length > 0)
+                        {
+                            ItemTaxAmount = 0;
+
+                            Tax = ((trlTax)(objtrLine[j].trlTaxes[0])).Value;
+                            Rate = ((trlRate)(objtrLine[j].trlTaxes[1])).Value;
+                            TaxId = Convert.ToInt32(((trlRate)(objtrLine[j].trlTaxes[1])).sysid);
+                            IsReverse = ((trlTax)(objtrLine[j].trlTaxes[0])).reverse;
+                            if (IsReverse)
+                            {
+                                #region for remove tax
+                                dtTaxExempt.Rows.Add(
+                                    RegisterInvoiceNo,
+                                    UPC,
+                                    InvoiceDate,
+                                    RowPosition,
+                                    Rate,
+                                    UserId,
+                                    RegisterId
+                                    );
+                                #endregion
+                            }
 
                         }
                         else
                         {
-                            ItemNo = "0";
-                            ItemDesc = "";
-                            UPC = "";
-                        }
-                        ItemQty = 1;
-                    }
-                    else
-                    {
-                        ItemNo = objtrLine[j].trlNetwCode;
-                        ItemDesc = objtrLine[j].trlDesc;
-                        UPC = objtrLine[j].trlUPC;
-                        ItemQty = objtrLine[j].trlQty != null ? objtrLine[j].trlQty : 0;
-                    }
-
-                    Modifier = objtrLine[j].trlModifier;
-
-                    if (objtrLine[j].trlTaxes != null && objtrLine[j].trlTaxes.Length > 0)
-                    {
-                        ItemTaxAmount = 0;
-
-                        Tax = ((trlTax)(objtrLine[j].trlTaxes[0])).Value;
-                        Rate = ((trlRate)(objtrLine[j].trlTaxes[1])).Value;
-                        TaxId = Convert.ToInt32(((trlRate)(objtrLine[j].trlTaxes[1])).sysid);
-                        IsReverse = ((trlTax)(objtrLine[j].trlTaxes[0])).reverse;
-                        if (IsReverse)
-                        {
-                            #region for remove tax
-                            dtTaxExempt.Rows.Add(
-                                RegisterInvoiceNo,
-                                UPC,
-                                InvoiceDate,
-                                RowPosition,
-                                Rate,
-                                UserId,
-                                RegisterId
-                                );
-                            #endregion
+                            Tax = 0;
+                            Rate = 0;
+                            TaxId = 0;
+                            ItemTaxAmount = 0;
                         }
 
-                    }
-                    else
-                    {
-                        Tax = 0;
-                        Rate = 0;
-                        TaxId = 0;
-                        ItemTaxAmount = 0;
-                    }
-
-                    ItemTaxAmount = ((Tax * Rate) / 100);
-                    TaxPercentage = Rate;
+                        ItemTaxAmount = ((Tax * Rate) / 100);
+                        TaxPercentage = Rate;
 
 
 
-                    if (objtrLine[j].trlMixMatches != null)
-                    {
-                        for (int d = 0; d < objtrLine[j].trlMixMatches.Length; d++)
+                        if (objtrLine[j].trlMixMatches != null)
                         {
-                            dtInvoiceDiscount.Rows.Add(
-                                Id,
-                                RowPosition,
-                                UPC,
-                                objtrLine[j].trlMixMatches[d].trlPromoAmount,
-                                ItemNo,
-                                ItemDesc,
-                                objtrLine[j].trlMixMatches[d].trlPromotionID.Value,
-                                ItemType
-                                );
+                            for (int d = 0; d < objtrLine[j].trlMixMatches.Length; d++)
+                            {
+                                dtInvoiceDiscount.Rows.Add(
+                                    Id,
+                                    RowPosition,
+                                    UPC,
+                                    objtrLine[j].trlMixMatches[d].trlPromoAmount,
+                                    ItemNo,
+                                    ItemDesc,
+                                    objtrLine[j].trlMixMatches[d].trlPromotionID.Value,
+                                    ItemType
+                                    );
 
-                            PromotionAmount += objtrLine[j].trlMixMatches[d].trlPromoAmount;
+                                PromotionAmount += objtrLine[j].trlMixMatches[d].trlPromoAmount;
+                            }
                         }
-                    }
-                    if (objtrLine[j].trlDisc != null)
-                    {
-                        trlDisc[] objtrlDisc = new trlDisc[objtrLine[j].trlDisc.Count()];
-                        objtrlDisc = objtrLine[j].trlDisc;
-                        for (int kk = 0; kk < objtrlDisc.Length; kk++)
+                        if (objtrLine[j].trlDisc != null)
                         {
-                            dtInvoiceDiscount.Rows.Add(
-                              Id,
-                              RowPosition,
-                              UPC,
-                              objtrlDisc[kk].Value,
-                              ItemNo,
-                              ItemDesc,
-                              0,
-                              ItemType
-                              );
+                            trlDisc[] objtrlDisc = new trlDisc[objtrLine[j].trlDisc.Count()];
+                            objtrlDisc = objtrLine[j].trlDisc;
 
+                            if (objtrlDisc != null && objtrlDisc.Length > 0)
+                            {
+                                for (int kk = 0; kk < objtrlDisc.Length; kk++)
+                                {
+                                    dtInvoiceDiscount.Rows.Add(
+                                      Id,
+                                      RowPosition,
+                                      UPC,
+                                      objtrlDisc[kk].Value,
+                                      ItemNo,
+                                      ItemDesc,
+                                      0,
+                                      ItemType
+                                      );
 
-                            PromotionAmount += objtrlDisc[kk].Value;
+                                    PromotionAmount += objtrlDisc[kk].Value;
+                                }
+                            }
                         }
-                    }
 
-                    Discount = PromotionAmount;
+                        Discount = PromotionAmount;
 
-                    OldPrice = objtrLine[j].trlPrcOvrd;
-                    Amount = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
+                        OldPrice = objtrLine[j].trlPrcOvrd;
+                        Amount = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
 
-                    #region ItemAmount & ItemBasicRate
-                    if (ItemType != "postFuel")
-                    {
-                        if (objTransactionType == 0 || (Convert.ToInt16(objTransactionType) == 2))
+                        #region ItemAmount & ItemBasicRate
+                        if (ItemType != "postFuel")
                         {
-                            if (ItemType == "voidplu" || ItemType == "voiddept" || DepartmentType == "neg")
+                            if (objTransactionType == 0 || (Convert.ToInt16(objTransactionType) == 2))
+                            {
+                                if (ItemType == "voidplu" || ItemType == "voiddept" || DepartmentType == "neg")
+                                {
+                                    if (ItemQty != 0)
+                                    {
+                                        if (DepartmentType == "neg")
+                                        {
+                                            ItemType = "dept_neg";
+                                        }
+                                        ItemAmount = (((Amount * ItemQty) - Discount) / ItemQty) * (-1);
+                                        //TotalLotteryItemAmount += ItemAmount;
+                                    }
+                                    else
+                                    {
+                                        ItemAmount = 0;
+                                        //TotalLotteryItemAmount += ItemAmount;
+                                    }
+                                    RetailAmount = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * -1) : 0;
+
+                                    if (OldPrice == 0)
+                                    {
+                                        ItemBasicRate = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * -1) : 0;
+                                    }
+                                    else
+                                    {
+                                        if (OldPrice < 0)
+                                            ItemBasicRate = (((OldPrice * (-1)) / ItemQty) * (-1));
+                                        else
+                                            ItemBasicRate = ((OldPrice / ItemQty) * (-1));
+                                    }
+                                }
+                                else
+                                {
+                                    if (ItemQty != 0)
+                                    {
+                                        ItemAmount = ((Amount * ItemQty) - Discount) / ItemQty;
+                                        //TotalLotteryItemAmount += ItemAmount;
+                                    }
+                                    else
+                                    {
+                                        ItemAmount = 0;
+                                        //TotalLotteryItemAmount += ItemAmount;
+                                    }
+                                    RetailAmount = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
+                                    if (OldPrice == 0)
+                                    {
+                                        ItemBasicRate = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
+                                    }
+                                    else
+                                    {
+                                        ItemBasicRate = OldPrice / ItemQty;
+                                    }
+                                }
+                            }
+                            else
                             {
                                 if (ItemQty != 0)
                                 {
-                                    if (DepartmentType == "neg")
-                                    {
-                                        ItemType = "dept_neg";
-                                    }
                                     ItemAmount = (((Amount * ItemQty) - Discount) / ItemQty) * (-1);
-                                    //TotalLotteryItemAmount += ItemAmount;
+                                    // TotalLotteryItemAmount += ItemAmount;
                                 }
                                 else
                                 {
                                     ItemAmount = 0;
-                                    //TotalLotteryItemAmount += ItemAmount;
+                                    // TotalLotteryItemAmount += ItemAmount;
                                 }
-                                RetailAmount = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * -1) : 0;
-
+                                RetailAmount = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * (-1)) : 0;
                                 if (OldPrice == 0)
                                 {
-                                    ItemBasicRate = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * -1) : 0;
+                                    ItemBasicRate = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * (-1)) : 0;
                                 }
                                 else
                                 {
@@ -3194,211 +3526,165 @@ namespace VerifoneServices
                                         ItemBasicRate = ((OldPrice / ItemQty) * (-1));
                                 }
                             }
-                            else
-                            {
-                                if (ItemQty != 0)
-                                {
-                                    ItemAmount = ((Amount * ItemQty) - Discount) / ItemQty;
-                                    //TotalLotteryItemAmount += ItemAmount;
-                                }
-                                else
-                                {
-                                    ItemAmount = 0;
-                                    //TotalLotteryItemAmount += ItemAmount;
-                                }
-                                RetailAmount = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
-                                if (OldPrice == 0)
-                                {
-                                    ItemBasicRate = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
-                                }
-                                else
-                                {
-                                    ItemBasicRate = OldPrice / ItemQty;
-                                }
-                            }
+                        #endregion
+
+                            TotalItemAmount = (ItemAmount * ItemQty) + ItemTaxAmount;
                         }
                         else
                         {
-                            if (ItemQty != 0)
-                            {
-                                ItemAmount = (((Amount * ItemQty) - Discount) / ItemQty) * (-1);
-                                // TotalLotteryItemAmount += ItemAmount;
-                            }
-                            else
-                            {
-                                ItemAmount = 0;
-                                // TotalLotteryItemAmount += ItemAmount;
-                            }
-                            RetailAmount = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * (-1)) : 0;
-                            if (OldPrice == 0)
-                            {
-                                ItemBasicRate = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * (-1)) : 0;
-                            }
-                            else
-                            {
-                                if (OldPrice < 0)
-                                    ItemBasicRate = (((OldPrice * (-1)) / ItemQty) * (-1));
-                                else
-                                    ItemBasicRate = ((OldPrice / ItemQty) * (-1));
-                            }
+                            ItemAmount = objtrLine[j].trlLineTot;
+                            ItemBasicRate = objtrLine[j].trlLineTot;
+                            TotalItemAmount = objtrLine[j].trlLineTot;
                         }
-                    #endregion
-
-                        TotalItemAmount = (ItemAmount * ItemQty) + ItemTaxAmount;
-                    }
-                    else
-                    {
-                        ItemAmount = objtrLine[j].trlLineTot;
-                        ItemBasicRate = objtrLine[j].trlLineTot;
-                        TotalItemAmount = objtrLine[j].trlLineTot;
-                    }
 
 
 
-                    //if (IsReverse == false)
-                    //{
-                    if (IsLotteryItem == true)
-                    {
-                        #region Lottery item
-                        dtLotteryInvoiceItem.Rows.Add(
-                            Id,
-                            ItemNo,
-                            ItemDesc,
-                            UPC,
-                            ItemQty,
-                            ItemAmount,
-                            ItemTaxAmount,
-                            TotalItemAmount,
-                            DepartmentId,
-                            RetailAmount,
-                            false,
-                            TaxId,
-                            TaxPercentage,
-                            RowPosition,
-                            UserId,
-                            ItemType,
-                            OldPrice,
-                            InvoiceDate,
-                            PromotionAmount,
-                            Modifier,
-                            ItemBasicRate,
-                            RegisterId,
-                            false,
-                            ExtraCharge,
-                            IsMoneyOrder
-                        );
-                        #endregion
-                    }
-                    else
-                    {
-                        #region Invoice item
-                        dtInvoiceItem.Rows.Add(
-                            Id,
-                            ItemNo,
-                            ItemDesc,
-                            UPC,
-                            ItemQty,
-                            ItemAmount,
-                            ItemTaxAmount,
-                            TotalItemAmount,
-                            DepartmentId,
-                            RetailAmount,
-                            false,
-                            TaxId,
-                            TaxPercentage,
-                           RowPosition,
-                            UserId,
-                            ItemType,
-                            OldPrice,
-                            InvoiceDate,
-                            PromotionAmount,
-                            Modifier,
-                            ItemBasicRate,
-                            RegisterId,
-                            ExtraCharge,
-                            IsMoneyOrder
-                        );
-                        #endregion
-                    }
-
-                    #region Fuel invoices
-                    if (objtrLine[j].trlFuel != null)
-                    {
-                        if (UserId != 0)
+                        //if (IsReverse == false)
+                        //{
+                        if (IsLotteryItem == true)
                         {
-
-                            if (objtrans.fuelPrepayCompletion)
-                            {
-                                prepostpay = "PRE-PAY";
-                            }
-                            else
-                            {
-                                prepostpay = "POST-PAY";
-                            }
+                            #region Lottery item
+                            dtLotteryInvoiceItem.Rows.Add(
+                                Id,
+                                ItemNo,
+                                ItemDesc,
+                                UPC,
+                                ItemQty,
+                                ItemAmount,
+                                ItemTaxAmount,
+                                TotalItemAmount,
+                                DepartmentId,
+                                RetailAmount,
+                                false,
+                                TaxId,
+                                TaxPercentage,
+                                RowPosition,
+                                UserId,
+                                ItemType,
+                                OldPrice,
+                                InvoiceDate,
+                                PromotionAmount,
+                                Modifier,
+                                ItemBasicRate,
+                                RegisterId,
+                                false,
+                                ExtraCharge,
+                                IsMoneyOrder
+                            );
+                            #endregion
                         }
                         else
                         {
-                            prepostpay = "OUTSIDE-PAY";
+                            #region Invoice item
+                            dtInvoiceItem.Rows.Add(
+                                Id,
+                                ItemNo,
+                                ItemDesc,
+                                UPC,
+                                ItemQty,
+                                ItemAmount,
+                                ItemTaxAmount,
+                                TotalItemAmount,
+                                DepartmentId,
+                                RetailAmount,
+                                false,
+                                TaxId,
+                                TaxPercentage,
+                               RowPosition,
+                                UserId,
+                                ItemType,
+                                OldPrice,
+                                InvoiceDate,
+                                PromotionAmount,
+                                Modifier,
+                                ItemBasicRate,
+                                RegisterId,
+                                ExtraCharge,
+                                IsMoneyOrder
+                            );
+                            #endregion
                         }
 
-                        var chars = "0123456789";
-                        var stringChars = new char[19];
-                        var random = new Random();
-
-                        #region auto generated code
-                        for (int a = 0; a < stringChars.Length; a++)
+                        #region Fuel invoices
+                        if (objtrLine[j].trlFuel != null)
                         {
-                            stringChars[a] = chars[random.Next(chars.Length)];
+                            if (UserId != 0)
+                            {
+
+                                if (objtrans.fuelPrepayCompletion)
+                                {
+                                    prepostpay = "PRE-PAY";
+                                }
+                                else
+                                {
+                                    prepostpay = "POST-PAY";
+                                }
+                            }
+                            else
+                            {
+                                prepostpay = "OUTSIDE-PAY";
+                            }
+
+                            var chars = "0123456789";
+                            var stringChars = new char[19];
+                            var random = new Random();
+
+                            #region auto generated code
+                            for (int a = 0; a < stringChars.Length; a++)
+                            {
+                                stringChars[a] = chars[random.Next(chars.Length)];
+                            }
+                            SequenceNumber = new String(stringChars);
+                            #endregion
+
+                            string t = "";
+                            dtInvoicePump.Rows.Add(
+                               RowPosition,
+                                Id,
+                                "/Cart-" + InvoiceDate + "," + RegisterInvoiceNo,   //CartId
+                                objtrLine[j].trlFuel.fuelPosition,  //PumpId
+                                objtrLine[j].trlFuel.fuelProd.sysid,    //FuelId
+                                objtrLine[j].trlFuel.fuelSvcMode.sysid, //ServiceType
+                                objtrLine[j].trlFuel.basePrice, //PricePerGallon
+                                 objtrLine[j].trlLineTot,   //Amount
+                                objtrLine[j].trlFuel.fuelVolume,    //Volume
+                               prepostpay,  ///TransactionType
+                                SequenceNumber,  //SequenceNumber
+                                6,   //PumpCartStatus
+                                DepartmentId
+                                );
+
+
+                            dtPumpCart.Rows.Add(
+                                 "/Cart-" + InvoiceDate + "," + RegisterInvoiceNo,  //CartId
+                                 objtrLine[j].trlFuel.fuelPosition, //PumpId
+                                 objtrLine[j].trlFuel.fuelProd.sysid,   //FuelId
+                                 UserId, //UserId
+                                 InvoiceDate,   //TimeStamp
+                                 RegisterInvoiceNo, //RegInvNum
+                                 RegisterId,    //RegisterNumber
+                                 objtrLine[j].trlFuel.fuelSvcMode.sysid,
+                                 0, //PayId
+                                 objtrLine[j].trlFuel.basePrice, //PricePerGallon
+                                 objtrLine[j].trlLineTot,   //Amount
+                                 objtrLine[j].trlFuel.fuelVolume, //Volume
+                                 1, // PayType
+                                 prepostpay, //TransactionType
+                                 Id,    //InvoiceNo
+                                 objtrLine[j].trlFuel.trlFuelSeq,   //TransactionNo
+                                 PumpCart_RowPosition += 1,  //RowPosition
+                                 SequenceNumber,    //SequenceNumber
+                                 6, //PumpCartStatus
+                                 "", //parentSequence
+                                 "", //reason
+                                 "",    //ReleaseToken
+                                 0, //TransactionSeqNo
+                                 null,  //Odometer
+                                 null, //Vehicle
+                                 null   //Driver
+                                );
                         }
-                        SequenceNumber = new String(stringChars);
                         #endregion
-
-                        string t = "";
-                        dtInvoicePump.Rows.Add(
-                           RowPosition,
-                            Id,
-                            "/Cart-" + InvoiceDate + "," + RegisterInvoiceNo,   //CartId
-                            objtrLine[j].trlFuel.fuelPosition,  //PumpId
-                            objtrLine[j].trlFuel.fuelProd.sysid,    //FuelId
-                            objtrLine[j].trlFuel.fuelSvcMode.sysid, //ServiceType
-                            objtrLine[j].trlFuel.basePrice, //PricePerGallon
-                             objtrLine[j].trlLineTot,   //Amount
-                            objtrLine[j].trlFuel.fuelVolume,    //Volume
-                           prepostpay,  ///TransactionType
-                            SequenceNumber,  //SequenceNumber
-                            6,   //PumpCartStatus
-                            DepartmentId
-                            );
-
-
-                        dtPumpCart.Rows.Add(
-                             "/Cart-" + InvoiceDate + "," + RegisterInvoiceNo,  //CartId
-                             objtrLine[j].trlFuel.fuelPosition, //PumpId
-                             objtrLine[j].trlFuel.fuelProd.sysid,   //FuelId
-                             UserId, //UserId
-                             InvoiceDate,   //TimeStamp
-                             RegisterInvoiceNo, //RegInvNum
-                             RegisterId,    //RegisterNumber
-                             objtrLine[j].trlFuel.fuelSvcMode.sysid,
-                             0, //PayId
-                             objtrLine[j].trlFuel.basePrice, //PricePerGallon
-                             objtrLine[j].trlLineTot,   //Amount
-                             objtrLine[j].trlFuel.fuelVolume, //Volume
-                             1, // PayType
-                             prepostpay, //TransactionType
-                             Id,    //InvoiceNo
-                             objtrLine[j].trlFuel.trlFuelSeq,   //TransactionNo
-                             PumpCart_RowPosition += 1,  //RowPosition
-                             SequenceNumber,    //SequenceNumber
-                             6, //PumpCartStatus
-                             "", //parentSequence
-                             "", //reason
-                             "",    //ReleaseToken
-                             0, //TransactionSeqNo
-                             null,  //Odometer
-                             null, //Vehicle
-                             null   //Driver
-                            );
                     }
                     #endregion
                 }
@@ -3406,12 +3692,12 @@ namespace VerifoneServices
             }
             catch (Exception ex)
             {
-                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Sale Exception  : Invoice No " + RegisterInvoiceNo + " - Exception " + ex.Message, "Sale", "");
+                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Sale Exception " + Path.GetFileName(FilePath) + "  : Invoice No " + RegisterInvoiceNo + " - Exception " + ex.Message, "Sale", "");
                 //objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Sale Exception : " + ex.Message, "Sale", "");
             }
         }
 
-        public void Void(myCompany1111.trans objtrans, DataTable dtVoid)
+        public void Void(myCompany1111.trans objtrans, DataTable dtVoid, string FilePath)
         {
             _CVerifone objVerifone = new _CVerifone();
             try
@@ -3444,71 +3730,77 @@ namespace VerifoneServices
 
                 UserId = Convert.ToInt64(objtrans.trHeader.cashier.sysid);
 
-                for (int j = 0; j < objtrLine.Length; j++)
+                if (objtrLine != null && objtrLine.Length > 0)
                 {
-                    Discount = objtrLine[j].trlMixMatches != null ? objtrLine[j].trlMixMatches[0].trlPromoAmount : 0;
-                    Amount = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
-                    ItemQty = objtrLine[j].trlQty != null ? objtrLine[j].trlQty : 0;
-                    OldPrice = objtrLine[j].trlPrcOvrd;
-                    LineAmount = objtrLine[j].trlLineTot != null ? objtrLine[j].trlLineTot : 0;
-
-                    LineType = Convert.ToString(objtrLine[j].type);
-
-                    if (LineType == "preFuel")
+                    #region
+                    for (int j = 0; j < objtrLine.Length; j++)
                     {
-                        ItemAmount = LineAmount;
-                    }
-                    else
-                    {
-                        if (ItemQty != 0)
+                        Discount = objtrLine[j].trlMixMatches != null ? objtrLine[j].trlMixMatches[0].trlPromoAmount : 0;
+                        Amount = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
+                        ItemQty = objtrLine[j].trlQty != null ? objtrLine[j].trlQty : 0;
+                        OldPrice = objtrLine[j].trlPrcOvrd;
+                        LineAmount = objtrLine[j].trlLineTot != null ? objtrLine[j].trlLineTot : 0;
+
+                        LineType = Convert.ToString(objtrLine[j].type);
+
+                        if (LineType == "preFuel")
                         {
-                            ItemAmount = (((Amount * ItemQty) - Discount));
+                            ItemAmount = LineAmount;
                         }
                         else
                         {
-                            ItemAmount = 0;
+                            if (ItemQty != 0)
+                            {
+                                ItemAmount = (((Amount * ItemQty) - Discount));
+                            }
+                            else
+                            {
+                                ItemAmount = 0;
+                            }
                         }
-                    }
 
-                    if (objtrLine[j].type == 0)
-                    {
-                        Modifier = objtrLine[j].trlModifier != null ? objtrLine[j].trlModifier : "";
-                        UPC = objtrLine[j].trlUPC;
-                        //ItemType = 0;
-                    }
-                    else
-                    {
-                        Modifier = "";
-                        UPC = "";
-                        //ItemType = 1;
-                    }
+                        if (objtrLine[j].type == 0)
+                        {
+                            Modifier = objtrLine[j].trlModifier != null ? objtrLine[j].trlModifier : "";
+                            UPC = objtrLine[j].trlUPC;
+                            //ItemType = 0;
+                        }
+                        else
+                        {
+                            Modifier = "";
+                            UPC = "";
+                            //ItemType = 1;
+                        }
 
-                    itemname = objtrLine[j].trlDesc != null ? objtrLine[j].trlDesc : "";
+                        itemname = objtrLine[j].trlDesc != null ? objtrLine[j].trlDesc : "";
 
-                    dtVoid.Rows.Add(
-                         objtrLine[j].type, //ItemType = 0 (plu), 8 (dept), 4 (preFuel),
-                         TVoid_InvoiceNo,
-                         itemname,
-                         UPC,
-                         Modifier,
-                         TVoid_Date,
-                         TVoid_RowPosition += 1,
-                         UserId,
-                         ItemAmount,//objtrLine[j].trlLineTot,
-                         TVoid_OldInvoiceNo,
-                         TVoid_RegisterId,
-                         OldPrice,
-                         ItemQty
-                      );
+                        dtVoid.Rows.Add(
+                             objtrLine[j].type, //ItemType = 0 (plu), 8 (dept), 4 (preFuel),
+                             TVoid_InvoiceNo,
+                             itemname,
+                             UPC,
+                             Modifier,
+                             TVoid_Date,
+                             TVoid_RowPosition += 1,
+                             UserId,
+                             ItemAmount,//objtrLine[j].trlLineTot,
+                             TVoid_OldInvoiceNo,
+                             TVoid_RegisterId,
+                             OldPrice,
+                             ItemQty
+                          );
+                    }
+                    #endregion
                 }
             }
             catch (Exception ex)
             {
-                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Void Exception : " + ex.Message, "Void", "");
+                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Void Exception " + Path.GetFileName(FilePath) + " : " + ex.Message, "Void", "");
             }
         }
 
-        public void Suspended(myCompany1111.trans objtrans, DataTable dtSaleSuspened, DataTable dtSalesSuspenedItem, int SaleSuspended_OrderNo, DataTable dtTaxExempt)
+        public void Suspended(myCompany1111.trans objtrans, DataTable dtSaleSuspened, DataTable dtSalesSuspenedItem, int SaleSuspended_OrderNo, DataTable dtTaxExempt,
+                              string FilePath)
         {
             _CVerifone objVerifone = new _CVerifone();
             try
@@ -3558,178 +3850,187 @@ namespace VerifoneServices
                     SaleSuspended_RegisterId
                     );
 
-                for (int n = 0; n < objtrLine.Length; n++)
+                if (objtrLine != null && objtrLine.Length > 0)
                 {
-
-                    SaleSuspendedItem_RowPosition = n + 1;
-                    SaleSuspenedItem_Barcode = objtrLine[n].trlUPC;
-                    SaleSuspenedItem_ItemNo = objtrLine[n].trlNetwCode;
-                    SaleSuspenedItem_ItemDesc = objtrLine[n].trlDesc;
-                    SaleSupenedItem_ItemQty = objtrLine[n].trlQty;
-                    SaleSuspenedItem_Modifier = objtrLine[n].trlModifier;
-
-                    SaleSuspenedItem_DepartmentId = Convert.ToInt16(objtrLine[n].trlDept.number);
-                    SaleSuspenedItem_RetailAmount = objtrLine[n].trlUnitPrice;
-                    SaleSuspendedItem_OldPrice = objtrLine[n].trlPrcOvrd;
-                    SaleSuspendedItem_ItemType = Convert.ToString(objtrLine[n].type);
-                    SaleSupenedItem_Discount = objtrLine[n].trlMixMatches != null ? objtrLine[n].trlMixMatches[0].trlPromoAmount : 0;
-                    SaleSuspenedItem_DepartmentType = Convert.ToString(objtrLine[n].trlDept.type);
-
-                    if (objtrLine[n].trlTaxes != null && objtrLine[n].trlTaxes.Length > 0)
+                    #region
+                    for (int n = 0; n < objtrLine.Length; n++)
                     {
-                        SaleSuspenedItem_Tax = ((trlTax)(objtrLine[n].trlTaxes[0])).Value;
-                        SaleSuspenedItem_Rate = ((trlRate)(objtrLine[n].trlTaxes[1])).Value;
-                        SaleSuspenedItem_TaxId = Convert.ToInt32(((trlRate)(objtrLine[n].trlTaxes[1])).sysid);
-                        SaleSuspenedItem_IsReverse = ((trlTax)(objtrLine[n].trlTaxes[0])).reverse;
 
-                        if (SaleSuspenedItem_IsReverse)
+                        SaleSuspendedItem_RowPosition = n + 1;
+                        SaleSuspenedItem_Barcode = objtrLine[n].trlUPC;
+                        SaleSuspenedItem_ItemNo = objtrLine[n].trlNetwCode;
+                        SaleSuspenedItem_ItemDesc = objtrLine[n].trlDesc;
+                        SaleSupenedItem_ItemQty = objtrLine[n].trlQty;
+                        SaleSuspenedItem_Modifier = objtrLine[n].trlModifier;
+
+                        SaleSuspenedItem_DepartmentId = Convert.ToInt16(objtrLine[n].trlDept.number);
+                        SaleSuspenedItem_RetailAmount = objtrLine[n].trlUnitPrice;
+                        SaleSuspendedItem_OldPrice = objtrLine[n].trlPrcOvrd;
+                        SaleSuspendedItem_ItemType = Convert.ToString(objtrLine[n].type);
+                        SaleSupenedItem_Discount = objtrLine[n].trlMixMatches != null ? objtrLine[n].trlMixMatches[0].trlPromoAmount : 0;
+                        SaleSuspenedItem_DepartmentType = Convert.ToString(objtrLine[n].trlDept.type);
+
+                        if (objtrLine[n].trlTaxes != null && objtrLine[n].trlTaxes.Length > 0)
                         {
+                            SaleSuspenedItem_Tax = ((trlTax)(objtrLine[n].trlTaxes[0])).Value;
+                            SaleSuspenedItem_Rate = ((trlRate)(objtrLine[n].trlTaxes[1])).Value;
+                            SaleSuspenedItem_TaxId = Convert.ToInt32(((trlRate)(objtrLine[n].trlTaxes[1])).sysid);
+                            SaleSuspenedItem_IsReverse = ((trlTax)(objtrLine[n].trlTaxes[0])).reverse;
 
-                            //dtTaxExempt.Rows.Add(
-                            //       SaleSuspended_InvoiceNo,
-                            //       SaleSuspendedItem_RowPosition,
-                            //       SaleSuspenedItem_ItemDesc,
-                            //       SaleSuspendedItem_ItemType,
-                            //       SaleSuspenedItem_Barcode,
-                            //       SaleSuspenedItem_Modifier,
-                            //       SaleSuspenedItem_TaxId,
-                            //       SaleSuspenedItem_Rate,
-                            //       0,
-                            //       ((SaleSuspenedItem_Tax * SaleSuspenedItem_Rate) / 100)
-                            //   );
+                            if (SaleSuspenedItem_IsReverse)
+                            {
 
-                            dtTaxExempt.Rows.Add(
-                           SaleSuspended_InvoiceNo,
-                            SaleSuspenedItem_Barcode,
-                            SaleSuspended_InvoiceDate,
-                           SaleSuspendedItem_RowPosition,
-                            SaleSuspenedItem_Rate,
-                           UserId,
-                           SaleSuspended_RegisterId
-                           );
+                                //dtTaxExempt.Rows.Add(
+                                //       SaleSuspended_InvoiceNo,
+                                //       SaleSuspendedItem_RowPosition,
+                                //       SaleSuspenedItem_ItemDesc,
+                                //       SaleSuspendedItem_ItemType,
+                                //       SaleSuspenedItem_Barcode,
+                                //       SaleSuspenedItem_Modifier,
+                                //       SaleSuspenedItem_TaxId,
+                                //       SaleSuspenedItem_Rate,
+                                //       0,
+                                //       ((SaleSuspenedItem_Tax * SaleSuspenedItem_Rate) / 100)
+                                //   );
+
+                                dtTaxExempt.Rows.Add(
+                               SaleSuspended_InvoiceNo,
+                                SaleSuspenedItem_Barcode,
+                                SaleSuspended_InvoiceDate,
+                               SaleSuspendedItem_RowPosition,
+                                SaleSuspenedItem_Rate,
+                               UserId,
+                               SaleSuspended_RegisterId
+                               );
+                            }
+
+                        }
+                        else
+                        {
+                            SaleSuspenedItem_Tax = 0;
+                            SaleSuspenedItem_Rate = 0;
+                            SaleSuspenedItem_TaxId = 0;
+                            SaleSuspenedItem_ItemTaxAmount = 0;
                         }
 
-                    }
-                    else
-                    {
-                        SaleSuspenedItem_Tax = 0;
-                        SaleSuspenedItem_Rate = 0;
-                        SaleSuspenedItem_TaxId = 0;
-                        SaleSuspenedItem_ItemTaxAmount = 0;
-                    }
+                        SaleSuspenedItem_ItemTaxAmount += ((SaleSuspenedItem_Tax * SaleSuspenedItem_Rate) / 100);
 
-                    SaleSuspenedItem_ItemTaxAmount += ((SaleSuspenedItem_Tax * SaleSuspenedItem_Rate) / 100);
-
-                    if (objtrLine[n].trlDept.Value == "MONEY ORDER")
-                    {
-                        if (objtrLine[n].trlFee != null)
+                        if (objtrLine[n].trlDept.Value == "MONEY ORDER")
                         {
-                            trlFee[] objtrlFee = new trlFee[objtrLine[n].trlFee.Count()];
-                            objtrlFee = objtrLine[n].trlFee;
-                            for (int jj = 0; jj < objtrlFee.Length; jj++)
+                            if (objtrLine[n].trlFee != null)
                             {
-                                ExtraCharge += objtrlFee[jj].trlFeeAmount;
+                                trlFee[] objtrlFee = new trlFee[objtrLine[n].trlFee.Count()];
+                                objtrlFee = objtrLine[n].trlFee;
 
+                                if (objtrlFee != null && objtrlFee.Length > 0)
+                                {
+                                    for (int jj = 0; jj < objtrlFee.Length; jj++)
+                                    {
+                                        ExtraCharge += objtrlFee[jj].trlFeeAmount;
+                                    }
+                                }
+                                IsMoneyOrder = true;
                             }
-                            IsMoneyOrder = true;
+                            else
+                            {
+                                ExtraCharge = 0;
+                                IsMoneyOrder = false;
+                            }
                         }
                         else
                         {
                             ExtraCharge = 0;
                             IsMoneyOrder = false;
                         }
-                    }
-                    else
-                    {
-                        ExtraCharge = 0;
-                        IsMoneyOrder = false;
-                    }
 
 
-                    #region ItemAmount & ItemBasicRate
-                    SaleSupenedItem_Amount = objtrLine[n].trlUnitPrice != null ? objtrLine[n].trlUnitPrice : 0;
-                    if (SaleSuspendedItem_ItemType == "voidplu" || SaleSuspendedItem_ItemType == "voiddept" || SaleSuspenedItem_DepartmentType == "neg")
-                    {
-                        if (SaleSupenedItem_ItemQty != 0)
+                        #region ItemAmount & ItemBasicRate
+                        SaleSupenedItem_Amount = objtrLine[n].trlUnitPrice != null ? objtrLine[n].trlUnitPrice : 0;
+                        if (SaleSuspendedItem_ItemType == "voidplu" || SaleSuspendedItem_ItemType == "voiddept" || SaleSuspenedItem_DepartmentType == "neg")
                         {
-                            if (SaleSuspenedItem_DepartmentType == "neg")
+                            if (SaleSupenedItem_ItemQty != 0)
                             {
-                                SaleSuspendedItem_ItemType = "dept_neg";
+                                if (SaleSuspenedItem_DepartmentType == "neg")
+                                {
+                                    SaleSuspendedItem_ItemType = "dept_neg";
+                                }
+                                SaleSuspenedItem_ItemAmount = (((SaleSupenedItem_Amount * SaleSupenedItem_ItemQty) - SaleSupenedItem_Discount) / SaleSupenedItem_ItemQty) * (-1);
                             }
-                            SaleSuspenedItem_ItemAmount = (((SaleSupenedItem_Amount * SaleSupenedItem_ItemQty) - SaleSupenedItem_Discount) / SaleSupenedItem_ItemQty) * (-1);
-                        }
-                        else
-                        {
-                            SaleSuspenedItem_ItemAmount = 0;
-                        }
-                        if (SaleSuspendedItem_OldPrice == 0)
-                        {
-                            SaleSuspenedItem_ItemBasicRate = objtrLine[n].trlUnitPrice != null ? (objtrLine[n].trlUnitPrice * (-1)) : 0;
-                        }
-                        else
-                        {
-                            if (SaleSuspendedItem_OldPrice < 0)
-                                SaleSuspenedItem_ItemBasicRate = (((SaleSuspendedItem_OldPrice * (-1)) / SaleSupenedItem_ItemQty) * (-1));
                             else
-                                SaleSuspenedItem_ItemBasicRate = ((SaleSuspendedItem_OldPrice / SaleSupenedItem_ItemQty) * (-1));
-                        }
-                    }
-                    else
-                    {
-                        if (SaleSupenedItem_ItemQty != 0)
-                        {
-                            SaleSuspenedItem_ItemAmount = ((SaleSupenedItem_Amount * SaleSupenedItem_ItemQty) - SaleSupenedItem_Discount) / SaleSupenedItem_ItemQty;
-                        }
-                        else
-                        {
-                            SaleSuspenedItem_ItemAmount = 0;
-                        }
-                        if (SaleSuspendedItem_OldPrice == 0)
-                        {
-                            SaleSuspenedItem_ItemBasicRate = objtrLine[n].trlUnitPrice != null ? objtrLine[n].trlUnitPrice : 0;
+                            {
+                                SaleSuspenedItem_ItemAmount = 0;
+                            }
+                            if (SaleSuspendedItem_OldPrice == 0)
+                            {
+                                SaleSuspenedItem_ItemBasicRate = objtrLine[n].trlUnitPrice != null ? (objtrLine[n].trlUnitPrice * (-1)) : 0;
+                            }
+                            else
+                            {
+                                if (SaleSuspendedItem_OldPrice < 0)
+                                    SaleSuspenedItem_ItemBasicRate = (((SaleSuspendedItem_OldPrice * (-1)) / SaleSupenedItem_ItemQty) * (-1));
+                                else
+                                    SaleSuspenedItem_ItemBasicRate = ((SaleSuspendedItem_OldPrice / SaleSupenedItem_ItemQty) * (-1));
+                            }
                         }
                         else
                         {
-                            SaleSuspenedItem_ItemBasicRate = SaleSuspendedItem_OldPrice / SaleSupenedItem_ItemQty;
+                            if (SaleSupenedItem_ItemQty != 0)
+                            {
+                                SaleSuspenedItem_ItemAmount = ((SaleSupenedItem_Amount * SaleSupenedItem_ItemQty) - SaleSupenedItem_Discount) / SaleSupenedItem_ItemQty;
+                            }
+                            else
+                            {
+                                SaleSuspenedItem_ItemAmount = 0;
+                            }
+                            if (SaleSuspendedItem_OldPrice == 0)
+                            {
+                                SaleSuspenedItem_ItemBasicRate = objtrLine[n].trlUnitPrice != null ? objtrLine[n].trlUnitPrice : 0;
+                            }
+                            else
+                            {
+                                SaleSuspenedItem_ItemBasicRate = SaleSuspendedItem_OldPrice / SaleSupenedItem_ItemQty;
+                            }
                         }
+                        #endregion
+
+                        SaleSuspenedItem_TotalItemAmount = (SaleSuspenedItem_ItemAmount * SaleSupenedItem_ItemQty) + SaleSuspenedItem_ItemTaxAmount;
+
+                        dtSalesSuspenedItem.Rows.Add(
+                        SaleSuspendedItem_RowPosition,
+                        SaleSuspended_InvoiceNo,
+                        SaleSuspenedItem_Barcode,
+                        SaleSuspenedItem_ItemNo,
+                        SaleSuspenedItem_ItemDesc,
+                        SaleSupenedItem_ItemQty,
+                        SaleSuspenedItem_ItemAmount,
+                        SaleSuspenedItem_ItemTaxAmount,
+                        SaleSuspenedItem_TotalItemAmount,
+                        SaleSuspenedItem_DepartmentId,
+                        SaleSuspenedItem_RetailAmount,
+                        SaleSuspenedItem_TaxId,
+                        SaleSuspenedItem_Rate,
+                        SaleSuspended_InvoiceDate,
+                        UserId,
+                        SaleSuspenedItem_Modifier,
+                        SaleSuspenedItem_ItemBasicRate,
+                        SaleSuspended_RegisterId,
+                        SaleSuspendedItem_OldPrice,
+                        ExtraCharge,
+                        IsMoneyOrder
+                        );
                     }
                     #endregion
-
-                    SaleSuspenedItem_TotalItemAmount = (SaleSuspenedItem_ItemAmount * SaleSupenedItem_ItemQty) + SaleSuspenedItem_ItemTaxAmount;
-
-                    dtSalesSuspenedItem.Rows.Add(
-                    SaleSuspendedItem_RowPosition,
-                    SaleSuspended_InvoiceNo,
-                    SaleSuspenedItem_Barcode,
-                    SaleSuspenedItem_ItemNo,
-                    SaleSuspenedItem_ItemDesc,
-                    SaleSupenedItem_ItemQty,
-                    SaleSuspenedItem_ItemAmount,
-                    SaleSuspenedItem_ItemTaxAmount,
-                    SaleSuspenedItem_TotalItemAmount,
-                    SaleSuspenedItem_DepartmentId,
-                    SaleSuspenedItem_RetailAmount,
-                    SaleSuspenedItem_TaxId,
-                    SaleSuspenedItem_Rate,
-                    SaleSuspended_InvoiceDate,
-                    UserId,
-                    SaleSuspenedItem_Modifier,
-                    SaleSuspenedItem_ItemBasicRate,
-                    SaleSuspended_RegisterId,
-                    SaleSuspendedItem_OldPrice,
-                    ExtraCharge,
-                    IsMoneyOrder
-                    );
                 }
             }
             catch (Exception ex)
             {
-                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Suspended Exception : " + ex.Message, "Suspended", "");
+                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Suspended Exception " + Path.GetFileName(FilePath) + " : " + ex.Message, "Suspended", "");
             }
         }
 
         public void Recall(myCompany1111.trans objtrans, DataTable dtSaleRecall, DataTable dtSaleRecallItem, DataTable dtSaleRecall_InvoiceDiscount, DataTable dtLotteryInvoice,
-                    DataTable dtLotteryInvoiceItem, DataTable dtTaxExempt, int Comman_InvoiceNo, DataTable dtInvoicePump, DataTable dtPumpCart, DataTable dtSaleRecallPayment)
+                    DataTable dtLotteryInvoiceItem, DataTable dtTaxExempt, int Comman_InvoiceNo, DataTable dtInvoicePump, DataTable dtPumpCart, DataTable dtSaleRecallPayment,
+                    string FilePath)
         {
             _CVerifone objVerifone = new _CVerifone();
 
@@ -3752,8 +4053,6 @@ namespace VerifoneServices
             #endregion
             try
             {
-
-
                 PayLineCount = objtrans.trPaylines == null ? 0 : objtrans.trPaylines.Count();
                 trPayline[] objtrPayline = new trPayline[PayLineCount];
                 objtrPayline = objtrans.trPaylines;
@@ -3770,11 +4069,9 @@ namespace VerifoneServices
                 SaleRecall_OldInvoiceNo = Convert.ToInt64(objtrans.trHeader.trRecall[0].trSeq);
 
                 #region check invoice
-
                 RegisterId = Convert.ToInt32(objtrans.trHeader.trTickNum.posNum);
 
                 InvoiceDate = objComman.SplitDate(objtrans.trHeader.date);
-
 
                 SubTotal = objtrans.trValue.trTotNoTax;
                 TaxAmount = objtrans.trValue.trTotTax;
@@ -3782,7 +4079,7 @@ namespace VerifoneServices
 
                 try
                 {
-                    if (objtrPayline != null)
+                    if (objtrPayline != null && objtrPayline.Length > 0)
                     {
                         for (int k = 0; k < objtrPayline.Length; k++)
                         {
@@ -3793,6 +4090,8 @@ namespace VerifoneServices
                                 ReturnAmount = (objtrPayline[k].trpAmt * -1);
                                 RetrunPayid = PayId;
                             }
+
+                            #region commented
                             //if (objtrPayline[k].trpPaycode.Value == "CASH")
                             //{
                             //    PayMode = objtrPayline[k].trpPaycode.Value;
@@ -3831,6 +4130,8 @@ namespace VerifoneServices
                             //    );
 
                             //}
+                            #endregion
+
                             else //if (objtrPayline[k].trpPaycode.Value == "CREDIT" || objtrPayline[k].trpPaycode.Value == "DEBIT")
                             {
 
@@ -3843,7 +4144,6 @@ namespace VerifoneServices
 
                                 if (((trpCardInfo)(objtrPayline[k].Item)) != null)
                                 {
-
                                     CardType = ((trpCardInfo)(objtrPayline[k].Item)).trpcCCName.Value;
                                     AuthCode = ((trpCardInfo)(objtrPayline[k].Item)).trpcAuthCode;
                                     AccNo = ((trpCardInfo)(objtrPayline[k].Item)).trpcAccount.Value;
@@ -3880,6 +4180,8 @@ namespace VerifoneServices
                                     , ExtData, HostCode, AuthDateTime
                                 );
                             }
+
+                            #region commented
                             //else if (objtrPayline[k].trpPaycode.Value == "LOTTERY")
                             //{
                             //    PayMode = objtrPayline[k].trpPaycode.Value;
@@ -3900,9 +4202,8 @@ namespace VerifoneServices
                             //        "", "", "", "", "", ""
                             //        , "", "", null
                             //    );
-
-
                             //}
+                            #endregion
                         }
                         if (RetrunPayid > 0 && ReturnAmount > 0)
                         {
@@ -4006,172 +4307,222 @@ namespace VerifoneServices
                 );
                 }
                 #endregion
-
-                for (int j = 0; j < objtrLine.Length; j++)
+                if (objtrLine != null && objtrLine.Length > 0)
                 {
-
-                    RowPosition = RowPosition + 1;
-                    IsReverse = false;
-                    PromotionAmount = 0;
-                    ItemType = Convert.ToString(objtrLine[j].type);
-                    DepartmentId = Convert.ToInt64(objtrLine[j].trlDept.number);
-                    DepartmentType = Convert.ToString(objtrLine[j].trlDept.type);
-
-                    if (objtrLine[j].trlDept.Value == "MONEY ORDER")
+                    #region
+                    for (int j = 0; j < objtrLine.Length; j++)
                     {
-                        if (objtrLine[j].trlFee != null)
-                        {
-                            trlFee[] objtrlFee = new trlFee[objtrLine[j].trlFee.Count()];
-                            objtrlFee = objtrLine[j].trlFee;
-                            for (int jj = 0; jj < objtrlFee.Length; jj++)
-                            {
-                                ExtraCharge += objtrlFee[jj].trlFeeAmount;
+                        RowPosition = RowPosition + 1;
+                        IsReverse = false;
+                        PromotionAmount = 0;
+                        ItemType = Convert.ToString(objtrLine[j].type);
+                        DepartmentId = Convert.ToInt64(objtrLine[j].trlDept.number);
+                        DepartmentType = Convert.ToString(objtrLine[j].trlDept.type);
 
+                        if (objtrLine[j].trlDept.Value == "MONEY ORDER")
+                        {
+                            if (objtrLine[j].trlFee != null)
+                            {
+                                trlFee[] objtrlFee = new trlFee[objtrLine[j].trlFee.Count()];
+                                objtrlFee = objtrLine[j].trlFee;
+
+                                if (objtrlFee != null && objtrlFee.Length > 0)
+                                {
+                                    for (int jj = 0; jj < objtrlFee.Length; jj++)
+                                    {
+                                        ExtraCharge += objtrlFee[jj].trlFeeAmount;
+                                    }
+                                }
+                                IsMoneyOrder = true;
                             }
-                            IsMoneyOrder = true;
+                            else
+                            {
+                                ExtraCharge = 0;
+                                IsMoneyOrder = false;
+                            }
                         }
                         else
                         {
                             ExtraCharge = 0;
                             IsMoneyOrder = false;
                         }
-                    }
-                    else
-                    {
-                        ExtraCharge = 0;
-                        IsMoneyOrder = false;
-                    }
 
-                    if (ItemType == "postFuel")
-                    {
-                        DataSet dsdep = objComman.GetDataDepthorwItem(DepartmentId);
-                        if (dsdep.Tables[0] != null && dsdep.Tables[0].Rows.Count > 0)
+                        if (ItemType == "postFuel")
                         {
-                            ItemNo = Convert.ToString(dsdep.Tables[0].Rows[0]["ITEM_No"]);
-                            ItemDesc = Convert.ToString(dsdep.Tables[0].Rows[0]["ITEM_Desc"]);
-                            UPC = Convert.ToString(dsdep.Tables[0].Rows[0]["Barcode"]);
+                            DataSet dsdep = objComman.GetDataDepthorwItem(DepartmentId);
+                            if (dsdep.Tables[0] != null && dsdep.Tables[0].Rows.Count > 0)
+                            {
+                                ItemNo = Convert.ToString(dsdep.Tables[0].Rows[0]["ITEM_No"]);
+                                ItemDesc = Convert.ToString(dsdep.Tables[0].Rows[0]["ITEM_Desc"]);
+                                UPC = Convert.ToString(dsdep.Tables[0].Rows[0]["Barcode"]);
+                            }
+                            else
+                            {
+                                ItemNo = "0";
+                                ItemDesc = "";
+                                UPC = "";
+                            }
+                            ItemQty = 1;
                         }
                         else
                         {
-                            ItemNo = "0";
-                            ItemDesc = "";
-                            UPC = "";
+                            ItemNo = objtrLine[j].trlNetwCode;
+                            ItemDesc = objtrLine[j].trlDesc;
+                            UPC = objtrLine[j].trlUPC;
+                            ItemQty = objtrLine[j].trlQty != null ? objtrLine[j].trlQty : 0;
                         }
-                        ItemQty = 1;
-                    }
-                    else
-                    {
-                        ItemNo = objtrLine[j].trlNetwCode;
-                        ItemDesc = objtrLine[j].trlDesc;
-                        UPC = objtrLine[j].trlUPC;
-                        ItemQty = objtrLine[j].trlQty != null ? objtrLine[j].trlQty : 0;
-                    }
 
-                    Modifier = objtrLine[j].trlModifier;
+                        Modifier = objtrLine[j].trlModifier;
 
-                    if (objtrLine[j].trlTaxes != null && objtrLine[j].trlTaxes.Length > 0)
-                    {
-
-                        Tax = ((trlTax)(objtrLine[j].trlTaxes[0])).Value;
-                        Rate = ((trlRate)(objtrLine[j].trlTaxes[1])).Value;
-                        TaxId = Convert.ToInt32(((trlRate)(objtrLine[j].trlTaxes[1])).sysid);
-                        IsReverse = ((trlTax)(objtrLine[j].trlTaxes[0])).reverse;
-                        if (IsReverse)
+                        if (objtrLine[j].trlTaxes != null && objtrLine[j].trlTaxes.Length > 0)
                         {
-                            #region for remove tax
-                            dtTaxExempt.Rows.Add(
-                                Id,
-                                UPC,
-                                InvoiceDate,
-                                RowPosition,
-                                Rate,
-                                UserId,
-                                RegisterId
-                                );
-                            #endregion
+                            Tax = ((trlTax)(objtrLine[j].trlTaxes[0])).Value;
+                            Rate = ((trlRate)(objtrLine[j].trlTaxes[1])).Value;
+                            TaxId = Convert.ToInt32(((trlRate)(objtrLine[j].trlTaxes[1])).sysid);
+                            IsReverse = ((trlTax)(objtrLine[j].trlTaxes[0])).reverse;
+                            if (IsReverse)
+                            {
+                                #region for remove tax
+                                dtTaxExempt.Rows.Add(
+                                    Id,
+                                    UPC,
+                                    InvoiceDate,
+                                    RowPosition,
+                                    Rate,
+                                    UserId,
+                                    RegisterId
+                                    );
+                                #endregion
+                            }
                         }
-                    }
-                    else
-                    {
-                        Tax = 0;
-                        Rate = 0;
-                        TaxId = 0;
-                        ItemTaxAmount = 0;
-                    }
-
-                    ItemTaxAmount = ((Tax * Rate) / 100);
-                    TaxPercentage = Rate;
-
-
-                    if (objtrLine[j].trlMixMatches != null)
-                    {
-                        for (int d = 0; d < objtrLine[j].trlMixMatches.Length; d++)
+                        else
                         {
-                            dtSaleRecall_InvoiceDiscount.Rows.Add(
-                                Id,
-                                RowPosition,
-                                UPC,
-                                objtrLine[j].trlMixMatches[d].trlPromoAmount,
-                                ItemNo,
-                                ItemDesc,
-                                objtrLine[j].trlMixMatches[d].trlPromotionID.Value,
-                                ItemType
-                                );
-
-                            PromotionAmount += objtrLine[j].trlMixMatches[d].trlPromoAmount;
+                            Tax = 0;
+                            Rate = 0;
+                            TaxId = 0;
+                            ItemTaxAmount = 0;
                         }
-                    }
-                    if (objtrLine[j].trlDisc != null)
-                    {
-                        trlDisc[] objtrlDisc = new trlDisc[objtrLine[j].trlDisc.Count()];
-                        objtrlDisc = objtrLine[j].trlDisc;
-                        for (int kk = 0; kk < objtrlDisc.Length; kk++)
+
+                        ItemTaxAmount = ((Tax * Rate) / 100);
+                        TaxPercentage = Rate;
+
+                        if (objtrLine[j].trlMixMatches != null && objtrLine[j].trlMixMatches.Length > 0)
                         {
-                            dtSaleRecall_InvoiceDiscount.Rows.Add(
-                              Id,
-                              RowPosition,
-                              UPC,
-                              objtrlDisc[kk].Value,
-                              ItemNo,
-                              ItemDesc,
-                              0,
-                              ItemType
-                              );
-                            PromotionAmount += objtrlDisc[kk].Value;
+                            for (int d = 0; d < objtrLine[j].trlMixMatches.Length; d++)
+                            {
+                                dtSaleRecall_InvoiceDiscount.Rows.Add(
+                                    Id,
+                                    RowPosition,
+                                    UPC,
+                                    objtrLine[j].trlMixMatches[d].trlPromoAmount,
+                                    ItemNo,
+                                    ItemDesc,
+                                    objtrLine[j].trlMixMatches[d].trlPromotionID.Value,
+                                    ItemType
+                                    );
+
+                                PromotionAmount += objtrLine[j].trlMixMatches[d].trlPromoAmount;
+                            }
                         }
-                    }
-
-                    Discount = PromotionAmount;
-                    TaxPercentage = Rate;
-                    OldPrice = objtrLine[j].trlPrcOvrd;
-                    Amount = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
-
-                    #region ItemAmount & ItemBasicRate
-                    if (ItemType != "postFuel")
-                    {
-                        if (objTransactionType == 0 || (Convert.ToInt16(objTransactionType) == 2))
+                        if (objtrLine[j].trlDisc != null)
                         {
-                            if (ItemType == "voidplu" || ItemType == "voiddept" || DepartmentType == "neg")
+                            trlDisc[] objtrlDisc = new trlDisc[objtrLine[j].trlDisc.Count()];
+                            objtrlDisc = objtrLine[j].trlDisc;
+                            for (int kk = 0; kk < objtrlDisc.Length; kk++)
+                            {
+                                dtSaleRecall_InvoiceDiscount.Rows.Add(
+                                  Id,
+                                  RowPosition,
+                                  UPC,
+                                  objtrlDisc[kk].Value,
+                                  ItemNo,
+                                  ItemDesc,
+                                  0,
+                                  ItemType
+                                  );
+                                PromotionAmount += objtrlDisc[kk].Value;
+                            }
+                        }
+
+                        Discount = PromotionAmount;
+                        TaxPercentage = Rate;
+                        OldPrice = objtrLine[j].trlPrcOvrd;
+                        Amount = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
+
+                        #region ItemAmount & ItemBasicRate
+                        if (ItemType != "postFuel")
+                        {
+                            if (objTransactionType == 0 || (Convert.ToInt16(objTransactionType) == 2))
+                            {
+                                if (ItemType == "voidplu" || ItemType == "voiddept" || DepartmentType == "neg")
+                                {
+                                    if (ItemQty != 0)
+                                    {
+                                        if (DepartmentType == "neg")
+                                        {
+                                            ItemType = "dept_neg";
+                                        }
+                                        ItemAmount = (((Amount * ItemQty) - Discount) / ItemQty) * (-1);
+                                        //TotalLotteryItemAmount += ItemAmount;
+                                    }
+                                    else
+                                    {
+                                        ItemAmount = 0;
+                                        //TotalLotteryItemAmount += ItemAmount;
+                                    }
+                                    RetailAmount = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * -1) : 0;
+
+                                    if (OldPrice == 0)
+                                    {
+                                        ItemBasicRate = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * -1) : 0;
+                                    }
+                                    else
+                                    {
+                                        if (OldPrice < 0)
+                                            ItemBasicRate = (((OldPrice * (-1)) / ItemQty) * (-1));
+                                        else
+                                            ItemBasicRate = ((OldPrice / ItemQty) * (-1));
+                                    }
+                                }
+                                else
+                                {
+                                    if (ItemQty != 0)
+                                    {
+                                        ItemAmount = ((Amount * ItemQty) - Discount) / ItemQty;
+                                        //TotalLotteryItemAmount += ItemAmount;
+                                    }
+                                    else
+                                    {
+                                        ItemAmount = 0;
+                                        //TotalLotteryItemAmount += ItemAmount;
+                                    }
+                                    RetailAmount = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
+                                    if (OldPrice == 0)
+                                    {
+                                        ItemBasicRate = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
+                                    }
+                                    else
+                                    {
+                                        ItemBasicRate = OldPrice / ItemQty;
+                                    }
+                                }
+                            }
+                            else
                             {
                                 if (ItemQty != 0)
                                 {
-                                    if (DepartmentType == "neg")
-                                    {
-                                        ItemType = "dept_neg";
-                                    }
                                     ItemAmount = (((Amount * ItemQty) - Discount) / ItemQty) * (-1);
-                                    //TotalLotteryItemAmount += ItemAmount;
+                                    // TotalLotteryItemAmount += ItemAmount;
                                 }
                                 else
                                 {
                                     ItemAmount = 0;
-                                    //TotalLotteryItemAmount += ItemAmount;
+                                    // TotalLotteryItemAmount += ItemAmount;
                                 }
-                                RetailAmount = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * -1) : 0;
-
+                                RetailAmount = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * (-1)) : 0;
                                 if (OldPrice == 0)
                                 {
-                                    ItemBasicRate = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * -1) : 0;
+                                    ItemBasicRate = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * (-1)) : 0;
                                 }
                                 else
                                 {
@@ -4181,183 +4532,137 @@ namespace VerifoneServices
                                         ItemBasicRate = ((OldPrice / ItemQty) * (-1));
                                 }
                             }
-                            else
-                            {
-                                if (ItemQty != 0)
-                                {
-                                    ItemAmount = ((Amount * ItemQty) - Discount) / ItemQty;
-                                    //TotalLotteryItemAmount += ItemAmount;
-                                }
-                                else
-                                {
-                                    ItemAmount = 0;
-                                    //TotalLotteryItemAmount += ItemAmount;
-                                }
-                                RetailAmount = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
-                                if (OldPrice == 0)
-                                {
-                                    ItemBasicRate = objtrLine[j].trlUnitPrice != null ? objtrLine[j].trlUnitPrice : 0;
-                                }
-                                else
-                                {
-                                    ItemBasicRate = OldPrice / ItemQty;
-                                }
-                            }
+                        #endregion
+
+                            TotalItemAmount = (ItemAmount * ItemQty) + ItemTaxAmount;
                         }
                         else
                         {
-                            if (ItemQty != 0)
-                            {
-                                ItemAmount = (((Amount * ItemQty) - Discount) / ItemQty) * (-1);
-                                // TotalLotteryItemAmount += ItemAmount;
-                            }
-                            else
-                            {
-                                ItemAmount = 0;
-                                // TotalLotteryItemAmount += ItemAmount;
-                            }
-                            RetailAmount = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * (-1)) : 0;
-                            if (OldPrice == 0)
-                            {
-                                ItemBasicRate = objtrLine[j].trlUnitPrice != null ? (objtrLine[j].trlUnitPrice * (-1)) : 0;
-                            }
-                            else
-                            {
-                                if (OldPrice < 0)
-                                    ItemBasicRate = (((OldPrice * (-1)) / ItemQty) * (-1));
-                                else
-                                    ItemBasicRate = ((OldPrice / ItemQty) * (-1));
-                            }
+                            ItemAmount = objtrLine[j].trlLineTot;
+                            ItemBasicRate = objtrLine[j].trlLineTot;
+                            TotalItemAmount = objtrLine[j].trlLineTot;
                         }
-                    #endregion
 
-                        TotalItemAmount = (ItemAmount * ItemQty) + ItemTaxAmount;
-                    }
-                    else
-                    {
-                        ItemAmount = objtrLine[j].trlLineTot;
-                        ItemBasicRate = objtrLine[j].trlLineTot;
-                        TotalItemAmount = objtrLine[j].trlLineTot;
-                    }
-
-                    if (IsLotteryItem == true)
-                    {
-                        #region Lottery item
-                        dtLotteryInvoiceItem.Rows.Add(
-                            Id,
-                            ItemNo,
-                            ItemDesc,
-                            UPC,
-                            ItemQty,
-                            ItemAmount,
-                            ItemTaxAmount,
-                            TotalItemAmount,
-                            DepartmentId,
-                            RetailAmount,
-                            false,
-                            TaxId,
-                            TaxPercentage,
-                            RowPosition,
-                            UserId,
-                            ItemType,
-                            OldPrice,
-                            InvoiceDate,
-                            PromotionAmount,
-                            Modifier,
-                            ItemBasicRate,
-                            RegisterId,
-                            false,
-                            ExtraCharge,
-                            IsMoneyOrder
-                        );
-                        #endregion
-                    }
-                    else
-                    {
-                        #region Invoice item
-                        dtSaleRecallItem.Rows.Add(
-                            Id, ItemNo, ItemDesc,
-                            UPC, ItemQty, ItemAmount,
-                            ItemTaxAmount, TotalItemAmount, DepartmentId,
-                            RetailAmount, TaxId, TaxPercentage,
-                           RowPosition, UserId, ItemType,
-                           PromotionAmount, Modifier, ItemBasicRate,
-                           OldPrice, ExtraCharge, IsMoneyOrder
-
-                        );
-                        #endregion
-                    }
-
-                    #region Fuel invoices
-                    if (objtrLine[j].trlFuel != null)
-                    {
-                        if (objtrans.fuelPrepayCompletion)
+                        if (IsLotteryItem == true)
                         {
-                            prepostpay = "PRE-PAY";
+                            #region Lottery item
+                            dtLotteryInvoiceItem.Rows.Add(
+                                Id,
+                                ItemNo,
+                                ItemDesc,
+                                UPC,
+                                ItemQty,
+                                ItemAmount,
+                                ItemTaxAmount,
+                                TotalItemAmount,
+                                DepartmentId,
+                                RetailAmount,
+                                false,
+                                TaxId,
+                                TaxPercentage,
+                                RowPosition,
+                                UserId,
+                                ItemType,
+                                OldPrice,
+                                InvoiceDate,
+                                PromotionAmount,
+                                Modifier,
+                                ItemBasicRate,
+                                RegisterId,
+                                false,
+                                ExtraCharge,
+                                IsMoneyOrder
+                            );
+                            #endregion
                         }
                         else
                         {
-                            prepostpay = "POST-PAY";
+                            #region Invoice item
+                            dtSaleRecallItem.Rows.Add(
+                                Id, ItemNo, ItemDesc,
+                                UPC, ItemQty, ItemAmount,
+                                ItemTaxAmount, TotalItemAmount, DepartmentId,
+                                RetailAmount, TaxId, TaxPercentage,
+                               RowPosition, UserId, ItemType,
+                               PromotionAmount, Modifier, ItemBasicRate,
+                               OldPrice, ExtraCharge, IsMoneyOrder
+
+                            );
+                            #endregion
                         }
 
-                        var chars = "0123456789";
-                        var stringChars = new char[19];
-                        var random = new Random();
-
-                        #region auto generated code
-                        for (int a = 0; a < stringChars.Length; a++)
+                        #region Fuel invoices
+                        if (objtrLine[j].trlFuel != null)
                         {
-                            stringChars[a] = chars[random.Next(chars.Length)];
+                            if (objtrans.fuelPrepayCompletion)
+                            {
+                                prepostpay = "PRE-PAY";
+                            }
+                            else
+                            {
+                                prepostpay = "POST-PAY";
+                            }
+
+                            var chars = "0123456789";
+                            var stringChars = new char[19];
+                            var random = new Random();
+
+                            #region auto generated code
+                            for (int a = 0; a < stringChars.Length; a++)
+                            {
+                                stringChars[a] = chars[random.Next(chars.Length)];
+                            }
+                            SequenceNumber = new String(stringChars);
+                            #endregion
+
+                            string t = "";
+                            dtInvoicePump.Rows.Add(
+                               RowPosition,
+                                Id,
+                                "/Cart-" + InvoiceDate + "," + RegisterInvoiceNo,   //CartId
+                                objtrLine[j].trlFuel.fuelPosition,  //PumpId
+                                objtrLine[j].trlFuel.fuelProd.sysid,    //FuelId
+                                objtrLine[j].trlFuel.fuelSvcMode.sysid, //ServiceType
+                                objtrLine[j].trlFuel.basePrice, //PricePerGallon
+                                 objtrLine[j].trlLineTot,   //Amount
+                                objtrLine[j].trlFuel.fuelVolume,    //Volume
+                               prepostpay,  ///TransactionType
+                                SequenceNumber,  //SequenceNumber
+                                6,   //PumpCartStatus
+                                DepartmentId
+                                );
+
+
+                            dtPumpCart.Rows.Add(
+                                 "/Cart-" + InvoiceDate + "," + RegisterInvoiceNo,  //CartId
+                                 objtrLine[j].trlFuel.fuelPosition, //PumpId
+                                 objtrLine[j].trlFuel.fuelProd.sysid,   //FuelId
+                                 UserId, //UserId
+                                 InvoiceDate,   //TimeStamp
+                                 RegisterInvoiceNo, //RegInvNum
+                                 RegisterId,    //RegisterNumber
+                                 objtrLine[j].trlFuel.fuelSvcMode.sysid,
+                                 0, //PayId
+                                 objtrLine[j].trlFuel.basePrice, //PricePerGallon
+                                 objtrLine[j].trlLineTot,   //Amount
+                                 objtrLine[j].trlFuel.fuelVolume, //Volume
+                                 1, // PayType
+                                 prepostpay, //TransactionType
+                                 Id,    //InvoiceNo
+                                 objtrLine[j].trlFuel.trlFuelSeq,   //TransactionNo
+                                 PumpCart_RowPosition += 1,  //RowPosition
+                                 SequenceNumber,    //SequenceNumber
+                                 6, //PumpCartStatus
+                                 "", //parentSequence
+                                 "", //reason
+                                 "",    //ReleaseToken
+                                 0, //TransactionSeqNo
+                                 null,  //Odometer
+                                 null, //Vehicle
+                                 null   //Driver
+                                );
                         }
-                        SequenceNumber = new String(stringChars);
                         #endregion
-
-                        string t = "";
-                        dtInvoicePump.Rows.Add(
-                           RowPosition,
-                            Id,
-                            "/Cart-" + InvoiceDate + "," + RegisterInvoiceNo,   //CartId
-                            objtrLine[j].trlFuel.fuelPosition,  //PumpId
-                            objtrLine[j].trlFuel.fuelProd.sysid,    //FuelId
-                            objtrLine[j].trlFuel.fuelSvcMode.sysid, //ServiceType
-                            objtrLine[j].trlFuel.basePrice, //PricePerGallon
-                             objtrLine[j].trlLineTot,   //Amount
-                            objtrLine[j].trlFuel.fuelVolume,    //Volume
-                           prepostpay,  ///TransactionType
-                            SequenceNumber,  //SequenceNumber
-                            6,   //PumpCartStatus
-                            DepartmentId
-                            );
-
-
-                        dtPumpCart.Rows.Add(
-                             "/Cart-" + InvoiceDate + "," + RegisterInvoiceNo,  //CartId
-                             objtrLine[j].trlFuel.fuelPosition, //PumpId
-                             objtrLine[j].trlFuel.fuelProd.sysid,   //FuelId
-                             UserId, //UserId
-                             InvoiceDate,   //TimeStamp
-                             RegisterInvoiceNo, //RegInvNum
-                             RegisterId,    //RegisterNumber
-                             objtrLine[j].trlFuel.fuelSvcMode.sysid,
-                             0, //PayId
-                             objtrLine[j].trlFuel.basePrice, //PricePerGallon
-                             objtrLine[j].trlLineTot,   //Amount
-                             objtrLine[j].trlFuel.fuelVolume, //Volume
-                             1, // PayType
-                             prepostpay, //TransactionType
-                             Id,    //InvoiceNo
-                             objtrLine[j].trlFuel.trlFuelSeq,   //TransactionNo
-                             PumpCart_RowPosition += 1,  //RowPosition
-                             SequenceNumber,    //SequenceNumber
-                             6, //PumpCartStatus
-                             "", //parentSequence
-                             "", //reason
-                             "",    //ReleaseToken
-                             0, //TransactionSeqNo
-                             null,  //Odometer
-                             null, //Vehicle
-                             null   //Driver
-                            );
                     }
                     #endregion
                 }
@@ -4366,12 +4671,12 @@ namespace VerifoneServices
             catch (Exception ex)
             {
                 // objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Sale Exception : " + ex.Message, "Sale", "");
-                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Sale Exception  : Invoice No " + RegisterInvoiceNo + " - Exception " + ex.Message, "Sale", "");
+                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Sale Exception " + Path.GetFileName(FilePath) + " : Invoice No " + RegisterInvoiceNo + " - Exception " + ex.Message, "Sale", "");
                 //objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Sale Exception : " + ex.Message, "Sale", "");
             }
         }
 
-        public void Journal(myCompany1111.trans objtrans, DataTable dtJournal)
+        public void Journal(myCompany1111.trans objtrans, DataTable dtJournal, string FilePath)
         {
             _CVerifone objVerifone = new _CVerifone();
             try
@@ -4392,7 +4697,7 @@ namespace VerifoneServices
                 myCompany1111.trLine[] objJournal_trLine = new trLine[Journal_trLineCount];
                 objJournal_trLine = objtrans.trJournal.trLine;
 
-                if (objJournal_trLine != null)
+                if (objJournal_trLine != null && objJournal_trLine.Length > 0)
                 {
                     for (int j = 0; j < objJournal_trLine.Length; j++)
                     {
@@ -4464,11 +4769,11 @@ namespace VerifoneServices
             }
             catch (Exception ex)
             {
-                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Journal Exception : " + ex.Message, "Journal", "");
+                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Journal Exception " + Path.GetFileName(FilePath) + ": " + ex.Message, "Journal", "");
             }
         }
 
-        public void Payout(myCompany1111.trans objtrans, DataTable dtPayout, int Comman_InvoiceNo)
+        public void Payout(myCompany1111.trans objtrans, DataTable dtPayout, int Comman_InvoiceNo, string FilePath)
         {
             _CVerifone objVerifone = new _CVerifone();
             try
@@ -4496,29 +4801,34 @@ namespace VerifoneServices
 
                 try
                 {
-                    for (int k = 0; k < objtrPayline.Length; k++)
+                    if (objtrPayline != null && objtrPayline.Length > 0)
                     {
-                        PayId = Convert.ToInt32(objtrPayline[k].trpPaycode.mop);
-                        if (objtrPayline[k].trpPaycode.Value == "Change")
+                        for (int k = 0; k < objtrPayline.Length; k++)
                         {
-                            ReturnAmount = (objtrPayline[k].trpAmt * -1);
+                            PayId = Convert.ToInt32(objtrPayline[k].trpPaycode.mop);
+                            if (objtrPayline[k].trpPaycode.Value == "Change")
+                            {
+                                ReturnAmount = (objtrPayline[k].trpAmt * -1);
+                            }
+                            else //if (objtrPayline[k].trpPaycode.Value == "CASH")
+                            {
+                                PayMode = objtrPayline[k].trpPaycode.Value;
+                                TenderAmount = objtrPayline[k].trpAmt != 0 ? (objtrPayline[k].trpAmt * (-1)) : 0;
+                            }
+                            #region commented
+                            //else if (objtrPayline[k].trpPaycode.Value == "MAN CREDIT")
+                            //{
+                            //    PayMode = "Credit";
+                            //    TenderAmount = objtrPayline[k].trpAmt != 0 ? (objtrPayline[k].trpAmt * (-1)) : 0;
+                            //}
+                            //else
+                            //{
+                            //    PayMode = "";
+                            //    ReturnAmount = 0;
+                            //    TenderAmount = 0;
+                            //}
+                            #endregion
                         }
-                        else //if (objtrPayline[k].trpPaycode.Value == "CASH")
-                        {
-                            PayMode = objtrPayline[k].trpPaycode.Value;
-                            TenderAmount = objtrPayline[k].trpAmt != 0 ? (objtrPayline[k].trpAmt * (-1)) : 0;
-                        }
-                        //else if (objtrPayline[k].trpPaycode.Value == "MAN CREDIT")
-                        //{
-                        //    PayMode = "Credit";
-                        //    TenderAmount = objtrPayline[k].trpAmt != 0 ? (objtrPayline[k].trpAmt * (-1)) : 0;
-                        //}
-                        //else
-                        //{
-                        //    PayMode = "";
-                        //    ReturnAmount = 0;
-                        //    TenderAmount = 0;
-                        //}
                     }
                 }
                 catch (Exception ex)
@@ -4555,11 +4865,12 @@ namespace VerifoneServices
             }
             catch (Exception ex)
             {
-                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Payout Exception : " + ex.Message, "Payout", "");
+                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Payout Exception " + Path.GetFileName(FilePath) + " : " + ex.Message, "Payout", "");
             }
         }
 
-        public void LotteryWithoutItem(myCompany1111.trans objtrans, DataTable dtLotteryInvoice, int Comman_InvoiceNo, bool IsLotteryItem, long OrderNo, DataTable dtInvoicePayment)
+        public void LotteryWithoutItem(myCompany1111.trans objtrans, DataTable dtLotteryInvoice, int Comman_InvoiceNo, bool IsLotteryItem, long OrderNo,
+                                       DataTable dtInvoicePayment, string FilePath)
         {
             _CVerifone objVerifone = new _CVerifone();
             try
@@ -4593,7 +4904,7 @@ namespace VerifoneServices
 
                 try
                 {
-                    if (objtrPayline != null)
+                    if (objtrPayline != null && objtrPayline.Length > 0)
                     {
                         for (int k = 0; k < objtrPayline.Length; k++)
                         {
@@ -4687,7 +4998,7 @@ namespace VerifoneServices
             }
             catch (Exception ex)
             {
-                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Lottery Exception : " + ex.Message, "Lottery", "");
+                objVerifone.InsertActiveLog("BoF", "Error", "Invoice()", "Lottery Exception " + Path.GetFileName(FilePath) + " : " + ex.Message, "Lottery", "");
             }
         }
         #endregion
@@ -4708,6 +5019,7 @@ namespace VerifoneServices
 
             string registerID = "";
             string InvoiceBegin = "", InvoiceEnd = "";
+            bool isXMLError_Report = false, isXMLError_Z = false, isXMLError_Shift = false, isXMLError_ZZ = false;
             #endregion
 
             #region Declare Daily Variable
@@ -4751,14 +5063,30 @@ namespace VerifoneServices
                 #endregion
 
                 #region Step 2: Check PeriodSeqNum (Id) already exists or not
-                //objCVerifone.InsertActiveLog("BoF", "Start", "Ruby_Report()", "Initialize Ruby_Report", "RubyReport 3", "");
-                string checkpath = AppDomain.CurrentDomain.BaseDirectory + "xml\\Report";
-                string[] filePaths = Directory.GetFiles(checkpath);
-                if (filePaths.Length > 0)
+                //string checkpath = AppDomain.CurrentDomain.BaseDirectory + "xml\\Report";
+                //string[] filePaths = Directory.GetFiles(checkpath);
+
+                var FilePathReport = AppDomain.CurrentDomain.BaseDirectory + "xml\\Report\\" + objComman.ReportPeriodFileName;
+
+                DataSet ds_xml = new DataSet();
+                ds_xml.ReadXml(FilePathReport, XmlReadMode.InferSchema);
+
+                for (int i = 0; i < ds_xml.Tables.Count; i++)
                 {
+                    if (ds_xml.Tables[i].TableName == "Fault")
+                    {
+                        isXMLError_Report = true;
+                        break;
+                    }
+                }
+
+                if (isXMLError_Report == false)
+                {
+                    //if (filePaths.Length > 0)
+                    //{
                     #region Step 3: xml to dataset of "vreportpdlist" xml
-                    var path = filePaths[0];
-                    dataSet.ReadXml(path, XmlReadMode.InferSchema);
+                    //var path = filePaths[0];
+                    dataSet.ReadXml(FilePathReport, XmlReadMode.InferSchema);
                     #endregion
 
                     #region xml to dataset of RubyReport_Period_FileName.xml
@@ -4775,16 +5103,20 @@ namespace VerifoneServices
                     string DailySysId = "";
                     if (ds.Tables.Count > 0)
                     {
-                        DataView dvdaily = ds.Tables[0].DefaultView;
-                        //dvdaily.RowFilter = ("[" + ds.Tables[0].Columns[4].ColumnName + "] = 'Daily'");   // nidhi
-                        dvdaily.RowFilter = ("[" + ds.Tables[0].Columns["Name"] + "] = 'Daily'");
-                        for (int i = 0; i < dvdaily.Count; i++)
+                        if (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
                         {
-                            DailySysId += (string)dvdaily[i]["Sysid"] + ",";
-                        }
-                        if (DailySysId == "")
-                        {
-                            DailySysId = "0";
+                            DataView dvdaily = ds.Tables[0].DefaultView;
+                            //dvdaily.RowFilter = ("[" + ds.Tables[0].Columns[4].ColumnName + "] = 'Daily'");   // nidhi
+                            dvdaily.RowFilter = ("[" + ds.Tables[0].Columns["Name"] + "] = 'Daily'");
+                            for (int i = 0; i < dvdaily.Count; i++)
+                            {
+                                DailySysId += (string)dvdaily[i]["Sysid"] + ",";
+                            }
+                            if (DailySysId == "")
+                            {
+                                DailySysId = "0";
+                            }
+                            dvdaily.RowFilter = string.Empty;
                         }
                     }
                     else
@@ -4798,14 +5130,20 @@ namespace VerifoneServices
                     // dv.RowFilter = ("([" + Convert.ToString(dataSet.Tables["period"].Columns[4].ColumnName).ToUpper() + "] = 'DAILY' OR [" + Convert.ToString(dataSet.Tables[1].Columns["period"].ColumnName).ToUpper() + "] = 'DAY')   AND [" + dataSet.Tables["period"].Columns[2].ColumnName + "] NOT IN (" + DailySysId + ") AND [" + dataSet.Tables["period"].Columns[1].ColumnName + "] <> 'CURRENT'");
 
                     //---nidhi //dv.RowFilter = ("([" + Convert.ToString(dataSet.Tables["period"].Columns[4].ColumnName).ToUpper() + "] = 'DAILY' OR [" + Convert.ToString(dataSet.Tables["period"].Columns[4].ColumnName).ToUpper() + "] = 'DAY') AND [" + dataSet.Tables["period"].Columns[2].ColumnName + "] NOT IN (" + DailySysId + ") AND [" + dataSet.Tables["period"].Columns[1].ColumnName + "] <> 'CURRENT'");
-                    dv.RowFilter = ("([" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'DAILY' OR [" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'DAY') AND [" + dataSet.Tables["period"].Columns["periodBeginDate"] + "] NOT IN (" + DailySysId + ") AND [" + dataSet.Tables["period"].Columns["periodSeqNum"] + "] <> 'CURRENT'");
+                    //dv.RowFilter = ("([" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'DAILY' OR [" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'DAY') AND [" + dataSet.Tables["period"].Columns["periodBeginDate"] + "] NOT IN (" + DailySysId + ") AND [" + dataSet.Tables["period"].Columns["periodSeqNum"] + "] <> 'CURRENT'");
+
+                    //---------- change condition for CURRENT --- nidhi
+                    dv.RowFilter = ("([" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'DAILY' OR [" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'DAY') AND [" + dataSet.Tables["period"].Columns["periodBeginDate"] + "] NOT IN (" + DailySysId + ") AND ([" + dataSet.Tables["period"].Columns["periodEndDate"] + "] <> '' AND [" + dataSet.Tables["period"].Columns["periodEndDate"] + "] <> 'CURRENT')");
 
                     dv.Sort = "periodSeqNum asc";
                     DataTable dtDaily = dv.ToTable();
 
+                    dv.RowFilter = string.Empty;
+
                     //objCVerifone.InsertActiveLog("BoF", "Start", "Ruby_Report()", "Initialize Ruby_Report", "RubyReport 5", "");
                     for (int i = 0; i < dtDaily.Rows.Count; i++)
                     {
+                        isXMLError_Z = false;
                         DataView dv1 = dataSet.Tables["reportParameters"].DefaultView;
                         //dv1.RowFilter = ("[" + dataSet.Tables["reportParameters"].Columns[1].ColumnName + "] = " + dtDaily.Rows[i][dtDaily.Columns.Count - 1] + "");
                         //---nidhi //dv1.RowFilter = ("[" + dataSet.Tables["reportParameters"].Columns[1].ColumnName + "] = " + dtDaily.Rows[i]["periodInfo_Id"] + "");
@@ -4824,81 +5162,112 @@ namespace VerifoneServices
                         #endregion
 
                         #region Step 7: insert z (daily data)
-                        objCVerifone.InsertActiveLog("BoF", "Start", "Ruby_Report()", "Initialize to Insert Z Data into BoF", "RubyReport_Daily", "");
+
                         //objComman.RubyPeriodFileName = "RubyReport_Daily" + "_" + objComman.period + "_" + objComman.PeriodFileName;
                         var pathForZ = AppDomain.CurrentDomain.BaseDirectory + "xml\\RubyReport\\Daily\\" + objComman.RubyPeriodFileName + ".xml";
 
-                        XmlSerializer serializer = new XmlSerializer(typeof(periodTargs.summaryPdType));
+                        DataSet ds_Z = new DataSet();
+                        ds_Z.ReadXml(pathForZ, XmlReadMode.InferSchema);
 
-                        periodTargs.summaryPdType resultingMessageDaily = (periodTargs.summaryPdType)serializer.Deserialize(new XmlTextReader(pathForZ));
-
-                        //BrnZId = Convert.ToInt64(resultingMessageDaily.period.periodSeqNum);
-
-                        OpenDate = objComman.SplitDate(resultingMessageDaily.period.periodBeginDate);
-                        CloseDate = objComman.SplitDate(resultingMessageDaily.period.periodEndDate);
-
-                        //OpenAmount = resultingMessageDaily.totals.totalizers.start.insideGrand.Value;
-                        //CloseAmount = resultingMessageDaily.totals.totalizers.end.insideGrand.Value;
-
-                        if (resultingMessageDaily.byRegister != null)
+                        for (int j = 0; j < ds_Z.Tables.Count; j++)
                         {
-                            dtZReport.Clear();
-                            //long invoicestart = 0; 
-                            //long invoiceend =0; 
-                            long zid = 0;
-                            for (int ii = 0; ii < resultingMessageDaily.byRegister.Length; ii++)
+                            if (ds_Z.Tables[j].TableName == "Fault")
                             {
-
-                                //dtZReport = new DataTable();InsertInvoice_Sale
-                                if (resultingMessageDaily.byRegister[ii].ticketRange != null)
-                                {
-                                    for (int j = 0; j < resultingMessageDaily.byRegister[ii].ticketRange.Length; j++)
-                                    {
-                                        zid = zid + 1;
-                                        dtZReport.Rows.Add(
-                                        Convert.ToInt64(zid),
-                                        Convert.ToInt64(resultingMessageDaily.byRegister[ii].register.sysid),
-                                        Convert.ToInt64(resultingMessageDaily.byRegister[ii].ticketRange[j].begin),
-                                        Convert.ToInt64(resultingMessageDaily.byRegister[ii].ticketRange[j].end),
-                                        Convert.ToDecimal(resultingMessageDaily.byRegister[ii].totalizers.start.overallSales.Value),
-                                        Convert.ToDecimal(resultingMessageDaily.byRegister[ii].totalizers.end.overallSales.Value)
-                                        );
-                                    }
-                                }
-
+                                isXMLError_Z = true;
+                                break;
                             }
                         }
 
-                        //if (InvoiceBegin != 0 && InvoiceEnd != 0)
-                        if (dtZReport.Rows.Count > 0)
+                        if (isXMLError_Z == false)
                         {
-                            //result = objCVerifone.InsertZ(OpenDate, CloseDate, OpenAmount, CloseAmount, InvoiceBegin, InvoiceEnd, BrnZId, RegisterId);
-                            //result = objCVerifone.InsertZ(OpenDate, CloseDate, OpenAmount, CloseAmount, dtZReport, BrnZId, RegisterId);
-                            result = objCVerifone.InsertZ(OpenDate, CloseDate, dtZReport);
-                            if (result != 0)
+                            objCVerifone.InsertActiveLog("BoF", "Start", "Ruby_Report()", objComman.RubyPeriodFileName + "--Initialize to Insert Z Data into BoF", "RubyReport_Daily", "");
+
+                            XmlSerializer serializer = new XmlSerializer(typeof(periodTargs.summaryPdType));
+
+                            periodTargs.summaryPdType resultingMessageDaily = (periodTargs.summaryPdType)serializer.Deserialize(new XmlTextReader(pathForZ));
+
+                            //BrnZId = Convert.ToInt64(resultingMessageDaily.period.periodSeqNum);
+
+                            OpenDate = objComman.SplitDate(resultingMessageDaily.period.periodBeginDate);
+                            CloseDate = objComman.SplitDate(resultingMessageDaily.period.periodEndDate);
+
+                            //OpenAmount = resultingMessageDaily.totals.totalizers.start.insideGrand.Value;
+                            //CloseAmount = resultingMessageDaily.totals.totalizers.end.insideGrand.Value;
+
+                            if (resultingMessageDaily.byRegister != null)
                             {
-                                if (File.Exists(RubyXMLFilepath) == false)
+                                dtZReport.Clear();
+                                //long invoicestart = 0; 
+                                //long invoiceend =0; 
+                                long zid = 0;
+                                for (int ii = 0; ii < resultingMessageDaily.byRegister.Length; ii++)
                                 {
-                                    objComman.CreateXML(objComman.period, objComman.PeriodFileName, "", "New", "RubyReport_Daily");
+
+                                    //dtZReport = new DataTable();InsertInvoice_Sale
+                                    if (resultingMessageDaily.byRegister[ii].ticketRange != null)
+                                    {
+                                        for (int j = 0; j < resultingMessageDaily.byRegister[ii].ticketRange.Length; j++)
+                                        {
+                                            zid = zid + 1;
+                                            dtZReport.Rows.Add(
+                                            Convert.ToInt64(zid),
+                                            Convert.ToInt64(resultingMessageDaily.byRegister[ii].register.sysid),
+                                            Convert.ToInt64(resultingMessageDaily.byRegister[ii].ticketRange[j].begin),
+                                            Convert.ToInt64(resultingMessageDaily.byRegister[ii].ticketRange[j].end),
+                                            Convert.ToDecimal(resultingMessageDaily.byRegister[ii].totalizers.start.overallSales.Value),
+                                            Convert.ToDecimal(resultingMessageDaily.byRegister[ii].totalizers.end.overallSales.Value)
+                                            );
+                                        }
+                                    }
                                 }
-                                else
+                            }
+
+                            //if (InvoiceBegin != 0 && InvoiceEnd != 0)
+                            if (dtZReport.Rows.Count > 0)
+                            {
+                                //result = objCVerifone.InsertZ(OpenDate, CloseDate, OpenAmount, CloseAmount, InvoiceBegin, InvoiceEnd, BrnZId, RegisterId);
+                                //result = objCVerifone.InsertZ(OpenDate, CloseDate, OpenAmount, CloseAmount, dtZReport, BrnZId, RegisterId);
+                                try
                                 {
-                                    objComman.CreateXML(objComman.period, objComman.PeriodFileName, RubyXMLFilepath, "Exists", "RubyReport_Daily");
+                                    result = objCVerifone.InsertZ(OpenDate, CloseDate, dtZReport);
+                                    if (result != 0)
+                                    {
+                                        if (File.Exists(RubyXMLFilepath) == false)
+                                        {
+                                            objComman.CreateXML(objComman.period, objComman.PeriodFileName, "", "New", "RubyReport_Daily");
+                                        }
+                                        else
+                                        {
+                                            objComman.CreateXML(objComman.period, objComman.PeriodFileName, RubyXMLFilepath, "Exists", "RubyReport_Daily");
+                                        }
+                                        objCVerifone.InsertActiveLog("BoF", "End", "Ruby_Report()", objComman.RubyPeriodFileName + "-- Z Data Inserted Successfully", "RubyReport_Daily", "");
+                                        result = 0;
+                                    }
+                                    else
+                                    {
+                                        objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", objComman.RubyPeriodFileName + "-- Z Data not Inserted", "RubyReport_Daily", "");
+                                        result = 0;
+                                    }
                                 }
-                                objCVerifone.InsertActiveLog("BoF", "End", "Ruby_Report()", "Z Data Inserted Successfully", "RubyReport_Daily", "");
-                                result = 0;
+                                catch (Exception ex)
+                                {
+                                    objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", objComman.RubyPeriodFileName + "--" + ex.Message.ToString(), "RubyReport_Daily", "");
+                                }
                             }
                             else
                             {
-                                objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", "Z Data not Inserted", "RubyReport_Daily", "");
-                                result = 0;
+                                objCVerifone.InsertActiveLog("BoF", "End", "Ruby_Report()", objComman.RubyPeriodFileName + "-- Invoice not found in Z Report", "RubyReport_Daily", "");
                             }
                         }
                         else
                         {
-                            objCVerifone.InsertActiveLog("BoF", "End", "Ruby_Report()", "Invoice not found in Z Report", "RubyReport_Daily", "");
+                            String xmlText = File.ReadAllText(pathForZ);
+                            objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", "Error in " + objComman.RubyPeriodFileName, "Ruby_Report", "");
+                            objComman.SendEmail(objEmail.ZSubject + ": " + objComman.RubyPeriodFileName, xmlText, objComman.RubyPeriodFileName);
                         }
                         #endregion
+
+                        dv1.RowFilter = string.Empty;
                     }
                     #endregion
 
@@ -4906,18 +5275,23 @@ namespace VerifoneServices
                     string ShiftSysId = "";
                     if (ds.Tables.Count > 0)
                     {
-                        DataView dvdaily = ds.Tables[0].DefaultView;
-                        //---nidhi //dvdaily.RowFilter = ("[" + ds.Tables[0].Columns[4].ColumnName + "] = 'Shift'");
-
-                        dvdaily.RowFilter = ("[" + ds.Tables[0].Columns["Name"] + "] = 'Shift'");
-
-                        for (int i = 0; i < dvdaily.Count; i++)
+                        if (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
                         {
-                            ShiftSysId += (string)dvdaily[i]["Sysid"] + ",";
-                        }
-                        if (ShiftSysId == "")
-                        {
-                            ShiftSysId = "0";
+                            DataView dvdaily = ds.Tables[0].DefaultView;
+                            //---nidhi //dvdaily.RowFilter = ("[" + ds.Tables[0].Columns[4].ColumnName + "] = 'Shift'");
+
+                            dvdaily.RowFilter = ("[" + ds.Tables[0].Columns["Name"] + "] = 'Shift'");
+
+                            for (int i = 0; i < dvdaily.Count; i++)
+                            {
+                                ShiftSysId += (string)dvdaily[i]["Sysid"] + ",";
+                            }
+                            if (ShiftSysId == "")
+                            {
+                                ShiftSysId = "0";
+                            }
+
+                            dvdaily.RowFilter = string.Empty;
                         }
                     }
                     else
@@ -4925,13 +5299,17 @@ namespace VerifoneServices
                         ShiftSysId = "0";
                     }
 
-
                     DataView dvShift = dataSet.Tables["period"].DefaultView;
 
                     //---nidhi //dvShift.RowFilter = ("[" + dataSet.Tables["period"].Columns[4].ColumnName + "] = 'Shift' AND [" + dataSet.Tables["period"].Columns[2].ColumnName + "] NOT IN (" + ShiftSysId + ") AND [" + dataSet.Tables["period"].Columns[1].ColumnName + "] <> 'CURRENT'");
-                    dvShift.RowFilter = ("[" + dataSet.Tables["period"].Columns["name"] + "] = 'Shift' AND [" + dataSet.Tables["period"].Columns["periodBeginDate"] + "] NOT IN (" + ShiftSysId + ") AND [" + dataSet.Tables["period"].Columns["periodSeqNum"] + "] <> 'CURRENT'");
+                    //dvShift.RowFilter = ("[" + dataSet.Tables["period"].Columns["name"] + "] = 'Shift' AND [" + dataSet.Tables["period"].Columns["periodBeginDate"] + "] NOT IN (" + ShiftSysId + ") AND [" + dataSet.Tables["period"].Columns["periodSeqNum"] + "] <> 'CURRENT'");
+
+                    //---------- change condition for CURRENT --- nidhi
+                    dvShift.RowFilter = ("[" + dataSet.Tables["period"].Columns["name"] + "] = 'Shift' AND [" + dataSet.Tables["period"].Columns["periodBeginDate"] + "] NOT IN (" + ShiftSysId + ") AND ([" + dataSet.Tables["period"].Columns["periodEndDate"] + "] <> '' AND [" + dataSet.Tables["period"].Columns["periodEndDate"] + "] <> 'CURRENT')");
                     dvShift.Sort = "periodSeqNum asc";
                     DataTable dtShift = dvShift.ToTable();
+
+                    dvShift.RowFilter = string.Empty;
 
                     DataSet dsShifNo = objComman.GetShiftID();
                     if (dsShifNo.Tables[0].Rows.Count > 0)
@@ -4945,6 +5323,7 @@ namespace VerifoneServices
 
                     for (int j = 0; j < dtShift.Rows.Count; j++)
                     {
+                        isXMLError_Shift = false;
                         DataView dv1 = dataSet.Tables["reportParameters"].DefaultView;
                         //dv1.RowFilter = ("[" + dataSet.Tables["reportParameters"].Columns[1].ColumnName + "] = " + dtShift.Rows[j][5] + "");
                         //---nidhi //dv1.RowFilter = ("[" + dataSet.Tables["reportParameters"].Columns[1].ColumnName + "] = " + dtShift.Rows[j]["periodInfo_Id"] + "");
@@ -4962,79 +5341,104 @@ namespace VerifoneServices
                         #endregion
 
                         #region Step 10: Insert Shift Data
-                        objCVerifone.InsertActiveLog("BoF", "Start", "Ruby_Report()", "Initialize to Insert Shift Data into BoF", "RubyReport_Shift", "");
+
                         //objComman.RubyPeriodFileName = "RubyReport_Shift" + "_" + objComman.period + "_" + objComman.PeriodFileName;
                         var pathForShift = AppDomain.CurrentDomain.BaseDirectory + "xml\\RubyReport\\Shift\\" + objComman.RubyPeriodFileName + ".xml";
 
-                        XmlSerializer serializer = new XmlSerializer(typeof(periodTargs.summaryPdType));
+                        DataSet ds_shift = new DataSet();
+                        ds_shift.ReadXml(pathForShift, XmlReadMode.InferSchema);
 
-                        periodTargs.summaryPdType resultingMessageShift = (periodTargs.summaryPdType)serializer.Deserialize(new XmlTextReader(pathForShift));
-
-                        //BrnCashInOutId = Convert.ToInt64(resultingMessageShift.period.periodSeqNum);
-
-                        //CashInAmt = Convert.ToDecimal(resultingMessageShift.totals.totalizers.start.insideGrand.Value);
-                        //CashOutAmt = Convert.ToDecimal(resultingMessageShift.totals.totalizers.end.insideGrand.Value);
-                        OpnDate = objComman.SplitDate(resultingMessageShift.period.periodBeginDate);
-                        ClsDate = objComman.SplitDate(resultingMessageShift.period.periodEndDate);
-
-                        // code bimal change for array wise
-                        if (resultingMessageShift.byRegister != null)
+                        for (int i = 0; i < ds_shift.Tables.Count; i++)
                         {
-                            periodTargs.summaryPdTypeByRegister[] objsummaryPdTypeByRegister = new periodTargs.summaryPdTypeByRegister[resultingMessageShift.byRegister.Count()];
-                            objsummaryPdTypeByRegister = resultingMessageShift.byRegister;
-
-                            for (int jj = 0; jj < objsummaryPdTypeByRegister.Length; jj++)
+                            if (ds_shift.Tables[i].TableName == "Fault")
                             {
-                                registerID = Convert.ToString(resultingMessageShift.byRegister[jj].register.sysid);
-                                if (resultingMessageShift.byRegister[jj].ticketRange != null)
+                                isXMLError_Shift = true;
+                                break;
+                            }
+                        }
+
+                        if (isXMLError_Shift == false)
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "Start", "Ruby_Report()", objComman.RubyPeriodFileName + "-- Initialize to Insert Shift Data into BoF", "RubyReport_Shift", "");
+
+                            XmlSerializer serializer = new XmlSerializer(typeof(periodTargs.summaryPdType));
+
+                            periodTargs.summaryPdType resultingMessageShift = (periodTargs.summaryPdType)serializer.Deserialize(new XmlTextReader(pathForShift));
+
+                            //BrnCashInOutId = Convert.ToInt64(resultingMessageShift.period.periodSeqNum);
+
+                            //CashInAmt = Convert.ToDecimal(resultingMessageShift.totals.totalizers.start.insideGrand.Value);
+                            //CashOutAmt = Convert.ToDecimal(resultingMessageShift.totals.totalizers.end.insideGrand.Value);
+                            OpnDate = objComman.SplitDate(resultingMessageShift.period.periodBeginDate);
+                            ClsDate = objComman.SplitDate(resultingMessageShift.period.periodEndDate);
+
+                            // code bimal change for array wise
+                            if (resultingMessageShift.byRegister != null)
+                            {
+                                periodTargs.summaryPdTypeByRegister[] objsummaryPdTypeByRegister = new periodTargs.summaryPdTypeByRegister[resultingMessageShift.byRegister.Count()];
+                                objsummaryPdTypeByRegister = resultingMessageShift.byRegister;
+
+                                for (int jj = 0; jj < objsummaryPdTypeByRegister.Length; jj++)
                                 {
-                                    periodTargs.ticketRange[] objticketRange = new periodTargs.ticketRange[resultingMessageShift.byRegister[jj].ticketRange.Count()];
-
-                                    objticketRange = resultingMessageShift.byRegister[jj].ticketRange;
-
-                                    if (objticketRange != null)
+                                    registerID = Convert.ToString(resultingMessageShift.byRegister[jj].register.sysid);
+                                    if (resultingMessageShift.byRegister[jj].ticketRange != null)
                                     {
-                                        for (int k = 0; k < objticketRange.Length; k++)
+                                        periodTargs.ticketRange[] objticketRange = new periodTargs.ticketRange[resultingMessageShift.byRegister[jj].ticketRange.Count()];
+
+                                        objticketRange = resultingMessageShift.byRegister[jj].ticketRange;
+
+                                        if (objticketRange != null)
                                         {
-                                            InvoiceBegin = objticketRange[k].begin;
-                                            InvoiceEnd = objticketRange[k].end;
-
-                                            CashInAmt = Convert.ToDecimal(resultingMessageShift.byRegister[jj].totalizers.start.overallSales.Value);
-                                            CashOutAmt = Convert.ToDecimal(resultingMessageShift.byRegister[jj].totalizers.end.overallSales.Value);
-                                            BrnCashInOutId = BrnCashInOutId + 1;
-                                            try
+                                            for (int k = 0; k < objticketRange.Length; k++)
                                             {
-                                                result = objCVerifone.InsertShift(BrnCashInOutId, CashInAmt, CashOutAmt, OpnDate, ClsDate, InvoiceBegin, InvoiceEnd);
+                                                InvoiceBegin = objticketRange[k].begin;
+                                                InvoiceEnd = objticketRange[k].end;
 
-                                                if (result != 0)
+                                                CashInAmt = Convert.ToDecimal(resultingMessageShift.byRegister[jj].totalizers.start.overallSales.Value);
+                                                CashOutAmt = Convert.ToDecimal(resultingMessageShift.byRegister[jj].totalizers.end.overallSales.Value);
+                                                BrnCashInOutId = BrnCashInOutId + 1;
+                                                try
                                                 {
-                                                    if (File.Exists(RubyXMLFilepath) == false)
+                                                    result = objCVerifone.InsertShift(BrnCashInOutId, CashInAmt, CashOutAmt, OpnDate, ClsDate, InvoiceBegin, InvoiceEnd);
+
+                                                    if (result != 0)
                                                     {
-                                                        objComman.CreateXML(objComman.period, objComman.PeriodFileName, "", "New", "RubyReport_Shift");
+                                                        if (File.Exists(RubyXMLFilepath) == false)
+                                                        {
+                                                            objComman.CreateXML(objComman.period, objComman.PeriodFileName, "", "New", "RubyReport_Shift");
+                                                        }
+                                                        else
+                                                        {
+                                                            objComman.CreateXML(objComman.period, objComman.PeriodFileName, RubyXMLFilepath, "Exists", "RubyReport_Shift");
+                                                        }
+                                                        result = 0;
                                                     }
                                                     else
                                                     {
-                                                        objComman.CreateXML(objComman.period, objComman.PeriodFileName, RubyXMLFilepath, "Exists", "RubyReport_Shift");
+                                                        objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", objComman.RubyPeriodFileName + "-- Shift Data not inserted", "RubyReport_Shift", "");
+                                                        result = 0;
                                                     }
-                                                    objCVerifone.InsertActiveLog("BoF", "End", "Ruby_Report()", "Shift Data inserted Successfully", "RubyReport_Shift", "");
-                                                    result = 0;
                                                 }
-                                                else
+                                                catch (Exception ex)
                                                 {
-                                                    objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", "Shift Data not inserted", "RubyReport_Shift", "");
-                                                    result = 0;
+                                                    objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", objComman.RubyPeriodFileName + "--" + ex.Message.ToString(), "RubyReport_Shift", "");
                                                 }
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", ex.Message.ToString(), "RubyReport_Shift", "");
                                             }
                                         }
                                     }
                                 }
                             }
+                            objCVerifone.InsertActiveLog("BoF", "End", "Ruby_Report()", objComman.RubyPeriodFileName + "-- Shift Data inserted Successfully", "RubyReport_Shift", "");
+                        }
+                        else
+                        {
+                            String xmlText = File.ReadAllText(pathForShift);
+                            objCVerifone.InsertActiveLog("BoF", "End", "Ruby_Report()", "Error in " + objComman.RubyPeriodFileName, "Ruby_Report", "");
+                            objComman.SendEmail(objEmail.ShiftSubject + ": " + objComman.RubyPeriodFileName, xmlText, objComman.RubyPeriodFileName);
                         }
                         #endregion
+
+                        dv1.RowFilter = string.Empty;
                     }
                     #endregion
 
@@ -5042,16 +5446,20 @@ namespace VerifoneServices
                     string MonthSysId = "";
                     if (ds.Tables.Count > 0)
                     {
-                        DataView dvdaily = ds.Tables[0].DefaultView;
-                        //---nidhi //dvdaily.RowFilter = ("[" + ds.Tables[0].Columns[4].ColumnName + "] = 'Month'");
-                        dvdaily.RowFilter = ("[" + ds.Tables[0].Columns["Name"] + "] = 'Month'");
-                        for (int i = 0; i < dvdaily.Count; i++)
+                        if (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
                         {
-                            MonthSysId += (string)dvdaily[i]["Sysid"] + ",";
-                        }
-                        if (MonthSysId == "")
-                        {
-                            MonthSysId = "0";
+                            DataView dvdaily = ds.Tables[0].DefaultView;
+                            //---nidhi //dvdaily.RowFilter = ("[" + ds.Tables[0].Columns[4].ColumnName + "] = 'Month'");
+                            dvdaily.RowFilter = ("[" + ds.Tables[0].Columns["Name"] + "] = 'Month'");
+                            for (int i = 0; i < dvdaily.Count; i++)
+                            {
+                                MonthSysId += (string)dvdaily[i]["Sysid"] + ",";
+                            }
+                            if (MonthSysId == "")
+                            {
+                                MonthSysId = "0";
+                            }
+                            dvdaily.RowFilter = string.Empty;
                         }
                     }
                     else
@@ -5061,13 +5469,20 @@ namespace VerifoneServices
 
                     DataView dvMonth = dataSet.Tables["period"].DefaultView;
                     //---nidhi //dvMonth.RowFilter = ("([" + Convert.ToString(dataSet.Tables["period"].Columns[4].ColumnName).ToUpper() + "] = 'MONTHLY' OR [" + Convert.ToString(dataSet.Tables["period"].Columns[4].ColumnName).ToUpper() + "] = 'MONTH')  AND  [" + dataSet.Tables["period"].Columns[2].ColumnName + "] NOT IN (" + MonthSysId + ") AND [" + dataSet.Tables["period"].Columns[1].ColumnName + "] <> 'CURRENT'");
-                    dvMonth.RowFilter = ("([" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'MONTHLY' OR [" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'MONTH')  AND  [" + dataSet.Tables["period"].Columns["periodBeginDate"] + "] NOT IN (" + MonthSysId + ") AND [" + dataSet.Tables["period"].Columns["periodSeqNum"] + "] <> 'CURRENT'");
+                    //dvMonth.RowFilter = ("([" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'MONTHLY' OR [" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'MONTH')  AND  [" + dataSet.Tables["period"].Columns["periodBeginDate"] + "] NOT IN (" + MonthSysId + ") AND [" + dataSet.Tables["period"].Columns["periodSeqNum"] + "] <> 'CURRENT'");
+
+                    //---------- change condition for CURRENT --- nidhi
+                    dvMonth.RowFilter = ("([" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'MONTHLY' OR [" + Convert.ToString(dataSet.Tables["period"].Columns["name"]).ToUpper() + "] = 'MONTH')  AND  [" + dataSet.Tables["period"].Columns["periodSeqNum"] + "] NOT IN (" + MonthSysId + ") AND ([" + dataSet.Tables["period"].Columns["periodEndDate"] + "] <> '' AND [" + dataSet.Tables["period"].Columns["periodEndDate"] + "] <> 'CURRENT')");
 
                     dvMonth.Sort = "periodSeqNum asc";
                     DataTable dtMonth = dvMonth.ToTable();
+
+                    dvMonth.RowFilter = string.Empty;
+
                     bool MonthlyZZStatus = false;
                     for (int j = 0; j < dtMonth.Rows.Count; j++)
                     {
+                        isXMLError_ZZ = false;
                         DataView dv1 = dataSet.Tables["reportParameters"].DefaultView;
                         /// dv1.RowFilter = ("[" + dataSet.Tables["reportParameters"].Columns[1].ColumnName + "] = " + dtMonth.Rows[j][5] + "");
                         //---nidhi //dv1.RowFilter = ("[" + dataSet.Tables["reportParameters"].Columns[1].ColumnName + "] = " + dtMonth.Rows[j]["periodInfo_Id"] + "");
@@ -5085,71 +5500,106 @@ namespace VerifoneServices
                         #endregion
 
                         #region Step 13: Insert Month Data
-                        objCVerifone.InsertActiveLog("BoF", "Start", "Ruby_Report()", "Initialize to Insert ZZ Data into BoF", "RubyReport_Month", "");
                         //objComman.RubyPeriodFileName = "RubyReport_Month" + "_" + objComman.period + "_" + objComman.PeriodFileName;
                         var pathForMonth = AppDomain.CurrentDomain.BaseDirectory + "xml\\RubyReport\\Month\\" + objComman.RubyPeriodFileName + ".xml";
 
-                        XmlSerializer serializer = new XmlSerializer(typeof(periodTargs.summaryPdType));
+                        DataSet ds_month = new DataSet();
+                        ds_month.ReadXml(pathForMonth, XmlReadMode.InferSchema);
 
-                        periodTargs.summaryPdType resultingMessageMonth = (periodTargs.summaryPdType)serializer.Deserialize(new XmlTextReader(pathForMonth));
-
-                        OpnDate = objComman.SplitDate(resultingMessageMonth.period.periodBeginDate);
-                        ZZDate = objComman.SplitDate(resultingMessageMonth.period.periodEndDate);
-                        BatchNo = Convert.ToInt64(resultingMessageMonth.period.periodSeqNum);
-
-                        long monthlyInvoiceBegin = 0;
-                        long monthlyInvoiceEnd = 0;
-                        long regsiterid = 0;
-                        if (resultingMessageMonth.byRegister != null)
+                        for (int i = 0; i < ds_month.Tables.Count; i++)
                         {
-                            for (int ii = 0; ii < resultingMessageMonth.byRegister.Length; ii++)
+                            if (ds_month.Tables[i].TableName == "Fault")
                             {
-                                if (resultingMessageMonth.byRegister[ii].ticketRange != null)
+                                isXMLError_ZZ = true;
+                                break;
+                            }
+                        }
+
+                        if (isXMLError_ZZ == false)
+                        {
+                            objCVerifone.InsertActiveLog("BoF", "Start", "Ruby_Report()", objComman.RubyPeriodFileName + "--Initialize to Insert ZZ Data into BoF", "RubyReport_Month", "");
+                            XmlSerializer serializer = new XmlSerializer(typeof(periodTargs.summaryPdType));
+
+                            periodTargs.summaryPdType resultingMessageMonth = (periodTargs.summaryPdType)serializer.Deserialize(new XmlTextReader(pathForMonth));
+
+                            OpnDate = objComman.SplitDate(resultingMessageMonth.period.periodBeginDate);
+                            ZZDate = objComman.SplitDate(resultingMessageMonth.period.periodEndDate);
+                            BatchNo = Convert.ToInt64(resultingMessageMonth.period.periodSeqNum);
+
+                            long monthlyInvoiceBegin = 0;
+                            long monthlyInvoiceEnd = 0;
+                            long regsiterid = 0;
+                            long RegisterCount = 0, RegLoopCount = 0;
+                            if (resultingMessageMonth.byRegister != null)
+                            {
+                                RegisterCount = resultingMessageMonth.byRegister.Length;
+                                for (int ii = 0; ii < resultingMessageMonth.byRegister.Length; ii++)
                                 {
-                                    for (int jj = 0; jj < resultingMessageMonth.byRegister[ii].ticketRange.Length; jj++)
+                                    RegLoopCount += 1;
+                                    if (resultingMessageMonth.byRegister[ii].ticketRange != null)
                                     {
-                                        monthlyInvoiceBegin = Convert.ToInt64(resultingMessageMonth.byRegister[ii].ticketRange[jj].begin);
-                                        monthlyInvoiceEnd = Convert.ToInt64(resultingMessageMonth.byRegister[ii].ticketRange[jj].end);
-                                        Month_RegisterId = Convert.ToInt64(resultingMessageMonth.byRegister[ii].register.sysid);
-
-                                        DataSet dsreg = objComman.GetRegsiteridZZReport(monthlyInvoiceBegin, monthlyInvoiceEnd, Month_RegisterId, OpnDate, ZZDate);
-                                        if (dsreg != null && dsreg.Tables[0] != null && dsreg.Tables[0].Rows.Count > 0)
+                                        for (int jj = 0; jj < resultingMessageMonth.byRegister[ii].ticketRange.Length; jj++)
                                         {
-                                            regsiterid = Convert.ToInt32(dsreg.Tables[0].Rows[0]["RegisterId"]);
+                                            monthlyInvoiceBegin = Convert.ToInt64(resultingMessageMonth.byRegister[ii].ticketRange[jj].begin);
+                                            monthlyInvoiceEnd = Convert.ToInt64(resultingMessageMonth.byRegister[ii].ticketRange[jj].end);
+                                            Month_RegisterId = Convert.ToInt64(resultingMessageMonth.byRegister[ii].register.sysid);
 
-                                            result = objCVerifone.Insert_ZZ(ZZId, OpnDate, ZZDate, BatchNo, regsiterid, monthlyInvoiceBegin, monthlyInvoiceEnd);
-                                            if (result == 0)
+                                            DataSet dsreg = objComman.GetRegsiteridZZReport(monthlyInvoiceBegin, monthlyInvoiceEnd, Month_RegisterId, OpnDate, ZZDate);
+                                            if (dsreg != null && dsreg.Tables[0] != null && dsreg.Tables[0].Rows.Count > 0)
                                             {
-                                                MonthlyZZStatus = true;
+                                                regsiterid = Convert.ToInt32(dsreg.Tables[0].Rows[0]["RegisterId"]);
+
+                                                result = objCVerifone.Insert_ZZ(ZZId, OpnDate, ZZDate, BatchNo, regsiterid, monthlyInvoiceBegin, monthlyInvoiceEnd);
+                                                if (result == 0)
+                                                {
+                                                    RegLoopCount -= 1;
+                                                    //MonthlyZZStatus = true;
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
 
-                        if (MonthlyZZStatus)
-                        {
-                            if (File.Exists(RubyXMLFilepath) == false)
+                            //if (MonthlyZZStatus)
+                            if (RegisterCount == RegLoopCount)
                             {
-                                objComman.CreateXML(objComman.period, objComman.PeriodFileName, "", "New", "RubyReport_Month");
+                                if (File.Exists(RubyXMLFilepath) == false)
+                                {
+                                    objComman.CreateXML(objComman.period, objComman.PeriodFileName, "", "New", "RubyReport_Month");
+                                }
+                                else
+                                {
+                                    objComman.CreateXML(objComman.period, objComman.PeriodFileName, RubyXMLFilepath, "Exists", "RubyReport_Month");
+                                }
+                                objCVerifone.InsertActiveLog("BoF", "End", "Ruby_Report()", objComman.RubyPeriodFileName + "--ZZ Data inserted Successfully", "RubyReport_Month", "");
+                                result = 0;
                             }
                             else
                             {
-                                objComman.CreateXML(objComman.period, objComman.PeriodFileName, RubyXMLFilepath, "Exists", "RubyReport_Month");
+                                objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", objComman.RubyPeriodFileName + "--ZZ Data not inserted", "RubyReport_Month", "");
+                                result = 0;
                             }
-                            objCVerifone.InsertActiveLog("BoF", "End", "Ruby_Report()", "ZZ Data inserted Successfully", "RubyReport_Month", "");
-                            result = 0;
                         }
                         else
                         {
-                            objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", "ZZ Data not inserted", "RubyReport_Month", "");
-                            result = 0;
+                            String xmlText = File.ReadAllText(pathForMonth);
+                            objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", "Error in " + objComman.RubyPeriodFileName, "Ruby_Report", "");
+                            objComman.SendEmail(objEmail.ZZSubject + ": " + objComman.RubyPeriodFileName, xmlText, objComman.RubyPeriodFileName);
                         }
                         #endregion
+
+                        dv1.RowFilter = string.Empty;
                     }
                     #endregion
                     #endregion
+                    //}
+                }
+                else
+                {
+                    String xmlText = File.ReadAllText(FilePathReport);
+                    objCVerifone.InsertActiveLog("BoF", "Fail", "Ruby_Report()", "Error in " + objComman.ReportPeriodFileName, "Ruby_Report", "");
+                    objComman.SendEmail(objEmail.ReportSubject + ": " + objComman.ReportPeriodFileName, xmlText, objComman.ReportPeriodFileName);
                 }
                 #endregion
             }

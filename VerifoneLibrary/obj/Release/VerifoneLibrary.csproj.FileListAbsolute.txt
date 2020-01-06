@@ -1,0 +1,5 @@
+D:\VerifoneServices\VerifoneLibrary\bin\Release\VerifoneLibrary.dll
+D:\VerifoneServices\VerifoneLibrary\bin\Release\VerifoneLibrary.pdb
+D:\VerifoneServices\VerifoneLibrary\obj\Release\VerifoneLibrary.dll
+D:\VerifoneServices\VerifoneLibrary\obj\Release\VerifoneLibrary.pdb
+D:\VerifoneServices\VerifoneLibrary\obj\Release\VerifoneLibrary.csprojResolveAssemblyReference.cache

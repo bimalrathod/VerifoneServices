@@ -1,0 +1,5 @@
+D:\VerifoneServices\CustomAction\bin\Release\CustomAction.dll
+D:\VerifoneServices\CustomAction\bin\Release\CustomAction.pdb
+D:\VerifoneServices\CustomAction\obj\Release\CustomAction.dll
+D:\VerifoneServices\CustomAction\obj\Release\CustomAction.pdb
+D:\VerifoneServices\CustomAction\obj\Release\CustomAction.csprojResolveAssemblyReference.cache

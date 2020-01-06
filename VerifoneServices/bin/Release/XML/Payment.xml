@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<domain:paymentConfig xmlns:domain="urn:vfi-sapphire:np.domain.2001-07-01">
+  <site>0413</site>
+  <mopCodes>
+    <mopCode sysid="0" name="CASH" />
+    <mopCode sysid="1" name="CREDIT" />
+    <mopCode sysid="2" name="DEBIT" />
+    <mopCode sysid="3" name="MANUAL_CREDIT" />
+    <mopCode sysid="4" name="MANUAL_DEBIT" />
+    <mopCode sysid="5" name="LOTTO" />
+    <mopCode sysid="6" name="CHECK" />
+    <mopCode sysid="7" name="TAX_COUPON" />
+    <mopCode sysid="8" name="1_CASH" />
+    <mopCode sysid="9" name="5_CASH" />
+    <mopCode sysid="10" name="10_CASH" />
+    <mopCode sysid="11" name="20_CASH" />
+    <mopCode sysid="12" name="50_CASH" />
+    <mopCode sysid="13" name="FOOD_STAMP" />
+    <mopCode sysid="14" name="DRIVE_OFF" />
+    <mopCode sysid="15" name="SPECIAL_DISC" />
+    <mopCode sysid="16" name="MANUAL_FS" />
+    <mopCode sysid="17" name="LOTTERY" />
+    <mopCode sysid="18" name="IN_HOUSE" />
+    <mopCode sysid="19" name="PUMP_TEST" />
+    <mopCode sysid="20" name="EBT_FS" />
+    <mopCode sysid="21" name="EBT" />
+    <mopCode sysid="22" name="MANUAL_EBT_CB" />
+    <mopCode sysid="23" name="ECHECK" />
+    <mopCode sysid="24" name="STORED_VAL_CARD" />
+    <mopCode sysid="25" name="MANUAL_ENTRY" />
+    <mopCode sysid="26" name="FORCE_POST" />
+    <mopCode sysid="27" name="POST_ENTRY" />
+    <mopCode sysid="28" name="MOBILE" />
+    <mopCode sysid="29" name="NON_TAX_COUPON" />
+  </mopCodes>
+  <mops>
+    <mop sysid="1" name="CASH" code="0" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="1" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="0" isAllowWithoutSale="0" isAllowRefund="1" isAllowChange="1" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="0" numReceiptCopies="1" />
+    <mop sysid="2" name="CHECK" code="6" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="1" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="0" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="1" numReceiptCopies="1" />
+    <mop sysid="3" name="CREDIT" code="1" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="0" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="0" numReceiptCopies="1" />
+    <mop sysid="4" name="DEBIT" code="2" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="0" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="0" numReceiptCopies="1" />
+    <mop sysid="5" name="OTHER" code="3" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="0" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="0" numReceiptCopies="1" />
+    <mop sysid="6" name="DRIVE OFF" code="14" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="1" isCashrRptPrompt="1" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="1" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="1" numReceiptCopies="0" />
+    <mop sysid="7" name="MAN COUPON" code="7" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="10.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="1" isCashrRptPrompt="1" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="0" numReceiptCopies="0" />
+    <mop sysid="8" name="LOTTO CASH" code="5" nacstendercode="generic" nacstendersubcode="generic" min="1.00" max="500.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="1" isTenderAmtReqd="1" isCashrRptPrompt="1" isAllowZeroEntry="1" isAllowWithoutSale="1" isAllowRefund="1" isAllowChange="1" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="0" numReceiptCopies="0" />
+    <mop sysid="9" name="FOOD STAMP" code="16" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="1" isCashrRptPrompt="1" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="1" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="1" numReceiptCopies="0" />
+    <mop sysid="10" name="FUEL MAN" code="3" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="1" isCashrRptPrompt="0" isAllowZeroEntry="0" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="0" numReceiptCopies="0" />
+    <mop sysid="11" name="FLEET EXPRESS" code="1" nacstendercode="generic" nacstendersubcode="generic" min="0.05" max="1000.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="0" isCashrRptPrompt="1" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="1" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="0" numReceiptCopies="0" />
+    <mop sysid="12" name="MAN CREDIT" code="3" nacstendercode="generic" nacstendersubcode="generic" min="0.01" max="9999.99" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="1" isCashrRptPrompt="1" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="1" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="1" numReceiptCopies="0" />
+    <mop sysid="13" name="PUMP TEST" code="19" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="100.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="0" isCashrRptPrompt="1" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="1" numReceiptCopies="0" />
+    <mop sysid="14" name="$10 CASH" code="10" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="1" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="1" isAllowSafeDrop="1" isAllowMOPurch="1" isForceTicketPrint="0" numReceiptCopies="0" />
+    <mop sysid="15" name="$20 CASH" code="11" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="1" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="1" isAllowSafeDrop="1" isAllowMOPurch="1" isForceTicketPrint="0" numReceiptCopies="0" />
+    <mop sysid="16" name="$50 CASH" code="12" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="1" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="1" isAllowSafeDrop="1" isAllowMOPurch="1" isForceTicketPrint="0" numReceiptCopies="0" />
+    <mop sysid="17" name="$5 CASH" code="9" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="1" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="1" isAllowSafeDrop="1" isAllowMOPurch="1" isForceTicketPrint="0" numReceiptCopies="0" />
+    <mop sysid="18" name="COMDATA - TRENDAR" code="0" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="9999.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="1" isCashrRptPrompt="1" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="1" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="1" numReceiptCopies="0" />
+    <mop sysid="19" name="MILITARY DISCOUNT" code="15" nacstendercode="generic" nacstendersubcode="generic" min="10.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="1" isTenderAmtReqd="1" isCashrRptPrompt="0" isAllowZeroEntry="0" isAllowWithoutSale="0" isAllowRefund="1" isAllowChange="1" isAllowSafeDrop="1" isAllowMOPurch="0" isForceTicketPrint="0" numReceiptCopies="0" />
+    <mop sysid="20" name="PARTNER POINTS" code="0" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="1" isCashrRptPrompt="0" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="1" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="1" numReceiptCopies="0" />
+    <mop sysid="21" name="MOBILE PAY" code="28" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="1" isAllowWithoutSale="0" isAllowRefund="1" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="1" numReceiptCopies="0" />
+    <mop sysid="22" name="payout" code="0" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="0" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="0" numReceiptCopies="0" />
+    <mop sysid="23" name="Verifone payment tes" code="0" nacstendercode="generic" nacstendersubcode="generic" min="0.00" max="0.00" limit="0.00" isForceSafeDrop="0" isOpenDrwOnSale="0" isTenderAmtReqd="0" isCashrRptPrompt="0" isAllowZeroEntry="0" isAllowWithoutSale="0" isAllowRefund="0" isAllowChange="0" isAllowSafeDrop="0" isAllowMOPurch="0" isForceTicketPrint="0" numReceiptCopies="1" />
+  </mops>
+  <fees>
+    <fee sysid="1" name="MO FEE 1" dept="45" isRefundable="0" feeIdentifier="">
+      <percentageFee>0.000</percentageFee>
+    </fee>
+    <fee sysid="2" name="MO FEE 2" dept="45" isRefundable="0" feeIdentifier="">
+      <range>
+        <rangeFee>0.79</rangeFee>
+        <rangeEnd>1000.00</rangeEnd>
+      </range>
+      <range>
+        <rangeFee>1.58</rangeFee>
+        <rangeEnd>2000.00</rangeEnd>
+      </range>
+    </fee>
+    <fee sysid="3" name="MO FEE 3" dept="45" isRefundable="1" feeIdentifier="">
+      <range>
+        <rangeFee>0.89</rangeFee>
+        <rangeEnd>500.00</rangeEnd>
+      </range>
+      <range>
+        <rangeFee>1.78</rangeFee>
+        <rangeEnd>1000.00</rangeEnd>
+      </range>
+    </fee>
+    <fee sysid="4" name="MO FEE 4 1" dept="45" isRefundable="1" feeIdentifier="">
+      <range>
+        <rangeFee>0.99</rangeFee>
+        <rangeEnd>1000.00</rangeEnd>
+      </range>
+      <range>
+        <rangeFee>1.98</rangeFee>
+        <rangeEnd>2000.00</rangeEnd>
+      </range>
+    </fee>
+    <fee sysid="5" name="Test 1" dept="70" isRefundable="0" feeIdentifier="">
+      <range>
+        <rangeFee>0.00</rangeFee>
+        <rangeEnd>1000.00</rangeEnd>
+      </range>
+    </fee>
+    <fee sysid="10" name="911 FEE Cell" dept="40" isRefundable="0" feeIdentifier="">
+      <range>
+        <rangeFee>1.00</rangeFee>
+        <rangeEnd>9999.99</rangeEnd>
+      </range>
+    </fee>
+  </fees>
+  <currencies>
+    <currency sysid="1" name="DOLLAR" symbol="$" amount="1.000000" />
+  </currencies>
+  <taxRates>
+    <taxRate sysid="1" name="STATE HI TAX" indicator="A" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="6.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="2" name="CO/PA TAX" indicator="!" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="0.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="3" name="911 FEE" indicator="F" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="2.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="4" name="CITY TAX 1" indicator="!" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="1.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="5" name="CITY SPL TAX" indicator="!" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="0.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="6" name="STATE LO TAX 1" indicator="T" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="12.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="7" name="NO TAX" indicator="!" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="0.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+    <taxRate sysid="8" name="SALES TAX" indicator="T" isPriceIncsTax="0" isPromptExemption="0">
+      <taxProperties rate="6.000" pctStartAmt="0.00" />
+      <taxBreakPts />
+    </taxRate>
+  </taxRates>
+</domain:paymentConfig>

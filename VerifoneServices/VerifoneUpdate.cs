@@ -1,14 +1,14 @@
-﻿using VerifoneLibrary;
+﻿//using VerifoneLibrary;
 using VerifoneLibrary.DataAccess;
 using RapidVerifone;
-using myCompany1111;
+//using myCompany1111;
 using RapidVarifone;
-using RapidVerifoneFuelconfig;
+//using RapidVerifoneFuelconfig;
 using RapidVerifoneNAXML;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
+//using System.Collections.Generic;
+//using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +17,7 @@ using System.Xml;
 
 using System.Xml.Serialization;
 using System.IO;
-using System.Xml.Linq;
+//using System.Xml.Linq;
 
 using System.Globalization;
 using System.Configuration;
@@ -31,10 +31,9 @@ namespace VerifoneServices
         public bool ItemListID_isError = false;
         public string New_VP = "";
 
-        public void Update_UpdateVerifoneTax(DataTable dt)
+        public void UpdateVerifoneTax(DataTable dt)
         {
             _CVerifone objCVerifone = new _CVerifone();
-            //  DataTable dt = new DataTable();
             DataTable dtUpdate = new DataTable();
             string arraysysid = "";
             string sysidxml = "";
@@ -43,14 +42,12 @@ namespace VerifoneServices
 
                 taxRateConfig objtaxRateConfig = new taxRateConfig();
 
-                if (dt.Rows.Count > 0)
+                if (dt != null && dt.Rows.Count > 0)
                 {
-
                     var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Tax.xml";
                     XmlDocument docxmlPath = new XmlDocument();
                     docxmlPath.Load(path);
-
-                    objCVerifone.InsertActiveLog("Verifone", "Start", "Update_UpdateVerifoneTax()", "Initialize to Update", "Tax", "utaxratecfg");
+                    objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifoneTax()", "Initialize to Update", "Tax", "utaxratecfg");
 
                     string TaxPayloadXML = "";
                     StringBuilder sb = new StringBuilder();
@@ -86,7 +83,6 @@ namespace VerifoneServices
                             XmlNode node = docxmlPath.DocumentElement.SelectSingleNode("//taxRates//taxRate[@sysid='" + sysidxml + "']");
                             if (node != null)
                             {
-
                                 try
                                 {
                                     var serializer = new XmlSerializer(typeof(RapidVerifone.taxRate));
@@ -106,7 +102,6 @@ namespace VerifoneServices
                                         objtaxRateTaxProperties.pctStartAmtSpecified = Convert.ToBoolean(objtaxRate1.taxProperties.pctStartAmtSpecified); //6
                                         objtaxRateTaxProperties.rateSpecified = Convert.ToBoolean(objtaxRate1.taxProperties.rateSpecified); //6
 
-
                                         if (arraysysid == "")
                                         {
                                             arraysysid = sysidxml;
@@ -115,17 +110,13 @@ namespace VerifoneServices
                                         {
                                             arraysysid = arraysysid + "," + sysidxml;
                                         }
-
                                     }
                                 }
-                                catch (Exception)
+                                catch (Exception ex)
                                 {
-
+                                    objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneTax()", "UpdateVerifoneTax Exception : " + ex, "Tax", "utaxratecfg");
                                 }
-
                             }
-
-
                         }
                         else
                         {
@@ -149,9 +140,9 @@ namespace VerifoneServices
                                 }
 
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
-
+                                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneTax()", "UpdateVerifoneTax Exception 2 : " + ex, "Tax", "utaxratecfg");
                             }
                         }
                         #endregion
@@ -183,31 +174,31 @@ namespace VerifoneServices
                         long result = objCVerifone.DeleteVerifoneHistory("Tax", arraysysid);
                         if (result == 0)
                         {
-                            objCVerifone.InsertActiveLog("Verifone", "Fail", "Update_UpdateVerifoneTax()", "Verifone Data not updated ", "Tax", "utaxratecfg");
+                            objCVerifone.InsertActiveLog("Verifone", "Fail", "UpdateVerifoneTax()", "Verifone Data not updated ", "Tax", "utaxratecfg");
                         }
                         else
                         {
-                            objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneTax()", "Verifone Data updated successfully", "Tax", "utaxratecfg");
+                            objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneTax()", "Verifone Data updated successfully", "Tax", "utaxratecfg");
                         }
                     }
                     else
                     {
-                        objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneTax()", "No Response", "Tax", "utaxratecfg");
+                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneTax()", "No Response", "Tax", "utaxratecfg");
                     }
                     #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneTax()", "Not any Tax data is pending to update", "Tax", "utaxratecfg");
+                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneTax()", "Not any Tax data is pending to update", "Tax", "utaxratecfg");
                 }
             }
             catch (Exception ex)
             {
-                objCVerifone.InsertActiveLog("Verifone", "Error", "Update_UpdateVerifoneTax()", "Update_UpdateVerifoneTax Exception : " + ex, "Tax", "utaxratecfg");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneTax()", "UpdateVerifoneTax Exception 3 : " + ex, "Tax", "utaxratecfg");
             }
         }
 
-        public void Update_UpdateVerifonePayment(DataTable dtpayment)
+        public void UpdateVerifonePayment(DataTable dtpayment)
         {
             _CVerifone objCVerifone = new _CVerifone();
             string sysidxml = "";
@@ -215,19 +206,15 @@ namespace VerifoneServices
             try
             {
 
-
-                //DataSet ds = new DataSet();
                 paymentConfig objpaymentConfig = new paymentConfig();
-                //ds = objCVerifone.GetVerifonePaymentData();
 
-                if (dtpayment.Rows.Count > 0)
+
+                if (dtpayment != null && dtpayment.Rows.Count > 0)
                 {
-
                     var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Payment.xml";
                     XmlDocument docxmlPath = new XmlDocument();
                     docxmlPath.Load(path);
-
-                    objCVerifone.InsertActiveLog("Verifone", "Start", "Update_UpdateVerifonePayment()", "Initialize to update", "Payment", "upaymentcfg");
+                    objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifonePayment()", "Initialize to update", "Payment", "upaymentcfg");
 
                     string PaymentPayloadXML = "";
                     StringBuilder sb = new StringBuilder();
@@ -285,7 +272,6 @@ namespace VerifoneServices
                                         objpaymentConfigMop[i].nacstendercode = objpaymentConfigMopGet.nacstendercode;
                                         objpaymentConfigMop[i].nacstendersubcode = objpaymentConfigMopGet.nacstendersubcode;
 
-
                                         objpaymentConfig.mops = objpaymentConfigMop;
 
                                         if (arraysysid == "")
@@ -300,13 +286,12 @@ namespace VerifoneServices
                                 }
                                 catch (Exception ex)
                                 {
-
+                                    objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifonePayment()", "UpdateVerifonePayment Exception : " + Convert.ToString(ex), "Payment", "upaymentcfg");
                                 }
                             }
                         }
                         else
                         {
-
                             objpaymentConfigMop[i] = new paymentConfigMop();
                             objpaymentConfigMop[i].sysid = Convert.ToString(dtpayment.Rows[i][1]);
                             objpaymentConfigMop[i].name = Convert.ToString(dtpayment.Rows[i][3]);
@@ -365,52 +350,48 @@ namespace VerifoneServices
                         long result = objCVerifone.DeleteVerifoneHistory("Payment", arraysysid);
                         if (result == 0)
                         {
-                            //lblResult.Text = "UpdatePayment : Fail";
                             // ******** msg of fail
-                            objCVerifone.InsertActiveLog("Verifone", "Fail", "Update_UpdateVerifonePayment()", "Verifone Data not updated", "Payment", "upaymentcfg");
+                            objCVerifone.InsertActiveLog("Verifone", "Fail", "UpdateVerifonePayment()", "Verifone Data not updated", "Payment", "upaymentcfg");
                         }
                         else
                         {
-                            //lblResult.Text = "UpdatePayment : Success";
                             // ******** msg of success
-                            objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifonePayment()", "Verifone Data updated successfully", "Payment", "upaymentcfg");
+                            objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifonePayment()", "Verifone Data updated successfully", "Payment", "upaymentcfg");
                         }
                     }
                     else
                     {
-                        //lblResult.Text = "UpdatePayment : No Reponse";
                         // ******** msg of no response
-                        objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifonePayment()", "No Response", "Payment", "upaymentcfg");
+                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifonePayment()", "No Response", "Payment", "upaymentcfg");
                     }
                     #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifonePayment()", "Not any Payment data is pending to update", "Payment", "upaymentcfg");
+                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifonePayment()", "Not any Payment data is pending to update", "Payment", "upaymentcfg");
                 }
+
             }
             catch (Exception ex)
             {
-                //lblResult.Text = "UpdatePayment : " + ex;
                 // ******** msg of exception
-                objCVerifone.InsertActiveLog("Verifone", "Error", "Update_UpdateVerifonePayment()", "Update_UpdateVerifonePayment Exception : " + Convert.ToString(ex), "Payment", "upaymentcfg");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifonePayment()", "UpdateVerifonePayment Exception 2 : " + Convert.ToString(ex), "Payment", "upaymentcfg");
             }
         }
 
-        public void Update_UpdateVerifoneCategory(DataTable dtCat)
+        public void UpdateVerifoneCategory(DataTable dtCat)
         {
             string arraysysid = "";
             string sysidxml = "";
             _CVerifone objCVerifone = new _CVerifone();
             try
             {
-                //DataSet ds = new DataSet();
-                posConfig objposConfig = new posConfig();
-                //ds = objCVerifone.GetVerifoneCategoryData();
 
-                if (dtCat.Rows.Count > 0)
+                posConfig objposConfig = new posConfig();
+
+                if (dtCat != null && dtCat.Rows.Count > 0)
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "Start", "Update_UpdateVerifoneCategory()", "Initialize to update", "Category", "uposcfg");
+                    objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifoneCategory()", "Initialize to update", "Category", "uposcfg");
 
                     string CategoryPayloadXML = "";
                     StringBuilder sb = new StringBuilder();
@@ -440,6 +421,7 @@ namespace VerifoneServices
                         }
                         catch (Exception ex)
                         {
+                            objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneCategory()", "UpdateVerifoneCategory Exception : " + Convert.ToString(ex), "Category", "uposcfg");
                         }
                     }
 
@@ -466,39 +448,35 @@ namespace VerifoneServices
                         long result = objCVerifone.DeleteVerifoneHistory("Category", arraysysid);
                         if (result == 0)
                         {
-                            //lblResult.Text = "UpdateCategory : Fail";
                             // ******** msg of fail
-                            objCVerifone.InsertActiveLog("Verifone", "Fail", "Update_UpdateVerifoneCategory()", "Verifone data not updated", "Category", "uposcfg");
+                            objCVerifone.InsertActiveLog("Verifone", "Fail", "UpdateVerifoneCategory()", "Verifone data not updated", "Category", "uposcfg");
                         }
                         else
                         {
-                            //lblResult.Text = "UpdateCategory : Success";
                             // ******** msg of success
-                            objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneCategory()", "Verifone data updated successfully", "Category", "uposcfg");
+                            objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneCategory()", "Verifone data updated successfully", "Category", "uposcfg");
                         }
                     }
                     else
                     {
-                        //lblResult.Text = "UpdateCategory : No Reponse";
                         // ******** msg of no response
-                        objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneCategory()", "No Response", "Category", "uposcfg");
+                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneCategory()", "No Response", "Category", "uposcfg");
                     }
                     #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneCategory()", "Not any Category data is pending to update", "Category", "uposcfg");
+                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneCategory()", "Not any Category data is pending to update", "Category", "uposcfg");
                 }
             }
             catch (Exception ex)
             {
-                //lblResult.Text = "UpdateCategory : " + ex;
                 // ******** msg of exception
-                objCVerifone.InsertActiveLog("Verifone", "Error", "Update_UpdateVerifoneCategory()", "Update_UpdateVerifoneCategory Exception : " + Convert.ToString(ex), "Category", "uposcfg");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneCategory()", "UpdateVerifoneCategory Exception 2 : " + Convert.ToString(ex), "Category", "uposcfg");
             }
         }
 
-        public void Update_UpdateVerifoneProductCode(DataTable dt)
+        public void UpdateVerifoneProductCode(DataTable dt)
         {
             string arraysysid = "";
             string sysidxml = "";
@@ -511,7 +489,7 @@ namespace VerifoneServices
 
                 if (dt.Rows.Count > 0)
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "Start", "Update_UpdateVerifoneProductCode()", "Initialize to update", "ProductCode", "uposcfg");
+                    objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifoneProductCode()", "Initialize to update", "ProductCode", "uposcfg");
 
                     string ProductCodePayloadXML = "";
                     StringBuilder sb = new StringBuilder();
@@ -567,59 +545,53 @@ namespace VerifoneServices
                         long result = objCVerifone.DeleteVerifoneHistory("ProdCode", arraysysid);
                         if (result == 0)
                         {
-                            //lblResult.Text = "UpdateCategory : Fail";
                             // ******** msg of fail
-                            objCVerifone.InsertActiveLog("Verifone", "Fail", "Update_UpdateVerifoneProductCode()", "Verifone data not updated", "ProdCode", "uposcfg");
+                            objCVerifone.InsertActiveLog("Verifone", "Fail", "UpdateVerifoneProductCode()", "Verifone data not updated", "ProdCode", "uposcfg");
                         }
                         else
                         {
                             //lblResult.Text = "UpdateCategory : Success";
                             // ******** msg of success
-                            objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneProductCode()", "Verifone data updated successfully", "ProdCode", "uposcfg");
+                            objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneProductCode()", "Verifone data updated successfully", "ProdCode", "uposcfg");
                         }
                     }
                     else
                     {
                         //lblResult.Text = "UpdateCategory : No Reponse";
                         // ******** msg of no response
-                        objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneProductCode()", "No Response", "ProdCode", "uposcfg");
+                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneProductCode()", "No Response", "ProdCode", "uposcfg");
                     }
                     #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneProductCode()", "Not any ProdCode data is pending to update", "ProdCode", "uposcfg");
+                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneProductCode()", "Not any ProdCode data is pending to update", "ProdCode", "uposcfg");
                 }
             }
             catch (Exception ex)
             {
                 //lblResult.Text = "UpdateCategory : " + ex;
                 // ******** msg of exception
-                objCVerifone.InsertActiveLog("Verifone", "Error", "Update_UpdateVerifoneProductCode()", "Update_UpdateVerifoneCategory Exception : " + Convert.ToString(ex), "ProdCode", "uposcfg");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneProductCode()", "UpdateVerifoneCategory Exception : " + Convert.ToString(ex), "ProdCode", "uposcfg");
             }
         }
 
-        public void Update_UpdateVerifoneDepartment(DataTable dt, DataTable dttax)
+        public void UpdateVerifoneDepartment(DataTable dt, DataTable dttax)
         {
             _CVerifone objCVerifone = new _CVerifone();
             string sysidxml = "";
             string arraysysid = "";
             try
             {
+                objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifoneDepartment()", "Initialize to update", "Department", "uposcfg");
 
-
-                //DataSet ds = new DataSet();
                 posConfig objposConfig = new posConfig();
-                //ds = objCVerifone.GetVerifoneDepartmentData();
 
-                if (dt.Rows.Count > 0)
+                if (dt != null && dt.Rows.Count > 0)
                 {
                     var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Department.xml";
                     XmlDocument docxmlPath = new XmlDocument();
                     docxmlPath.Load(path);
-
-
-                    objCVerifone.InsertActiveLog("Verifone", "Start", "Update_UpdateVerifoneDepartment()", "Initialize to update", "Department", "uposcfg");
 
                     string DepartmentPayloadXML = "";
                     StringBuilder sb = new StringBuilder();
@@ -650,7 +622,6 @@ namespace VerifoneServices
                                 {
                                     var serializer = new XmlSerializer(typeof(RapidVerifone.department));
                                     RapidVerifone.department objDepartmentGet = new RapidVerifone.department();
-
 
                                     using (TextReader reader = new StringReader(node.OuterXml))
                                     {
@@ -687,19 +658,23 @@ namespace VerifoneServices
                                         DataTable dttaxdept = new DataTable();
                                         dv.RowFilter = ("[" + dttax.Columns[0].ColumnName + "] = " + Convert.ToString(dt.Rows[i][0]) + "");
                                         dttaxdept = dv.ToTable();
+                                        dv.RowFilter = string.Empty;
 
-                                        departmentTax[] objdepartmentTax = new departmentTax[dttaxdept.Rows.Count];
 
-                                        for (int a = 0; a < dttaxdept.Rows.Count; a++)
-                                        {
-                                            objdepartmentTax[a] = new departmentTax();
-                                            objdepartmentTax[a].sysid = Convert.ToString(dttaxdept.Rows[a][1]);
+                                      
+                                            if (dttaxdept != null && dttaxdept.Rows.Count > 0)
+                                            {
+                                                departmentTax[] objdepartmentTax = new departmentTax[dttaxdept.Rows.Count];
 
+                                                for (int a = 0; a < dttaxdept.Rows.Count; a++)
+                                                {
+                                                    objdepartmentTax[a] = new departmentTax();
+                                                    objdepartmentTax[a].sysid = Convert.ToString(dttaxdept.Rows[a][1]);
+                                                }
+
+                                                objdepartment[i].taxes = objdepartmentTax;
+                                            
                                         }
-
-
-                                        objdepartment[i].taxes = objdepartmentTax;
-
 
                                         objposConfig.departments = objdepartment;
                                         if (arraysysid == "")
@@ -710,13 +685,13 @@ namespace VerifoneServices
                                         {
                                             arraysysid = arraysysid + "," + sysidxml;
                                         }
-                                    }
-                                    else
-                                    {
+
+                                        dv.RowFilter = string.Empty;
                                     }
                                 }
                                 catch (Exception ex)
                                 {
+                                    objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneDepartment()", "UpdateVerifoneDepartment Exception : " + Convert.ToString(ex), "Department", "uposcfg");
                                 }
                             }
                         }
@@ -733,15 +708,14 @@ namespace VerifoneServices
                             objdepartment[i].isAllowFQ = false;
                             objdepartment[i].isAllowSD = false;
                             objdepartment[i].prohibitDisc = false;
-                            objdepartment[i].prohibitDiscSpecified = false;  //
+                            objdepartment[i].prohibitDiscSpecified = false;
                             objdepartment[i].isBL1 = false;
-                            objdepartment[i].isBL1Specified = false; //
+                            objdepartment[i].isBL1Specified = false;
                             objdepartment[i].isBL2 = false;
-                            objdepartment[i].isBL2Specified = false; //
+                            objdepartment[i].isBL2Specified = false;
                             objdepartment[i].isMoneyOrder = false;
                             objdepartment[i].isSNPromptReqd = false;
-                            objdepartment[i].isSNPromptReqdSpecified = false; //
-
+                            objdepartment[i].isSNPromptReqdSpecified = false;
 
                             objdeptCat.sysid = Convert.ToString(dt.Rows[i][4]);
                             objdepartment[i].category = objdeptCat;
@@ -754,18 +728,20 @@ namespace VerifoneServices
                             dv.RowFilter = ("[" + dttax.Columns[0].ColumnName + "] = " + Convert.ToString(dt.Rows[i][0]) + "");
                             dttaxdept = dv.ToTable();
 
-                            departmentTax[] objdepartmentTax = new departmentTax[dttaxdept.Rows.Count];
 
-                            for (int a = 0; a < dttaxdept.Rows.Count; a++)
-                            {
-                                objdepartmentTax[a] = new departmentTax();
-                                objdepartmentTax[a].sysid = Convert.ToString(dttaxdept.Rows[a][1]);
+                          
+                                if (dttaxdept != null && dttaxdept.Rows.Count > 0)
+                                {
+                                    departmentTax[] objdepartmentTax = new departmentTax[dttaxdept.Rows.Count];
 
-                            }
-
-
-                            objdepartment[i].taxes = objdepartmentTax;
-
+                                    for (int a = 0; a < dttaxdept.Rows.Count; a++)
+                                    {
+                                        objdepartmentTax[a] = new departmentTax();
+                                        objdepartmentTax[a].sysid = Convert.ToString(dttaxdept.Rows[a][1]);
+                                    }
+                                    objdepartment[i].taxes = objdepartmentTax;
+                                }
+                            
 
                             objposConfig.departments = objdepartment;
                             if (arraysysid == "")
@@ -776,65 +752,63 @@ namespace VerifoneServices
                             {
                                 arraysysid = arraysysid + "," + sysidxml;
                             }
+
+                            dv.RowFilter = string.Empty;
                         }
-                    }
 
-                    string xml = objComman.GetXMLFromObject(objposConfig);
-                    XmlDocument doc = new XmlDocument();
-                    doc.LoadXml(xml);
-                    XmlWriterSettings settings = new XmlWriterSettings();
-                    settings.Indent = true;
-                    XmlWriter writer = XmlWriter.Create(sb, settings);
-                    doc.WriteTo(writer);
-                    writer.Close();
-                    string t = "xmlns=\"" + "" + "\"";
-                    sb = sb.Replace(t, "");
-                    //this.txtPayloadXml.Text = sb.ToString();
-                    DepartmentPayloadXML = sb.ToString();
+                        string xml = objComman.GetXMLFromObject(objposConfig);
+                        XmlDocument doc = new XmlDocument();
+                        doc.LoadXml(xml);
+                        XmlWriterSettings settings = new XmlWriterSettings();
+                        settings.Indent = true;
+                        XmlWriter writer = XmlWriter.Create(sb, settings);
+                        doc.WriteTo(writer);
+                        writer.Close();
+                        string t = "xmlns=\"" + "" + "\"";
+                        sb = sb.Replace(t, "");
+                        //this.txtPayloadXml.Text = sb.ToString();
+                        DepartmentPayloadXML = sb.ToString();
 
-                    #region Pass Payload to generate Verifone data xml
-                    string Response = objComman.GetXMLResult(DepartmentPayloadXML, "UpdateDepartment", "POST", "uposcfg");
-                    #endregion
+                        #region Pass Payload to generate Verifone data xml
+                        string Response = objComman.GetXMLResult(DepartmentPayloadXML, "UpdateDepartment", "POST", "uposcfg");
+                        #endregion
 
-                    #region Delete updated data from BoF
-                    if (Response != null && Response != "")
-                    {
-                        long result = objCVerifone.DeleteVerifoneHistory("Department", arraysysid);
-                        if (result == 0)
+                        #region Delete updated data from BoF
+                        if (Response != null && Response != "")
                         {
-                            //lblResult.Text = "UpdateDepartment : Fail";
-                            // ******** msg of fail
-                            objCVerifone.InsertActiveLog("Verifone", "Fail", "Update_UpdateVerifoneDepartment()", "Verifone data not updated", "Department", "uposcfg");
+                            long result = objCVerifone.DeleteVerifoneHistory("Department", arraysysid);
+                            if (result == 0)
+                            {
+                                // ******** msg of fail
+                                objCVerifone.InsertActiveLog("Verifone", "Fail", "UpdateVerifoneDepartment()", "Verifone data not updated", "Department", "uposcfg");
+                            }
+                            else
+                            {
+                                // ******** msg of success
+                                objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneDepartment()", "Verifone data updated successfully", "Department", "uposcfg");
+                            }
                         }
                         else
                         {
-                            //lblResult.Text = "UpdateDepartment : Success";
-                            // ******** msg of success
-                            objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneDepartment()", "Verifone data updated successfully", "Department", "uposcfg");
+                            // ******** msg of no response
+                            objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneDepartment()", "No Response", "Department", "uposcfg");
                         }
+                        #endregion
                     }
-                    else
-                    {
-                        //lblResult.Text = "UpdateDepartment : No Reponse";
-                        // ******** msg of no response
-                        objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneDepartment()", "No Response", "Department", "uposcfg");
-                    }
-                    #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneDepartment()", "Not any Department data is pending to update", "Department", "uposcfg");
+                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneDepartment()", "Not any Department data is pending to update", "Department", "uposcfg");
                 }
             }
             catch (Exception ex)
             {
-                //lblResult.Text = "UpdateDepartment : " + ex;
                 // ******** msg of exception
-                objCVerifone.InsertActiveLog("Verifone", "Error", "Update_UpdateVerifoneDepartment()", "Update_UpdateVerifoneDepartment Exception : " + Convert.ToString(ex), "Department", "uposcfg");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneDepartment()", "UpdateVerifoneDepartment Exception 2 : " + Convert.ToString(ex), "Department", "uposcfg");
             }
         }
 
-        public void Update_UpdateVerifoneFees(DataTable dt, DataTable dt1)
+        public void UpdateVerifoneFees(DataTable dt, DataTable dt1)
         {
             _CVerifone objCVerifone = new _CVerifone();
             string sysidxml = "";
@@ -842,21 +816,15 @@ namespace VerifoneServices
             try
             {
 
-                //DataSet ds = new DataSet();
                 DataTable dtNew = new DataTable();
                 feeConfig objfeeConfig = new feeConfig();
-                //ds = objCVerifone.GetVerifoneFeesData();
 
-
-                if (dt.Rows.Count > 0)
+                if (dt != null && dt.Rows.Count > 0)
                 {
-
                     var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Fee.xml";
                     XmlDocument docxmlPath = new XmlDocument();
                     docxmlPath.Load(path);
-
-
-                    objCVerifone.InsertActiveLog("Verifone", "Start", "Update_UpdateVerifoneFees()", "Initialize to update", "Fee", "ufeecfg");
+                    objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifoneFees()", "Initialize to update", "Fee", "ufeecfg");
 
                     string FeePayloadXML = "";
                     StringBuilder sb = new StringBuilder();
@@ -903,15 +871,19 @@ namespace VerifoneServices
                                         dv.RowFilter = ("[" + dt1.Columns[1].ColumnName + "] = " + objfee[i].sysid + "");
                                         dtNew = dv.ToTable();
 
-                                        rangeAmountFeeType[] objItems = new rangeAmountFeeType[dtNew.Rows.Count];
-
-                                        for (int a = 0; a < dtNew.Rows.Count; a++)
+                                        if (dtNew != null && dtNew.Rows.Count > 0)
                                         {
-                                            objItems[a] = new rangeAmountFeeType();
-                                            objItems[a].rangeFee = Convert.ToDecimal(dtNew.Rows[a][3]);
-                                            objItems[a].rangeEnd = Convert.ToDecimal(dtNew.Rows[a][4]);
+                                            rangeAmountFeeType[] objItems = new rangeAmountFeeType[dtNew.Rows.Count];
+
+                                            for (int a = 0; a < dtNew.Rows.Count; a++)
+                                            {
+                                                objItems[a] = new rangeAmountFeeType();
+                                                objItems[a].rangeFee = Convert.ToDecimal(dtNew.Rows[a][3]);
+                                                objItems[a].rangeEnd = Convert.ToDecimal(dtNew.Rows[a][4]);
+                                            }
+                                            objfee[i].Items = objItems;
                                         }
-                                        objfee[i].Items = objItems;
+
 
                                         objfeeConfig.fees = objfee;
 
@@ -923,6 +895,7 @@ namespace VerifoneServices
                                         {
                                             arraysysid = arraysysid + "," + sysidxml;
                                         }
+                                        dv.RowFilter = string.Empty;
                                     }
                                 }
                                 catch (Exception ex)
@@ -943,15 +916,19 @@ namespace VerifoneServices
                             dv.RowFilter = ("[" + dt1.Columns[1].ColumnName + "] = " + objfee[i].sysid + "");
                             dtNew = dv.ToTable();
 
-                            rangeAmountFeeType[] objItems = new rangeAmountFeeType[dtNew.Rows.Count];
 
-                            for (int a = 0; a < dtNew.Rows.Count; a++)
+                            if (dtNew != null && dtNew.Rows.Count > 0)
                             {
-                                objItems[a] = new rangeAmountFeeType();
-                                objItems[a].rangeFee = Convert.ToDecimal(dtNew.Rows[a][3]);
-                                objItems[a].rangeEnd = Convert.ToDecimal(dtNew.Rows[a][4]);
+                                rangeAmountFeeType[] objItems = new rangeAmountFeeType[dtNew.Rows.Count];
+
+                                for (int a = 0; a < dtNew.Rows.Count; a++)
+                                {
+                                    objItems[a] = new rangeAmountFeeType();
+                                    objItems[a].rangeFee = Convert.ToDecimal(dtNew.Rows[a][3]);
+                                    objItems[a].rangeEnd = Convert.ToDecimal(dtNew.Rows[a][4]);
+                                }
+                                objfee[i].Items = objItems;
                             }
-                            objfee[i].Items = objItems;
 
                             objfeeConfig.fees = objfee;
 
@@ -963,6 +940,7 @@ namespace VerifoneServices
                             {
                                 arraysysid = arraysysid + "," + sysidxml;
                             }
+                            dv.RowFilter = string.Empty;
                         }
                     }
 
@@ -989,47 +967,45 @@ namespace VerifoneServices
                         long result = objCVerifone.DeleteVerifoneHistory("Fee", arraysysid);
                         if (result == 0)
                         {
-                            //lblResult.Text = "UpdateFees : Fail";
                             // ******** msg of fail
-                            objCVerifone.InsertActiveLog("Verifone", "Fail", "Update_UpdateVerifoneFees()", "Verifone data not updated", "Fee", "ufeecfg");
+                            objCVerifone.InsertActiveLog("Verifone", "Fail", "UpdateVerifoneFees()", "Verifone data not updated", "Fee", "ufeecfg");
                         }
                         else
                         {
-                            //lblResult.Text = "UpdateFees : Success";
                             // ******** msg of success
-                            objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneFees()", "Verifone data updated successfully", "Fee", "ufeecfg");
+                            objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneFees()", "Verifone data updated successfully", "Fee", "ufeecfg");
                         }
                     }
                     else
                     {
-                        //lblResult.Text = "UpdateFees : No Reponse";
                         // ******** msg of no response
-                        objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneFees()", "No Response", "Fee", "ufeecfg");
+                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneFees()", "No Response", "Fee", "ufeecfg");
                     }
                     #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneFees()", "Not any Fees data is pending to update", "Fees", "ufeecfg");
+                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneFees()", "Not any Fees data is pending to update", "Fees", "ufeecfg");
                 }
             }
             catch (Exception ex)
             {
-                //lblResult.Text = "UpdateFees : " + ex;
                 // ******** msg of exception
-                objCVerifone.InsertActiveLog("Verifone", "Error", "Update_UpdateVerifoneFees()", "Update_UpdateVerifoneFees Exception : " + Convert.ToString(ex), "Fee", "ufeecfg");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneFees()", "UpdateVerifoneFees Exception 2 : " + Convert.ToString(ex), "Fee", "ufeecfg");
             }
         }
 
-        public void Update_UpdateVerifoneItems(DataTable dtItem, DataTable dtitemTax, DataTable dtitemFee)
+        public void UpdateVerifoneItems(DataTable dtItem, DataTable dtitemTax, DataTable dtitemFee)
         {
             _CVerifone objCVerifone = new _CVerifone();
             try
             {
+
                 PLUs objPLUs = new PLUs();
-                if (dtItem.Rows.Count > 0)
+
+                if (dtItem != null && dtItem.Rows.Count > 0)
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "Start", "Update_UpdateVerifoneItems()", "Initialize to update", "Items", "uPLUs");
+                    objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifoneItems()", "Initialize to update", "Items", "uPLUs");
 
                     string ItemPayloadXML = "";
                     StringBuilder sb = new StringBuilder();
@@ -1040,6 +1016,11 @@ namespace VerifoneServices
 
                     for (int i = 0; i < dtItem.Rows.Count; i++)
                     {
+                        if (Convert.ToString(dtItem.Rows[i]["ItemCode"]) == "66")
+                        {
+                            objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifoneItems()", "Initialize to update", "Items", "uPLUs");
+                        }
+
                         objPLUCType[i] = new PLUCType();
 
                         PLUCTypeUpc objPLUCTypeUpc = new PLUCTypeUpc();
@@ -1052,7 +1033,6 @@ namespace VerifoneServices
                         objPLUCType[i].description = Convert.ToString(dtItem.Rows[i]["ITEM_Desc"]);
                         objPLUCType[i].department = Convert.ToString(dtItem.Rows[i]["DeptId"]);
 
-
                         objPLUCType[i].pcode = Convert.ToString(dtItem.Rows[i]["ITEM_No"]);
 
                         PLUCTypePrice objPLUCTypePrice = new PLUCTypePrice();
@@ -1060,13 +1040,15 @@ namespace VerifoneServices
                         objPLUCType[i].price = objPLUCTypePrice;
 
                         //*******************************
-                        DataView dv = dtitemTax.DefaultView;
-                        if (dv != null && dv.Count > 0)
+                        DataView dvTax = dtitemTax.DefaultView;
+                        if (dvTax != null && dvTax.Count > 0)
                         {
-                            dv.RowFilter = ("[" + dtitemTax.Columns["Barcode"].ColumnName + "] ='" + dtItem.Rows[i]["Barcode"] + "' and  [" + dtitemTax.Columns["ITEM_ShortName"].ColumnName + "] ='" + dtItem.Rows[i]["ITEM_ShortName"] + "' ");
-                            DataTable dtNew = dv.ToTable();
+                            //dvTax.RowFilter = ("[" + dtitemTax.Columns["Barcode"].ColumnName + "] ='" + dtItem.Rows[i]["Barcode"] + "' and  [" + dtitemTax.Columns["ITEM_ShortName"].ColumnName + "] ='" + dtItem.Rows[i]["ITEM_ShortName"] + "' ");
+                            dvTax.RowFilter = ("[" + dtitemTax.Columns["ItemCode"].ColumnName + "] ='" + dtItem.Rows[i]["ItemCode"] + "'");
 
-                            if (dtNew.Rows.Count > 0)
+                            DataTable dtNew = dvTax.ToTable();
+
+                            if (dtNew != null && dtNew.Rows.Count > 0)
                             {
                                 RapidVarifone.taxRate[] objtaxRate = new RapidVarifone.taxRate[dtNew.Rows.Count];
 
@@ -1077,17 +1059,19 @@ namespace VerifoneServices
                                 }
                                 objPLUCType[i].taxRates = objtaxRate;
                             }
+
+                            dvTax.RowFilter = string.Empty;
                         }
-
-
 
                         DataView dvFee = dtitemFee.DefaultView;
                         if (dvFee != null && dvFee.Count > 0)
                         {
-                            dvFee.RowFilter = ("[" + dtitemFee.Columns["Barcode"].ColumnName + "] ='" + dtItem.Rows[i]["Barcode"] + "' and [" + dtitemFee.Columns["ITEM_ShortName"].ColumnName + "] ='" + dtItem.Rows[i]["ITEM_ShortName"] + "' ");
+                            //dvFee.RowFilter = ("[" + dtitemFee.Columns["Barcode"].ColumnName + "] ='" + dtItem.Rows[i]["Barcode"] + "' and [" + dtitemFee.Columns["ITEM_ShortName"].ColumnName + "] ='" + dtItem.Rows[i]["ITEM_ShortName"] + "' ");
+                            dvFee.RowFilter = ("[" + dtitemFee.Columns["ItemCode"].ColumnName + "] ='" + dtItem.Rows[i]["ItemCode"] + "'");
+
                             DataTable dtNew = dvFee.ToTable();
 
-                            if (dtNew.Rows.Count > 0)
+                            if (dtNew != null && dtNew.Rows.Count > 0)
                             {
                                 PLUCTypeFees objPLUCTypeFees = new PLUCTypeFees();
 
@@ -1100,6 +1084,8 @@ namespace VerifoneServices
                                 objPLUCTypeFees.fee = arrFee;
                                 objPLUCType[i].Item = objPLUCTypeFees;
                             }
+
+                            dvFee.RowFilter = string.Empty;
                         }
 
                         objPLUCType[i].SellUnit = Convert.ToString(dtItem.Rows[i]["Qty"]);
@@ -1112,7 +1098,6 @@ namespace VerifoneServices
 
                         objPLUs.PLU = objPLUCType;
                         // }
-
                     }
 
                     string xml = objComman.GetXMLFromObject(objPLUs);
@@ -1138,44 +1123,41 @@ namespace VerifoneServices
                         long result = objCVerifone.DeleteVerifoneHistory("Items", "");
                         if (result == 0)
                         {
-                            //lblResult.Text = "UpdateItems : Fail";
                             // ******** msg of fail
-                            objCVerifone.InsertActiveLog("Verifone", "Fail", "Update_UpdateVerifoneItems()", "Verifone data not updated", "Items", "uPLUs");
+                            objCVerifone.InsertActiveLog("Verifone", "Fail", "UpdateVerifoneItems()", "Verifone data not updated", "Items", "uPLUs");
                         }
                         else
                         {
-                            //lblResult.Text = "UpdateItems : Success";
                             // ******** msg of success
-                            objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneItems()", "Verifone data updated successfully", "Items", "uPLUs");
+                            objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneItems()", "Verifone data updated successfully", "Items", "uPLUs");
                         }
                     }
                     else
                     {
-                        //lblResult.Text = "UpdateItems : No Reponse";
                         // ******** msg of no response
-                        objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneItems()", "No Response", "Items", "uPLUs");
+                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneItems()", "No Response", "Items", "uPLUs");
                     }
                     #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneItems()", "Not any Item data is pending to update", "Items", "uPLUs");
+                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneItems()", "Not any Item data is pending to update", "Items", "uPLUs");
                 }
             }
             catch (Exception ex)
             {
-                //lblResult.Text = "UpdateItems : " + ex;
                 // ******** msg of exception
-                objCVerifone.InsertActiveLog("Verifone", "Error", "Update_UpdateVerifoneItems()", "Update_UpdateVerifoneItems Exception : " + Convert.ToString(ex), "Items", "uPLUs");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneItems()", "UpdateVerifoneItems Exception 2 : " + Convert.ToString(ex), "Items", "uPLUs");
             }
         }
 
-        public void Update_UpdateVerifoneFuel(DataTable dtfuel, DataTable dtfuelPrice)
+        public void UpdateVerifoneFuel(DataTable dtfuel, DataTable dtfuelPrice)
         {
             _CVerifone objCVerifone = new _CVerifone();
             string arraysysid = "";
             try
             {
+
                 var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\Fuel.xml";
                 XmlDocument docxmlPath = new XmlDocument();
                 docxmlPath.Load(path);
@@ -1184,9 +1166,10 @@ namespace VerifoneServices
                 fuelPrices objfuelPrices = new fuelPrices();
                 #endregion
 
-                if (dtfuel.Rows.Count > 0)
+
+                if (dtfuel != null && dtfuel.Rows.Count > 0)
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "Start", "Update_UpdateVerifoneFuel()", "Initialize to update", "Fuel", "ufuelprices");
+                    objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifoneFuel()", "Initialize to update", "Fuel", "ufuelprices");
 
                     string FuelPayloadXML = "";
                     StringBuilder sb = new StringBuilder();
@@ -1202,28 +1185,28 @@ namespace VerifoneServices
                         objsite.Value = "";
                         objfuelPrices.site = objsite;
                     }
+
                     #region Fuel Price products  2
                     fuelPricesFuelProducts objfuelPricesFuelProducts = new fuelPricesFuelProducts();
                     objfuelPricesFuelProducts.maxSize = Convert.ToString(dtfuel.Rows.Count);
-
                     #endregion
-                    fuelPricesFuelProductsFuelProduct[] objfuelPricesFuelProductsFuelProduct = new fuelPricesFuelProductsFuelProduct[dtfuel.Rows.Count];
 
+                    fuelPricesFuelProductsFuelProduct[] objfuelPricesFuelProductsFuelProduct = new fuelPricesFuelProductsFuelProduct[dtfuel.Rows.Count];
 
                     for (int i = 0; i < dtfuel.Rows.Count; i++)
                     {
-
                         fuelPricesFuelProductsFuelProduct FuelProduct = new fuelPricesFuelProductsFuelProduct();
 
                         FuelProduct.sysid = Convert.ToString(dtfuel.Rows[i]["FuelTypeId"]);
                         FuelProduct.name = Convert.ToString(dtfuel.Rows[i]["FuelTypeLabelTitle"]);
                         FuelProduct.NAXMLFuelGradeID = Convert.ToString(dtfuel.Rows[i]["NAXMLFuelGradeID"]);
 
-
                         DataView dv = dtfuelPrice.DefaultView;
                         dv.RowFilter = ("[" + dtfuelPrice.Columns[0].ColumnName + "] =" + dtfuel.Rows[i]["FuelTypeId"] + "");
                         DataTable dtNew = dv.ToTable();
-                        if (dtNew.Rows.Count > 0)
+
+
+                        if (dtNew != null && dtNew.Rows.Count > 0)
                         {
                             fuelPricesFuelProductsFuelProductPrice[] objFuelPrice = new fuelPricesFuelProductsFuelProductPrice[dtNew.Rows.Count];
                             for (int j = 0; j < dtNew.Rows.Count; j++)
@@ -1238,9 +1221,13 @@ namespace VerifoneServices
                             }
                             FuelProduct.prices = objFuelPrice;
                         }
+
+
                         objfuelPricesFuelProductsFuelProduct[i] = FuelProduct;
 
+                        dv.RowFilter = string.Empty;
                     }
+
                     objfuelPricesFuelProducts.fuelProduct = objfuelPricesFuelProductsFuelProduct;
 
                     objfuelPrices.fuelProducts = objfuelPricesFuelProducts;
@@ -1268,39 +1255,35 @@ namespace VerifoneServices
                         long result = objCVerifone.DeleteVerifoneHistory("Fuel", arraysysid);
                         if (result == 0)
                         {
-                            //lblResult.Text = "UpdateFuel : Fail";
                             // ******** msg of fail
-                            objCVerifone.InsertActiveLog("Verifone", "Fail", "Update_UpdateVerifoneFuel()", "Verifone data not updated", "Fuel", "ufuelprices");
+                            objCVerifone.InsertActiveLog("Verifone", "Fail", "UpdateVerifoneFuel()", "Verifone data not updated", "Fuel", "ufuelprices");
                         }
                         else
                         {
-                            //lblResult.Text = "UpdateFuel : Success";
                             // ******** msg of success
-                            objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneFuel()", "Verifone data updated successfully", "Fuel", "ufuelprices");
+                            objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneFuel()", "Verifone data updated successfully", "Fuel", "ufuelprices");
                         }
                     }
                     else
                     {
-                        //lblResult.Text = "UpdateFuel : No Reponse";
                         // ******** msg of no response
-                        objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneFuel()", "No Response", "Fuel", "ufuelprices");
+                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneFuel()", "No Response", "Fuel", "ufuelprices");
                     }
                     #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneFuel()", "Not any Fuel data is pending to update", "Fuel", "ufuelcfg");
+                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneFuel()", "Not any Fuel data is pending to update", "Fuel", "ufuelcfg");
                 }
             }
             catch (Exception ex)
             {
-                //lblResult.Text = "UpdateFuel : " + ex;
                 // ******** msg of exception
-                objCVerifone.InsertActiveLog("Verifone", "Error", "Update_UpdateVerifoneFuel()", "Update_UpdateVerifoneFuel Exception : " + Convert.ToString(ex), "Fuel", "ufuelcfg");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneFuel()", "UpdateVerifoneFuel Exception : " + Convert.ToString(ex), "Fuel", "ufuelcfg");
             }
         }
 
-        public void Update_UpdateVerifoneUser(DataTable dtUser, DataTable dtUserRole)
+        public void UpdateVerifoneUser(DataTable dtUser, DataTable dtUserRole)
         {
             _CVerifone objCVerifone = new _CVerifone();
             DataTable dt = new DataTable();
@@ -1314,13 +1297,14 @@ namespace VerifoneServices
             {
 
                 RapidVerifone.userConfig objuserConfig = new RapidVerifone.userConfig();
-                if (dtUser.Rows.Count > 0)
+
+                if (dtUser != null && dtUser.Rows.Count > 0)
                 {
                     var path = AppDomain.CurrentDomain.BaseDirectory + "xml\\UserRole.xml";
                     XmlDocument docxmlPath = new XmlDocument();
                     docxmlPath.Load(path);
 
-                    objCVerifone.InsertActiveLog("Verifone", "Start", "Update_UpdateVerifoneUser()", "Initialize to Insert", "UserWithRole", "uuseradmin");
+                    objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifoneUser()", "Initialize to Insert", "UserWithRole", "uuseradmin");
 
                     RapidVerifone.usersType objusersType = new RapidVerifone.usersType();
 
@@ -1379,6 +1363,8 @@ namespace VerifoneServices
                         {
                             arraysysid = arraysysid + "," + sysidxml;
                         }
+
+                        dvrole.RowFilter = string.Empty;
                     }
                     objusersType.user = objuser;
                     object[] item = new object[3];
@@ -1408,31 +1394,31 @@ namespace VerifoneServices
                         long result = objCVerifone.DeleteVerifoneHistory("User", arraysysid);
                         if (result == 0)
                         {
-                            objCVerifone.InsertActiveLog("Verifone", "Fail", "Update_UpdateVerifoneUser()", "Verifone Data not Insert ", "User", "uuseradmin");
+                            objCVerifone.InsertActiveLog("Verifone", "Fail", "UpdateVerifoneUser()", "Verifone Data not Insert ", "User", "uuseradmin");
                         }
                         else
                         {
                             //bool Result = objComman.UpdateDatabaseServerFile(NewPassword); // update pwd in DS file
                             //if (Result == true)
                             //{
-                            objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneUser()", "Verifone Data Insert successfully", "User", "uuseradmin");
+                            objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneUser()", "Verifone Data Insert successfully", "User", "uuseradmin");
                             //}
                         }
                     }
                     else
                     {
-                        objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneUser()", "No Response", "User", "uuseradmin");
+                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneUser()", "No Response", "User", "uuseradmin");
                     }
                     #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneUser()", "Not any Tax data is pending to update", "User", "uuseradmin");
+                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneUser()", "Not any Tax data is pending to update", "User", "uuseradmin");
                 }
             }
             catch (Exception ex)
             {
-                objCVerifone.InsertActiveLog("Verifone", "Error", "Update_UpdateVerifoneUser()", "Update_UpdateVerifoneUser Exception : " + ex, "User", "utaxratecfg");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneUser()", "UpdateVerifoneUser Exception : " + ex, "User", "uuseradmin");
             }
         }
 
@@ -1587,27 +1573,27 @@ namespace VerifoneServices
                         long result = objCVerifone.DeleteVerifoneHistory("CashierUser", arraysysid);
                         if (result == 0)
                         {
-                            objCVerifone.InsertActiveLog("Verifone", "Fail", "Update_UpdateVerifoneTax()", "Verifone Data not updated ", "Tax", "utaxratecfg");
+                            objCVerifone.InsertActiveLog("Verifone", "Fail", "UpdateVerifoneTax()", "Verifone Data not updated ", "Tax", "utaxratecfg");
                         }
                         else
                         {
-                            objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneTax()", "Verifone Data updated successfully", "Tax", "utaxratecfg");
+                            objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneTax()", "Verifone Data updated successfully", "Tax", "utaxratecfg");
                         }
                     }
                     else
                     {
-                        objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneTax()", "No Response", "Tax", "utaxratecfg");
+                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneTax()", "No Response", "Tax", "utaxratecfg");
                     }
                     #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "End", "Update_UpdateVerifoneTax()", "Not any Tax data is pending to update", "Tax", "utaxratecfg");
+                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneTax()", "Not any Tax data is pending to update", "Tax", "utaxratecfg");
                 }
             }
             catch (Exception ex)
             {
-                objCVerifone.InsertActiveLog("Verifone", "Error", "Update_UpdateVerifoneTax()", "Update_UpdateVerifoneTax Exception : " + ex, "Tax", "utaxratecfg");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneTax()", "UpdateVerifoneTax Exception : " + ex, "Tax", "utaxratecfg");
             }
         }
 
@@ -1620,7 +1606,9 @@ namespace VerifoneServices
             string ItemListID = "";
             try
             {
-                if (dtItem.Rows.Count > 0)
+                objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateMixMatchItem()", "Initialize UpdateMixMatchItem", "MixMatch_ItemList", "uMaintenance");
+
+                if (dtItem != null && dtItem.Rows.Count > 0)
                 {
                     RapidVerifoneNAXML.NAXMLMaintenanceRequest objNAXMLConfig_Item = new RapidVerifoneNAXML.NAXMLMaintenanceRequest();
 
@@ -1653,54 +1641,71 @@ namespace VerifoneServices
 
                     objItem[0].RecordAction = objrecordAction;
 
-                    RapidVerifoneNAXML.ILTDetailType[] objILTDetail = new RapidVerifoneNAXML.ILTDetailType[uniqueCols.Rows.Count];
 
-                    for (int i = 0; i < uniqueCols.Rows.Count; i++)
-                    {
-                        try
+                    
+                        if (uniqueCols != null && uniqueCols.Rows.Count > 0)
                         {
-                            ItemListID = Convert.ToString(uniqueCols.Rows[i]["ItemListID"]);
-                            objILTDetail[i] = new RapidVerifoneNAXML.ILTDetailType();
+                            RapidVerifoneNAXML.ILTDetailType[] objILTDetail = new RapidVerifoneNAXML.ILTDetailType[uniqueCols.Rows.Count];
 
-                            #region ItemListID
-                            objILTDetail[i].ItemListID = Convert.ToString(uniqueCols.Rows[i]["ItemListID"]);
-                            #endregion
-
-                            #region ItemListDescription
-                            objILTDetail[i].ItemListDescription = Convert.ToString(uniqueCols.Rows[i]["ItemName"]);
-                            #endregion
-
-                            #region ItemListEntry
-                            DataView dvItem = dtItem.DefaultView;
-                            dvItem.RowFilter = ("[" + dtItem.Columns["ItemListID"].ColumnName + "] = " + Convert.ToString(uniqueCols.Rows[i]["ItemListID"]) + "");
-                            RapidVerifoneNAXML.ItemListEntry[] objItemList = new RapidVerifoneNAXML.ItemListEntry[dvItem.Count];
-
-                            for (int j = 0; j < dvItem.Count; j++)
+                            for (int i = 0; i < uniqueCols.Rows.Count; i++)
                             {
-                                objItemList[j] = new RapidVerifoneNAXML.ItemListEntry();
+                                try
+                                {
+                                    ItemListID = Convert.ToString(uniqueCols.Rows[i]["ItemListID"]);
+                                    objILTDetail[i] = new RapidVerifoneNAXML.ILTDetailType();
 
-                                RapidVerifoneNAXML.ItemCode objItemCode = new RapidVerifoneNAXML.ItemCode();
-                                RapidVerifoneNAXML.POSCodeFormat objPOS = new RapidVerifoneNAXML.POSCodeFormat();
-                                objPOS.format = "plu";
-                                objItemCode.POSCodeFormat = objPOS;
-                                objItemCode.POSCode = Convert.ToString((string)dvItem[j]["Barcode"]);
+                                    #region ItemListID
+                                    objILTDetail[i].ItemListID = Convert.ToString(uniqueCols.Rows[i]["ItemListID"]);
+                                    #endregion
 
-                                RapidVerifoneNAXML.POSCodeModifier objModifier = new RapidVerifoneNAXML.POSCodeModifier();
-                                objModifier.Value = Convert.ToString((string)dvItem[j]["ITEM_ShortName"]);
+                                    #region ItemListDescription
+                                    objILTDetail[i].ItemListDescription = Convert.ToString(uniqueCols.Rows[i]["ItemName"]);
+                                    #endregion
 
-                                objItemCode.POSCodeModifier = objModifier;
+                                    #region ItemListEntry
+                                    DataView dvItem = dtItem.DefaultView;
+                                    dvItem.RowFilter = ("[" + dtItem.Columns["ItemListID"].ColumnName + "] = " + Convert.ToString(uniqueCols.Rows[i]["ItemListID"]) + "");
+                                    RapidVerifoneNAXML.ItemListEntry[] objItemList = new RapidVerifoneNAXML.ItemListEntry[dvItem.Count];
 
-                                objItemList[j].ItemCode = objItemCode;
+                                    if (dvItem != null)
+                                    {
+                                        if (dvItem.Count > 0)
+                                        {
+                                            for (int j = 0; j < dvItem.Count; j++)
+                                            {
+                                                objItemList[j] = new RapidVerifoneNAXML.ItemListEntry();
+
+                                                RapidVerifoneNAXML.ItemCode objItemCode = new RapidVerifoneNAXML.ItemCode();
+                                                RapidVerifoneNAXML.POSCodeFormat objPOS = new RapidVerifoneNAXML.POSCodeFormat();
+                                                objPOS.format = "plu";
+                                                objItemCode.POSCodeFormat = objPOS;
+                                                objItemCode.POSCode = Convert.ToString((string)dvItem[j]["Barcode"]);
+
+                                                RapidVerifoneNAXML.POSCodeModifier objModifier = new RapidVerifoneNAXML.POSCodeModifier();
+                                                objModifier.Value = Convert.ToString((string)dvItem[j]["ITEM_ShortName"]);
+
+                                                objItemCode.POSCodeModifier = objModifier;
+
+                                                objItemList[j].ItemCode = objItemCode;
+                                            }
+                                            objILTDetail[i].ItemListEntry = objItemList;
+                                        }
+                                    }
+
+                                    dvItem.RowFilter = string.Empty;
+                                    #endregion
+                                }
+                                catch (Exception ex)
+                                {
+                                    objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateMixMatchItem()", "UpdateMixMatchItem Exception : " + ex, "MixMatch_ItemList", "uMaintenance");
+                                    MixMatch_ItemListID += ItemListID + ",";
+                                }
                             }
-                            objILTDetail[i].ItemListEntry = objItemList;
-                            #endregion
+
+                            objItem[0].ILTDetail = objILTDetail;
                         }
-                        catch (Exception ex)
-                        {
-                            MixMatch_ItemListID += ItemListID + ",";
-                        }
-                    }
-                    objItem[0].ILTDetail = objILTDetail;
+                    
+
                     objNAXMLConfig_Item.ItemListMaintenance = objItem;
                     objNAXMLConfig_Item.version = ConfigurationManager.AppSettings["MixMatchVersion"];
 
@@ -1717,7 +1722,6 @@ namespace VerifoneServices
                     sb = sb.Replace(t, "");
                     ItemXML = sb.ToString();
                     #endregion
-
                     #region Pass Payload to generate Verifone data xml
                     string Response = objComman.GetXMLResult(ItemXML, "UpdateMixMatch_ItemList", "POST", "uMaintenance");
                     #endregion
@@ -1747,7 +1751,7 @@ namespace VerifoneServices
             }
             catch (Exception ex)
             {
-                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateMixMatchItem()", "UpdateMixMatchItem Exception : " + ex, "MixMatch_ItemList", "uMaintenance");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateMixMatchItem()", "UpdateMixMatchItem Exception 2 : " + ex, "MixMatch_ItemList", "uMaintenance");
             }
         }
 
@@ -1759,6 +1763,8 @@ namespace VerifoneServices
             string arraysysid = "";
             try
             {
+                objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateMixMatch()", "Initialize UpdateMixMatch", "MixMatch", "uMaintenance");
+
                 #region filter of error MixMatch_Item
                 if (MixMatch_ItemListID != "")
                 {
@@ -1766,10 +1772,13 @@ namespace VerifoneServices
                     DataView dvNonErrorItems = dt.DefaultView;
                     dvNonErrorItems.RowFilter = ("[" + dt.Columns["ItemListID"].ColumnName + "] not in (" + MixMatch_ItemListID + ")");
                     dt = dvNonErrorItems.ToTable();
+
+                    dvNonErrorItems.RowFilter = string.Empty;
                 }
                 #endregion
 
-                if (dt.Rows.Count > 0)
+
+                if (dt != null && dt.Rows.Count > 0)
                 {
                     RapidVerifoneNAXML.NAXMLMaintenanceRequest objNAXMLConfig_Item = new RapidVerifoneNAXML.NAXMLMaintenanceRequest();
 
@@ -1972,32 +1981,39 @@ namespace VerifoneServices
                         dv = dtMixMatchEntry.DefaultView;
                         dv.RowFilter = ("[" + dtMixMatchEntry.Columns["Name"].ColumnName + "] = " + Convert.ToString(dt.Rows[i]["Name"]) + "");
                         dtMMEntry = dv.ToTable();
-                        RapidVerifoneNAXML.MixMatchEntry[] objMixMatchEntry = new RapidVerifoneNAXML.MixMatchEntry[dtMMEntry.Rows.Count];
-                        for (int n = 0; n < dtMMEntry.Rows.Count; n++)
-                        {
-                            objMixMatchEntry[n] = new RapidVerifoneNAXML.MixMatchEntry();
-                            sellUnit objsellUnit = new sellUnit();
-                            //objsellUnit.Value = Convert.ToDecimal(dt.Rows[i]["PrimaryItemQty"]);
-                            objsellUnit.Value = Convert.ToDecimal(dtMMEntry.Rows[n]["PrimaryItemQty"]);
-                            objMixMatchEntry[n].MixMatchUnits = objsellUnit;
+                        dv.RowFilter = string.Empty;
 
-                            RapidVerifoneNAXML.ItemChoiceType objItemChoiceType = new RapidVerifoneNAXML.ItemChoiceType();
-                            objItemChoiceType = Convert.ToString(dtMMEntry.Rows[n]["FreeType"]) == "1" ? RapidVerifoneNAXML.ItemChoiceType.MixMatchDiscountAmount : Convert.ToString(dtMMEntry.Rows[n]["FreeType"]) == "2" ? RapidVerifoneNAXML.ItemChoiceType.MixMatchDiscountPercent : RapidVerifoneNAXML.ItemChoiceType.MixMatchPrice;
-                            objMixMatchEntry[n].ItemElementName = objItemChoiceType;
-
-                            if (Convert.ToString(dtMMEntry.Rows[n]["FreeType"]) == "1" || Convert.ToString(dtMMEntry.Rows[n]["FreeType"]) == "4")
+                       
+                            if (dtMMEntry != null && dtMMEntry.Rows.Count > 0)
                             {
-                                amount12 objamount = new amount12();
-                                objamount.Value = Convert.ToDecimal(dtMMEntry.Rows[n]["Free"]);
-                                objMixMatchEntry[n].Item = objamount;
-                            }
-                            else
-                            {
-                                objMixMatchEntry[n].Item = Convert.ToDecimal(dtMMEntry.Rows[n]["Free"]);
-                            }
-                        }
+                                RapidVerifoneNAXML.MixMatchEntry[] objMixMatchEntry = new RapidVerifoneNAXML.MixMatchEntry[dtMMEntry.Rows.Count];
+                                for (int n = 0; n < dtMMEntry.Rows.Count; n++)
+                                {
+                                    objMixMatchEntry[n] = new RapidVerifoneNAXML.MixMatchEntry();
+                                    sellUnit objsellUnit = new sellUnit();
+                                    //objsellUnit.Value = Convert.ToDecimal(dt.Rows[i]["PrimaryItemQty"]);
+                                    objsellUnit.Value = Convert.ToDecimal(dtMMEntry.Rows[n]["PrimaryItemQty"]);
+                                    objMixMatchEntry[n].MixMatchUnits = objsellUnit;
 
-                        objMMTDetail[i].MixMatchEntry = objMixMatchEntry;
+                                    RapidVerifoneNAXML.ItemChoiceType objItemChoiceType = new RapidVerifoneNAXML.ItemChoiceType();
+                                    objItemChoiceType = Convert.ToString(dtMMEntry.Rows[n]["FreeType"]) == "1" ? RapidVerifoneNAXML.ItemChoiceType.MixMatchDiscountAmount : Convert.ToString(dtMMEntry.Rows[n]["FreeType"]) == "2" ? RapidVerifoneNAXML.ItemChoiceType.MixMatchDiscountPercent : RapidVerifoneNAXML.ItemChoiceType.MixMatchPrice;
+                                    objMixMatchEntry[n].ItemElementName = objItemChoiceType;
+
+                                    if (Convert.ToString(dtMMEntry.Rows[n]["FreeType"]) == "1" || Convert.ToString(dtMMEntry.Rows[n]["FreeType"]) == "4")
+                                    {
+                                        amount12 objamount = new amount12();
+                                        objamount.Value = Convert.ToDecimal(dtMMEntry.Rows[n]["Free"]);
+                                        objMixMatchEntry[n].Item = objamount;
+                                    }
+                                    else
+                                    {
+                                        objMixMatchEntry[n].Item = Convert.ToDecimal(dtMMEntry.Rows[n]["Free"]);
+                                    }
+                                }
+
+                                objMMTDetail[i].MixMatchEntry = objMixMatchEntry;
+                            }
+                        
                         #endregion
 
                         #region Priority
@@ -2016,15 +2032,20 @@ namespace VerifoneServices
                             TaxId = TaxId.Replace(" ", "");
                             string[] TaxIdSplit = TaxId.Split(',');
 
-                            vsmsNAXML.TaxableRebateTax[] objTaxableRebateTax = new vsmsNAXML.TaxableRebateTax[TaxIdSplit.Length];
+                           
+                                if (TaxIdSplit != null && TaxIdSplit.Length > 0)
+                                {
+                                    vsmsNAXML.TaxableRebateTax[] objTaxableRebateTax = new vsmsNAXML.TaxableRebateTax[TaxIdSplit.Length];
 
-                            for (int m = 0; m < TaxIdSplit.Length; m++)
-                            {
-                                objTaxableRebateTax[m] = new vsmsNAXML.TaxableRebateTax();
-                                objTaxableRebateTax[m].sysid = TaxIdSplit[m];
-                            }
+                                    for (int m = 0; m < TaxIdSplit.Length; m++)
+                                    {
+                                        objTaxableRebateTax[m] = new vsmsNAXML.TaxableRebateTax();
+                                        objTaxableRebateTax[m].sysid = TaxIdSplit[m];
+                                    }
 
-                            objTaxableRebate.Tax = objTaxableRebateTax;
+                                    objTaxableRebate.Tax = objTaxableRebateTax;
+                                }
+                            
                         }
 
                         transmissionHeaderExtension objtransmissionHeaderExtension = new transmissionHeaderExtension();
@@ -2432,17 +2453,17 @@ namespace VerifoneServices
             Comman com = new Comman();
             try
             {
+
                 passwdConfig objpasswdConfig = new passwdConfig();
 
-                if (dt.Rows.Count > 0)
+                if (dt != null && dt.Rows.Count > 0)
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifoneUser()", "Initialize to Update", "User", "changepasswd");
+                    objCVerifone.InsertActiveLog("Verifone", "Start", "UpdateVerifoneUserPassword()", "Initialize to Update User Password", "User", "changepasswd");
 
                     string UserPayloadXML = "";
-                    //string New_VP = "";
                     StringBuilder sb = new StringBuilder();
 
-                    // remove for loop bcoz at a time only one pwd will be updated using DataSource file
+                    // remove loop bcoz at a time only one pwd will be updated using DataSource file
                     passwdConfigUser objpasswdConfigUser = new passwdConfigUser();
                     objpasswdConfigUser.name = VerifoneServices.VerifoneUserName; //Convert.ToString(dt.Rows[0]["UserName"]);
 
@@ -2489,24 +2510,24 @@ namespace VerifoneServices
                         //}
                         //else
                         //{
-                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneUser()", "Verifone Data updated successfully", "User", "changepasswd");
+                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneUserPassword()", "Verifone Data Updated Successfully", "User", "changepasswd");
                         //}
                     }
                     else
                     {
-                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneUser()", "No Response", "User", "changepasswd");
+                        objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneUserPassword()", "No Response", "User", "changepasswd");
                     }
                     #endregion
                 }
                 else
                 {
-                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneUser()", "Not any User data is pending to update", "User", "changepasswd");
+                    objCVerifone.InsertActiveLog("Verifone", "End", "UpdateVerifoneUserPassword()", "Not any User data is pending to update", "User", "changepasswd");
                 }
                 return Response;
             }
             catch (Exception ex)
             {
-                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneUser()", "UpdateVerifoneUser Exception : " + ex, "User", "changepasswd");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateVerifoneUserPassword()", "UpdateVerifoneUserPassword Exception : " + ex, "User", "changepasswd");
                 return Response;
             }
         }

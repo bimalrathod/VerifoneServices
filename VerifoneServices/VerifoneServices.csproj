@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -22,9 +23,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -36,6 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,6 +48,22 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>5823DD046388EBB08390FD7FD2BEEBE123131343</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>VerifoneServices_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -83,6 +102,7 @@
     <Compile Include="ProjectInstaller.Designer.cs">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
+    <Compile Include="VerifoneDelete.cs" />
     <Compile Include="VerifoneInsert.cs" />
     <Compile Include="VerifoneServices.cs">
       <SubType>Component</SubType>
@@ -98,9 +118,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="bin\Debug\VerifoneServices.exe.config" />
-    <None Include="bin\Debug\VerifoneServices.vshost.exe.config" />
-    <None Include="bin\Debug\VerifoneServices.vshost.exe.manifest" />
+    <None Include="bin\Release\VerifoneServices.vshost.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">
@@ -111,148 +129,31 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\DataSource\DatabaseServers.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="bin\Debug\Payload\Department.xml" />
     <Content Include="bin\Debug\Payload\Fee.xml" />
     <Content Include="bin\Debug\Payload\Fuel.xml" />
-    <Content Include="bin\Debug\Payload\Item.xml" />
+    <Content Include="bin\Debug\Payload\Item.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="bin\Debug\Payload\Payment.xml" />
     <Content Include="bin\Debug\Payload\Tax.xml" />
-    <Content Include="bin\Debug\VerifoneServices.exe" />
-    <Content Include="bin\Debug\VerifoneServices.pdb" />
-    <Content Include="bin\Debug\VerifoneServices.vshost.exe" />
-    <Content Include="bin\Debug\xml\CashierUser.xml" />
-    <Content Include="bin\Debug\xml\Department.xml" />
-    <Content Include="bin\Debug\xml\Employee.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-11-20.006.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-11-23.007.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-11-24.008.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-11-28.009.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-03.010.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-04.011.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-05.012.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-06.013.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-08.014.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-11.015.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-11.016.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-14.017.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-16.018.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-19.019.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-21.020.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-23.021.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-24.022.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-26.023.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-26.024.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2018-12-27.025.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2019-01-03.026.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2019-01-03.027.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2019-01-03.028.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2019-01-06.029.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2019-01-15.030.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2019-01-21.031.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2019-01-23.032.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_2019-01-30.033.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Archived_Files\Invoice_2_current.xml" />
-    <Content Include="bin\Debug\xml\Invoice\Invoice_2_2019-03-06.354.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="bin\Debug\xml\MixMatch.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="bin\Debug\xml\MixMatch_ItemList.xml" />
-    <Content Include="bin\Debug\xml\Payment.xml" />
-    <Content Include="bin\Debug\xml\Period\Archived_Files\LogPeriod_27122018004459.xml" />
-    <Content Include="bin\Debug\xml\Period\Archived_Files\LogPeriod_28122018033552.xml" />
-    <Content Include="bin\Debug\xml\Period\LogPeriod_29122018023655.xml" />
-    <Content Include="bin\Debug\xml\Report\Report_24052019011918.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Daily\RubyReport_Daily_2_2019-02-01.320.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="bin\Debug\xml\RubyReport\Daily\RubyReport_Daily_2_2019-02-02.321.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Month\RubyReport_Month_3_2019-05-31.021.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-09-18.001.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-09-18.002.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-10-29.003.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-10-29.004.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-10-30.005.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-10-30.006.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-11-20.010.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-11-20.011.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-11-21.012.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-11-23.013.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-11-24.014.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-11-24.015.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-11-28.016.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-11-29.017.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-12-03.018.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-12-03.019.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-12-04.020.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-12-05.021.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-12-05.022.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-12-06.023.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-12-06.024.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-12-08.025.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-12-11.026.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-12-11.027.xml" />
-    <Content Include="bin\Debug\xml\RubyReport\Shift\RubyReport_Shift_1_2018-12-14.028.xml" />
-    <Content Include="bin\Debug\xml\Tax.xml" />
-    <Content Include="bin\Debug\xml\UserWithRole.xml" />
+    <Content Include="bin\Debug\Period_FileName.xml" />
+    <Content Include="bin\Debug\RubyReport_Period_FileName.xml" />
+    <Content Include="bin\Debug\VerifoneLibrary.dll" />
+    <Content Include="bin\Debug\VerifoneLibrary.pdb" />
+    <Content Include="bin\Release\XML\Invoice\Invoice_2_2019-10-04.583.xml" />
+    <Content Include="bin\Release\DataSource\DatabaseServers-ez.xml" />
     <Content Include="bin\Release\DataSource\DatabaseServers.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="bin\Release\DataSource\DatabaseServers1.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="bin\Release\Payload\Department.xml" />
     <Content Include="bin\Release\Payload\Fee.xml" />
     <Content Include="bin\Release\Payload\Fuel.xml" />
-    <Content Include="bin\Release\Payload\Item.xml" />
+    <Content Include="bin\Release\Payload\Item.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="bin\Release\Payload\Payment.xml" />
     <Content Include="bin\Release\Payload\Tax.xml" />
-    <Content Include="bin\Release\XML\CashierUser.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="bin\Release\XML\department.xml" />
-    <Content Include="bin\Release\XML\Departmen11t.xml" />
-    <Content Include="bin\Release\XML\Fee.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="bin\Release\XML\Fuel.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-01-03.026.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-01-03.027.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-01-03.028.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-01-06.029.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-01-15.030.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-01-21.031.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-01-23.032.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-01-30.033.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-03-31.034.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-03-31.035.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-04-01.036.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_2019-07-13.453.xml" />
-    <Content Include="bin\Release\XML\Invoice\Archived_Files\Invoice_2_current.xml" />
-    <Content Include="bin\Release\XML\Invoice\Invoice_2_2019-07-13.453.xml" />
-    <Content Include="bin\Release\XML\Item.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="bin\Release\XML\Payment.xml" />
-    <Content Include="bin\Release\XML\Period\LogPeriod_02042019010248.xml" />
-    <Content Include="bin\Release\XML\Report\Report_01112019011406.xml" />
-    <Content Include="bin\Release\XML\RubyReport\Month\RubyReport_Daily_2_2019-07-01.616.xml" />
-    <Content Include="bin\Release\XML\RubyReport\Shift\Archived_Files\RubyReport_Shift_1_2019-06-30.122.xml" />
-    <Content Include="bin\Release\XML\RubyReport\Shift\RubyReport_Shift_1_2019-06-30.622.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Debug\xml\Report\Archived_Files\" />
-    <Folder Include="bin\Debug\xml\RubyReport\Daily\Archived_Files\" />
-    <Folder Include="bin\Debug\xml\RubyReport\Month\Archived_Files\" />
-    <Folder Include="bin\Debug\xml\RubyReport\Shift\Archived_Files\" />
-    <Folder Include="bin\Release\XML\Period\Archived_Files\" />
-    <Folder Include="bin\Release\XML\Report\Archived_Files\" />
-    <Folder Include="bin\Release\XML\RubyReport\Daily\Archived_Files\" />
-    <Folder Include="bin\Release\XML\RubyReport\Month\Archived_Files\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -276,6 +177,20 @@
       <Project>{f331b1db-403e-4f72-93ab-7edadfd196ff}</Project>
       <Name>VerifoneLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\XML\Invoice\Archived_Files\" />
+    <Folder Include="bin\Debug\XML\Period\Archived_Files\" />
+    <Folder Include="bin\Debug\XML\Report\Archived_Files\" />
+    <Folder Include="bin\Debug\XML\RubyReport\Daily\Archived_Files\" />
+    <Folder Include="bin\Debug\XML\RubyReport\Month\Archived_Files\" />
+    <Folder Include="bin\Debug\XML\RubyReport\Shift\Archived_Files\" />
+    <Folder Include="bin\Release\XML\Invoice\Archived_Files\" />
+    <Folder Include="bin\Release\XML\Period\Archived_Files\" />
+    <Folder Include="bin\Release\XML\Report\Archived_Files\" />
+    <Folder Include="bin\Release\XML\RubyReport\Daily\Archived_Files\" />
+    <Folder Include="bin\Release\XML\RubyReport\Month\Archived_Files\" />
+    <Folder Include="bin\Release\XML\RubyReport\Shift\Archived_Files\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

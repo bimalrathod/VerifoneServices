@@ -1,0 +1,2058 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<NAXML-MaintenanceRequest version="3.4" xmlns="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+  <TransmissionHeader>
+    <StoreLocationID>1</StoreLocationID>
+    <VendorName>VeriFone</VendorName>
+    <VendorModelVersion>Commander Site Controller</VendorModelVersion>
+  </TransmissionHeader>
+  <MixMatchMaintenance>
+    <TableAction type="initialize" />
+    <RecordAction type="addchange" />
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>1</PromotionID>
+      </Promotion>
+      <MixMatchDescription>Monster 16oz</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>67</ItemListID>
+      <StartDate>2017-02-22</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-03</StopDate>
+      <StopTime>23:59:00</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>10</PromotionID>
+      </Promotion>
+      <MixMatchDescription>2L Coke</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>31</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>11</PromotionID>
+      </Promotion>
+      <MixMatchDescription>2L Pepsi</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>32</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>12</PromotionID>
+      </Promotion>
+      <MixMatchDescription>20oz 7Up</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>33</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>13</PromotionID>
+      </Promotion>
+      <MixMatchDescription>16oz AMP</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>34</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>14</PromotionID>
+      </Promotion>
+      <MixMatchDescription>Full Throttle</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>35</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>15</PromotionID>
+      </Promotion>
+      <MixMatchDescription>20oz Gatorade</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>36</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>16</PromotionID>
+      </Promotion>
+      <MixMatchDescription>16oz NOS</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>37</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>17</PromotionID>
+      </Promotion>
+      <MixMatchDescription>32oz Powerade</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>38</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>18</PromotionID>
+      </Promotion>
+      <MixMatchDescription>Pure Leaf</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>39</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.500</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>19</PromotionID>
+      </Promotion>
+      <MixMatchDescription>8.4oz Redbull</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>40</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.220</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>2</PromotionID>
+      </Promotion>
+      <MixMatchDescription>TALL MONSTER</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>4</ItemListID>
+      <StartDate>2017-02-26</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-08-27</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>5.500</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>20</PromotionID>
+      </Promotion>
+      <MixMatchDescription>12oz Redbull</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>41</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>5.330</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>21</PromotionID>
+      </Promotion>
+      <MixMatchDescription>16oz Redbull</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>42</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>6.330</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>22</PromotionID>
+      </Promotion>
+      <MixMatchDescription>16oz Rockstar</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>43</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>23</PromotionID>
+      </Promotion>
+      <MixMatchDescription>Vitamin Water</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>44</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.500</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>24</PromotionID>
+      </Promotion>
+      <MixMatchDescription>sobe water</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>45</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2017-10-17</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.500</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>25</PromotionID>
+      </Promotion>
+      <MixMatchDescription>16oz Kinky beer</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>46</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>26</PromotionID>
+      </Promotion>
+      <MixMatchDescription>decade</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>47</ItemListID>
+      <StartDate>2017-03-12</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-06-12</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>5.540</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>27</PromotionID>
+      </Promotion>
+      <MixMatchDescription>20oz tahitian</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>50</ItemListID>
+      <StartDate>2018-01-30</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-03-28</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.220</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>28</PromotionID>
+      </Promotion>
+      <MixMatchDescription>16oz snapple</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>51</ItemListID>
+      <StartDate>2019-01-30</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-11-07</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.800</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>29</PromotionID>
+      </Promotion>
+      <MixMatchDescription>monaco</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>52</ItemListID>
+      <StartDate>2018-02-05</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-12-31</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>5.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>3</PromotionID>
+      </Promotion>
+      <MixMatchDescription>gatorade 28 oz</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>5</ItemListID>
+      <StartDate>2017-02-27</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-02-28</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>30</PromotionID>
+      </Promotion>
+      <MixMatchDescription>vess 12oz</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>53</ItemListID>
+      <StartDate>2018-02-05</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-04-11</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>1.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>31</PromotionID>
+      </Promotion>
+      <MixMatchDescription>kinky 16oz</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>54</ItemListID>
+      <StartDate>2018-02-05</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-12-31</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>32</PromotionID>
+      </Promotion>
+      <MixMatchDescription>goldpeak</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>55</ItemListID>
+      <StartDate>2018-02-07</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-12-31</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>33</PromotionID>
+      </Promotion>
+      <MixMatchDescription>fanta 20oz</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>56</ItemListID>
+      <StartDate>2018-02-07</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-12-31</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>34</PromotionID>
+      </Promotion>
+      <MixMatchDescription>28oz body armour</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>57</ItemListID>
+      <StartDate>2018-03-17</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2018-05-19</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>35</PromotionID>
+      </Promotion>
+      <MixMatchDescription>calypso</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>58</ItemListID>
+      <StartDate>2018-03-17</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2018-05-14</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>36</PromotionID>
+      </Promotion>
+      <MixMatchDescription>clear fruit</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>59</ItemListID>
+      <StartDate>2018-04-09</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-12-28</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>37</PromotionID>
+      </Promotion>
+      <MixMatchDescription>16oz mr.pure</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>60</ItemListID>
+      <StartDate>2018-10-14</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-10-31</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>38</PromotionID>
+      </Promotion>
+      <MixMatchDescription>2L vess</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>61</ItemListID>
+      <StartDate>2019-04-11</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-09-30</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>39</PromotionID>
+      </Promotion>
+      <MixMatchDescription>remy vsop  v</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>62</ItemListID>
+      <StartDate>2018-05-29</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-01-29</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>6.490</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>4</PromotionID>
+      </Promotion>
+      <MixMatchDescription>16oz coke</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>25</ItemListID>
+      <StartDate>2017-03-04</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-04</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>40</PromotionID>
+      </Promotion>
+      <MixMatchDescription>16oz kickstart</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>63</ItemListID>
+      <StartDate>2018-08-15</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-08-15</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>41</PromotionID>
+      </Promotion>
+      <MixMatchDescription>20oz crush</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>64</ItemListID>
+      <StartDate>2018-10-18</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-10-18</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.500</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>42</PromotionID>
+      </Promotion>
+      <MixMatchDescription>2 for $1 planters</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>69</ItemListID>
+      <StartDate>2018-12-02</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-12-02</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>1.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>43</PromotionID>
+      </Promotion>
+      <MixMatchDescription>2 for $1 sunflower seeds</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>70</ItemListID>
+      <StartDate>2018-12-02</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-12-02</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>1.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>44</PromotionID>
+      </Promotion>
+      <MixMatchDescription>capriccio</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>71</ItemListID>
+      <StartDate>2018-12-02</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-02-02</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>5.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>45</PromotionID>
+      </Promotion>
+      <MixMatchDescription>sathers</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>72</ItemListID>
+      <StartDate>2018-12-03</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2021-12-03</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>46</PromotionID>
+      </Promotion>
+      <MixMatchDescription>sparkling water</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>78</ItemListID>
+      <StartDate>2019-02-01</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-12-31</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>47</PromotionID>
+      </Promotion>
+      <MixMatchDescription>16oz game fuel</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>79</ItemListID>
+      <StartDate>2019-03-08</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-12-31</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>48</PromotionID>
+      </Promotion>
+      <MixMatchDescription>12oz redbull</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>80</ItemListID>
+      <StartDate>2019-05-05</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2029-05-05</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>5.330</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>49</PromotionID>
+      </Promotion>
+      <MixMatchDescription>xyience</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>81</ItemListID>
+      <StartDate>2019-05-08</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-05-08</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>5</PromotionID>
+      </Promotion>
+      <MixMatchDescription>16oz snapple</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>26</ItemListID>
+      <StartDate>2017-03-04</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-04</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.500</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>50</PromotionID>
+      </Promotion>
+      <MixMatchDescription>high noon</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>82</ItemListID>
+      <StartDate>2019-05-17</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-08-30</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>5.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>51</PromotionID>
+      </Promotion>
+      <MixMatchDescription>bertly and james</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>83</ItemListID>
+      <StartDate>2019-05-17</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-08-30</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>52</PromotionID>
+      </Promotion>
+      <MixMatchDescription>32oz powerade</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>85</ItemListID>
+      <StartDate>2019-06-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2021-06-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>53</PromotionID>
+      </Promotion>
+      <MixMatchDescription>snapple 160z</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>86</ItemListID>
+      <StartDate>2019-06-20</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-06-20</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>2.800</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>54</PromotionID>
+      </Promotion>
+      <MixMatchDescription>BANG 16OZ</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>87</ItemListID>
+      <StartDate>2019-07-19</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-07-19</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>55</PromotionID>
+      </Promotion>
+      <MixMatchDescription>2 for $1.50</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>88</ItemListID>
+      <StartDate>2019-09-12</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2021-09-12</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>1.500</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>56</PromotionID>
+      </Promotion>
+      <MixMatchDescription>rap snack 2 for $1</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>89</ItemListID>
+      <StartDate>2019-09-12</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2021-09-12</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>1.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>57</PromotionID>
+      </Promotion>
+      <MixMatchDescription>6pk bud</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>90</ItemListID>
+      <StartDate>2019-09-26</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-09-26</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>9.990</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>58</PromotionID>
+      </Promotion>
+      <MixMatchDescription>6pk busch</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>91</ItemListID>
+      <StartDate>2019-09-26</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-09-26</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>7.990</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>59</PromotionID>
+      </Promotion>
+      <MixMatchDescription>6pk natural</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>92</ItemListID>
+      <StartDate>2019-09-26</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-09-26</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>6.990</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>6</PromotionID>
+      </Promotion>
+      <MixMatchDescription>1L Pepsi</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>27</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.500</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>60</PromotionID>
+      </Promotion>
+      <MixMatchDescription>750ml 1738</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>93</ItemListID>
+      <StartDate>2019-11-26</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-11-28</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>90.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>61</PromotionID>
+      </Promotion>
+      <MixMatchDescription>holiday sale</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>94</ItemListID>
+      <StartDate>2019-11-26</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-11-28</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>68.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>62</PromotionID>
+      </Promotion>
+      <MixMatchDescription>priv sale</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>95</ItemListID>
+      <StartDate>2019-11-26</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-11-28</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>86.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>63</PromotionID>
+      </Promotion>
+      <MixMatchDescription>ciroc deal</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>96</ItemListID>
+      <StartDate>2019-11-26</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2019-11-28</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>52.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>64</PromotionID>
+      </Promotion>
+      <MixMatchDescription>750ml andre</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>97</ItemListID>
+      <StartDate>2019-12-01</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-01-01</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>9.490</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>65</PromotionID>
+      </Promotion>
+      <MixMatchDescription>65</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>1</ItemListID>
+      <StartDate>2020-01-01</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-01-01</StopDate>
+      <StopTime>00:00:00</StopTime>
+      <WeekdayAvailability available="no" weekday="Sunday" />
+      <WeekdayAvailability available="no" weekday="Monday" />
+      <WeekdayAvailability available="no" weekday="Tuesday" />
+      <WeekdayAvailability available="no" weekday="Wednesday" />
+      <WeekdayAvailability available="no" weekday="Thursday" />
+      <WeekdayAvailability available="no" weekday="Friday" />
+      <WeekdayAvailability available="no" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>1.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>67</PromotionID>
+      </Promotion>
+      <MixMatchDescription>test 67</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>67</ItemListID>
+      <StartDate>2020-01-02</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2020-01-02</StopDate>
+      <StopTime>00:00:00</StopTime>
+      <WeekdayAvailability available="no" weekday="Sunday" />
+      <WeekdayAvailability available="no" weekday="Monday" />
+      <WeekdayAvailability available="no" weekday="Tuesday" />
+      <WeekdayAvailability available="no" weekday="Wednesday" />
+      <WeekdayAvailability available="no" weekday="Thursday" />
+      <WeekdayAvailability available="no" weekday="Friday" />
+      <WeekdayAvailability available="no" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>1.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>7</PromotionID>
+      </Promotion>
+      <MixMatchDescription>20oz Coke</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>28</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>8</PromotionID>
+      </Promotion>
+      <MixMatchDescription>20oz Pepsi</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>29</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>3.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+    <MMTDetail>
+      <Promotion>
+        <PromotionID>9</PromotionID>
+      </Promotion>
+      <MixMatchDescription>2L 7UP</MixMatchDescription>
+      <MixMatchStrictHighFlag value="yes" />
+      <MixMatchStrictLowFlag value="yes" />
+      <ItemListID>30</ItemListID>
+      <StartDate>2017-03-06</StartDate>
+      <StartTime>00:00:00</StartTime>
+      <StopDate>2027-03-06</StopDate>
+      <StopTime>23:59:59</StopTime>
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Sunday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Monday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Tuesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Wednesday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Thursday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Friday" />
+      <WeekdayAvailability stopTime="00:00:00" startTime="00:00:00" available="yes" weekday="Saturday" />
+      <MixMatchEntry>
+        <MixMatchUnits>2</MixMatchUnits>
+        <MixMatchPrice>4.000</MixMatchPrice>
+      </MixMatchEntry>
+      <Priority>
+      </Priority>
+      <Extension>
+        <ns2:TaxableRebate xmlns:ns2="urn:vfi-sapphire:np.naxmlext.2005-06-24" xmlns:ns3="http://www.naxml.org/POSBO/Vocabulary/2003-10-16">
+          <ns2:Amount>0.00</ns2:Amount>
+        </ns2:TaxableRebate>
+      </Extension>
+    </MMTDetail>
+  </MixMatchMaintenance>
+</NAXML-MaintenanceRequest>

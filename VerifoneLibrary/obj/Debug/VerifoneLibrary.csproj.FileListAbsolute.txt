@@ -1,0 +1,4 @@
+D:\VerifoneServices\VerifoneLibrary\bin\Debug\VerifoneLibrary.dll
+D:\VerifoneServices\VerifoneLibrary\bin\Debug\VerifoneLibrary.pdb
+D:\VerifoneServices\VerifoneLibrary\obj\Debug\VerifoneLibrary.dll
+D:\VerifoneServices\VerifoneLibrary\obj\Debug\VerifoneLibrary.pdb

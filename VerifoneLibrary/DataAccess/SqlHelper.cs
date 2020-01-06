@@ -323,7 +323,7 @@ namespace Microsoft.ApplicationBlocks.Data
         {
             //create a command and prepare it for execution
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandTimeout = 120;
+            cmd.CommandTimeout = 200;
             PrepareCommand(cmd, connection, (SqlTransaction)null, commandType, commandText, commandParameters);
 
             //finally, execute the command.
@@ -623,7 +623,7 @@ namespace Microsoft.ApplicationBlocks.Data
             //create the DataAdapter & DataSet
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
-            cmd.CommandTimeout = 0;
+            cmd.CommandTimeout = 200;
             //fill the DataSet using default values for DataTable names, etc.
             da.Fill(ds);
 
@@ -657,7 +657,7 @@ namespace Microsoft.ApplicationBlocks.Data
             //create the DataAdapter & DataSet
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
-            cmd.CommandTimeout = 0;
+            cmd.CommandTimeout = 200;
             //fill the DataSet using default values for DataTable names, etc.
             da.Fill(ds);
 

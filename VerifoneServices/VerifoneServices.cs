@@ -1,27 +1,27 @@
-﻿using VerifoneLibrary;
+﻿//using VerifoneLibrary;
 using VerifoneLibrary.DataAccess;
-using RapidVerifone;
-using myCompany1111;
+//using RapidVerifone;
+//using myCompany1111;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+//using System.Collections.Generic;
+//using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Data.OleDb;
-using System.Diagnostics;
+//using System.Data.OleDb;
+//using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
+//using System.Net;
 using System.ServiceProcess;
-using System.Text;
+//using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
+//using System.Threading.Tasks;
+//using System.Xml;
 
-using System.Xml.Serialization;
-using System.Collections;
+//using System.Xml.Serialization;
+//using System.Collections;
 using System.Xml.Linq;
-using System.Text.RegularExpressions;
+//using System.Text.RegularExpressions;
 
 namespace VerifoneServices
 {
@@ -59,6 +59,7 @@ namespace VerifoneServices
 
         VerifoneInsert objInsert = new VerifoneInsert();
         VerifoneUpdate objUpdate = new VerifoneUpdate();
+        VerifoneDelete objDelete = new VerifoneDelete();
         Comman objComman = new Comman();
         _CVerifone objCVerifone = new _CVerifone();
         private Timer Schedular;
@@ -67,21 +68,13 @@ namespace VerifoneServices
         public VerifoneServices()
         {
             InitializeComponent();
-            //SetVarible();
-            //objInsert.Ruby_Report();
-        }
-        public void callxml()
-        {
-            DataSet dataSet = new DataSet();
-            string checkpath = AppDomain.CurrentDomain.BaseDirectory + "xml\\Invoice";
-            string[] filePaths = Directory.GetFiles(checkpath);
-            if (filePaths.Length > 0)
-            {
-                #region Step 3: xml to dataset of "vreportpdlist" xml
-                var path = filePaths[0];
-                dataSet.ReadXml(path, XmlReadMode.InferSchema);
-                #endregion
-            }
+            SetVarible();
+           // objInsert.Invoice_New_WithChanges();
+            VerifoneDelete objVerifoneDelete = new VerifoneDelete();
+             DeleteMasterData();
+           // objInsert.Promotion();
+
+            
         }
 
         protected override void OnStart(string[] args)
@@ -98,8 +91,6 @@ namespace VerifoneServices
         {
             try
             {
-
-                //SetVarible();
                 Schedular = new Timer(new TimerCallback(SchedularCallback));
                 string mode = ConfigurationManager.AppSettings["Mode"].ToUpper();
                 // this.WriteToFile("Simple Service Mode: " + mode + " {0}");
@@ -164,73 +155,89 @@ namespace VerifoneServices
             this.ScheduleService();
         }
 
+        public void CallVerifone1()
+        {
+            try
+            {
+                WriteToFile("1");
+                WriteToFile("2");
+                WriteToFile("3");
+                WriteToFile("4");
+            }
+            catch (Exception ex)
+            {
+                objCVerifone.InsertActiveLog("BoF", "Error", "CallVerifone()", "CallVerifone Exception : " + ex, "CallVerifone", "");
+            }
+        }
+
+
         public void CallVerifone()
         {
             try
             {
                 DeleteDummyfile();
-
                 SetVarible();
-
-                //bool Result = objComman.UpdateDatabaseServerFile_test("TESTING"); // update pwd in DS file
-
+              
                 #region change Rapid pwd before expire on 86th day
                 if (VerifoneUserName == "Rapid")
                 {
-                    objCVerifone.InsertActiveLog("BoF", "Testing", "CallVerifone()", "CallVerifone : " + VerifoneUserName, "CallVerifone", "");
                     DataSet DS = objCVerifone.CheckUserExpireOrNot(VerifoneUserName);
 
-                    if (DS.Tables[0].Rows.Count > 0)
+                    if (DS.Tables.Count > 0)  // nidhi - changes while code review
                     {
-                        if (Convert.ToInt64(DS.Tables[0].Rows[0]["DayRemain"]) <= 5) // now need to update Rapid pwd in verifone bcoz it's near to expire
+                        if (DS.Tables[0].Rows.Count > 0)
                         {
-                            objCVerifone.InsertActiveLog("BoF", "Testing", "CallVerifone()", "CallVerifone : Rapid Pwd Expire", "CallVerifone", "");
-                            string Response = objUpdate.UpdateVerifoneUserPassword(DS.Tables[0]); // update pwd in verifone
-                            if (Response != null && Response != "")
+                            if (Convert.ToInt64(DS.Tables[0].Rows[0]["DayRemain"]) <= 5) // now need to update Rapid pwd in verifone bcoz it's near to expire
                             {
-                                bool Result = objComman.UpdateDatabaseServerFile(objUpdate.New_VP.Encript()); // update pwd in DS file
-                                if (Result == true)
+                                string Response = objUpdate.UpdateVerifoneUserPassword(DS.Tables[0]); // update pwd in verifone
+                                if (Response != null && Response != "")
                                 {
-                                    // update pwd from BoF
-                                    long Return = objCVerifone.UpdateUserPassword(VerifoneServices.VerifoneLink, VerifoneServices.VerifoneUserName, objUpdate.New_VP.Encript());
-                                    UpdateMasterData();
-                                    InsertMasterData();
-                                    objInsert.Invoice_New_WithChanges();
-                                    objInsert.Ruby_Report();
+                                    bool Result = objComman.UpdateDatabaseServerFile(objUpdate.New_VP.Encript()); // update pwd in DS file
+                                    if (Result == true)
+                                    {
+                                        // update pwd in BoF
+                                        long Return = objCVerifone.UpdateUserPassword(VerifoneServices.VerifoneLink, VerifoneServices.VerifoneUserName, objUpdate.New_VP.Encript());
+                                        UpdateMasterData();
+                                        DeleteMasterData();
+                                        InsertMasterData();
+                                        objInsert.Invoice_New_WithChanges();
+                                        objInsert.Ruby_Report();
+                                    }
                                 }
                             }
-                        }
-                        else // dont need to update Rapid pwd in verifone bcoz it's not near to expire
-                        {
-                            objCVerifone.InsertActiveLog("BoF", "Testing", "CallVerifone()", "CallVerifone : Rapid Pwd Not Expire", "CallVerifone", "");
-                            UpdateMasterData();
-                            InsertMasterData();
-                            objInsert.Invoice_New_WithChanges();
-                            objInsert.Ruby_Report();
+                            else // dont need to update Rapid pwd in verifone bcoz it's not near to expire
+                            {
+                                UpdateMasterData();
+                                DeleteMasterData();
+                                InsertMasterData();
+                                objInsert.Invoice_New_WithChanges();
+                                objInsert.Ruby_Report();
+                            }
                         }
                     }
                 }
                 else // if manager user
                 {
-                    objCVerifone.InsertActiveLog("BoF", "Testing", "CallVerifone()", "CallVerifone : No Rapid User", "CallVerifone", "");
                     UpdateMasterData();
+                    DeleteMasterData();
                     InsertMasterData();
                     objInsert.Invoice_New_WithChanges();
                     objInsert.Ruby_Report();
 
                     DataSet DS = objCVerifone.CheckUserExpireOrNot("Rapid"); // check Rapid user exists or not in BoF (pwd should not be blanked)
-                    if (DS.Tables[0].Rows.Count > 0)
+                    if (DS.Tables.Count > 0)
                     {
-                        if (Convert.ToString(DS.Tables[0].Rows[0]["CommandPassword"]) != "")
+                        if (DS.Tables[0].Rows.Count > 0)
                         {
-                            objCVerifone.InsertActiveLog("BoF", "Testing", "CallVerifone()", "CallVerifone : CommandPassword not blank", "CallVerifone", "");
-                            bool Result = objComman.UpdateDatabaseServerFile(Convert.ToString(DS.Tables[0].Rows[0]["CommandPassword"]),
-                                                                        Convert.ToString(DS.Tables[0].Rows[0]["UserName"]).Encript()); // update pwd in DS file
-                        }
-                        else
-                        {
-                            objCVerifone.InsertActiveLog("BoF", "Testing", "CallVerifone()", "CallVerifone : CommandPassword found blank", "CallVerifone", "");
-                            objComman.SendEmail(objEmail.UserSubject, objEmail.UserBody); // send mail if found blank pwd of Rapid user
+                            if (Convert.ToString(DS.Tables[0].Rows[0]["CommandPassword"]) != "")
+                            {
+                                bool Result = objComman.UpdateDatabaseServerFile(Convert.ToString(DS.Tables[0].Rows[0]["CommandPassword"]),
+                                                                                 Convert.ToString(DS.Tables[0].Rows[0]["UserName"]).Encript()); // update pwd in DS file
+                            }
+                            else
+                            {
+                                objComman.SendEmail(objEmail.UserSubject, objEmail.UserBody); // send mail if found blank pwd of Rapid user
+                            }
                         }
                     }
                 }
@@ -246,7 +253,7 @@ namespace VerifoneServices
         {
             try
             {
-
+              
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "xml\\Invoice\\Invoice.txt"))
                 {
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + "xml\\Invoice\\Invoice.txt");
@@ -307,22 +314,14 @@ namespace VerifoneServices
             }
             catch (Exception ex)
             {
-                _CVerifone objVerifone = new _CVerifone();
-                objVerifone.InsertActiveLog("Verifone", "Error", "DeleteDummyfile()", "DeleteDummyfile  : " + ex.Message, "DeleteDummyfile", "");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "DeleteDummyfile()", "DeleteDummyfile  : " + ex.Message, "DeleteDummyfile", "");
             }
         }
 
         public void SetVarible()
         {
-            _CVerifone objVerifone = new _CVerifone();
             try
             {
-
-                //string u = "shofar";
-                //u = u.Encript();
-                //string p = "shofar22";
-                //p = p.Encript();
-
                 string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DataSource\\DatabaseServers.xml");
                 XDocument xdoc = XDocument.Load(path);
 
@@ -358,39 +357,40 @@ namespace VerifoneServices
                 VerifoneLibrary.DataAccess._CVerifone.FN = userName = dbDetailResult.FN.Decript();
                 VerifoneLibrary.DataAccess._CVerifone.PN = password = dbDetailResult.PN.Decript();
 
-                VerifoneLibrary.DataAccess._CVerifone.DTN = objVerifone.GetDatabaseNameFromApplicationKey(dbServerDetailResult.ApplicationKey);
-                objVerifone.InsertActiveLog("Verifone", "End", "SetVarible()", "SetVarible Done", "SetVarible", "");
-            }
+                VerifoneLibrary.DataAccess._CVerifone.DTN = objCVerifone.GetDatabaseNameFromApplicationKey(dbServerDetailResult.ApplicationKey);
+                objCVerifone.InsertActiveLog("Verifone", "End", "SetVarible()", "SetVarible Done", "SetVarible", "");
+             }
             catch (Exception ex)
             {
-                objVerifone.InsertActiveLog("Verifone", "Error", "SetVarible()", "SetVarible  : " + ex.Message, "SetVarible", "");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "SetVarible()", "SetVarible  : " + ex.Message, "SetVarible", "");
             }
         }
 
         public void UpdateMasterData()
         {
             DataSet ds = new DataSet();
-            //_CVerifone objCVerifone = new _CVerifone();
             try
             {
+
+
                 ds = objCVerifone.GetVerifoneUpdatePendingData();
 
-                if (ds.Tables.Count > 0)
+                if (ds.Tables != null && ds.Tables.Count > 0)
                 {
                     // Tax
-                    if (ds.Tables[0].Rows.Count > 0)
+                    if (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
                     {
-                        objUpdate.Update_UpdateVerifoneTax(ds.Tables[0]);
+                        objUpdate.UpdateVerifoneTax(ds.Tables[0]);
                     }
                     // Payment
                     if (ds.Tables[1].Rows.Count > 0)
                     {
-                        objUpdate.Update_UpdateVerifonePayment(ds.Tables[1]);
+                        objUpdate.UpdateVerifonePayment(ds.Tables[1]);
                     }
                     // Category
                     if (ds.Tables[2].Rows.Count > 0)
                     {
-                        objUpdate.Update_UpdateVerifoneCategory(ds.Tables[2]);
+                        objUpdate.UpdateVerifoneCategory(ds.Tables[2]);
                     }
                     // ProdCode
                     //if (ds.Tables[3].Rows.Count > 0)
@@ -401,35 +401,35 @@ namespace VerifoneServices
                     //department
                     if (ds.Tables[3].Rows.Count > 0)
                     {
-                        objUpdate.Update_UpdateVerifoneDepartment(ds.Tables[3], ds.Tables[4]);
+                        objUpdate.UpdateVerifoneDepartment(ds.Tables[3], ds.Tables[4]);
                     }
                     //Fee
                     if (ds.Tables[5].Rows.Count > 0)
                     {
-                        objUpdate.Update_UpdateVerifoneFees(ds.Tables[5], ds.Tables[6]);
+                        objUpdate.UpdateVerifoneFees(ds.Tables[5], ds.Tables[6]);
                     }
                     // Item
                     if (ds.Tables[7].Rows.Count > 0)
                     {
-                        objUpdate.Update_UpdateVerifoneItems(ds.Tables[7], ds.Tables[8], ds.Tables[9]);
+                        objUpdate.UpdateVerifoneItems(ds.Tables[7], ds.Tables[8], ds.Tables[9]);
                     }
                     if (ds.Tables[10].Rows.Count > 0)
                     {
                         // objUpdate.UpdateVerifoneFuel();
-                        objUpdate.Update_UpdateVerifoneFuel(ds.Tables[10], ds.Tables[11]);
+                        objUpdate.UpdateVerifoneFuel(ds.Tables[10], ds.Tables[11]);
                     }
                     // User
                     if (ds.Tables[12].Rows.Count > 0)
                     {
-                        objUpdate.Update_UpdateVerifoneUser(ds.Tables[12], ds.Tables[13]);
+                        objUpdate.UpdateVerifoneUser(ds.Tables[12], ds.Tables[13]);
                     }
                     //Promotion Item
-                    if (ds.Tables[13].Rows.Count > 0)
+                    if (ds.Tables[14].Rows.Count > 0)
                     {
                         objUpdate.UpdateMixMatchItem(ds.Tables[14]);
                     }
                     // Promotion
-                    if (ds.Tables[14].Rows.Count > 0)
+                    if (ds.Tables[15].Rows.Count > 0)
                     {
                         objUpdate.UpdateMixMatch(ds.Tables[15], ds.Tables[16]);
                     }
@@ -437,8 +437,74 @@ namespace VerifoneServices
             }
             catch (Exception ex)
             {
-                _CVerifone objVerifone = new _CVerifone();
-                objVerifone.InsertActiveLog("Verifone", "Error", "UpdateMasterData()", "UpdateMasterData  : " + ex.Message, "UpdateMasterData", "");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateMasterData()", "UpdateMasterData Exception : " + ex.Message, "UpdateMasterData", "");
+            }
+        }
+
+        public void DeleteMasterData()
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = objCVerifone.GetVerifoneDeletePendingData();
+
+                if (ds.Tables != null && ds.Tables.Count > 0)
+                {
+                    // Tax
+                    if (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        objDelete.DeleteVerifoneTax(ds.Tables[0]);
+                    }
+                    // Payment
+                    if (ds.Tables[1] != null &&  ds.Tables[1].Rows.Count > 0)
+                    {
+                        objDelete.DeleteVerifonePayment(ds.Tables[1]);
+                    }
+                    // Category
+                    if (ds.Tables[2] != null &&  ds.Tables[2].Rows.Count > 0)
+                    {
+                        objDelete.DeleteVerifoneCategory(ds.Tables[2]);
+                    }
+                    //department
+                    if (ds.Tables[3] != null &&  ds.Tables[3].Rows.Count > 0)
+                    {
+                        objDelete.DeleteVerifoneDepartment(ds.Tables[3], ds.Tables[4]);
+                    }
+                    //Fee
+                    //if (ds.Tables[5] != null &&  ds.Tables[5].Rows.Count > 0)
+                    //{
+                    //    objDelete.DeleteVerifoneFees(ds.Tables[5], ds.Tables[6]);
+                    //}
+                    // Item
+                    if (ds.Tables[7] != null && ds.Tables[7].Rows.Count > 0)
+                    {
+                        objDelete.DeleteVerifoneItems(ds.Tables[7]);
+                    }
+                    //if (ds.Tables[10] != null &&  ds.Tables[10].Rows.Count > 0)
+                    //{
+                    //    // objUpdate.UpdateVerifoneFuel();
+                    //    objDelete.DeleteVerifoneFuel(ds.Tables[10], ds.Tables[11]);
+                    //}
+                    //// User
+                    //if (ds.Tables[12] != null &&  ds.Tables[12].Rows.Count > 0)
+                    //{
+                    //    objDelete.DeleteVerifoneUser(ds.Tables[12], ds.Tables[13]);
+                    //}
+                    //Promotion Item
+                    if (ds.Tables[8] != null &&  ds.Tables[8].Rows.Count > 0)
+                    {
+                        objDelete.DeleteMixMatchItem(ds.Tables[8]);
+                    }
+                    // Promotion
+                    if (ds.Tables[9] != null && ds.Tables[9].Rows.Count > 0)
+                    {
+                        objDelete.DeleteMixMatch(ds.Tables[9], ds.Tables[10]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                objCVerifone.InsertActiveLog("Verifone", "Error", "UpdateMasterData()", "UpdateMasterData Exception : " + ex.Message, "UpdateMasterData", "");
             }
         }
 
@@ -460,15 +526,14 @@ namespace VerifoneServices
                 objInsert.ProductCode();
                 objInsert.Department();
                 objInsert.Fee();
-                objInsert.Item_New();
+                objInsert.Item();
                 objInsert.Fuel();
-                objInsert.PromotionNew();
+                objInsert.Promotion();
                 objInsert.Register();
             }
             catch (Exception ex)
             {
-                _CVerifone objVerifone = new _CVerifone();
-                objVerifone.InsertActiveLog("Verifone", "Error", "InsertMasterData()", "InsertMasterData  : " + ex.Message, "InsertMasterData", "");
+                objCVerifone.InsertActiveLog("Verifone", "Error", "InsertMasterData()", "InsertMasterData  : " + ex.Message, "InsertMasterData", "");
             }
         }
 
@@ -478,6 +543,7 @@ namespace VerifoneServices
 
             using (StreamWriter writer = new StreamWriter(path, true))
             {
+                writer.WriteLine(text);
                 writer.Close();
             }
         }
